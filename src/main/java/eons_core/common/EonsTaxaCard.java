@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // package
 package eons_core;
 
@@ -35,7 +34,6 @@ public class EonsTaxaCard {
     public String getDescription(){
         return this.description;
     }
-=======
 // package
 package eons_core;
 
@@ -72,5 +70,4 @@ public class EonsTaxaCard {
     public String getDescription(){
         return this.description;
     }
->>>>>>> f69c2c5a5ddc41fd53e3884ffe998ea181f177af
 }
