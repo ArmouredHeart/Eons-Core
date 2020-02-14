@@ -9,7 +9,8 @@ package main.java.eons_core.api;
 
 public interface IEonsBeast {
 
-// *** Beast Attributes ***
+    // *** Beast Attributes ***
 
-
+    // *** Beast Methods ***
+    public EonsFieldNote getTaxanomy();
 }
