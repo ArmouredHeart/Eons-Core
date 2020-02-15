@@ -7,7 +7,7 @@ package main.java.eons_core.api;
 
 // misc imports
 
-public interface IEonsBeast {
+public interface IEonsPlant {
 
     // *** Methods ***
 

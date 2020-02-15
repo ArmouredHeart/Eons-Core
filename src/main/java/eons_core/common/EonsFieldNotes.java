@@ -10,7 +10,7 @@ package main.java.eons_core.common.item;
 public class EonsFieldNotes implements IEonsFieldNotes {
     // *** Attributes ***
     // taxanomy in format: [domain, kingdom, phylum, taxaClass, order, family, genus, species]
-    protected String[] taxa;
+    protected String[] taxanomy;
     protected String clade;
     protected String biography;
     protected EonsEra era;
@@ -24,7 +24,7 @@ public class EonsFieldNotes implements IEonsFieldNotes {
         //
 
         //
-        this.taxa = new String[]{domain, kingdom, phylum, taxaClass, order, family, genus, species};
+        this.taxanomy = new String[]{domain, kingdom, phylum, taxaClass, order, family, genus, species};
         this.biography = biography;
     }
 
@@ -39,11 +39,11 @@ public class EonsFieldNotes implements IEonsFieldNotes {
 
     /** */
     public String[] getTaxanomy(){
-        return this.taxa;
+        return this.taxanomy;
     }
 
     /** */
-    public String[] getClade(){
+    public String getClade(){
         return this.clade;
     }
 
