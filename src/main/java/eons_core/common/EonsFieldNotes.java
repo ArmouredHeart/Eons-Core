@@ -54,13 +54,13 @@ public class EonsFieldNotes implements IEonsFieldNotes {
         return this.biography;
     }
 
-    @Override
+    /** */
     public EonsEra getEra() {
         // TODO Auto-generated method stub
         return null;
     }
 
-    @Override
+    /** */
     public EonsTemper getTemper() {
         // TODO Auto-generated method stub
         return null;

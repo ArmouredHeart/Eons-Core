@@ -2,6 +2,8 @@
 package eons_core.api;
 
 // Forge imports
+import eons_core.common.EonsEra;
+import eons_core.common.EonsTemper;
 
 // Eons imports
 
@@ -15,7 +17,7 @@ public interface IEonsFieldNotes {
     public String[] getTaxanomy();
 
     /** */
-    public String[] getClade();
+    public String getClade();
 
     /** */
     public String getBiography();
@@ -24,5 +26,5 @@ public interface IEonsFieldNotes {
     public EonsEra getEra();
 
     /** */
-    public EonsEra getTemper();
+    public EonsTemper getTemper();
 }
