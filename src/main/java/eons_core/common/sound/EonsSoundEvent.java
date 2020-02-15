@@ -1,5 +1,5 @@
 // package
-package main.java.eons_core.common.sound;
+package eons_core.common.sound;
 
 // Forge imports
 

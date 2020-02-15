@@ -1,5 +1,5 @@
 // package
-package main.java.eons_core.common.entity;
+package eons_core.common.entity;
 
 // Forge imports
 

@@ -1,5 +1,5 @@
 // package
-package main.java.eons_core.common.item;
+package eons_core.common.item;
 
 // Forge imports
 import net.minecraft.item.WrittenBookItem;
@@ -8,6 +8,6 @@ import net.minecraft.item.WrittenBookItem;
 
 
 // misc imports
-public class FieldNotebookItem extends WrittenBookItem {
+public class EonsFieldNotebookItem extends WrittenBookItem {
     
 }

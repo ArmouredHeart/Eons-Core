@@ -1,5 +1,5 @@
 // package
-package main.java.eons_core.api;
+package eons_core.api;
 
 // Forge imports
 import net.minecraft.entity.IJumpingMount;

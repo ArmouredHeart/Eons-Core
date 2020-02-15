@@ -1,10 +1,12 @@
 // package
-package main.java.eons_core.common.item;
+package eons_core.common;
 
 // Forge imports
 
 // Eons imports
-
+import eons_core.common.EonsEra;
+import eons_core.common.EonsTemper;
+import eons_core.api.IEonsFieldNotes;
 // misc imports
 
 public class EonsFieldNotes implements IEonsFieldNotes {
@@ -50,5 +52,17 @@ public class EonsFieldNotes implements IEonsFieldNotes {
     /** */
     public String getBiography(){
         return this.biography;
+    }
+
+    @Override
+    public EonsEra getEra() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public EonsTemper getTemper() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

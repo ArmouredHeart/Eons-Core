@@ -12,10 +12,22 @@
 */
 
 // package
-package main.java.eons_core.common;
+package eons_core.common;
 
 // Forge imports
+import net.minecraft.server.dedicated.ServerProperties;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
 
+import org.apache.logging.log4j.Logger;
 
 // Eons imports
 
@@ -23,7 +35,7 @@ package main.java.eons_core.common;
 
 
 /** */
-@Mod(modid = EonsCore.MOD_ID, name = EonsCore.MOD_NAME, version = EonsCore.MOD_VERSION)
+@Mod(value = EonsCore.MOD_ID)
 public class EonsCore {
     //
     public static final String MOD_ID = "eons_core";
@@ -34,19 +46,31 @@ public class EonsCore {
     public static final String COMMON_PROXY_CLASS = "";
 
     //
-    private static Logger logger;
+    public static Logger logger;
+    public static EonsCore instance;
 
     /** */
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        //
-        logger = event.getModLog();
+    public EonsCore() {
+        instance = this;
+
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::dedicatedServerSetup);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
+        //MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
+    }
+
+    public void dedicatedServerSetup(FMLDedicatedServerSetupEvent event) {
+    
     }
 
     /** */
-    @EventHandler
-    public void preInit(FMLInitializationEvent event) {
-        //
-        
+    private void commonSetup(final FMLCommonSetupEvent event) {
+
+    }
+
+    /** */
+    private void clientSetup(final FMLClientSetupEvent event) {
+
     }
 }
