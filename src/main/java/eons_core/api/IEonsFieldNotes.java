@@ -2,8 +2,7 @@
 package eons_core.api;
 
 // Forge imports
-import eons_core.common.EonsEra;
-import eons_core.common.EonsTemper;
+import eons_core.common.EonsPeriod;
 
 // Eons imports
 
@@ -23,8 +22,5 @@ public interface IEonsFieldNotes {
     public String getBiography();
 
     /** */
-    public EonsEra getEra();
-
-    /** */
-    public EonsTemper getTemper();
+    public EonsPeriod getPeriod();
 }

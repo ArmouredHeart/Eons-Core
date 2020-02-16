@@ -4,9 +4,9 @@ package eons_core.common;
 // Forge imports
 
 // Eons imports
-import eons_core.common.EonsEra;
-import eons_core.common.EonsTemper;
+import eons_core.common.EonsPeriod;
 import eons_core.api.IEonsFieldNotes;
+
 // misc imports
 
 public class EonsFieldNotes implements IEonsFieldNotes {
@@ -15,14 +15,13 @@ public class EonsFieldNotes implements IEonsFieldNotes {
     protected String[] taxanomy;
     protected String clade;
     protected String biography;
-    protected EonsEra era;
-    protected EonsTemper temper;
+    protected EonsPeriod period;
 
     // *** Contructors ***
 
     /** domain, kingdom, phylum, taxaClass, order, family, genus, species*/
     public EonsFieldNotes(String domain, String kingdom, String phylum, String taxaClass, String order, String family,
-        String genus, String species, String biography, EonsEra era, EonsTemper temper){
+        String genus, String species, String biography, EonsPeriod period){
         //
 
         //
@@ -31,7 +30,7 @@ public class EonsFieldNotes implements IEonsFieldNotes {
     }
 
     /** */
-    public EonsFieldNotes(String[] taxanomy, String clade, String biography, EonsEra era, EonsTemper temper){
+    public EonsFieldNotes(String[] taxanomy, String clade, String biography, EonsPeriod period){
         this.taxanomy = taxanomy;
         this.clade = clade;
         this.biography = biography;
@@ -55,14 +54,7 @@ public class EonsFieldNotes implements IEonsFieldNotes {
     }
 
     /** */
-    public EonsEra getEra() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /** */
-    public EonsTemper getTemper() {
-        // TODO Auto-generated method stub
-        return null;
+    public EonsPeriod getPeriod() {
+        return this.period;
     }
 }
