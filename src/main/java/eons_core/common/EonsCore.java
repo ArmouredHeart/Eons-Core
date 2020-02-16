@@ -3,7 +3,7 @@
  * Started: 10/02/2020
  * Author: ArmouredHeart
  * Discord: ArmouredHeart#1208
- * GitHub: 
+ * GitHub: https://github.com/ArmouredHeart/Eons-Core
  * CurseForge: 
  * Licence: GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
  * Notice: Please refer to original source if you create any derived works.
@@ -44,22 +44,23 @@ public class EonsCore {
     public static final String ACCEPTED_VERSION = "[1.14.4]";
     public static final String CLIENT_PROXY_CLASS = "";
     public static final String COMMON_PROXY_CLASS = "";
-
+    public static Common_Proxy proxy = DistExecutor.runForDist(() -> Client_Proxy::new, () -> Common_Proxy::new);
     //
-    public static Logger logger;
+    public static Logger logger = LogManager.getLogger(MOD_ID);
     public static EonsCore instance;
 
     /** */
     public EonsCore() {
         instance = this;
 
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::dedicatedServerSetup);
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
-        //MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::dedicatedServerSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
+        MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
     }
 
+    /** */
     public void dedicatedServerSetup(FMLDedicatedServerSetupEvent event) {
     
     }
@@ -71,6 +72,16 @@ public class EonsCore {
 
     /** */
     private void clientSetup(final FMLClientSetupEvent event) {
+
+    }
+
+    /** */
+    private void loadComplete(final FMLLoadCompleteEvent event) {
+    
+    }
+
+    /** */
+    public void serverStarting(FMLServerStartingEvent event) {
 
     }
 }
