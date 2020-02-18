@@ -5,9 +5,10 @@ package eons_core.common.block;
 import net.minecraft.block.trees.BigTree;
 
 // Eons imports
-import eons_core.api.IEonsPlant;
+import eons_core.api.IEonsFieldNotes;
+
 // misc imports
 
-public abstract class EonsBigTree extends BigTree implements IEonsPlant {
+public abstract class EonsBigTree extends BigTree implements IEonsFieldNotes {
 
 }
