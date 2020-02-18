@@ -6,3 +6,7 @@ package eons_core.api;
 // Eons imports
 
 // misc imports
+
+public interface IEonsBeastAquatic {
+
+}
