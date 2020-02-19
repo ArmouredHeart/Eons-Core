@@ -16,7 +16,8 @@ Basic
 
 Optional
 ----------------------------------
-limp
-pounce
-fly
-glide
+
+* limp
+* pounce
+* fly
+* glide
