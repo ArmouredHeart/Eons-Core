@@ -30,8 +30,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // Eons imports
-import com.github.armouredheart.eons_core.common.Common_Proxy;
-import com.github.armouredheart.eons_core.common.Client_Proxy;
+import com.github.armouredheart.eons_core.Common_Proxy;
+import com.github.armouredheart.eons_core.Client_Proxy;
 
 // misc imports
 
