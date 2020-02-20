@@ -1,5 +1,5 @@
 // package
-package eons_core.config;
+package com.github.armouredheart.eons_core.config;
 
 // Forge imports
 

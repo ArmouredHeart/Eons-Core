@@ -2,7 +2,7 @@
 package com.github.armouredheart.eons_core.api;
 
 // Forge imports
-import eons_core.common.EonsPeriod;
+import com.github.armouredheart.eons_core.common.EonsPeriod;
 
 // Eons imports
 

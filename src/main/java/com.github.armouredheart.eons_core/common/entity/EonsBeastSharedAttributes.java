@@ -1,8 +1,8 @@
 // package
-package eons_core.common.entity;
+package com.github.armouredheart.eons_core.entity;
 
 // Forge imports
-import eons_core.common.EonsPeriod;
+import com.github.armouredheart.eons_core.common.EonsPeriod;
 
 // Eons imports
 

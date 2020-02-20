@@ -1,5 +1,5 @@
 // package
-package eons_core.common.sound;
+package com.github.armouredheart.eons_core.common.sound;
 
 // Forge imports
 

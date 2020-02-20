@@ -30,15 +30,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // Eons imports
+import com.github.armouredheart.eons_core.common.Common_Proxy;
+import com.github.armouredheart.eons_core.common.Client_Proxy;
 
 // misc imports
-
 
 /** */
 @Mod(value = EonsCore.MOD_ID)
 public class EonsCore {
     //
-    public static final String MOD_ID = "eons-core";
+    public static final String MOD_ID = "eons_core";
     public static final String MOD_NAME = "Eons-Core";
     public static final String MOD_VERSION = "0.0.1";
     public static final String ACCEPTED_VERSION = "[1.14.4]";

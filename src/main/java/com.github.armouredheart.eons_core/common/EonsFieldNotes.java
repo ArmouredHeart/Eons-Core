@@ -1,11 +1,11 @@
 // package
-package eons_core.common;
+package com.github.armouredheart.eons_core.common;
 
 // Forge imports
 
 // Eons imports
-import eons_core.common.EonsPeriod;
-import eons_core.api.IEonsFieldNotes;
+import com.github.armouredheart.eons_core.common.EonsPeriod;
+import com.github.armouredheart.eons_core.api.IEonsFieldNotes;
 
 // misc imports
 

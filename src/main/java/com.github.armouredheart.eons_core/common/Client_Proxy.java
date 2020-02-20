@@ -1,5 +1,5 @@
 // package
-package eons_core.common;
+package com.github.armouredheart.eons_core.common;
 
 // Forge imports
 

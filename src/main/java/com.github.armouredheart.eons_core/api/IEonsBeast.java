@@ -4,7 +4,7 @@ package com.github.armouredheart.eons_core.api;
 // Forge imports
 
 // Eons imports
-import eons_core.api.IEonsFieldNotes;
+import com.github.armouredheart.eons_core.api.IEonsFieldNotes;
 
 // misc imports
 

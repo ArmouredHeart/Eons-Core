@@ -1,12 +1,12 @@
 // package
-package eons_core.common.entity.ai.attribute;
+package com.github.armouredheart.eons_core.common.entity.ai.attribute;
 
 // Forge imports
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.IAttribute;
 
 // Eons imports
-import eons_core.common.EonsPeriod;
+import com.github.armouredheart.eons_core.common.EonsPeriod;
 
 // misc imports
 import javax.annotation.Nullable;

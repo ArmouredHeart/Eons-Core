@@ -1,5 +1,5 @@
 // package
-package eons_core.common.item;
+package com.github.armouredheart.eons_core.common.item;
 
 // Forge imports
 import net.minecraft.item.WrittenBookItem;
