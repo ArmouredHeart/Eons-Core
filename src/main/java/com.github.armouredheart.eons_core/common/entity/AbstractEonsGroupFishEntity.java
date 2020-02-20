@@ -1,5 +1,5 @@
 // package
-package eons_core.common.entity;
+package com.github.armouredheart.eons_core.common.entity;
 
 // Forge imports
 import net.minecraft.entity.passive.fish.AbstractGroupFishEntity;
@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.entity.EntityType;
 
 // Eons imports
-import eons_core.api.IEonsFieldNotes;
+import com.github.armouredheart.eons_core.api.IEonsFieldNotes;
 
 // misc imports
 

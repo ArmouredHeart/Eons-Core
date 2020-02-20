@@ -12,7 +12,7 @@
 */
 
 // package
-package eons_core.common;
+package com.github.armouredheart.eons_core;
 
 // Forge imports
 import net.minecraft.server.dedicated.ServerProperties;
@@ -38,8 +38,8 @@ import org.apache.logging.log4j.Logger;
 @Mod(value = EonsCore.MOD_ID)
 public class EonsCore {
     //
-    public static final String MOD_ID = "eons_core";
-    public static final String MOD_NAME = "Eons: Core";
+    public static final String MOD_ID = "eons-core";
+    public static final String MOD_NAME = "Eons-Core";
     public static final String MOD_VERSION = "0.0.1";
     public static final String ACCEPTED_VERSION = "[1.14.4]";
     public static final String CLIENT_PROXY_CLASS = "";

@@ -1,5 +1,5 @@
 // package
-package eons_core.api;
+package com.github.armouredheart.eons_core.api;
 
 // Forge imports
 import eons_core.common.EonsPeriod;
