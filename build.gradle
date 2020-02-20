@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.0.2'
+version = '0.0.3'
 group = 'armouredheart.eons_mod.eons_core' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Eons-Core'
 
