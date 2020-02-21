@@ -1,0 +1,12 @@
+{
+    "eons_music_primal_age": {
+        "subtitle": "eons_core.subtitle.eons_music_primal_age",
+        "sounds": [
+            {
+                "name": "eons_core:/music/eons_music_primal_age.ogg",
+                "stream": true,
+                "type": "event"
+            }
+        ]
+    }
+}
