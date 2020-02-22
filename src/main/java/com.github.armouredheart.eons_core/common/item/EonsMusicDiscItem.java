@@ -19,6 +19,6 @@ public class EonsMusicDiscItem extends MusicDiscItem {
 
     /** */
     public EonsMusicDiscItem(SoundEvent sound_event) {
-        super(0, sound_event, new Item.Properties().group(EonsItemGroups.EONS_ITEM_GROUP));
+        super(0, sound_event, (new Item.Properties()).maxStackSize(1).group(EonsItemGroups.EONS_ITEM_GROUP).rarity(Rarity.RARE));
     }
 }

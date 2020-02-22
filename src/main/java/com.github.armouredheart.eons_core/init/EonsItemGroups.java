@@ -15,10 +15,12 @@ import com.github.armouredheart.eons_core.EonsCore;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-/** Creative Tabs */
+
 public final class EonsItemGroups {
 
-    /** Default Creative Tab for Eons */
+	// *** Creative Tabs ***
+
+    // Default Creative Tab for Eons
 	public static final ItemGroup EONS_ITEM_GROUP = new EonsItemGroup(EonsCore.MOD_ID, () -> new ItemStack(EonsItems.EONS_SPEAR_ITEM.get()));
 
 	// *** Methods ***

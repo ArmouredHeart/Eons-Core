@@ -11,6 +11,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
+import com.github.armouredheart.eons_core.common.item.EonsMusicDiscItem;
+import com.github.armouredheart.eons_core.common.item.EonsSpearItem;
+import com.github.armouredheart.eons_core.init.EonsSounds;
 
 // misc imports
 import java.util.function.Supplier;
@@ -24,8 +27,11 @@ public final class EonsItems {
     // *** Register Items ***
     
     //
-    public static final RegistryObject<Item> EONS_SPEAR_ITEM = registerItem("eons_spear_item", () -> new Item(new Item.Properties().group(EonsItemGroups.EONS_ITEM_GROUP)));
+    public static final RegistryObject<Item> EONS_SPEAR_ITEM = registerItem("eons_spear_item", () -> new EonsSpearItem(new Item.Properties().group(EonsItemGroups.EONS_ITEM_GROUP)));
 
+    //
+    public static final RegistryObject<Item> EONS_MUSIC_DISC_PRIMAL_AGE = registerItem("eons_music_disc_primal_age", () -> new EonsMusicDiscItem(EonsSounds.EONS_MUSIC_PRIMAL_AGE));
+    
     // *** Methods ***
 
     /**

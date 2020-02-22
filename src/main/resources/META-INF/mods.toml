@@ -11,11 +11,9 @@ displayName="Eons-Core"
 #displayURL="https://github.com/ArmouredHeart/Eons-Core"
 logoFile="Eons-Core_Logo.png"
 credits="sample text"
-authors="ArmouredHeart"
-description='''
-This is Eons-Core. 
-It is needed to use other Eons mods.
-'''
+authors="ArmouredHeart, Accentaur"
+description='''This is Eons-Core.
+It is needed to use other Eons mods.'''
 # Forge
 [[dependencies.eons_core]]
     modId="forge"
