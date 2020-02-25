@@ -27,7 +27,7 @@ public final class EonsSounds {
     // *** Register Sounds ***
 
     //
-    public static final SoundEvent EONS_MUSIC_PRIMAL_AGE = createSoundEvent("eons_music_primal_age");
+    public static final SoundEvent MUSIC_EONS_PRIMAL_AGE = createSoundEvent("music.eons_primal_age");
 
     // *** Methods ***
 

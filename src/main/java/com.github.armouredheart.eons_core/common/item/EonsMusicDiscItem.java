@@ -17,8 +17,12 @@ import com.github.armouredheart.eons_core.init.EonsItemGroups;
 
 public class EonsMusicDiscItem extends MusicDiscItem {
 
+    // *** Constructors ***
+
     /** */
     public EonsMusicDiscItem(SoundEvent sound_event) {
         super(0, sound_event, (new Item.Properties()).maxStackSize(1).group(EonsItemGroups.EONS_ITEM_GROUP).rarity(Rarity.RARE));
     }
+
+    // *** Methods ***
 }

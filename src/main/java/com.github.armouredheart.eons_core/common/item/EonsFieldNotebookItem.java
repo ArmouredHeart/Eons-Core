@@ -10,10 +10,16 @@ import net.minecraft.item.WrittenBookItem;
 // misc imports
 public class EonsFieldNotebookItem extends WrittenBookItem {
 
+    // *** Attributes ***
+    
+    // *** Constructors ***
+
     /** */
     public EonsFieldNotebookItem(Properties builder) {
         super(builder);
         // TODO Auto-generated constructor stub
     }
+
+    // *** Methods ***
     
 }

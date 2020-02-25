@@ -1,11 +1,10 @@
 {
-    "eons_music_primal_age": {
-        "subtitle": "eons_core.subtitle.eons_music_primal_age",
+    "music.eons_primal_age": {
+        "subtitle": "test music text <Primal Age>",
         "sounds": [
             {
-                "name": "eons_core:music/eons_music_primal_age",
-                "stream": true,
-                "type": "event"
+                "name": "eons_core:music/eons_primal_age",
+                "stream": true
             }
         ]
     }

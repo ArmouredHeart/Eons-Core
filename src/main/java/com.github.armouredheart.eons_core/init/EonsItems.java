@@ -30,7 +30,7 @@ public final class EonsItems {
     public static final RegistryObject<Item> EONS_SPEAR_ITEM = registerItem("eons_spear_item", () -> new EonsSpearItem(new Item.Properties().group(EonsItemGroups.EONS_ITEM_GROUP)));
 
     //
-    public static final RegistryObject<Item> EONS_MUSIC_DISC_PRIMAL_AGE = registerItem("eons_music_disc_primal_age", () -> new EonsMusicDiscItem(EonsSounds.EONS_MUSIC_PRIMAL_AGE));
+    public static final RegistryObject<Item> EONS_MUSIC_DISC_PRIMAL_AGE = registerItem("eons_music_disc_primal_age", () -> new EonsMusicDiscItem(EonsSounds.MUSIC_EONS_PRIMAL_AGE));
     
     // *** Methods ***
 

@@ -49,10 +49,10 @@ public class EonsCore implements IEonsCore {
         final IEventBus eonsEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         
         // Register DeferredRegisters
+        EonsSounds.SOUND_EVENTS.register(eonsEventBus);
         EonsBlocks.BLOCKS.register(eonsEventBus);
         EonsItems.ITEMS.register(eonsEventBus);
-        EonsSounds.SOUND_EVENTS.register(eonsEventBus);
-
+        
         // Register Configs
 
     }
