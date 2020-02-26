@@ -1,6 +1,5 @@
 {
     "music.eons_primal_age": {
-        "subtitle": "test music text <Primal Age>",
         "sounds": [
             {
                 "name": "eons_core:music/eons_primal_age",

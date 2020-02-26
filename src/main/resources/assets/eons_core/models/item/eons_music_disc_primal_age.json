@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "eons_core:item/blank_cassette"
+	}
+}
