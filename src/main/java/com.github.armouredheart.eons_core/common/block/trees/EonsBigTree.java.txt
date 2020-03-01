@@ -1,0 +1,20 @@
+// package
+package com.github.armouredheart.eons_core.common.block.trees;
+
+// Minecraft imports
+
+// Forge imports
+
+// Eons imports
+
+// misc imports
+
+public abstract class EonsBigTree extends BigTree {
+
+    // *** Attributes ***
+
+    // *** Constructors ***
+
+    // *** Methods ***
+
+}

@@ -13,7 +13,7 @@ public class EonsNotebookItem extends Item {
     // *** Attributes ***
     
     // *** Constructors ***
-
+    
     /** */
     public EonsNotebookItem() {
         super((new Item.Properties()).maxStackSize(1).group(EonsItemGroups.EONS_ITEM_GROUP));

@@ -1,0 +1,17 @@
+// package
+package com.github.armouredheart.eons_core.common.block.tree;
+
+// Minecraft imports
+
+// Forge imports
+
+// Eons imports
+
+// misc imports
+
+public class EonsTestTree extends Tree {
+   @Nullable
+   protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random) {
+      return new EonsTestTreeFeature(NoFeatureConfig::deserialize, true);
+   }
+}

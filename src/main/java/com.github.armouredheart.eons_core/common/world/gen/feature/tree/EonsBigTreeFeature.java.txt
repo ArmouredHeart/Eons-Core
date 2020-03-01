@@ -1,0 +1,33 @@
+// package
+package com.github.armouredheart.eons_core.common.world.gen.feature.tree;
+
+// Minecraft imports
+import net.minecraft.world.gen.HugeTreesFeature;
+
+// Forge imports
+
+// Eons imports
+
+// misc imports
+
+public abstract class EonsBigTreeFeature extends HugeTreesFeature<NoFeatureConfig> {
+
+    // *** Attributes ***
+
+    // *** Constructors ***
+
+    /** 
+    * @param configFactoryIn 
+    * @param doBlockNotifyOnPlace
+    * @param baseHeightIn
+    * @param extraRandomHeightIn
+    * @param trunkIn
+    * @param leafIn
+    */ 
+    public EonsBigTreeFeature(Function<Dynamic<?>, ? extends T> configFactoryIn, boolean doBlockNotifyOnPlace, int baseHeightIn, int extraRandomHeightIn, BlockState trunkIn, BlockState leafIn) {
+        super(configFactoryIn, doBlockNotifyOnPlace, baseHeightIn, extraRandomHeightIn, trunkIn, leafIn)
+    }
+
+    // *** Methods ***
+
+}

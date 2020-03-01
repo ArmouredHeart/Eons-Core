@@ -21,7 +21,8 @@ import java.util.function.Supplier;
 
 /** */
 public final class EonsItems {
-
+    // *** Attributes ***
+    
     //
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, EonsCore.MOD_ID);
 
@@ -37,7 +38,7 @@ public final class EonsItems {
     public static final RegistryObject<Item> EONS_NOTEBOOK_ITEM = registerItem("eons_notebook_item", () -> new EonsNotebookItem());
 
     // *** Methods ***
-
+    
     /**
      * @param item_supplier Minecraft Item object or subclass object
      * @param item_name String unlocalised name all lowercase

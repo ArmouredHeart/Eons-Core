@@ -1,0 +1,24 @@
+// package
+package com.github.armouredheart.eons_core.common.world.gen.feature.tree;
+
+// Minecraft imports
+
+// Forge imports
+
+// Eons imports
+import com.github.armouredheart.eons_core.common.world.gen.feature.tree.EonsTreeFeature;
+
+// misc imports
+
+public class EonsTestTreeFeature extends EonsTreeFeature{
+
+    // *** Attributes ***
+
+    // *** Constructors ***
+
+    /** */
+
+
+    // *** Methods ***
+        
+}

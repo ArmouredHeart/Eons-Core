@@ -21,6 +21,8 @@ import java.util.function.Supplier;
 /** */
 public final class EonsBlocks {
 
+    // *** Attributes ***
+    
     //
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, EonsCore.MOD_ID);
 
