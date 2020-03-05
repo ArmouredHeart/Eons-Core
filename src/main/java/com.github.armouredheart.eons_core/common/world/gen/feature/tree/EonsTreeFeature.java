@@ -8,7 +8,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.block.OAK_LOG;
+import net.minecraft.block.OAK_LEAVES;
+import net.minecraft.block.OAK_SAPLING;
 
 // Forge imports
 import net.minecraftforge.common.IPlantable;
@@ -24,16 +28,25 @@ import java.util.function.Function;
 public abstract class EonsTreeFeature extends AbstractTreeFeature<NoFeatureConfig> {
 
     // *** Attributes ***
-    private static final BlockState TRUNK;
-    private static final BlockState LEAF;
-    private static final IPlantable SAPLING;
+	// default values
+	private static final BlockState DEFAULT_TRUNK = Blocks.OAK_LOG.getDefaultState();
+   	private static final BlockState DEFAULT_LEAF = Blocks.OAK_LEAVES.getDefaultState();
+	private static final int DEFAULT_HEIGHT = 6;
+	private static final BlockState DEFAULT_TRUNK_FRUIT = null;
+	private static final BlockState DEFAULT_HANGING_FRUIT = null;
+	private static final IPlantable DEFAULT_SAPLING = null;
 
-    protected final int minTreeHeight;
-    protected final int maxTreeHeight;
-    protected final int trunkThickness;
-    private final boolean vinesGrow;
-    private final BlockState trunk;
-    private final BlockState leaf;
+	// tree values
+    protected final IPlantable SAPLING;
+    protected final int MIN_TREE_HEIGHT;
+    protected final int MAX_TREE_HEIGHT;
+    protected final int TRUNK_THICKNESS;
+    protected final boolean VINES_GROW;
+    protected final BlockState TRUNK;
+    protected final BlockState LEAF;
+	protected final BlockState VINE;
+	protected final BlockState TRUNK_FRUIT;
+	protected final BlockState HANGING_FRUIT;
 
     // *** Constructors ***
 
@@ -43,86 +56,123 @@ public abstract class EonsTreeFeature extends AbstractTreeFeature<NoFeatureConfi
     * @param minHeightIn
     * @param maxTreeHeightIn
     * @param trunkThicknessIn
-    * @param trunkIn
-    * @param leafIn
     * @param vinesGrowIn
     */
-    public EonsTreeFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace, int minTreeHeightIn, int maxTreeHeightIn, int trunkThicknessIn, BlockState trunkState, BlockState leafState, boolean vinesGrowIn) {
+    public EonsTreeFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace, int minTreeHeightIn, int maxTreeHeightIn, BlockState trunkState, BlockState leafState, int trunkThicknessIn, boolean vinesGrowIn) {
         super(configFactoryIn, doBlockNotifyOnPlace);
         this.setSapling(SAPLING);
-        this.minHeight = minHeightIn;
-        this.maxTreeHeight = maxTreeHeightIn;
-        this.trunkThickness = trunkThicknessIn;
-        this.trunk = trunkIn;
-        this.leaf = leafIn;
-        this.vinesGrow = vinesGrowIn;
+        this.minHeight = minTreeHeightIn;
+        this.MAX_TREE_HEIGHT = maxTreeHeightIn;
+		this.LEAF = leafState;
+		this.TRUNK = trunkState;
+        this.TRUNK_THICKNESS = trunkThicknessIn;
+        this.VINES_GROW = vinesGrowIn;
     }
 
-    /** */
-    public EonsTreeFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace) {
-        int minHeight = 6;// default tree size
-        int trunkThicknessIn
-        this.EonsTreeFeature(configFactoryIn, doBlockNotifyOnPlace);
-    }
+	/**
+    * @param configFactoryIn 
+    * @param doBlockNotifyOnPlace
+    * @param minHeightIn
+    * @param maxTreeHeightIn
+    * @param trunkThicknessIn
+    * @param vinesGrowIn
+    */
+	public EonsTreeFeature() {
+		this.EonsTreeFeature();
+	}
 
     // *** Methods ***
 
-    @Override
-	protected boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox boundingBox) {
-		int height = this.getHeight(rand);
-		boolean flag = true;
-		if (position.getY() >= 1 && position.getY() + height + 1 <= worldIn.getMaxHeight()) {
-			for(int j = position.getY(); j <= position.getY() + 1 + height; ++j) {
-				int k = 1;
-				if (j == position.getY()) {
-					k = 0;
-				}
-				if (j >= position.getY() + 1 + height - 2) {
-					k = 2;
-				}
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-				for(int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
-					for(int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
-						if (j >= 0 && j < worldIn.getMaxHeight()) {
-							if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(l, j, i1))) {
-								flag = false;
-							}
-						} else {
-							flag = false;
-						}
-					}
-				}
-			}
-			if(!flag) {
-				return false;
-			} else if (isSoil(worldIn, position.down(), getSapling()) && position.getY() < worldIn.getMaxHeight() - height - 1) {
-				this.setDirtAt(worldIn, position.down(), position);
-				for(int l2 = position.getY() - 3 + height; l2 <= position.getY() + height; ++l2) {
-					int l3 = l2 - (position.getY() + height);
-					int j4 = 1 - l3 / 2;
-					for(int j1 = position.getX() - j4; j1 <= position.getX() + j4; ++j1) {
-						int k1 = j1 - position.getX();
-						for(int l1 = position.getZ() - j4; l1 <= position.getZ() + j4; ++l1) {
-							int i2 = l1 - position.getZ();
-							if (Math.abs(k1) != j4 || Math.abs(i2) != j4 || rand.nextInt(2) != 0 && l3 != 0) {
-								BlockPos blockpos = new BlockPos(j1, l2, l1);
-								if (isAirOrLeaves(worldIn, blockpos) || func_214576_j(worldIn, blockpos)) {
-									this.setLogState(changedBlocks, worldIn, blockpos, LEAF, boundingBox);
-								}
-							}
-						}
-					}
-				}
-				for(int i3 = 0; i3 < height; ++i3) {
-					this.setLogState(changedBlocks, worldIn, position.up(i3), LOG, boundingBox);
-				}
-				return true;
-			} else {
-				return false;
-			}
+	@Nullable
+   	protected abstract AbstractTreeFeature<NoFeatureConfig> getEonsTreeFeature(Random random);
+
+	/**
+	* @return boolean true if tree placed successfully, false if failed to place tree.
+	 */
+	@Override
+    public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox boundingBox) {
+		if (pos.getY() >= 1 && pos.getY() + height + 1 <= 256) {
+			//
+			int xOffset = 0;
+			int yOffset = 0;
+			int zOffset = 0;
+
+			
 		} else {
 			return false;
 		}
+	}
+
+	/** */
+	protected boolean placeTrunk(Set<BlockPos> changedBlocks, MutableBoundingBox boundingBox, IWorld world, BlockPos position) {
+		try {	
+			// set axis so that the log is vertical
+			Direction.Axis axis;
+			
+			// vertical z
+			for(int k = 0; k < this.getHeight(); k++) {
+
+				// horizontal y
+				for(int j = 0; j < this.TRUNK_THICKNESS; j++) {
+
+					// horizontal x
+					for(int i = 0; i < this.TRUNK_THICKNESS; i++) {
+						placeLog(world, position.add(i, j, k), axis, changedBlocks, boundingBox);
+					}
+				}
+			}
+		} catch(Exception e) {
+			return false;
+		}
+	}
+
+	/** */
+	public boolean placeLog() {
+
+	}
+
+	/**
+	* @param IWorld
+	* @param pos
+	* @param axis
+	* @param changedBlocks
+	* @param boundingBox
+	 */
+	public boolean placeLog(IWorld world, BlockPos pos, Direction.Axis axis, Set<BlockPos> changedBlocks, MutableBoundingBox boundingBox) {
+
+	}
+
+	/**
+	* @param IWorld
+	* @param pos
+	* @param changedBlocks
+	* @param boundingBox
+	 */
+	public boolean placeLeaves(IWorld world, BlockPos pos, Set<BlockPos> changedBlocks, MutableBoundingBox boundingBox) {
+		return placeLog(world, pos, null, changedBlocks, boundingBox);
+	}
+
+	/** */
+	public boolean setTrunkFruit() {
+
+	}
+
+	/** */
+	@Override
+	protected void addVine(IWorldWriter worldIn, BlockPos pos, BooleanProperty prop) {
+		this.setBlockState(worldIn, pos, this.VINE);
+	}
+
+	/** */
+	private void addHangingVine(IWorldGenerationReader worldIn, BlockPos pos, BooleanProperty prop) {
+		this.addVine(worldIn, pos, prop);
+		int i = 4;
+
+		for(BlockPos blockpos = pos.down(); isAir(worldIn, blockpos) && i > 0; --i) {
+			this.addVine(worldIn, blockpos, prop);
+			blockpos = blockpos.down();
+		}
+
 	}
 
     /** */
@@ -134,6 +184,8 @@ public abstract class EonsTreeFeature extends AbstractTreeFeature<NoFeatureConfi
     /** */
     @Override
 	protected int getHeight(Random rand) {
-		return this.minHeight + rand.nextInt(this.maxHeight + 1);
+		return this.MIN_TREE_HEIGHT + rand.nextInt(this.MAX_TREE_HEIGHT);
 	}
+
+	// *** Internal Classes ***
 }
