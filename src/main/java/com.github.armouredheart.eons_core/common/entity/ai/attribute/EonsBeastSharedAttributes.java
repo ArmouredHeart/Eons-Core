@@ -1,8 +1,7 @@
 // package
-package com.github.armouredheart.eons_core.entity;
+package com.github.armouredheart.eons_core.entity.ai.attribute;
 
 // Forge imports
-import com.github.armouredheart.eons_core.common.EonsPeriod;
 
 // Eons imports
 
@@ -11,5 +10,7 @@ import com.github.armouredheart.eons_core.common.EonsPeriod;
 public class EonsBeastSharedAttributes {
 
     // *** ***
+
+    // hunger
     
 }

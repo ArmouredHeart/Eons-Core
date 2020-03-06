@@ -29,7 +29,7 @@ public final class EonsEntityTypes {
     // *** Methods ***
 
     /**
-     * @param entity_supplier Minecraft Entity object or subclass object
+     * @param entity_supplier Minecraft Item object or subclass object
      * @param entity_name String unlocalised name all lowercase
      */
     public static RegistryObject<EntityType<?>> registerEntityType(String entity_name, Supplier<EntityType<?>> entity_supplier){

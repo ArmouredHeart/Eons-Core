@@ -25,7 +25,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import com.github.armouredheart.eons_core.init.EonsBlocks;
 import com.github.armouredheart.eons_core.init.EonsItems;
 import com.github.armouredheart.eons_core.init.EonsSounds;
-import com.github.armouredheart.eons_core.api.IEonsCore;
+import com.github.armouredheart.eons_core.init.EonsEntityTypes;
+import com.github.armouredheart.eons_core.init.EonsTileEntityTypes;
 
 // misc imports
 import org.apache.logging.log4j.LogManager;
@@ -33,7 +34,7 @@ import org.apache.logging.log4j.Logger;
 
 /** Declare entry point */
 @Mod(value = EonsCore.MOD_ID)
-public class EonsCore implements IEonsCore {
+public class EonsCore {
     // *** Attributes ***
     public static final String MOD_ID = "eons_core";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
@@ -52,6 +53,8 @@ public class EonsCore implements IEonsCore {
         EonsSounds.SOUND_EVENTS.register(eonsEventBus);
         EonsBlocks.BLOCKS.register(eonsEventBus);
         EonsItems.ITEMS.register(eonsEventBus);
+        EonsEntityTypes.ENTITY_TYPES.register(eonsEventBus);
+        //EonsTileEntityTypes.TILE_ENTITY_TYPES.register(eonsEventBus);
         
         // Register Configs
 
