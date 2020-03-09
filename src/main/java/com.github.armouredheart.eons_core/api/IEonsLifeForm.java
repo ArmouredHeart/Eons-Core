@@ -1,8 +1,9 @@
 // package
 package com.github.armouredheart.eons_core.api;
 
-// Forge imports
+// Minecraft imports
 
+// Forge imports
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;

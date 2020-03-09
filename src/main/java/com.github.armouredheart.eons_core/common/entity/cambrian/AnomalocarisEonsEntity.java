@@ -16,5 +16,11 @@ public class AnomalocarisEonsEntity extends AquaticEonsBeast {
 
     // *** Constructors ***
 
+    /** */
+    protected AnomalocarisEonsEntity(EntityType<? extends AnimalEntity> type, World world, EonsFieldNotes fieldNotes) {
+        super(type, world, fieldNotes);
+
+    }
+
     // *** Methods ***
 }

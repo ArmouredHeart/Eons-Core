@@ -1,6 +1,8 @@
 // package
 package com.github.armouredheart.eons_core.api;
 
+// Minecraft imports
+
 // Forge imports
 
 // Eons imports
@@ -8,7 +10,7 @@ import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 
 // misc imports
 
-public interface IEonsBeast extends IEonsLifeForm{
+public interface IEonsBeast extends IEonsLifeForm {
 
     // *** Attributes ***
     protected final static int threatBoost;// how scary (or non-threatening) the beast is. Can be negative.

@@ -2,9 +2,17 @@
 package com.github.armouredheart.eons_core.common.entity;
 
 // Minecraft imports
-import net.minecraft.entity.passive.WaterMobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.network.IPacket;
+import net.minecraft.world.World;
 
 // Forge imports
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsBeast;
@@ -54,4 +62,17 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 
       return super.processInteract(player, hand);
    }
+
+   /** */
+   @Override
+   public EonsBeastEntity createChild(final AgeableEntity parent) {
+		// Use getType to support overrides in subclasses
+		return (EonsBeastEntity) getType().create(this.world);
+	}
+
+   /** */
+   @Override
+	public IPacket<?> createSpawnPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
 }
