@@ -12,10 +12,8 @@ import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 
 public interface IEonsLifeForm {
 
-    protected final static EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
-
     // *** Methods ***
 
     /** @return EonsFieldNotes object containing educational notes about lifeform.*/
-    protected EonsFieldNotes getFieldNotes();
+    public EonsFieldNotes getFieldNotes();
 }

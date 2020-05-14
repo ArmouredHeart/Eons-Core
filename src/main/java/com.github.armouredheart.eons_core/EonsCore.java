@@ -20,13 +20,15 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 
 // Eons imports
 import com.github.armouredheart.eons_core.init.EonsBlocks;
 import com.github.armouredheart.eons_core.init.EonsItems;
 import com.github.armouredheart.eons_core.init.EonsSounds;
 import com.github.armouredheart.eons_core.init.EonsEntityTypes;
-import com.github.armouredheart.eons_core.init.EonsTileEntityTypes;
+//import com.github.armouredheart.eons_core.init.EonsTileEntityTypes;
 
 // misc imports
 import org.apache.logging.log4j.LogManager;
@@ -56,6 +58,10 @@ public class EonsCore {
         EonsEntityTypes.ENTITY_TYPES.register(eonsEventBus);
         //EonsTileEntityTypes.TILE_ENTITY_TYPES.register(eonsEventBus);
         
+        // Register Renderers on client
+		DistExecutor.runWhenOn(Dist.CLIENT, () -> EonsEntityTypes::registerEonsEntityRenderers);
+    
+
         // Register Configs
 
     }

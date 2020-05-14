@@ -20,7 +20,7 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	// *** Constructors ***
 
 	/** */
-	public AbstractEonsGroupFishEntity(EntityType<? extends AbstractGroupFishEntity> type, World world) {
+	public EonsGroupFishEntity(EntityType<? extends AbstractGroupFishEntity> type, World world) {
 		super(type, world);
 		//TODO Auto-generated constructor stub
 	}

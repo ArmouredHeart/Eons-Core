@@ -2,13 +2,15 @@
 package com.github.armouredheart.eons_core.api;
 
 // Minecraft imports
-import net.minecraft.entity.passive.IFlyingAnimal;
+
 // Forge imports
 
 // Eons imports
+import com.github.armouredheart.eons_core.api.IEonsEntityRenderer;
 
 // misc imports
 
-public interface IEonsBeastFlying extends IFlyingAnimal{
+public interface IEonsEntityRenderer {
 
+    // *** Methods ***
 }

@@ -59,4 +59,9 @@ public final class EonsEventSubscriber {
 	public static void onModConfigEvent(final ModConfig.ModConfigEvent event) {
 		LOGGER.debug("configs not yet implemented lol");
     }
+
+	/** */
+	//@SubscribeEvent
+	//public static void onFMLPreinit
+	//OBJLoader.addDomain(EonsCore.MOD_ID)
 }

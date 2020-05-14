@@ -6,8 +6,11 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.world.World;
+import net.minecraft.util.Hand;
+import net.minecraft.item.ItemStack;
 
 // Forge imports
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -16,27 +19,38 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsBeast;
+import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 
 // misc imports
 
 public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast {
 
    // *** Attributes ***
-   protected final static EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
+   public EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
 
    // *** Constructors ***
 
    /** */
-   protected EonsBeastEntity(EntityType<? extends AnimalEntity> type, World world, EonsFieldNotes fieldNotes) {
+   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes) {
       super(type, world);
-      this.fieldNotes = fieldNotes;
+      this.setFieldNotes(fieldNotes);
    }
 
    // *** Methods ***
 
    /** @return EonsFieldNotes object containing educational notes about lifeform.*/
-   protected EonsFieldNotes getFieldNotes() {
+   public EonsFieldNotes getFieldNotes() {
       return fieldNotes;
+   }
+
+   /** */
+   protected boolean setFieldNotes(EonsFieldNotes fieldNotes) {
+      try { 
+         this.fieldNotes = fieldNotes;
+         return true;
+      } catch (Exception e) {
+         return false;
+      }
    }
       
    /** */
@@ -75,4 +89,31 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 	public IPacket<?> createSpawnPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
+   
+   /** Calculated using remaining HP, Personality and Attack damage plus threatBoost.*/
+   public int getThreat() {return 1;}
+
+   /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
+   public int getResolve() {return 1;}
+
+   /** */
+   //protected boolean isHungry();
+
+   /** */
+   //public boolean isEnraged();
+
+   /** */
+   //protected boolean setEnraged();
+
+   /** */
+   //protected boolean setCalm();
+
+   /** */
+   //protected boolean resolveCheck(int threat);
+
+   /** Checks if beast becomes enraged.*/
+   //protected boolean rageCheck();
+
+   /** Checks if beast calms down.*/
+   //protected boolean calmCheck();
 }

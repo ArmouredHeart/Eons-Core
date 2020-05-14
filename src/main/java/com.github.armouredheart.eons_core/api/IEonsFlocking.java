@@ -7,7 +7,7 @@ package com.github.armouredheart.eons_core.api;
 
 // misc imports
 
-public interface IEonsBeastFlocking {
+public interface IEonsFlocking {
 
     // *** Attributes ***
 
