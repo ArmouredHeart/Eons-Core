@@ -51,10 +51,9 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
 
     /** */
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FindWaterGoal(this));
-        //this.goalSelector.addGoal(0, new EonsGoToWaterGoal(this, this.getSpeed(), 24));
-        //this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, this.getSpeed()));
-        //this.goalSelector.addGoal(3, new RestrictSunGoal(this));
+        this.goalSelector.addGoal(0, new EonsGoToWaterGoal(this, this.getSpeed(), 24));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, this.getSpeed()));
+        this.goalSelector.addGoal(3, new RestrictSunGoal(this));
     }
 
     /** */
