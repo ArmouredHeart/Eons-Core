@@ -13,14 +13,16 @@ import net.minecraft.util.ResourceLocation;
 import com.github.armouredheart.eons_core.common.entity.testmobs.EonsArcanineEntity;
 import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.client.render.entity.EonsMobRenderer;
-import com.github.armouredheart.eons_core.client.entity.model.EonsAraxocerasModel;
+import com.github.armouredheart.eons_core.client.model.entity.EonsAraxocerasModel;
 
 // misc imports
 
 public class EonsArcanineRenderer extends EonsMobRenderer<EonsArcanineEntity, EntityModel<EonsArcanineEntity>> {
 
     // *** Attributes ***
-    private static final ResourceLocation ARCANINE_TEXTURE = new ResourceLocation(EonsCore.MOD_ID, "textures/entity/arcanine/arcanine.png");
+    private static final ResourceLocation[] ARCANINE_TEXTURE = {
+        new ResourceLocation(EonsCore.MOD_ID, "textures/entity/arcanine/arcanine.png")
+    };
 
     // *** Constructors ***
 

@@ -19,5 +19,5 @@ public interface IEonsBeast extends IEonsLifeForm {
 
     /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
     public int getResolve();
-    }
+}
     

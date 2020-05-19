@@ -15,7 +15,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
-import com.github.armouredheart.eons_core.common.entity.testmobs.EonsArcanineEntity;
+import com.github.armouredheart.eons_core.common.entity.testmobs.*;
 import com.github.armouredheart.eons_core.client.render.entity.*;
 
 // misc imports
@@ -31,7 +31,12 @@ public final class EonsEntityTypes {
     // *** Register EntityTypes ***
 
     public static final RegistryObject<EntityType<EonsArcanineEntity>> ARCANINE = makeEonsEntity("arcanine", EonsArcanineEntity::new, EntityClassification.MONSTER, 1F, 1F);
-
+    // paleozoic
+    public static final RegistryObject<EntityType<EonsAraxocerasEntity>> ARAXOCERAS = makeEonsEntity("araxoceras", EonsAraxocerasEntity::new, EntityClassification.MONSTER, 0.3F, 0.3F);
+    public static final RegistryObject<EntityType<EonsBelantseaEntity>> BELANTSEA = makeEonsEntity("belantsea", EonsBelantseaEntity::new, EntityClassification.MONSTER, 1F, 1F);
+    public static final RegistryObject<EntityType<EonsHyneriaEntity>> HYNERIA = makeEonsEntity("hyneria", EonsHyneriaEntity::new, EntityClassification.MONSTER, 1F, 1F);
+    public static final RegistryObject<EntityType<EonsSpathicephalusEntity>> SPATHICEPHALUS = makeEonsEntity("spathicephalus", EonsSpathicephalusEntity::new, EntityClassification.MONSTER, 0.3F, 0.3F);
+    
     // *** Methods ***
 
     /** */
@@ -52,5 +57,10 @@ public final class EonsEntityTypes {
     /** Register client renderers */
 	public static void registerEonsEntityRenderers() {
         RenderingRegistry.registerEntityRenderingHandler(EonsArcanineEntity.class, manager -> new EonsArcanineRenderer(manager));
+        // paleozoic
+        RenderingRegistry.registerEntityRenderingHandler(EonsAraxocerasEntity.class, manager -> new EonsAraxocerasRenderer(manager));
+        RenderingRegistry.registerEntityRenderingHandler(EonsBelantseaEntity.class, manager -> new EonsBelantseaRenderer(manager));
+        RenderingRegistry.registerEntityRenderingHandler(EonsHyneriaEntity.class, manager -> new EonsHyneriaRenderer(manager));
+        RenderingRegistry.registerEntityRenderingHandler(EonsSpathicephalusEntity.class, manager -> new EonsSpathicephalusRenderer(manager));
     }
 }

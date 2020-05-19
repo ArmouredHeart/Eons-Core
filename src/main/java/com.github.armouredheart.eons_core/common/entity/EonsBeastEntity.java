@@ -11,6 +11,8 @@ import net.minecraft.network.IPacket;
 import net.minecraft.world.World;
 import net.minecraft.util.Hand;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 
 // Forge imports
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -19,14 +21,17 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsBeast;
+import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 
 // misc imports
 
-public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast {
+public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast, IEonsSexuallyDimorphic {
 
    // *** Attributes ***
-   public EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
+   //private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT);
+   private EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
+   private boolean isMale = true;
 
    // *** Constructors ***
 
@@ -34,9 +39,28 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes) {
       super(type, world);
       this.setFieldNotes(fieldNotes);
+      this.stepHeight = 1.0F;
    }
 
    // *** Methods ***
+
+   /** */
+   protected void registerEonsBeastGoals() {
+
+   }
+
+   /** */
+   protected float getLocalTemperature() {  
+      int i = MathHelper.floor(this.posX);
+      int j = MathHelper.floor(this.posY);
+      int k = MathHelper.floor(this.posZ);
+      return this.world.getBiome(new BlockPos(i, 0, k)).func_225486_c(new BlockPos(i, j, k));
+   }
+
+   /** */
+   protected double getSpeed() {
+      return this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue();
+   }
 
    /** @return EonsFieldNotes object containing educational notes about lifeform.*/
    public EonsFieldNotes getFieldNotes() {
@@ -95,6 +119,12 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 
    /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
    public int getResolve() {return 1;}
+
+   /** */
+   public boolean isMale() {return isMale;}
+
+   /** */
+   public boolean isFemale() {return !isMale;}
 
    /** */
    //protected boolean isHungry();
