@@ -1,0 +1,112 @@
+// package
+package com.github.armouredheart.eons_core.common.entity.ai;
+
+// Minecraft imports
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
+
+// Forge imports
+
+// Eons imports
+import com.github.armouredheart.eons_core.api.IEonsFlocking;
+
+// misc imports
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+public class EonsFlockingGoal<T extends CreatureEntity & IEonsFlocking> extends Goal {
+
+    // *** Attributes ***
+    private final T creature;
+    private int navigateTimer = 0;
+    private final double speed;
+    private final double[] searchBox = new double[]{8.0D, 8.0D, 8.0D};
+    private int random;
+
+    // *** Constructors ***
+    public EonsFlockingGoal(T creature, double speed) {
+        this.creature = creature;
+        this.speed = speed;
+    }
+
+    // *** Methods ***
+
+    /**
+    * Returns whether the EntityAIBase should begin execution.
+    * Pulled from FollowSchoolLeaderGoal and heavily modified
+    */
+    public boolean shouldExecute() {
+        if (this.creature.isGroupLeader()) {
+            return false;
+        } else if (this.creature.hasGroupLeader()) {
+            return true;
+        } else if (this.random > 0) {
+            --this.random;
+            return false;
+        } else {
+            this.random = getNextRandomInt(this.creature);
+            Predicate<T> predicate = (temp1) -> {
+                return temp1.canGroupGrow() || !temp1.hasGroupLeader();
+            };
+            List<T> list = this.creature.world.getEntitiesWithinAABB(this.creature.getClass(), this.creature.getBoundingBox().grow(this.searchBox[0], this.searchBox[1], this.searchBox[2]));
+            T newLeader = list.stream().filter(T::canGroupGrow).findAny().orElse(this.creature);
+            changeGroupLeader(newLeader, list.stream().filter((temp2) -> {return !temp2.hasGroupLeader();}));
+            return this.creature.hasGroupLeader();
+        }
+    }
+
+    /** For each T in the flock, set the group leader to be the input newLeader
+    * @param newLeader CreatureEntity that implements T to be assigned as the new leader
+    */
+    public void changeGroupLeader(T newLeader, Stream<T> flock) {
+        flock.limit((long)(newLeader.getMaxGroupSize() - newLeader.getGroupSize())).filter((temp1) -> {
+            return temp1 != newLeader;
+        }).forEach((temp2) -> {
+            temp2.setGroupLeader(newLeader);
+        });
+    }
+
+    /** */
+    protected int getNextRandomInt(T creature) {
+        return 200 + creature.getRNG().nextInt(200) % 20;
+    }
+
+    protected void moveToGroupLeader(T creature, double speed) {
+        if (creature.hasGroupLeader()) {
+            creature.getNavigator().tryMoveToEntityLiving(creature.getGroupLeader(), speed);
+        }
+    }
+
+    /**
+    * Returns whether an in-progress EntityAIBase should continue executing
+    */
+    public boolean shouldContinueExecuting() {
+        return this.creature.hasGroupLeader() && this.creature.inRangeOfGroupLeader();
+    }
+
+    /**
+    * Execute a one shot task or start executing a continuous task
+    */
+    public void startExecuting() {
+        this.navigateTimer = 0;
+    }
+
+    /**
+    * Reset the task's internal state. Called when this task is interrupted by another one
+    */
+    public void resetTask() {
+        this.creature.leaveGroup();
+    }
+
+    /**
+    * Keep ticking a continuous task that has already been started
+    */
+    public void tick() {
+        if (--this.navigateTimer <= 0) {
+            this.navigateTimer = 10;
+            moveToGroupLeader(this.creature, this.speed);
+        }
+    }
+}

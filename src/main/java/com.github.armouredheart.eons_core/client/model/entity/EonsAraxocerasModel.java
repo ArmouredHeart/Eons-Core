@@ -70,7 +70,7 @@ public class EonsAraxocerasModel<T extends Entity> extends EonsEntityModel<T> {
         this.roll2.setRotationPoint(0.0F, 0.0F, -0.2F);
         this.roll2.addBox(-2.5F, 0.0F, 0.0F, 5, 1, 3, 0.0F);
         this.shell = new RendererModel(this, 0, 0);
-        this.shell.setRotationPoint(0.0F, -16.0F, 0.0F);
+        this.shell.setRotationPoint(0.0F, 16.0F, 0.0F);
         this.shell.addBox(-1.5F, -2.5F, -2.5F, 3, 5, 5, 0.0F);
         this.head = new RendererModel(this, 21, 0);
         this.head.setRotationPoint(0.0F, 1.0F, -1.8F);

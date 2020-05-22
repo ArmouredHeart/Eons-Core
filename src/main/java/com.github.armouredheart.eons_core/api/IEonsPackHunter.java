@@ -2,18 +2,15 @@
 package com.github.armouredheart.eons_core.api;
 
 // Forge imports
-import net.minecraftforge.common.extensions.IForgeEntity;
 
 // Eons imports
+import com.github.armouredheart.eons_core.api.IEonsFlocking;
 
 // misc imports
 
-public interface IEonsMoistness extends IForgeEntity {
+public interface IEonsPackHunter extends IEonsFlocking {
 
     // *** Attributes ***
 
     // *** Methods ***
-
-    /** */
-    public boolean isDryingOut();
 }

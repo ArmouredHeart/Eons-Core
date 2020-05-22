@@ -15,7 +15,7 @@ import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.ai.goal.RestrictSunGoal;
 import net.minecraft.entity.ai.goal.FindWaterGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SpawnReason;
@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
 public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEonsMoistness {
     // *** Attributes ***
     private static final DataParameter<Integer> MOISTNESS = EntityDataManager.createKey(EonsAmphibianEntity.class, DataSerializers.VARINT);
-    private static final int baseMoistness = 1200;
+    private static final int baseMoistness = 2400;
 
     // *** Constructors ***
     protected EonsAmphibianEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final EonsFieldNotes fieldNotes) {
@@ -43,6 +43,7 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     
     // *** Methods ***
 
+    /** */
     protected void registerAttributes() {
         super.registerAttributes();
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
@@ -51,9 +52,9 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
 
     /** */
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new EonsGoToWaterGoal(this, this.getSpeed(), 24));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, this.getSpeed()));
-        this.goalSelector.addGoal(3, new RestrictSunGoal(this));
+        this.goalSelector.addGoal(0, new EonsGoToWaterGoal(this, this.getSpeed()*1.25F, 24));
+        this.goalSelector.addGoal(6, new RandomWalkingGoal(this, this.getSpeed()));
+        this.goalSelector.addGoal(5, new RestrictSunGoal(this));
     }
 
     /** */
@@ -67,16 +68,10 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     public void tick() {
         super.tick();
         if (!this.isAIDisabled()) {
-            
             //check how much moistness to remove
             //normally moistness is only lost while in direct sunlight, but high temperature will dry out faster even in shade!
-            if (this.isInWaterRainOrBubbleColumn()) {
-                this.setMoistness(this.baseMoistness);
-            } else if (this.getLocalTemperature() > 0.95F) {
-                this.dryOut(2);
-            } else if (this.isInDaylight()) {
-                this.dryOut(1);
-            }
+            if (this.isInWaterRainOrBubbleColumn()) {this.setMoistness(this.baseMoistness);} 
+            else if (this.getLocalTemperature() > 0.95F) {this.dryOut(2);} else if (this.isInDaylight()) {this.dryOut(1);}
         }
     }
 
@@ -88,29 +83,19 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     }
 
     /** */
-    public boolean isPushedByWater() {
-        return false;
-    }
+    public boolean isPushedByWater() {return false;}
 
     /** */
-    public boolean canBreatheUnderwater() {
-        return true;
-    }
+    public boolean canBreatheUnderwater() {return true;}
 
     /** */
-    public CreatureAttribute getCreatureAttribute() {
-        return CreatureAttribute.WATER;
-    }
+    public CreatureAttribute getCreatureAttribute() {return CreatureAttribute.WATER;}
 
     /** */
-    public int getMoistness() {
-        return this.dataManager.get(MOISTNESS);
-    }
+    public int getMoistness() {return this.dataManager.get(MOISTNESS);}
 
     /** */
-    public void setMoistness(int moistness) {
-        this.dataManager.set(MOISTNESS, moistness);
-    }
+    public void setMoistness(int moistness) {this.dataManager.set(MOISTNESS, moistness);}
 
     /** */
     protected void registerData() {
@@ -125,7 +110,5 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     }
 
     /** */
-    public boolean isDryingOut(){
-        return this.getMoistness() < this.baseMoistness/2;
-    }
+    public boolean isDryingOut() {return this.getMoistness() < this.baseMoistness/4;}
 }

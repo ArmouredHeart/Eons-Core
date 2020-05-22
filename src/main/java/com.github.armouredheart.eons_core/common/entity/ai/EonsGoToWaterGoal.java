@@ -18,21 +18,16 @@ import com.github.armouredheart.eons_core.api.IEonsMoistness;
 import java.util.EnumSet;
 import java.lang.Class;
 
-public class EonsGoToWaterGoal extends MoveToBlockGoal {
+public class EonsGoToWaterGoal<T extends CreatureEntity & IEonsMoistness> extends MoveToBlockGoal {
 
     // *** Attributes ***
-    protected final CreatureEntity creature;
-     protected final IEonsMoistness moistCreature;
+    protected final T creature;
 
     // *** Constructors ***
-    public EonsGoToWaterGoal(CreatureEntity creature, double speed, int searchLength) {
+    public EonsGoToWaterGoal(T creature, double speed, int searchLength) {
         super(creature, speed, searchLength);
         this.creature = creature;
-        if(isMoist(creature)){
-            this.moistCreature = (IEonsMoistness)creature;
-        } else {
-            this.moistCreature = null;
-        }
+        this.field_203112_e = -1;
     }
 
     // *** Methods ***
@@ -48,13 +43,9 @@ public class EonsGoToWaterGoal extends MoveToBlockGoal {
     * Returns whether the EntityAIBase should begin execution.
     */
     public boolean shouldExecute() {
-        if (this.creature.isChild() && !this.creature.isInWater()) {
-            return super.shouldExecute();
-        } else if (!this.moistCreature.equals(null)){
-            return !this.creature.isInWater() && this.moistCreature.isDryingOut() ? super.shouldExecute() : false;
-        } else {
-            return !this.creature.isInWater() ? super.shouldExecute() : false;
-        }
+        if(!this.creature.isInWater()){
+            return this.creature.isDryingOut();
+        } else {return false;}
     }
 
     public boolean shouldMove() {
@@ -62,15 +53,10 @@ public class EonsGoToWaterGoal extends MoveToBlockGoal {
     }
 
     /**
-    * Return true to set given position as destination
-    */
+     * Return true to set given position as destination
+     */
     protected boolean shouldMoveTo(IWorldReader worldIn, BlockPos pos) {
         Block block = worldIn.getBlockState(pos).getBlock();
         return block == Blocks.WATER;
-    }
-
-    /** */
-    protected boolean isMoist(CreatureEntity creature) {
-        return IEonsMoistness.class.isInstance(creature);
     }
 }

@@ -47,7 +47,7 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
 
     /** */
     @Override
-    protected SoundEvent getFlopSound(){return null;}
+    protected SoundEvent getFlopSound() {return null;}
 
     /** */
     @Override
@@ -55,6 +55,6 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
 
     /** */
 	@Override
-	protected ItemStack getFishBucket(){return null;}
+	protected ItemStack getFishBucket() {return null;}
 
 }
