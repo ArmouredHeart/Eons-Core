@@ -11,9 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
-import com.github.armouredheart.eons_core.common.item.EonsMusicDiscItem;
-import com.github.armouredheart.eons_core.common.item.EonsSpearItem;
-import com.github.armouredheart.eons_core.common.item.EonsNotebookItem;
+import com.github.armouredheart.eons_core.common.item.core.*;
 import com.github.armouredheart.eons_core.init.EonsSounds;
 
 // misc imports
@@ -28,14 +26,12 @@ public final class EonsItems {
 
     // *** Register Items ***
     
-    //
+    // Core
     public static final RegistryObject<Item> EONS_SPEAR_ITEM = registerItem("eons_spear_item", () -> new EonsSpearItem(new Item.Properties().group(EonsItemGroups.EONS_ITEM_GROUP)));
-
-    //
     public static final RegistryObject<Item> EONS_MUSIC_DISC_PRIMAL_AGE = registerItem("eons_music_disc_primal_age", () -> new EonsMusicDiscItem(EonsSounds.MUSIC_EONS_PRIMAL_AGE));
-    
-    //
     public static final RegistryObject<Item> EONS_NOTEBOOK_ITEM = registerItem("eons_notebook_item", () -> new EonsNotebookItem());
+
+    // Paleozoic
 
     // *** Methods ***
     

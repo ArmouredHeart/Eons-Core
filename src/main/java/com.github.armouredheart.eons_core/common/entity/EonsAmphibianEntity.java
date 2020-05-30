@@ -27,6 +27,8 @@ import com.github.armouredheart.eons_core.common.entity.EonsBeastEntity;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsGoToWaterGoal;
 import com.github.armouredheart.eons_core.api.IEonsMoistness;
+import com.github.armouredheart.eons_core.common.entity.ai.EonsEatBerriesGoal;
+import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 
 // misc imports
 import javax.annotation.Nullable;
@@ -37,8 +39,8 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     private static final int baseMoistness = 2400;
 
     // *** Constructors ***
-    protected EonsAmphibianEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final EonsFieldNotes fieldNotes) {
-        super(type, world, fieldNotes);
+    protected EonsAmphibianEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, int sexRatio, boolean isNocturnal) {
+        super(type, world, fieldNotes, diet, sexRatio, isNocturnal);
     }
     
     // *** Methods ***
@@ -52,7 +54,8 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
 
     /** */
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new EonsGoToWaterGoal(this, this.getSpeed()*1.25F, 24));
+        super.registerGoals();
+        this.goalSelector.addGoal(0, new EonsGoToWaterGoal(this, this.getSpeed()*1.25F, 32));
         this.goalSelector.addGoal(6, new RandomWalkingGoal(this, this.getSpeed()));
         this.goalSelector.addGoal(5, new RestrictSunGoal(this));
     }

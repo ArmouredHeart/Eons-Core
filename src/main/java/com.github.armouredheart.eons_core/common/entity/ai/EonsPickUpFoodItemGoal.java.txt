@@ -1,0 +1,32 @@
+// package
+package com.github.armouredheart.eons_core.common.entity.ai;
+
+// Minecraft imports
+
+// Forge imports
+
+// Eons imports
+
+// misc imports
+
+public class EonsPickUpFoodItemGoal extends Goal {
+    // *** Attributes ***
+    protected final CreatureEntity creature;
+    protected List<ItemEntity> itemsInRange = new ArrayList<>();
+    protected double[] searchBox = new double[]{8.0D, 3.0D, 8.0D};
+
+    // *** Constructors ***
+
+    /** */
+    public EonsPickUpFoodItemGoal(CreatureEntity creature, double speed) {
+        super(creature, speed);
+        this.creature = creature;
+    }
+
+    // *** Methods ***
+
+    /** */
+    public boolean shouldExecute(IWorldReader world, CreatureEntity creature) {
+        this.itemsInRange = world.getEntitiesWithinAABB(ItemEntity.class, creature.getBoundingBox().grow(this.searchBox[0], this.searchBox[1], this.searchBox[2]));
+        return !this.itemsInRange.isEmpty();
+    }

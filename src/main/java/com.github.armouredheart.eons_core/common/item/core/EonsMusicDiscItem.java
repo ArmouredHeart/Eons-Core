@@ -1,5 +1,5 @@
 // package
-package com.github.armouredheart.eons_core.common.item;
+package com.github.armouredheart.eons_core.common.item.core;
 
 // Minecraft imports
 import net.minecraft.item.Item;

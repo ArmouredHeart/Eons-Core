@@ -1,0 +1,20 @@
+// package
+package com.github.armouredheart.eons_core.common.entity;
+
+// Minecraft imports
+
+// Forge imports
+
+// Eons imports
+import com.github.armouredheart.eons_core.EonsCore;
+
+// misc imports
+
+public class EonsBeastAttributes {
+    // *** Attributes ***
+    public static final IAttribute MAX_SHIELDING = (new RangedAttribute((IAttribute)null, EonsCore.MOD_ID + ".maxShielding", 0.0D, Float.MIN_VALUE, 1024.0D)).setDescription("Max Health").setShouldWatch(true);
+
+    // *** Constructors ***
+
+    // *** Methods ***
+}

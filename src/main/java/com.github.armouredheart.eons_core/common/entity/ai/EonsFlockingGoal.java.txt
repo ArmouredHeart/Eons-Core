@@ -50,7 +50,7 @@ public class EonsFlockingGoal<T extends CreatureEntity & IEonsFlocking> extends 
             Predicate<T> predicate = (temp1) -> {
                 return temp1.canGroupGrow() || !temp1.hasGroupLeader();
             };
-            List<T> list = this.creature.world.getEntitiesWithinAABB(this.creature.getClass(), this.creature.getBoundingBox().grow(this.searchBox[0], this.searchBox[1], this.searchBox[2]));
+            List<T> list = this.creature.world.getEntitiesWithinAABB(, this.creature.getBoundingBox().grow(this.searchBox[0], this.searchBox[1], this.searchBox[2]));
             T newLeader = list.stream().filter(T::canGroupGrow).findAny().orElse(this.creature);
             changeGroupLeader(newLeader, list.stream().filter((temp2) -> {return !temp2.hasGroupLeader();}));
             return this.creature.hasGroupLeader();

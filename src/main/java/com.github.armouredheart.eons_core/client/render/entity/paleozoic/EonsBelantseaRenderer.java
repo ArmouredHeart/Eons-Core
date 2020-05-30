@@ -1,5 +1,5 @@
 // package
-package com.github.armouredheart.eons_core.client.render.entity;
+package com.github.armouredheart.eons_core.client.render.entity.paleozoic;
 
 // Minecraft imports
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -9,10 +9,10 @@ import net.minecraft.util.ResourceLocation;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.common.entity.testmobs.EonsBelantseaEntity;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsBelantseaEntity;
 import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.client.render.entity.EonsMobRenderer;
-import com.github.armouredheart.eons_core.client.model.entity.EonsBelantseaModel;
+import com.github.armouredheart.eons_core.client.model.entity.paleozoic.EonsBelantseaModel;
 
 // misc imports
 

@@ -1,5 +1,5 @@
 // package
-package com.github.armouredheart.eons_core.client.render.entity;
+package com.github.armouredheart.eons_core.client.render.entity.testmobs;
 
 // Minecraft imports
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import com.github.armouredheart.eons_core.common.entity.testmobs.EonsArcanineEntity;
 import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.client.render.entity.EonsMobRenderer;
-import com.github.armouredheart.eons_core.client.model.entity.EonsAraxocerasModel;
+import com.github.armouredheart.eons_core.client.model.entity.paleozoic.EonsAraxocerasModel;
 
 // misc imports
 

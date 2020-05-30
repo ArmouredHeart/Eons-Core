@@ -27,7 +27,7 @@ public class EonsGoToWaterGoal<T extends CreatureEntity & IEonsMoistness> extend
     public EonsGoToWaterGoal(T creature, double speed, int searchLength) {
         super(creature, speed, searchLength);
         this.creature = creature;
-        this.field_203112_e = -1;
+        this.field_203112_e = -1;// obfuscated field, change this to a setter when possible
     }
 
     // *** Methods ***

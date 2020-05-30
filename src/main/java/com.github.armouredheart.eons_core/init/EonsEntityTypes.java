@@ -16,8 +16,9 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.common.entity.testmobs.*;
-import com.github.armouredheart.eons_core.client.render.entity.*;
-
+import com.github.armouredheart.eons_core.client.render.entity.testmobs.*;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.*;
+import com.github.armouredheart.eons_core.client.render.entity.paleozoic.*;
 // misc imports
 import java.util.function.Supplier;
 

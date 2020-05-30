@@ -23,38 +23,90 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 
 // misc imports
+import javax.annotation.Nullable;
 
 public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast, IEonsSexuallyDimorphic {
 
    // *** Attributes ***
-   //private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT);
-   private EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
-   private boolean isMale = true;
+   private final EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
+   private boolean isMale;
+   private final EonsDiet diet;
+   private final int sexRatio;
+   private final boolean isNocturnal;
 
    // *** Constructors ***
 
-   /** */
-   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes) {
+   /**
+   * @param type
+   * @param world
+   * @param fieldNotes
+   * @param diet
+   * @param sexRatio
+   * @param isNocturnal
+   */
+   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, int sexRatio, boolean isNocturnal) {
       super(type, world);
-      this.setFieldNotes(fieldNotes);
+      this.fieldNotes = fieldNotes;
       this.stepHeight = 1.0F;
+      this.diet = diet;
+      this.sexRatio = sexRatio;
+      this.isNocturnal = isNocturnal;
+   }
+
+   /** Default Settings EonsBeast constructor*/
+   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes) {
+      this(type, world, fieldNotes, new EonsDiet(false, null), 50, false);
    }
 
    // *** Methods ***
 
-   /** */
-   protected void registerEonsBeastGoals() {
-
+   /**
+   * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
+   * the animal type)
+   */
+   @Override
+   public boolean isBreedingItem(ItemStack stack) {
+      return this.diet.isBreedingItem(stack);
    }
+
+   protected boolean determineSex(){
+      if(this.sexRatio < this.world.rand.nextInt(99)){return true;} else {return false;}
+   }
+
+   /** */
+   public EonsDiet getDiet(){return this.diet;}
+
+   /** */
+   public boolean isWounded(){
+      if(this.getHealthPercentage() > 0.4D) {
+         return false;
+      } else {
+         return true;
+      }
+   }
+
+   /** */
+   public void setRested() {}
+
+   public boolean shouldSleep() {return false;}
+
+   /** */
+   public boolean isNocturnal() {
+      return this.isNocturnal;
+   }
+
+   /** */
+   protected void registerEonsBeastGoals() {}
 
    /** */
    protected float getLocalTemperature() {  
       int i = MathHelper.floor(this.posX);
       int j = MathHelper.floor(this.posY);
       int k = MathHelper.floor(this.posZ);
-      return this.world.getBiome(new BlockPos(i, 0, k)).func_225486_c(new BlockPos(i, j, k));
+      return this.world.getBiome(new BlockPos(i, 0, k)).func_225486_c(new BlockPos(i, j, k));// obfuscated method, replace when possible
    }
 
    /** */
@@ -62,42 +114,25 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       return this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue();
    }
 
-   /** @return EonsFieldNotes object containing educational notes about lifeform.*/
-   public EonsFieldNotes getFieldNotes() {
-      return fieldNotes;
+   /** */
+   protected double getHealthPercentage() {
+      double maxHP = this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getValue();
+      double currentHP = this.getHealth();
+      return (double) currentHP/maxHP;
    }
 
-   /** */
-   protected boolean setFieldNotes(EonsFieldNotes fieldNotes) {
-      try { 
-         this.fieldNotes = fieldNotes;
-         return true;
-      } catch (Exception e) {
-         return false;
-      }
+   /** @return EonsFieldNotes object containing educational notes about lifeform.*/
+   public EonsFieldNotes getFieldNotes() {
+      return this.fieldNotes;
    }
-      
+
    /** */
    @Override
    public boolean processInteract(PlayerEntity player, Hand hand) {
       ItemStack itemstack = player.getHeldItem(hand);
-      if (this.isBreedingItem(itemstack)) {
-         if (this.getGrowingAge() == 0 && this.canBreed()) {
-            this.consumeItemFromStack(player, itemstack);
-            this.setInLove(player);
-            return true;
-         }
-
-         if (this.isChild()) {
-            this.consumeItemFromStack(player, itemstack);
-            this.ageUp((int)((float)(-this.getGrowingAge() / 20) * 0.1F), true);
-            return true;
-         }
-      } else if (false) {
-            // add field notes to player book
-            //TODO
+      if(false) {
+         //TODO collect field notes if holding notebook
       }
-
       return super.processInteract(player, hand);
    }
 
@@ -127,7 +162,9 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    public boolean isFemale() {return !isMale;}
 
    /** */
-   //protected boolean isHungry();
+   public boolean isHungry() {
+      return true;
+   }
 
    /** */
    //public boolean isEnraged();

@@ -1,5 +1,5 @@
 // package
-package com.github.armouredheart.eons_core.common.entity.testmobs;
+package com.github.armouredheart.eons_core.common.entity.paleozoic;
 
 // Minecraft imports
 import net.minecraft.entity.EntityType;
