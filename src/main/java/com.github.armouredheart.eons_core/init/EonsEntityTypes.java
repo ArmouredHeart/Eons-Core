@@ -15,10 +15,10 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
-import com.github.armouredheart.eons_core.common.entity.testmobs.*;
-import com.github.armouredheart.eons_core.client.render.entity.testmobs.*;
 import com.github.armouredheart.eons_core.common.entity.paleozoic.*;
+//import com.github.armouredheart.eons_core.common.entity.projectile.*;
 import com.github.armouredheart.eons_core.client.render.entity.paleozoic.*;
+
 // misc imports
 import java.util.function.Supplier;
 
@@ -31,11 +31,13 @@ public final class EonsEntityTypes {
 
     // *** Register EntityTypes ***
 
-    public static final RegistryObject<EntityType<EonsArcanineEntity>> ARCANINE = makeEonsEntity("arcanine", EonsArcanineEntity::new, EntityClassification.CREATURE, 1F, 1F);
+    // projectile 
+    //public static final RegistryObject<EntityType<EonsSpearEntity>> EONS_SPEAR_ENTITY = makeEonsEntity("eons_spear_entity", EonsSpearEntity::new, EntityClassification.MISC, 0.5F, 0.5F);
+
     // paleozoic
-    public static final RegistryObject<EntityType<EonsAraxocerasEntity>> ARAXOCERAS = makeEonsEntity("araxoceras", EonsAraxocerasEntity::new, EntityClassification.CREATURE, 0.3F, 0.3F);
-    public static final RegistryObject<EntityType<EonsBelantseaEntity>> BELANTSEA = makeEonsEntity("belantsea", EonsBelantseaEntity::new, EntityClassification.CREATURE, 0.3F, 0.31F);
-    public static final RegistryObject<EntityType<EonsHyneriaEntity>> HYNERIA = makeEonsEntity("hyneria", EonsHyneriaEntity::new, EntityClassification.CREATURE, 1F, 1F);
+    public static final RegistryObject<EntityType<EonsAraxocerasEntity>> ARAXOCERAS = makeEonsEntity("araxoceras", EonsAraxocerasEntity::new, EntityClassification.WATER_CREATURE, 0.3F, 0.3F);
+    public static final RegistryObject<EntityType<EonsBelantseaEntity>> BELANTSEA = makeEonsEntity("belantsea", EonsBelantseaEntity::new, EntityClassification.WATER_CREATURE, 0.3F, 0.31F);
+    public static final RegistryObject<EntityType<EonsHyneriaEntity>> HYNERIA = makeEonsEntity("hyneria", EonsHyneriaEntity::new, EntityClassification.WATER_CREATURE, 0.8F, 0.8F);
     public static final RegistryObject<EntityType<EonsSpathicephalusEntity>> SPATHICEPHALUS = makeEonsEntity("spathicephalus", EonsSpathicephalusEntity::new, EntityClassification.CREATURE, 0.3F, 0.3F);
     public static final RegistryObject<EntityType<EonsMazothairosEntity>> MAZOTHAIROS = makeEonsEntity("mazothairos", EonsMazothairosEntity::new, EntityClassification.CREATURE, 0.3F, 0.3F);
 
@@ -58,7 +60,6 @@ public final class EonsEntityTypes {
 
     /** Register client renderers */
 	public static void registerEonsEntityRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler(EonsArcanineEntity.class, manager -> new EonsArcanineRenderer(manager));
         // paleozoic
         RenderingRegistry.registerEntityRenderingHandler(EonsAraxocerasEntity.class, manager -> new EonsAraxocerasRenderer(manager));
         RenderingRegistry.registerEntityRenderingHandler(EonsBelantseaEntity.class, manager -> new EonsBelantseaRenderer(manager));

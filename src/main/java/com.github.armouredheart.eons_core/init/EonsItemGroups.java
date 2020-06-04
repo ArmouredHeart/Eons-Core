@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
+import com.github.armouredheart.eons_core.init.EonsItems;
 
 // misc imports
 import javax.annotation.Nonnull;
@@ -21,7 +22,7 @@ public final class EonsItemGroups {
 	// *** Creative Tabs ***
 
     // Default Creative Tab for Eons
-	public static final ItemGroup EONS_ITEM_GROUP = new EonsItemGroup(EonsCore.MOD_ID, () -> new ItemStack(EonsItems.EONS_SPEAR_ITEM.get()));
+	public static final ItemGroup EONS_ITEM_GROUP = new EonsItemGroup(EonsCore.MOD_ID, () -> new ItemStack(EonsItems.EONS_MUSIC_DISC_PRIMAL_AGE.get()));
 
 	// *** Methods ***
 

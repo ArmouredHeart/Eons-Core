@@ -15,22 +15,31 @@ import com.github.armouredheart.eons_core.client.render.entity.EonsMobRenderer;
 import com.github.armouredheart.eons_core.client.model.entity.paleozoic.EonsAraxocerasModel;
 
 // misc imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class EonsAraxocerasRenderer extends EonsMobRenderer<EonsAraxocerasEntity, EntityModel<EonsAraxocerasEntity>> {
 
     // *** Attributes ***
-    private static final ResourceLocation[] Araxoceras_TEXTURE = {
-        new ResourceLocation(EonsCore.MOD_ID, "textures/entity/araxoceras/araxoceras_male.png"),
-        new ResourceLocation(EonsCore.MOD_ID, "textures/entity/araxoceras/araxoceras_female.png")
-    };
+    private static final ResourceLocation ARAXOCERAS_TEXTURE_MALE = new ResourceLocation(EonsCore.MOD_ID, "textures/entity/paleozoic/araxoceras/araxoceras_male.png");
+    private static final ResourceLocation ARAXOCERAS_TEXTURE_FEMALE = new ResourceLocation(EonsCore.MOD_ID, "textures/entity/paleozoic/araxoceras/araxoceras_female.png");
 
     // *** Constructors ***
 
     /** */
     public EonsAraxocerasRenderer(final EntityRendererManager manager) {
         super(manager, new EonsAraxocerasModel<>(), 0.4F);
-        this.setEntityTexture(Araxoceras_TEXTURE);
     }
 
     // *** Methods ***
+    
+    /** */
+    protected ResourceLocation getMaleTexture() {return this.ARAXOCERAS_TEXTURE_MALE;}
+
+    /** */
+    protected ResourceLocation getUnisexTexture() {return null;}
+
+    /** */
+    protected ResourceLocation getFemaleTexture() {return this.ARAXOCERAS_TEXTURE_FEMALE;};
 }

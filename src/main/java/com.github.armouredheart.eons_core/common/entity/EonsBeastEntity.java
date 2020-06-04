@@ -2,17 +2,23 @@
 package com.github.armouredheart.eons_core.common.entity;
 
 // Minecraft imports
+import net.minecraft.item.ItemStack;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.util.Hand;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.nbt.CompoundNBT;
+
 
 // Forge imports
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -24,18 +30,23 @@ import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
+import com.github.armouredheart.eons_core.common.entity.ai.EonsSex;
+import com.github.armouredheart.eons_core.EonsCore;
 
 // misc imports
 import javax.annotation.Nullable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast, IEonsSexuallyDimorphic {
 
    // *** Attributes ***
+   private static final Logger LOGGER = LogManager.getLogger(EonsCore.MOD_ID + " EonsBeastEntity");
    private final EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
-   private boolean isMale;
    private final EonsDiet diet;
    private final int sexRatio;
    private final boolean isNocturnal;
+   private EonsSex sex;
 
    // *** Constructors ***
 
@@ -47,7 +58,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    * @param sexRatio
    * @param isNocturnal
    */
-   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, int sexRatio, boolean isNocturnal) {
+   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
       super(type, world);
       this.fieldNotes = fieldNotes;
       this.stepHeight = 1.0F;
@@ -63,6 +74,14 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 
    // *** Methods ***
 
+   /** */
+   @Nullable
+   public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+      this.sex = new EonsSex(this, sexRatio);
+      return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+   }
+
+
    /**
    * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
    * the animal type)
@@ -72,15 +91,11 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       return this.diet.isBreedingItem(stack);
    }
 
-   protected boolean determineSex(){
-      if(this.sexRatio < this.world.rand.nextInt(99)){return true;} else {return false;}
-   }
+   /** */
+   public EonsDiet getDiet() {return this.diet;}
 
    /** */
-   public EonsDiet getDiet(){return this.diet;}
-
-   /** */
-   public boolean isWounded(){
+   public boolean isWounded() {
       if(this.getHealthPercentage() > 0.4D) {
          return false;
       } else {
@@ -89,7 +104,9 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    }
 
    /** */
-   public void setRested() {}
+   public void setRested() {
+      // give regeneration if not hungry
+   }
 
    public boolean shouldSleep() {return false;}
 
@@ -150,16 +167,22 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 	}
    
    /** Calculated using remaining HP, Personality and Attack damage plus threatBoost.*/
-   public int getThreat() {return 1;}
+   public int getThreat() {
+      int threatFactor = 0;
+      return (int) this.getHealth()*threatFactor;
+   }
 
    /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
-   public int getResolve() {return 1;}
+   public int getResolve() {
+      int resolveFactor = 0;
+      return (int) this.getHealth()*resolveFactor;
+   }
 
    /** */
-   public boolean isMale() {return isMale;}
+   public boolean isMale() {return this.sex.isMale();}
 
    /** */
-   public boolean isFemale() {return !isMale;}
+   public boolean isFemale() {return this.sex.isFemale();}
 
    /** */
    public boolean isHungry() {

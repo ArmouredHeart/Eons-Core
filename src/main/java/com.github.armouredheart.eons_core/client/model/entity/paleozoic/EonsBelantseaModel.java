@@ -101,13 +101,4 @@ public class EonsBelantseaModel<T extends Entity> extends EonsEntityModel<T> {
         this.body.render(f5);
         GlStateManager.popMatrix();
     }
-
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(RendererModel RendererModel, float x, float y, float z) {
-        RendererModel.rotateAngleX = x;
-        RendererModel.rotateAngleY = y;
-        RendererModel.rotateAngleZ = z;
-    }
 }

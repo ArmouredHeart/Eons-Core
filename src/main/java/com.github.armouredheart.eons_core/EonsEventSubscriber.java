@@ -5,6 +5,8 @@ package com.github.armouredheart.eons_core;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
 // Forge imports
 import net.minecraftforge.event.RegistryEvent;
@@ -19,6 +21,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import com.github.armouredheart.eons_core.init.EonsItemGroups;
 import com.github.armouredheart.eons_core.init.EonsBlocks;
 import com.github.armouredheart.eons_core.EonsCore;
+import com.github.armouredheart.eons_core.init.EonsBiomes;
+import com.github.armouredheart.eons_core.common.world.gen.surfacebuilders.EonsSurfaceBuilders;
 
 // misc imports
 import org.apache.logging.log4j.LogManager;
@@ -59,6 +63,17 @@ public final class EonsEventSubscriber {
 	public static void onModConfigEvent(final ModConfig.ModConfigEvent event) {
 		LOGGER.debug("configs not yet implemented lol");
     }
+
+	/** */
+	@SubscribeEvent
+	public static void onRegisterBiomes(final RegistryEvent.Register<Biome> event) {
+		EonsBiomes.registerBiomesToBiomeDictionary();
+	}
+
+	@SubscribeEvent
+	public static void onRegisterSurfaceBuilders(RegistryEvent.Register<SurfaceBuilder<?>> event) {
+		EonsSurfaceBuilders.registerEonsSurfaceBuilders(event);
+	}
 
 	/** */
 	//@SubscribeEvent

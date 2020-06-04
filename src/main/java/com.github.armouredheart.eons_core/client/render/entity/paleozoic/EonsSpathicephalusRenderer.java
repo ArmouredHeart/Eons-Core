@@ -15,22 +15,31 @@ import com.github.armouredheart.eons_core.client.render.entity.EonsMobRenderer;
 import com.github.armouredheart.eons_core.client.model.entity.paleozoic.EonsSpathicephalusModel;
 
 // misc imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class EonsSpathicephalusRenderer extends EonsMobRenderer<EonsSpathicephalusEntity, EntityModel<EonsSpathicephalusEntity>> {
 
     // *** Attributes ***
-    private static final ResourceLocation[] Spathicephalus_TEXTURE = {
-        new ResourceLocation(EonsCore.MOD_ID, "textures/entity/spathicephalus/spathicephalus_male.png"),
-        new ResourceLocation(EonsCore.MOD_ID, "textures/entity/spathicephalus/spathicephalus_female.png")
-    };
+    private static final ResourceLocation SPATHICEPALUS_TEXTURE_MALE = new ResourceLocation(EonsCore.MOD_ID, "textures/entity/paleozoic/spathicephalus/spathicephalus_male.png");
+    private static final ResourceLocation SPATHICEPALUS_TEXTURE_FEMALE = new ResourceLocation(EonsCore.MOD_ID, "textures/entity/paleozoic/spathicephalus/spathicephalus_female.png");
 
     // *** Constructors ***
 
     /** */
     public EonsSpathicephalusRenderer(final EntityRendererManager manager) {
         super(manager, new EonsSpathicephalusModel<>(), 0.3F);
-        this.setEntityTexture(Spathicephalus_TEXTURE);
     }
 
     // *** Methods ***
+
+    /** */
+    protected ResourceLocation getMaleTexture() {return this.SPATHICEPALUS_TEXTURE_MALE;}
+
+    /** */
+    protected ResourceLocation getUnisexTexture() {return null;}
+
+    /** */
+    protected ResourceLocation getFemaleTexture() {return this.SPATHICEPALUS_TEXTURE_FEMALE;};
 }

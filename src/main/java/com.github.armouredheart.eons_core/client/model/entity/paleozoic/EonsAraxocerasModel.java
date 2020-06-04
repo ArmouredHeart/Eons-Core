@@ -124,14 +124,4 @@ public class EonsAraxocerasModel<T extends Entity> extends EonsEntityModel<T> {
         this.shell.render(f5);
         GlStateManager.popMatrix();
     }
-
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(RendererModel rendererModel, float x, float y, float z) {
-        rendererModel.rotateAngleX = x;
-        rendererModel.rotateAngleY = y;
-        rendererModel.rotateAngleZ = z;
-    }
-
 }

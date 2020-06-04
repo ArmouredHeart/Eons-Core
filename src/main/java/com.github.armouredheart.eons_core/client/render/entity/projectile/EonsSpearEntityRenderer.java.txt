@@ -1,0 +1,39 @@
+// package
+package com.github.armouredheart.eons_core.client.render.entity;
+
+// Minecraft imports
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.util.ResourceLocation;
+
+// Forge imports
+
+// Eons imports
+import com.github.armouredheart.eons_core.common.entity.projectile.EonsSpearEntity;
+import com.github.armouredheart.eons_core.EonsCore;
+
+// misc imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+@OnlyIn(Dist.CLIENT)
+public class EonsSpearEntityRenderer<T extends EonsSpearEntity> extends EntityRenderer<T> {
+
+    // *** Attributes ***
+    private static final ResourceLocation FLINT_SPEAR = new ResourceLocation(EonsCore.MOD_ID, "textures/entity/core/flint_spear.png");
+    private static final ResourceLocation OBSIDIAN_SPEAR = new ResourceLocation(EonsCore.MOD_ID, "textures/entity/core/obsidian_spear.png");
+    private static final ResourceLocation QUARTZ_SPEAR = new ResourceLocation(EonsCore.MOD_ID, "textures/entity/core/quartz_spear.png");
+
+    // *** Constructors ***
+
+    /** */
+    public EonsSpearEntityRenderer(EntityRendererManager renderManagerIn) {
+        super(renderManagerIn);
+    }
+
+    // *** Methods ***
+
+    public ResourceLocation getEntityTexture(T entity) {
+        return FLINT_SPEAR;
+    }
+}

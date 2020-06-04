@@ -15,7 +15,6 @@ import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.ai.goal.RestrictSunGoal;
 import net.minecraft.entity.ai.goal.FindWaterGoal;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SpawnReason;
@@ -36,11 +35,12 @@ import javax.annotation.Nullable;
 public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEonsMoistness {
     // *** Attributes ***
     private static final DataParameter<Integer> MOISTNESS = EntityDataManager.createKey(EonsAmphibianEntity.class, DataSerializers.VARINT);
-    private static final int baseMoistness = 2400;
+    protected int baseMoistness;
 
     // *** Constructors ***
     protected EonsAmphibianEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, int sexRatio, boolean isNocturnal) {
         super(type, world, fieldNotes, diet, sexRatio, isNocturnal);
+        this.baseMoistness = 2400;
     }
     
     // *** Methods ***
@@ -55,8 +55,7 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     /** */
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new EonsGoToWaterGoal(this, this.getSpeed()*1.25F, 32));
-        this.goalSelector.addGoal(6, new RandomWalkingGoal(this, this.getSpeed()));
+        this.goalSelector.addGoal(0, new EonsGoToWaterGoal(this, this.getSpeed()*1.25F, 48));
         this.goalSelector.addGoal(5, new RestrictSunGoal(this));
     }
 
@@ -74,15 +73,20 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
             //check how much moistness to remove
             //normally moistness is only lost while in direct sunlight, but high temperature will dry out faster even in shade!
             if (this.isInWaterRainOrBubbleColumn()) {this.setMoistness(this.baseMoistness);} 
-            else if (this.getLocalTemperature() > 0.95F) {this.dryOut(2);} else if (this.isInDaylight()) {this.dryOut(1);}
+            else  
+            if (this.isInDaylight()) {
+                this.dryOut(1);
+                if (this.getLocalTemperature() > 0.95F) {this.dryOut(2);}
+            }
+
+            // dryout damage
+            if (this.getMoistness() <= 0) {this.attackEntityFrom(DamageSource.DRYOUT, 1.0F);}
         }
     }
 
-    /** Call only once per tick, as it does damage*/
+    /** */
     protected void dryOut(int points){
         this.setMoistness(this.getMoistness() - points);
-        // dryout damage
-        if (this.getMoistness() <= 0) {this.attackEntityFrom(DamageSource.DRYOUT, 1.0F);}
     }
 
     /** */
@@ -113,5 +117,5 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     }
 
     /** */
-    public boolean isDryingOut() {return this.getMoistness() < this.baseMoistness/4;}
+    public boolean isDryingOut() {int moist = this.getMoistness(); return moist < 600;}
 }

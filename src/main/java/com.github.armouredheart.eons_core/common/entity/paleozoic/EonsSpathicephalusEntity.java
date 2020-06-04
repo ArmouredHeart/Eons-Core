@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
 import net.minecraft.item.Items;
 import net.minecraft.item.Item;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 
 // Forge imports
 
@@ -37,6 +38,7 @@ public class EonsSpathicephalusEntity extends EonsAmphibianEntity {
     /** */
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(4, new EonsEatBerriesGoal(this, this.getSpeed(), 32));
+        this.goalSelector.addGoal(4, new EonsEatBerriesGoal(this, this.getSpeed(), 48));
+        this.goalSelector.addGoal(6, new RandomWalkingGoal(this, this.getSpeed()));
     }
 }

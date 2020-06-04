@@ -28,6 +28,7 @@ import com.github.armouredheart.eons_core.init.EonsBlocks;
 import com.github.armouredheart.eons_core.init.EonsItems;
 import com.github.armouredheart.eons_core.init.EonsSounds;
 import com.github.armouredheart.eons_core.init.EonsEntityTypes;
+import com.github.armouredheart.eons_core.init.EonsBiomes;
 //import com.github.armouredheart.eons_core.init.EonsTileEntityTypes;
 
 // misc imports
@@ -56,6 +57,8 @@ public class EonsCore {
         EonsBlocks.BLOCKS.register(eonsEventBus);
         EonsItems.ITEMS.register(eonsEventBus);
         EonsEntityTypes.ENTITY_TYPES.register(eonsEventBus);
+        EonsBiomes.BIOMES.register(eonsEventBus);
+
         //EonsTileEntityTypes.TILE_ENTITY_TYPES.register(eonsEventBus);
         
         // Register Renderers on client

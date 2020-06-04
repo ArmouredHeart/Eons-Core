@@ -11,8 +11,8 @@ import net.minecraft.util.ResourceLocation;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.common.entity.testmobs.EonsArcanineEntity;
 import com.github.armouredheart.eons_core.EonsCore;
+import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 
 // misc imports
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +22,6 @@ public abstract class EonsMobRenderer<T extends MobEntity, M extends EntityModel
 
     // *** Attributes ***
     private static final Logger LOGGER = LogManager.getLogger(EonsCore.MOD_ID + " EonsMobRenderer");
-    private ResourceLocation[] EONS_MOB_TEXTURE;
 
     // *** Constructors ***
 
@@ -33,26 +32,28 @@ public abstract class EonsMobRenderer<T extends MobEntity, M extends EntityModel
 
     // *** Methods ***
 
-    protected boolean setEntityTexture(final ResourceLocation EONS_MOB_TEXTURE) {
-        return setEntityTexture(new ResourceLocation[]{EONS_MOB_TEXTURE});
-    }
-
-    /** */
-    protected boolean setEntityTexture(final ResourceLocation[] EONS_MOB_TEXTURE) {
-        try{this.EONS_MOB_TEXTURE = EONS_MOB_TEXTURE;}catch(Exception e){return false;}
-        return true;
-    }
-
+    /** This determines what texture is rendered on the mob */
     @Override
 	public ResourceLocation getEntityTexture(final MobEntity entity){
-        return getEntityTexture(entity, 0);
-	}
-    
-    /** */
-	public ResourceLocation getEntityTexture(final MobEntity entity, int index){
-        try{return EONS_MOB_TEXTURE[index];}catch(Exception e){
-            LOGGER.debug("No texture ResourceLocation specified at index '" + index + "'!");
-            return null;
+
+        // Handle cases where the mob is sexually dimorphic
+        if(entity instanceof IEonsSexuallyDimorphic) {
+            IEonsSexuallyDimorphic sexyMob = (IEonsSexuallyDimorphic) entity;
+            if(sexyMob.isMale()) {
+                return getMaleTexture();
+            } else if(sexyMob.isFemale()) {
+                return getFemaleTexture();
+            }
         }
-	}
+        return getUnisexTexture();
+    }
+
+    /** */
+    protected abstract ResourceLocation getMaleTexture();
+
+    /** */
+    protected abstract ResourceLocation getUnisexTexture();
+
+    /** */
+    protected abstract ResourceLocation getFemaleTexture();
 }

@@ -150,6 +150,9 @@ public class EonsDiet {
         }
     }
 
+    // *** Inner Classes ***
+    
+    /** */
     public static enum EonsPreyType {
         ALL("all"),
         // Vanilla Generic Types

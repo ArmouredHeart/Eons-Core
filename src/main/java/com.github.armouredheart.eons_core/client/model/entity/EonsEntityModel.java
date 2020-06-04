@@ -3,6 +3,7 @@ package com.github.armouredheart.eons_core.client.model.entity;
 
 // Minecraft imports
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 
 // Forge imports
@@ -21,6 +22,15 @@ public abstract class EonsEntityModel<T extends Entity> extends EntityModel<T> {
     // *** Constructors ***
 
     // *** Methods ***
+
+    /**
+     * This is a helper function from Tabula to set the rotation of model parts
+     */
+    public void setRotateAngle(RendererModel rendererModel, float x, float y, float z) {
+        rendererModel.rotateAngleX = x;
+        rendererModel.rotateAngleY = y;
+        rendererModel.rotateAngleZ = z;
+    }
     
     //protected abstract void animationWalk();
 
