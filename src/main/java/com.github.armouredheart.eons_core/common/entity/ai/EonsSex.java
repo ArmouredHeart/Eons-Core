@@ -19,12 +19,14 @@ public class EonsSex<E extends LivingEntity, IEonsSexuallyDimorphic> {
     // *** Constructors ***
     
     /** */
-    public EonsSex(E livingEntity, int sexRatio) {
+    public EonsSex(E creature, int sexRatio) {
         if(sexRatio < 0) {
+            // creature is sexless
             this.isMale = false;
             this.isFemale = false;
         } else {
-            int roll = livingEntity.world.rand.nextInt(100);
+            // randomise sex based on input ratio
+            int roll = creature.world.rand.nextInt(100);
             if(sexRatio < roll) {
                 setMale();
             } else {

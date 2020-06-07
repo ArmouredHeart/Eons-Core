@@ -5,11 +5,15 @@ package com.github.armouredheart.eons_core.common.entity.ai;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.inventory.Inventory;
+
 // Forge imports
 
 // Eons imports
@@ -18,9 +22,11 @@ import net.minecraft.entity.LivingEntity;
 import java.util.List;
 import javax.annotation.Nullable;
 
-public class EonsDiet {
+public class EonsDiet extends Inventory {
 
     // *** Attributes ***
+    private boolean isStarving; // cached this value because it is called often.
+    private boolean isHungry; // cached this value because it is called often.
     private final boolean isPredator;
     private final boolean isOmnivore;
     private final List<Item> favouriteFoodsInOrder;
@@ -36,7 +42,8 @@ public class EonsDiet {
     * @param prey
     * @param favouriteFoodsInOrder
     */
-    private EonsDiet(boolean isPredator, boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<LivingEntity> prey, @Nullable List<Item> favouriteFoodsInOrder) {
+    private EonsDiet(int stomachSize, boolean isPredator, boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<LivingEntity> prey, @Nullable List<Item> favouriteFoodsInOrder) {
+        super(stomachSize);
         this.prey = prey;
         this.favouriteFoodsInOrder = favouriteFoodsInOrder;
         this.isPredator = isPredator;
@@ -45,21 +52,65 @@ public class EonsDiet {
     }
 
     /** Construct generalist hunting diet */
-    public EonsDiet(boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<Item> favouriteFoodsInOrder) {
-        this(true, isOmnivore, preyType, null, favouriteFoodsInOrder);
+    public EonsDiet(int stomachSize, boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<Item> favouriteFoodsInOrder) {
+        this(stomachSize, true, isOmnivore, preyType, null, favouriteFoodsInOrder);
     }
 
     /** Construct specialist hunting diet */
-    public EonsDiet(boolean isOmnivore, @Nullable List<LivingEntity> prey, @Nullable List<Item> favouriteFoodsInOrder) {
-        this(true, isOmnivore, null, prey, favouriteFoodsInOrder);
+    public EonsDiet(int stomachSize, boolean isOmnivore, @Nullable List<LivingEntity> prey, @Nullable List<Item> favouriteFoodsInOrder) {
+        this(stomachSize, true, isOmnivore, null, prey, favouriteFoodsInOrder);
     }
 
     /** Construct non-hunting diet */
-    public EonsDiet(boolean isOmnivore, @Nullable List<Item> favouriteFoodsInOrder) {
-        this(false, isOmnivore, null, null, favouriteFoodsInOrder);
+    public EonsDiet(int stomachSize, boolean isOmnivore, @Nullable List<Item> favouriteFoodsInOrder) {
+        this(stomachSize, false, isOmnivore, null, null, favouriteFoodsInOrder);
     }
 
     // *** Methods ***
+
+    /** This method should be called when the stomach inventory is changed. */
+    public void updateStomach() {
+
+        // update if this is starving or not
+        this.isStarving = this.isEmpty();
+        if(this.isStarving) {
+            // if starving, then also hungry
+            this.isHungry = true;
+        } else {
+            // is hungry?
+            // how many empty slots are in the stomach?
+            int numEmptyStacks = 0;
+            int stomachSize = this.getSizeInventory();
+            for(int i = 0; i < stomachSize; i++) {
+                if(this.getStackInSlot(i) == ItemStack.EMPTY) {numEmptyStacks++;}
+            }
+
+            // if over half the stomach is empty, return true;
+            this.isHungry = numEmptyStacks > stomachSize*2/3;
+        }
+    }
+
+    /** */
+    @Override
+    public boolean isUsableByPlayer(PlayerEntity player) {return false;}
+
+    /** */
+    @Override
+    public ItemStack addItem(ItemStack stack) {
+        if(isEdible(stack.getItem())) {
+            // eat item
+            return super.addItem(stack);
+        } else {
+            // item is not edible
+            return stack;
+        }
+    }
+
+    /** */
+    public boolean isHungry() {return this.isHungry;}
+
+    /** */
+    public boolean isStarving() {return this.isStarving;}
 
     /** */
     public boolean isBreedingItem(Item item) {
@@ -159,6 +210,7 @@ public class EonsDiet {
         ANIMAL("animal"),
         FISH("fish"),
         WATER("water"),
+        ARTHROPOD("arthropod"),
         FLYING("flying");
         // Eons Generic Types
         
@@ -192,7 +244,8 @@ public class EonsDiet {
                     case "all": {return true;}
                     case "animal": {return entity instanceof AnimalEntity;}
                     case "fish": {return entity instanceof AbstractFishEntity;}
-                    case "water": {return entity instanceof WaterMobEntity;}
+                    case "water": {return entity.getCreatureAttribute() == CreatureAttribute.WATER;}
+                    case "arthropod": {return entity.getCreatureAttribute() == CreatureAttribute.ARTHROPOD;}
                     case "flying": {return entity instanceof IFlyingAnimal;}
                     default: {return false;}
                 }

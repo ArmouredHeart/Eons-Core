@@ -24,10 +24,14 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
+import com.github.armouredheart.eons_core.api.IEonsAnimationState;
+import com.github.armouredheart.eons_core.client.EonsAnimationState;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsSex;
@@ -38,13 +42,13 @@ import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast, IEonsSexuallyDimorphic {
+public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast, IEonsSexuallyDimorphic, IEonsAnimationState {
 
    // *** Attributes ***
    private static final Logger LOGGER = LogManager.getLogger(EonsCore.MOD_ID + " EonsBeastEntity");
+   private EonsAnimationState state;
    private final EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
    private final EonsDiet diet;
-   private final int sexRatio;
    private final boolean isNocturnal;
    private EonsSex sex;
 
@@ -63,21 +67,35 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       this.fieldNotes = fieldNotes;
       this.stepHeight = 1.0F;
       this.diet = diet;
-      this.sexRatio = sexRatio;
+      this.sex = new EonsSex(this, sexRatio);
       this.isNocturnal = isNocturnal;
    }
 
    /** Default Settings EonsBeast constructor*/
    protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes) {
-      this(type, world, fieldNotes, new EonsDiet(false, null), 50, false);
+      this(type, world, fieldNotes, new EonsDiet(8, false, null), 50, false);
    }
 
    // *** Methods ***
 
    /** */
+   @Override
+   protected void registerAttributes() {
+      super.registerAttributes();
+      this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+   }
+
+   /** */
+   @OnlyIn(Dist.CLIENT)
+   public EonsAnimationState getState() {return this.state;}
+
+   /** */
+   @OnlyIn(Dist.CLIENT)
+   public void setState(EonsAnimationState state) {this.state = state;}
+
+   /** */
    @Nullable
    public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-      this.sex = new EonsSex(this, sexRatio);
       return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
    }
 
@@ -185,11 +203,6 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    public boolean isFemale() {return this.sex.isFemale();}
 
    /** */
-   public boolean isHungry() {
-      return true;
-   }
-
-   /** */
    //public boolean isEnraged();
 
    /** */
@@ -197,9 +210,6 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 
    /** */
    //protected boolean setCalm();
-
-   /** */
-   //protected boolean resolveCheck(int threat);
 
    /** Checks if beast becomes enraged.*/
    //protected boolean rageCheck();

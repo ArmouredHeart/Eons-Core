@@ -26,8 +26,17 @@ public final class EonsSounds {
 
     // *** Register Sounds ***
 
-    //
+    // music
     public static final SoundEvent MUSIC_EONS_PRIMAL_AGE = createSoundEvent("music.eons_primal_age");
+
+    // misc
+    public static final SoundEvent ZAP = createSoundEvent("misc.zap");
+    
+    // arthropod
+    public static final SoundEvent MARINE_ARTHROPOD_CRAWLING = createSoundEvent("arthropod.marine_arthropod_crawling");
+
+    // amphibian
+
 
     // *** Methods ***
 

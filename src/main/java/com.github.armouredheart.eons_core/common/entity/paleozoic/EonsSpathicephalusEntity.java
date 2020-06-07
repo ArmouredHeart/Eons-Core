@@ -3,6 +3,7 @@ package com.github.armouredheart.eons_core.common.entity.paleozoic;
 
 // Minecraft imports
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
 import net.minecraft.item.Items;
 import net.minecraft.item.Item;
@@ -24,7 +25,7 @@ public class EonsSpathicephalusEntity extends EonsAmphibianEntity {
 
     // *** Attributes ***
     private static final EonsFieldNotes FIELDNOTES = null;
-    private static final EonsDiet DIET = new EonsDiet(false, Arrays.asList(Items.SWEET_BERRIES));
+    private static final EonsDiet DIET = new EonsDiet(4, false, Arrays.asList(Items.SWEET_BERRIES));
 
     // *** Constructors ***
     
@@ -34,6 +35,14 @@ public class EonsSpathicephalusEntity extends EonsAmphibianEntity {
     }
     
     // *** Methods ***
+
+    /** */
+    @Override
+    protected void registerAttributes() {
+        super.registerAttributes();
+        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
+        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+    }
 
     /** */
     protected void registerGoals() {

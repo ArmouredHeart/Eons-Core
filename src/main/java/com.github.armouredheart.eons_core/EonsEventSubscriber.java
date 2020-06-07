@@ -18,6 +18,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.IForgeRegistry;
 
 // Eons imports
+import com.github.armouredheart.eons_core.config.EonsConfig;
 import com.github.armouredheart.eons_core.init.EonsItemGroups;
 import com.github.armouredheart.eons_core.init.EonsBlocks;
 import com.github.armouredheart.eons_core.EonsCore;
@@ -25,6 +26,7 @@ import com.github.armouredheart.eons_core.init.EonsBiomes;
 import com.github.armouredheart.eons_core.common.world.gen.surfacebuilders.EonsSurfaceBuilders;
 
 // misc imports
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -61,7 +63,7 @@ public final class EonsEventSubscriber {
     /** */
     @SubscribeEvent
 	public static void onModConfigEvent(final ModConfig.ModConfigEvent event) {
-		LOGGER.debug("configs not yet implemented lol");
+		
     }
 
 	/** */
@@ -73,6 +75,18 @@ public final class EonsEventSubscriber {
 	@SubscribeEvent
 	public static void onRegisterSurfaceBuilders(RegistryEvent.Register<SurfaceBuilder<?>> event) {
 		EonsSurfaceBuilders.registerEonsSurfaceBuilders(event);
+	}
+
+	@SubscribeEvent
+	public static void onLoad(final ModConfig.Loading event) {
+		// call method defined in config
+		EonsConfig.onLoad(event);
+	}
+	
+	@SubscribeEvent
+	public static void onFileChange(final ModConfig.ConfigReloading event) {
+		// call method defined in config
+		EonsConfig.onFileChange(event);
 	}
 
 	/** */

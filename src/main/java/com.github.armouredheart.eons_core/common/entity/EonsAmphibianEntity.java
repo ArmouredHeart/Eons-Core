@@ -46,10 +46,12 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     // *** Methods ***
 
     /** */
+    @Override
+    public boolean isPushedByWater() {return false;}
+
+    /** */
     protected void registerAttributes() {
         super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
     }
 
     /** */
@@ -90,12 +92,11 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     }
 
     /** */
-    public boolean isPushedByWater() {return false;}
-
-    /** */
+    @Override
     public boolean canBreatheUnderwater() {return true;}
 
     /** */
+    @Override
     public CreatureAttribute getCreatureAttribute() {return CreatureAttribute.WATER;}
 
     /** */

@@ -35,7 +35,6 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 
 	// *** Attributes ***
 	private final EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
-	private final int sexRatio;
 	private EonsSex sex;
 
 	// *** Constructors ***
@@ -49,7 +48,7 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	protected EonsGroupFishEntity(final EntityType<? extends AbstractGroupFishEntity> type, final World world, final EonsFieldNotes fieldNotes, final int sexRatio) {
 		super(type, world);
 		this.fieldNotes = fieldNotes;
-        this.sexRatio = sexRatio;
+        this.sex = new EonsSex(this, sexRatio);
 	}
 
 	/** */
@@ -72,7 +71,6 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	/** */
 	@Nullable
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-		this.sex = new EonsSex(this, sexRatio);
 		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 

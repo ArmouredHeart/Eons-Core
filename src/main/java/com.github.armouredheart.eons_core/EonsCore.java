@@ -18,12 +18,14 @@ package com.github.armouredheart.eons_core;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 
 // Eons imports
+import com.github.armouredheart.eons_core.config.EonsConfig;
 import com.github.armouredheart.eons_core.init.EonsBlocks;
 import com.github.armouredheart.eons_core.init.EonsItems;
 import com.github.armouredheart.eons_core.init.EonsSounds;
@@ -38,6 +40,7 @@ import org.apache.logging.log4j.Logger;
 /** Declare entry point */
 @Mod(value = EonsCore.MOD_ID)
 public class EonsCore {
+
     // *** Attributes ***
     public static final String MOD_ID = "eons_core";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
@@ -51,6 +54,9 @@ public class EonsCore {
         //
         final ModLoadingContext eonsLoadingContext = ModLoadingContext.get();
         final IEventBus eonsEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        // Register Configs
+        eonsLoadingContext.registerConfig(Type.COMMON, EonsConfig.COMMON_SPEC, "eons-common.toml");
         
         // Register DeferredRegisters
         EonsSounds.SOUND_EVENTS.register(eonsEventBus);
@@ -64,9 +70,6 @@ public class EonsCore {
         // Register Renderers on client
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> EonsEntityTypes::registerEonsEntityRenderers);
     
-
-        // Register Configs
-
     }
 
     // *** Methods ***

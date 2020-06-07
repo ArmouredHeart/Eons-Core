@@ -1,0 +1,265 @@
+// package
+package com.github.armouredheart.eons_core.client.model.entity.paleozoic;
+
+// Minecraft imports
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.entity.Entity;
+
+// Forge imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+// Eons imports
+import com.github.armouredheart.eons_core.client.model.entity.EonsEntityModel;
+
+// misc imports
+import com.mojang.blaze3d.platform.GlStateManager;
+
+/**
+ * Hurdia - Accentaur
+ * Created using Tabula 7.0.0
+ */
+public class EonsHurdiaModel<T extends Entity> extends EonsEntityModel<T> {
+	  // *** Attributes ***
+    public RendererModel shape1;
+    public RendererModel tail;
+    public RendererModel head;
+    public RendererModel wingL1;
+    public RendererModel wingL2;
+    public RendererModel wingL3;
+    public RendererModel wingL4;
+    public RendererModel wingR1;
+    public RendererModel wingR2;
+    public RendererModel wingR3;
+    public RendererModel wingR4;
+    public RendererModel shape3;
+    public RendererModel wingL5;
+    public RendererModel wingL6;
+    public RendererModel wingL7;
+    public RendererModel shape3_1;
+    public RendererModel wingR5;
+    public RendererModel wingR6;
+    public RendererModel wingR7;
+    public RendererModel shape5;
+    public RendererModel armL1;
+    public RendererModel eyestockL;
+    public RendererModel armR1;
+    public RendererModel eyestockR;
+    public RendererModel shape6;
+    public RendererModel shape6_1;
+    public RendererModel shape22;
+    public RendererModel shape23;
+    public RendererModel shape24;
+    public RendererModel armL2;
+    public RendererModel arm;
+    public RendererModel eyeL1;
+    public RendererModel eyeL2;
+    public RendererModel armR2;
+    public RendererModel armR3;
+    public RendererModel eyeR1;
+    public RendererModel eye2R;
+
+	// *** Constructors ***
+    public EonsHurdiaModel() {
+        this.textureWidth = 64;
+        this.textureHeight = 32;
+        this.wingL3 = new RendererModel(this, 0, 14);
+        this.wingL3.setRotationPoint(0.5F, 0.0F, 0.5F);
+        this.wingL3.addBox(0.0F, -2.0F, 0.0F, 3, 4, 0, 0.0F);
+        this.shape3_1 = new RendererModel(this, 32, 0);
+        this.shape3_1.setRotationPoint(0.0F, 0.0F, 3.0F);
+        this.shape3_1.addBox(-3.0F, -0.5F, -0.5F, 3, 1, 1, 0.0F);
+        this.setRotateAngle(shape3_1, 0.0F, 0.40980330836826856F, 0.0F);
+        this.wingR3 = new RendererModel(this, 0, 14);
+        this.wingR3.mirror = true;
+        this.wingR3.setRotationPoint(-0.5F, 0.0F, 0.5F);
+        this.wingR3.addBox(-3.0F, -2.0F, 0.0F, 3, 4, 0, 0.0F);
+        this.eyeR1 = new RendererModel(this, 21, 0);
+        this.eyeR1.mirror = true;
+        this.eyeR1.setRotationPoint(-1.0F, 0.0F, 0.0F);
+        this.eyeR1.addBox(0.0F, -1.0F, -0.5F, 1, 1, 1, 0.0F);
+        this.head = new RendererModel(this, 24, 0);
+        this.head.setRotationPoint(0.0F, 0.2F, -1.8F);
+        this.head.addBox(-1.5F, -1.0F, -2.0F, 3, 2, 2, 0.0F);
+        this.wingL1 = new RendererModel(this, 0, 8);
+        this.wingL1.setRotationPoint(0.5F, 0.0F, -1.5F);
+        this.wingL1.addBox(0.0F, -2.0F, 0.0F, 4, 4, 0, 0.0F);
+        this.shape3 = new RendererModel(this, 32, 0);
+        this.shape3.setRotationPoint(0.0F, 0.0F, 3.0F);
+        this.shape3.addBox(0.0F, -0.5F, -0.5F, 3, 1, 1, 0.0F);
+        this.setRotateAngle(shape3, 0.0F, -0.40980330836826856F, 0.0F);
+        this.shape1 = new RendererModel(this, 0, 0);
+        this.shape1.setRotationPoint(0.0F, 21.5F, 0.7F);
+        this.shape1.addBox(-1.5F, -1.5F, -2.0F, 3, 3, 4, 0.0F);
+        this.armR1 = new RendererModel(this, 10, 0);
+        this.armR1.setRotationPoint(-1.0F, 0.0F, -2.0F);
+        this.armR1.addBox(-0.5F, -0.5F, -2.0F, 1, 1, 2, 0.0F);
+        this.setRotateAngle(armR1, 1.3658946726107624F, 0.0F, 0.0F);
+        this.tail = new RendererModel(this, 14, 0);
+        this.tail.setRotationPoint(0.0F, 0.2F, 2.0F);
+        this.tail.addBox(-1.0F, -1.0F, 0.0F, 2, 2, 3, 0.0F);
+        this.shape6 = new RendererModel(this, 50, 0);
+        this.shape6.setRotationPoint(0.0F, 0.2F, -4.9F);
+        this.shape6.addBox(-1.0F, -0.5F, -2.0F, 2, 1, 2, 0.0F);
+        this.setRotateAngle(shape6, 0.045553093477052F, 0.0F, 0.0F);
+        this.wingR5 = new RendererModel(this, 0, 20);
+        this.wingR5.mirror = true;
+        this.wingR5.setRotationPoint(-0.5F, 0.0F, 0.2F);
+        this.wingR5.addBox(-2.0F, -1.5F, 0.0F, 2, 3, 0, 0.0F);
+        this.wingR6 = new RendererModel(this, 0, 20);
+        this.wingR6.mirror = true;
+        this.wingR6.setRotationPoint(-0.5F, 0.0F, 1.0F);
+        this.wingR6.addBox(-2.0F, -1.5F, 0.0F, 2, 3, 0, 0.0F);
+        this.armL2 = new RendererModel(this, 46, 2);
+        this.armL2.setRotationPoint(0.0F, -0.2F, -1.5F);
+        this.armL2.addBox(-0.5F, -0.5F, -1.0F, 1, 1, 1, 0.0F);
+        this.setRotateAngle(armL2, 0.9105382707654417F, 0.0F, 0.0F);
+        this.shape6_1 = new RendererModel(this, 32, 2);
+        this.shape6_1.setRotationPoint(0.0F, 0.6F, -4.9F);
+        this.shape6_1.addBox(-1.0F, -0.5F, -2.0F, 2, 1, 2, 0.0F);
+        this.setRotateAngle(shape6_1, -0.091106186954104F, 0.0F, 0.0F);
+        this.wingR7 = new RendererModel(this, 0, 20);
+        this.wingR7.mirror = true;
+        this.wingR7.setRotationPoint(-0.5F, 0.0F, 2.0F);
+        this.wingR7.addBox(-2.0F, -1.5F, 0.0F, 2, 3, 0, 0.0F);
+        this.wingL6 = new RendererModel(this, 0, 20);
+        this.wingL6.setRotationPoint(0.5F, 0.0F, 1.0F);
+        this.wingL6.addBox(0.0F, -1.5F, 0.0F, 2, 3, 0, 0.0F);
+        this.armL1 = new RendererModel(this, 10, 0);
+        this.armL1.setRotationPoint(1.0F, 0.0F, -2.0F);
+        this.armL1.addBox(-0.5F, -0.5F, -2.0F, 1, 1, 2, 0.0F);
+        this.setRotateAngle(armL1, 1.3658946726107624F, 0.0F, 0.0F);
+        this.wingL2 = new RendererModel(this, 0, 8);
+        this.wingL2.setRotationPoint(0.5F, 0.0F, -0.5F);
+        this.wingL2.addBox(0.0F, -2.0F, 0.0F, 4, 4, 0, 0.0F);
+        this.eyeL2 = new RendererModel(this, 0, 2);
+        this.eyeL2.setRotationPoint(2.0F, 0.0F, 0.0F);
+        this.eyeL2.addBox(0.0F, 0.0F, -0.5F, 1, 1, 1, 0.0F);
+        this.eye2R = new RendererModel(this, 0, 2);
+        this.eye2R.mirror = true;
+        this.eye2R.setRotationPoint(-1.0F, 0.0F, 0.0F);
+        this.eye2R.addBox(0.0F, 0.0F, -0.5F, 1, 1, 1, 0.0F);
+        this.wingR1 = new RendererModel(this, 0, 8);
+        this.wingR1.mirror = true;
+        this.wingR1.setRotationPoint(-0.5F, 0.0F, -1.5F);
+        this.wingR1.addBox(-4.0F, -2.0F, 0.0F, 4, 4, 0, 0.0F);
+        this.shape5 = new RendererModel(this, 35, 0);
+        this.shape5.setRotationPoint(0.0F, -1.4F, 0.0F);
+        this.shape5.addBox(-1.5F, -0.5F, -5.0F, 3, 2, 5, 0.0F);
+        this.setRotateAngle(shape5, -0.006283185307179587F, -0.012566370614359173F, -0.003490658503988659F);
+        this.armR3 = new RendererModel(this, 0, 0);
+        this.armR3.setRotationPoint(0.0F, -0.2F, -0.7F);
+        this.armR3.addBox(-0.5F, -0.5F, -1.0F, 1, 1, 1, 0.0F);
+        this.setRotateAngle(armR3, 0.6373942428283291F, 0.0F, 0.0F);
+        this.wingL5 = new RendererModel(this, 0, 20);
+        this.wingL5.setRotationPoint(0.5F, 0.0F, 0.2F);
+        this.wingL5.addBox(0.0F, -1.5F, 0.0F, 2, 3, 0, 0.0F);
+        this.wingL7 = new RendererModel(this, 0, 20);
+        this.wingL7.setRotationPoint(0.5F, 0.0F, 2.0F);
+        this.wingL7.addBox(0.0F, -1.5F, 0.0F, 2, 3, 0, 0.0F);
+        this.wingR4 = new RendererModel(this, 0, 14);
+        this.wingR4.mirror = true;
+        this.wingR4.setRotationPoint(-0.5F, 0.0F, 1.5F);
+        this.wingR4.addBox(-3.0F, -2.0F, 0.0F, 3, 4, 0, 0.0F);
+        this.eyeL1 = new RendererModel(this, 21, 0);
+        this.eyeL1.setRotationPoint(2.0F, 0.0F, 0.0F);
+        this.eyeL1.addBox(0.0F, -1.0F, -0.5F, 1, 1, 1, 0.0F);
+        this.shape22 = new RendererModel(this, 55, 0);
+        this.shape22.setRotationPoint(0.0F, 0.6F, -6.7F);
+        this.shape22.addBox(-0.5F, 0.0F, 0.0F, 1, 1, 3, 0.0F);
+        this.wingR2 = new RendererModel(this, 0, 8);
+        this.wingR2.mirror = true;
+        this.wingR2.setRotationPoint(-0.5F, 0.0F, -0.5F);
+        this.wingR2.addBox(-4.0F, -2.0F, 0.0F, 4, 4, 0, 0.0F);
+        this.shape24 = new RendererModel(this, 41, 5);
+        this.shape24.setRotationPoint(0.0F, 0.0F, -3.0F);
+        this.shape24.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 1, 0.0F);
+        this.shape23 = new RendererModel(this, 21, 4);
+        this.shape23.setRotationPoint(0.0F, 1.0F, -5.0F);
+        this.shape23.addBox(-2.0F, -0.5F, 0.0F, 4, 2, 3, 0.0F);
+        this.armR2 = new RendererModel(this, 46, 2);
+        this.armR2.setRotationPoint(0.0F, -0.2F, -1.5F);
+        this.armR2.addBox(-0.5F, -0.5F, -1.0F, 1, 1, 1, 0.0F);
+        this.setRotateAngle(armR2, 0.9105382707654417F, 0.0F, 0.0F);
+        this.wingL4 = new RendererModel(this, 0, 14);
+        this.wingL4.setRotationPoint(0.5F, 0.0F, 1.5F);
+        this.wingL4.addBox(0.0F, -2.0F, 0.0F, 3, 4, 0, 0.0F);
+        this.arm = new RendererModel(this, 0, 0);
+        this.arm.setRotationPoint(0.0F, -0.2F, -0.7F);
+        this.arm.addBox(-0.5F, -0.5F, -1.0F, 1, 1, 1, 0.0F);
+        this.setRotateAngle(arm, 0.6373942428283291F, 0.0F, 0.0F);
+        this.eyestockR = new RendererModel(this, 46, 0);
+        this.eyestockR.setRotationPoint(-2.5F, 0.0F, -1.7F);
+        this.eyestockR.addBox(0.0F, -0.5F, -0.5F, 2, 1, 1, 0.0F);
+        this.eyestockL = new RendererModel(this, 46, 0);
+        this.eyestockL.setRotationPoint(0.5F, 0.0F, -1.7F);
+        this.eyestockL.addBox(0.0F, -0.5F, -0.5F, 2, 1, 1, 0.0F);
+        this.shape1.addChild(this.wingL3);
+        this.tail.addChild(this.shape3_1);
+        this.shape1.addChild(this.wingR3);
+        this.eyestockR.addChild(this.eyeR1);
+        this.shape1.addChild(this.head);
+        this.shape1.addChild(this.wingL1);
+        this.tail.addChild(this.shape3);
+        this.head.addChild(this.armR1);
+        this.shape1.addChild(this.tail);
+        this.shape5.addChild(this.shape6);
+        this.tail.addChild(this.wingR5);
+        this.tail.addChild(this.wingR6);
+        this.armL1.addChild(this.armL2);
+        this.shape5.addChild(this.shape6_1);
+        this.tail.addChild(this.wingR7);
+        this.tail.addChild(this.wingL6);
+        this.head.addChild(this.armL1);
+        this.shape1.addChild(this.wingL2);
+        this.eyestockL.addChild(this.eyeL2);
+        this.eyestockR.addChild(this.eye2R);
+        this.shape1.addChild(this.wingR1);
+        this.head.addChild(this.shape5);
+        this.armR2.addChild(this.armR3);
+        this.tail.addChild(this.wingL5);
+        this.tail.addChild(this.wingL7);
+        this.shape1.addChild(this.wingR4);
+        this.eyestockL.addChild(this.eyeL1);
+        this.shape5.addChild(this.shape22);
+        this.shape1.addChild(this.wingR2);
+        this.shape6_1.addChild(this.shape24);
+        this.shape5.addChild(this.shape23);
+        this.armR1.addChild(this.armR2);
+        this.shape1.addChild(this.wingL4);
+        this.armL2.addChild(this.arm);
+        this.head.addChild(this.eyestockR);
+        this.head.addChild(this.eyestockL);
+    }
+	// *** Methods ***
+    @Override
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        GlStateManager.pushMatrix();
+        GlStateManager.translatef(this.shape1.offsetX, this.shape1.offsetY, this.shape1.offsetZ);
+        GlStateManager.translatef(this.shape1.rotationPointX * f5, this.shape1.rotationPointY * f5, this.shape1.rotationPointZ * f5);
+        GlStateManager.scaled(0.5D, 0.5D, 0.5D);
+        GlStateManager.translatef(-this.shape1.offsetX, -this.shape1.offsetY, -this.shape1.offsetZ);
+        GlStateManager.translatef(-this.shape1.rotationPointX * f5, -this.shape1.rotationPointY * f5, -this.shape1.rotationPointZ * f5);
+        this.shape1.render(f5);
+        GlStateManager.popMatrix();
+    }
+
+    @Override
+    protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
+        this.wingR2.rotateAngleY = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+        this.wingR1.rotateAngleY = MathHelper.cos(f * 1.0F) * 1.0F * f1;
+        this.wingR6.rotateAngleY = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+        this.wingR5.rotateAngleY = MathHelper.cos(f * 1.0F) * 1.0F * f1;
+        this.wingR4.rotateAngleY = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+        this.wingR3.rotateAngleY = MathHelper.cos(f * 1.0F) * 1.0F * f1;
+        this.wingL4.rotateAngleY = MathHelper.cos(f * 1.0F) * -1.0F * f1;
+        this.wingL3.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+        this.wingL2.rotateAngleY = MathHelper.cos(f * 1.0F) * -1.0F * f1;
+        this.wingL1.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+        this.wingR7.rotateAngleY = MathHelper.cos(f * 1.0F) * 1.0F * f1;
+        this.wingL7.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+        this.wingL6.rotateAngleY = MathHelper.cos(f * 1.0F) * -1.0F * f1;
+        this.wingL5.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+    }
+}

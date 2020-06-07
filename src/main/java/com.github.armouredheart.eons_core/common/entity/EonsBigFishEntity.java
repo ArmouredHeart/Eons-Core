@@ -3,6 +3,7 @@ package com.github.armouredheart.eons_core.common.entity;
 
 // Minecraft imports
 import net.minecraft.item.ItemStack;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -37,7 +38,6 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     private EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
     private EonsSex sex;
     private final EonsDiet diet;
-    private final int sexRatio;
     private final boolean isNocturnal;
 
     // *** Constructors ***
@@ -53,16 +53,22 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     protected EonsBigFishEntity(final EntityType<? extends AbstractFishEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
         super(type, world);
         this.diet = diet;
-        this.sexRatio = sexRatio;
+        this.sex = new EonsSex(this, sexRatio);
         this.isNocturnal = isNocturnal;
     }
 
     /** */
     protected EonsBigFishEntity(final EntityType<? extends AbstractFishEntity> type, final World world, final EonsFieldNotes fieldNotes) {
-        this(type, world, fieldNotes, new EonsDiet(false, null), 50, false);
+        this(type, world, fieldNotes, new EonsDiet(8, false, null), 50, false);
     }
 
     // *** Methods ***
+
+    @Override
+    protected void registerAttributes() {
+        super.registerAttributes();
+        this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+    }
 
     /** */
 	@Override
@@ -77,7 +83,6 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     /** */
     @Nullable
     public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        this.sex = new EonsSex(this, sexRatio);
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 

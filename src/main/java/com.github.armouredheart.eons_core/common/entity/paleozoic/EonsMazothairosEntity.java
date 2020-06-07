@@ -22,7 +22,7 @@ public class EonsMazothairosEntity extends EonsArthropodEntity {
 
     // *** Attributes ***
     private static final EonsFieldNotes FIELDNOTES = null;
-    private static final EonsDiet DIET = new EonsDiet(false, null/**Arrays.asList(null)*/);
+    private static final EonsDiet DIET = new EonsDiet(4, false, null/**Arrays.asList(null)*/);
 
     // *** Constructors ***
     

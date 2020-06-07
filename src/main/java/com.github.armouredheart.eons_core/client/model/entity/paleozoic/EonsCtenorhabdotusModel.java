@@ -4,6 +4,7 @@ package com.github.armouredheart.eons_core.client.model.entity.paleozoic;
 // Minecraft imports
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Entity;
 
 // Forge imports
@@ -12,16 +13,18 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
 import com.github.armouredheart.eons_core.client.model.entity.EonsEntityModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsCtenorhabdotusEntity;
 
 // misc imports
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.GLX;
 
 /**
  * ctenorhabdotus - Accentaur
  * Created using Tabula 7.1.0
  */
 @OnlyIn(Dist.CLIENT)
-public class EonsCtenorhabdotusModel<T extends Entity> extends EonsEntityModel<T> {
+public class EonsCtenorhabdotusModel<T extends EonsCtenorhabdotusEntity> extends EonsEntityModel<T> {
     
      // *** Attributes ***
     public RendererModel bell;
@@ -31,7 +34,7 @@ public class EonsCtenorhabdotusModel<T extends Entity> extends EonsEntityModel<T
     public RendererModel shape5_1;
     public RendererModel inner;
 
-// *** Constructors ***
+    // *** Constructors ***
 
     public EonsCtenorhabdotusModel() {
         this.textureWidth = 64;
@@ -60,10 +63,11 @@ public class EonsCtenorhabdotusModel<T extends Entity> extends EonsEntityModel<T
         this.bell.addChild(this.shape2);
         this.bell.addChild(this.shape5_1);
     }
-   // *** Methods ***
+
+    // *** Methods ***
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         GlStateManager.enableBlend();
         //GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);// this is not imported and not formatted for minecraft
         //GlStateManager.colorf(1.0F, 1.0F, 1.0F, 0.45F);

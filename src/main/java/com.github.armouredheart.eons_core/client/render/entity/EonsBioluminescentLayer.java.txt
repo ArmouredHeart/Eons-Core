@@ -1,0 +1,46 @@
+// package
+package com.github.armouredheart.eons_core.client.render.entity;
+
+// Minecraft imports
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+
+// Forge imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+// Eons imports
+
+// misc imports
+
+@OnlyIn(Dist.CLIENT)
+public class EonsBioluminescentLayer extends LayerRenderer<T extends MobEntity, M extends EntityModel<T>> {
+    // *** Attributes ***
+    private final boolean shouldCombineTextures;
+    private final IEntityRenderer<T, M> entityRenderer;
+    private final ResourceLocation glowTexture;
+
+    // *** Constructors ***
+    /** */
+    public EonsBioluminescentLayer(IEntityRenderer<T, M> entityRendererIn, boolean shouldCombineTextures, ResourceLocation glowTexture) {
+        super(entityRendererIn);
+        this.shouldCombineTextures = shouldCombineTextures;
+        this.entityRenderer = entityRendererIn;
+        this.glowTexture = glowTexture;
+    }
+
+    // *** Methods ***
+    
+    /** */
+    @Override
+    public void render(T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        this.bindTexture(this.glowTexture);
+    }
+
+    /** */
+    @Override
+    public boolean shouldCombineTextures() {return this.shouldCombineTextures;}
+}

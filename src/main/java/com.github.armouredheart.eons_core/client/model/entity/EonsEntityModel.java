@@ -5,12 +5,15 @@ package com.github.armouredheart.eons_core.client.model.entity;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 // Forge imports
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
+import com.github.armouredheart.eons_core.api.IEonsAnimationState;
+import com.github.armouredheart.eons_core.client.EonsAnimationState;
 
 // misc imports
 
@@ -31,27 +34,40 @@ public abstract class EonsEntityModel<T extends Entity> extends EntityModel<T> {
         rendererModel.rotateAngleY = y;
         rendererModel.rotateAngleZ = z;
     }
+
+    /** This is called in the living animations tick, and performs the animation matching the defined state in the enitity. */
+    public <A extends Entity & IEonsAnimationState> void doAnimations(A entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        switch(entity.getState()) {
+            case FLYING: {this.animationFly(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case SWIMMING: {this.animationSwim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case IDLE: {this.animationIdle(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case WALKING: {this.animationWalk(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case RUNNING: {this.animationRun(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case SNEAKING: {this.animationSneak(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case CLIMBING: {this.animationClimb(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case POUNCING: {this.animationPounce(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case EATING: {this.animationEat(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case SLEEPING: {this.animationSleep(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case ATTACKING: {this.animationAttack(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case THREATENING: {this.animationThreat(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case ON_SHOULDER: {this.animationOnShoulder(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            default: {/** Possible invalid animation state? */break;}
+        }
+    }
     
-    //protected abstract void animationWalk();
-
-    //protected abstract void animationIdle();
-
-    //protected abstract void animationRun();
-
-    //protected abstract void animationSwim();
-    
-    //protected abstract void animationFly();
-
-    //protected abstract void animationClimb();
-
-    //protected abstract void animationJump();
-
-    //protected abstract void animationSneak();
-
-    //protected abstract void animationThreat();
-
-    //protected abstract void animationEat();
-
-    //protected abstract void animationAttack();
+    // override these in model to use them
+    protected void animationWalk(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationRun(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationSwim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationSneak(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationIdle(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationThreat(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationEat(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationAttack(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationPounce(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationFly(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationClimb(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationOnShoulder(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
+    protected void animationSleep(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
 
 }

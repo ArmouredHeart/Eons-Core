@@ -6,5 +6,35 @@
                 "stream": true
             }
         ]
+    },
+
+    "misc.zap": {
+        "sounds": [
+            {
+                "name": "eons_core:misc/zap",
+                "stream": false
+            }
+        ]
+
+    },
+
+    "misc.crack": {
+        "sounds": [
+            {
+                "name": "eons_core:misc/crack",
+                "stream": false
+            }
+        ]
+
+    },
+
+    "arthropod.marine_arthropod_crawling": {
+        "sounds": [
+            {
+                "name": "eons_core:arthropod/marine_arthropod_crawling",
+                "stream": false
+            }
+        ]
+
     }
 }

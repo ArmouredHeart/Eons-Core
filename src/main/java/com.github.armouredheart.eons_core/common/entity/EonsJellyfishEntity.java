@@ -4,8 +4,6 @@ package com.github.armouredheart.eons_core.common.entity;
 // Minecraft imports
 import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.SoundEvent;
@@ -24,18 +22,20 @@ import net.minecraft.nbt.CompoundNBT;
 // Forge imports
 
 // Eons imports
+import com.github.armouredheart.eons_core.init.EonsSounds;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.IEonsToxic;
 
 // misc imports
 
-public abstract class EonsJellyfishEntity extends EonsGroupFishEntity {
+public abstract class EonsJellyfishEntity extends EonsGroupFishEntity implements IEonsToxic{
 
     // *** Attributes ***
     private final int toxicity;
 
     // *** Constructors ***
 
-    /** @param toxicity value of 0 is non-toxic, and 2 is equal to a puffer fish. Bigger number, longer poison effect */
+    /** @param toxicity value of 0 is non-toxic, and 1 is equal to a puffer fish. Bigger number, longer poison effect */
     protected EonsJellyfishEntity(EntityType<? extends  EonsGroupFishEntity> type, World world, EonsFieldNotes fieldNotes, final int sexRatio, final int toxicity) {
         super(type, world, fieldNotes, sexRatio);
         this.toxicity = toxicity;
@@ -45,21 +45,8 @@ public abstract class EonsJellyfishEntity extends EonsGroupFishEntity {
 
     /** */
     private void attack(MobEntity mobEntity) {
-        if(tryPoisonEntity(mobEntity)) {
-            // do something here I guess? 
-        }
-    }
-
-    /** */
-    protected boolean tryPoisonEntity(LivingEntity livingEntity) {
-        if(this.toxicity < 1) {return false;} else {
-            if (livingEntity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)(2))) {
-                livingEntity.addPotionEffect(new EffectInstance(Effects.POISON, 30 * this.toxicity, 0));
-                this.playStingEffect();
-                return true;
-            } else {
-                return false;
-            }
+        if(IEonsToxic.tryPoisonEntity(this, mobEntity, this.toxicity)) {
+            this.playStingEffect(); 
         }
     }
 
@@ -67,7 +54,8 @@ public abstract class EonsJellyfishEntity extends EonsGroupFishEntity {
     * Called by a player entity when they collide with an entity
     */
     public void onCollideWithPlayer(PlayerEntity entityIn) {
-        if (entityIn instanceof ServerPlayerEntity && tryPoisonEntity(entityIn)){
+        if (entityIn instanceof ServerPlayerEntity && IEonsToxic.tryPoisonEntity(this, entityIn, this.toxicity)){
+            this.playStingEffect();
             ((ServerPlayerEntity)entityIn).connection.sendPacket(new SChangeGameStatePacket(9, 0.0F));
         }
         super.onCollideWithPlayer(entityIn);
@@ -86,5 +74,5 @@ public abstract class EonsJellyfishEntity extends EonsGroupFishEntity {
     protected SoundEvent getFlopSound() {return null;}
 
     /** */
-    protected void playStingEffect() {this.playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 1.0F, 1.0F);}
+    protected void playStingEffect() {this.playSound(EonsSounds.ZAP, 1.0F, 1.0F);}
 }

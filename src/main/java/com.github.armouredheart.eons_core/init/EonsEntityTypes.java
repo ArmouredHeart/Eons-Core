@@ -40,7 +40,10 @@ public final class EonsEntityTypes {
     public static final RegistryObject<EntityType<EonsHyneriaEntity>> HYNERIA = makeEonsEntity("hyneria", EonsHyneriaEntity::new, EntityClassification.WATER_CREATURE, 0.8F, 0.8F);
     public static final RegistryObject<EntityType<EonsSpathicephalusEntity>> SPATHICEPHALUS = makeEonsEntity("spathicephalus", EonsSpathicephalusEntity::new, EntityClassification.CREATURE, 0.3F, 0.3F);
     public static final RegistryObject<EntityType<EonsMazothairosEntity>> MAZOTHAIROS = makeEonsEntity("mazothairos", EonsMazothairosEntity::new, EntityClassification.CREATURE, 0.3F, 0.3F);
-
+    public static final RegistryObject<EntityType<EonsCtenorhabdotusEntity>> CTENORHABDOTUS = makeEonsEntity("ctenorhabdotus", EonsCtenorhabdotusEntity::new, EntityClassification.WATER_CREATURE, 0.50F, 0.30F);
+    public static final RegistryObject<EntityType<EonsAnomalocarisEntity>> ANOMALOCARIS = makeEonsEntity("anomalocaris", EonsAnomalocarisEntity::new, EntityClassification.WATER_CREATURE, 0.40F, 0.80F);
+    public static final RegistryObject<EntityType<EonsParadoxidesEntity>> PARADOXIDES = makeEonsEntity("paradoxides",  EonsParadoxidesEntity::new, EntityClassification.WATER_CREATURE, 0.30F, 0.30F);
+    
     // *** Methods ***
 
     /** */
@@ -58,7 +61,7 @@ public final class EonsEntityTypes {
             .build(id));
     }
 
-    /** Register client renderers */
+    /** Register client renderers, called in EonsEventSubscriber */
 	public static void registerEonsEntityRenderers() {
         // paleozoic
         RenderingRegistry.registerEntityRenderingHandler(EonsAraxocerasEntity.class, manager -> new EonsAraxocerasRenderer(manager));
@@ -66,5 +69,8 @@ public final class EonsEntityTypes {
         RenderingRegistry.registerEntityRenderingHandler(EonsHyneriaEntity.class, manager -> new EonsHyneriaRenderer(manager));
         RenderingRegistry.registerEntityRenderingHandler(EonsSpathicephalusEntity.class, manager -> new EonsSpathicephalusRenderer(manager));
         RenderingRegistry.registerEntityRenderingHandler(EonsMazothairosEntity.class, manager -> new EonsMazothairosRenderer(manager));
+        RenderingRegistry.registerEntityRenderingHandler(EonsCtenorhabdotusEntity.class, manager -> new EonsCtenorhabdotusRenderer(manager));
+        RenderingRegistry.registerEntityRenderingHandler(EonsAnomalocarisEntity.class, manager -> new EonsAnomalocarisRenderer(manager));
+        RenderingRegistry.registerEntityRenderingHandler(EonsParadoxidesEntity.class, manager -> new EonsParadoxidesRenderer(manager));
     }
 }
