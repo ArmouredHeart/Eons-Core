@@ -1,5 +1,5 @@
 // package
-package com.github.armouredheart.eons_core.client.model.entity;
+package com.github.armouredheart.eons_core.client.model.entity.cenozoic;
 
 // Minecraft imports
 import net.minecraft.util.math.MathHelper;

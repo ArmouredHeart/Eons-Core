@@ -12,6 +12,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
 import com.github.armouredheart.eons_core.client.model.entity.EonsEntityModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsAnomalocarisEntity;
 
 // misc imports
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -21,7 +22,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class EonsAnomalocarisModel<T extends Entity> extends EonsEntityModel<T> {
+public class EonsAnomalocarisModel<T extends EonsAnomalocarisEntity> extends EonsEntityModel<T> {
 	 // *** Attributes ***
     public RendererModel body;
     public RendererModel neck;
@@ -269,13 +270,14 @@ public class EonsAnomalocarisModel<T extends Entity> extends EonsEntityModel<T> 
         this.body2.addChild(this.wingL3);
     }
 	// *** Methods ***
+
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         this.body.render(f5);
     }
 
     @Override
-    protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
+    protected void animationSwim(T entity, float f, float f1, float f2, float f3, float f4, float f5){
         this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
         this.head.rotateAngleX = f4 / (180F / (float) Math.PI);
         this.wingR2.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
@@ -295,8 +297,10 @@ public class EonsAnomalocarisModel<T extends Entity> extends EonsEntityModel<T> 
     }
 
     @Override
-    protected void animationAttack(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
+    protected void animationAttack(T entity, float f, float f1, float f2, float f3, float f4, float f5){
         this.joint1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
         this.joint2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+        // continue swimming while attacking
+        //this.animationSwim(entity, f, f1, f2, f3, f4, f5);
     }
 }

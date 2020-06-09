@@ -12,12 +12,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
 import com.github.armouredheart.eons_core.client.model.entity.EonsEntityModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsSpathicephalusEntity;
 
 // misc imports
 import com.mojang.blaze3d.platform.GlStateManager;
 
 @OnlyIn(Dist.CLIENT)
-public class EonsSpathicephalusModel<T extends Entity> extends EonsEntityModel<T> {
+public class EonsSpathicephalusModel<T extends EonsSpathicephalusEntity> extends EonsEntityModel<T> {
 
     // *** Attributes ***
     public RendererModel shape1;
@@ -95,7 +96,7 @@ public class EonsSpathicephalusModel<T extends Entity> extends EonsEntityModel<T
     // *** Methods ***
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         GlStateManager.pushMatrix();
         GlStateManager.translatef(this.shape1.offsetX, this.shape1.offsetY, this.shape1.offsetZ);
         GlStateManager.translatef(this.shape1.rotationPointX * f5, this.shape1.rotationPointY * f5, this.shape1.rotationPointZ * f5);

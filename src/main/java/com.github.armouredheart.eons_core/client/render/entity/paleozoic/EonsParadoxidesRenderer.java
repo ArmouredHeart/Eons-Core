@@ -14,6 +14,7 @@ import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.client.render.entity.EonsMobRenderer;
 import com.github.armouredheart.eons_core.client.model.entity.paleozoic.EonsParadoxidesModel;
 
+
 // misc imports
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,7 +30,7 @@ public class EonsParadoxidesRenderer extends EonsMobRenderer<EonsParadoxidesEnti
 
     /** */
     public EonsParadoxidesRenderer(final EntityRendererManager manager) {
-        super(manager, new EonsParadoxidesModel<>(), 0.4F);
+        super(manager, new EonsParadoxidesModel<>(), 0.2F);
     }
 
     // *** Methods ***

@@ -12,6 +12,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
 import com.github.armouredheart.eons_core.client.model.entity.EonsEntityModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsMazothairosEntity;
 
 // misc imports
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -22,7 +23,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
  */
 
 @OnlyIn(Dist.CLIENT)
-public class EonsMazothairosModel<T extends Entity> extends EonsEntityModel<T> {
+public class EonsMazothairosModel<T extends EonsMazothairosEntity> extends EonsEntityModel<T> {
     // *** Attributes ***
     public RendererModel body1;
     public RendererModel body2;
@@ -151,25 +152,9 @@ public class EonsMazothairosModel<T extends Entity> extends EonsEntityModel<T> {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         this.body1.render(f5);
     }
-
-    protected void animationWalk(){}
-
-    protected void animationRun(){}
-
-    protected void animationSwim(){}
-
-    protected void animationSneak(){}
-
-    protected void animationIdle(){}
-
-    protected void animationThreat(){}
-
-    protected void animationEat(){}
-
-    protected void animationAttack(){}
 
     /*protected void animationFly(){
         this.haed.rotateAngleY = f3 / (180f / (float) Math.PI);
@@ -181,8 +166,4 @@ public class EonsMazothairosModel<T extends Entity> extends EonsEntityModel<T> {
         this.RWING2.rotateAngleZ = MathHelper. cos( f * -1.0F) * 1.0F * f1;
         this.RWING3.rotateAngleZ = MathHelper. cos( f * -1.0F) * 1.0F * f1;
     }*/
-
-    protected void animationJump(){}
-
-    protected void animationClimb(){}
 }

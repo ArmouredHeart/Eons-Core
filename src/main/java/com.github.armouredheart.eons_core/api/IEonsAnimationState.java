@@ -22,6 +22,5 @@ public interface IEonsAnimationState {
     public EonsAnimationState getState();
 
     /** */
-    @OnlyIn(Dist.CLIENT)
     public void setState(EonsAnimationState state);
 }   

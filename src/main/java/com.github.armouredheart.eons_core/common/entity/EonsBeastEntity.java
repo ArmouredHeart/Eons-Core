@@ -17,6 +17,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.DamageSource;
 import net.minecraft.nbt.CompoundNBT;
 
 
@@ -51,6 +52,8 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    private final EonsDiet diet;
    private final boolean isNocturnal;
    private EonsSex sex;
+   private double threatFactor = 1.0D;
+   private double resolveFactor = 1.0D;
 
    // *** Constructors ***
 
@@ -69,6 +72,8 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       this.diet = diet;
       this.sex = new EonsSex(this, sexRatio);
       this.isNocturnal = isNocturnal;
+      this.setCanPickUpLoot(true);
+      this.state = null;
    }
 
    /** Default Settings EonsBeast constructor*/
@@ -80,17 +85,22 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 
    /** */
    @Override
+   public void tick() {
+      super.tick();
+      // do some stuff here maybe?
+   }
+
+   /** */
+   @Override
    protected void registerAttributes() {
       super.registerAttributes();
       this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
    }
 
    /** */
-   @OnlyIn(Dist.CLIENT)
    public EonsAnimationState getState() {return this.state;}
 
    /** */
-   @OnlyIn(Dist.CLIENT)
    public void setState(EonsAnimationState state) {this.state = state;}
 
    /** */
@@ -98,7 +108,6 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
       return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
    }
-
 
    /**
    * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
@@ -113,25 +122,12 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    public EonsDiet getDiet() {return this.diet;}
 
    /** */
-   public boolean isWounded() {
-      if(this.getHealthPercentage() > 0.4D) {
-         return false;
-      } else {
-         return true;
-      }
-   }
-
-   /** */
-   public void setRested() {
-      // give regeneration if not hungry
-   }
+   public boolean isWounded() {return IEonsBeast.testForWounds(this, 0.4D, false);}
 
    public boolean shouldSleep() {return false;}
 
    /** */
-   public boolean isNocturnal() {
-      return this.isNocturnal;
-   }
+   public boolean isNocturnal() {return this.isNocturnal;}
 
    /** */
    protected void registerEonsBeastGoals() {}
@@ -149,12 +145,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       return this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue();
    }
 
-   /** */
-   protected double getHealthPercentage() {
-      double maxHP = this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getValue();
-      double currentHP = this.getHealth();
-      return (double) currentHP/maxHP;
-   }
+
 
    /** @return EonsFieldNotes object containing educational notes about lifeform.*/
    public EonsFieldNotes getFieldNotes() {
@@ -185,15 +176,15 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 	}
    
    /** Calculated using remaining HP, Personality and Attack damage plus threatBoost.*/
-   public int getThreat() {
-      int threatFactor = 0;
-      return (int) this.getHealth()*threatFactor;
-   }
+   public int getThreat() {return (int) (this.getHealth() * this.threatFactor * this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue() / this.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).getValue());}
 
    /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
-   public int getResolve() {
-      int resolveFactor = 0;
-      return (int) this.getHealth()*resolveFactor;
+   public int getResolve() {return (int) (this.getHealth()*this.resolveFactor);}
+
+   /** */
+   protected void setThreatFactorResolveFactor(double threatFactor, double resolveFactor) {
+      this.threatFactor = threatFactor;
+      this.resolveFactor = resolveFactor;
    }
 
    /** */
@@ -202,18 +193,4 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    /** */
    public boolean isFemale() {return this.sex.isFemale();}
 
-   /** */
-   //public boolean isEnraged();
-
-   /** */
-   //protected boolean setEnraged();
-
-   /** */
-   //protected boolean setCalm();
-
-   /** Checks if beast becomes enraged.*/
-   //protected boolean rageCheck();
-
-   /** Checks if beast calms down.*/
-   //protected boolean calmCheck();
 }

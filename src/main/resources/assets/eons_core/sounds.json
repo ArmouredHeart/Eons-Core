@@ -32,7 +32,7 @@
         "sounds": [
             {
                 "name": "eons_core:arthropod/marine_arthropod_crawling",
-                "stream": false
+                "stream": true
             }
         ]
 

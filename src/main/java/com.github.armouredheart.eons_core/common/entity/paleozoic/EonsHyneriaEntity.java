@@ -20,7 +20,7 @@ public class EonsHyneriaEntity extends EonsBigFishEntity {
     // *** Constructors ***
     
     /** */
-    public EonsHyneriaEntity(final EntityType<? extends EonsHyneriaEntity> type, final World world) {
+    public EonsHyneriaEntity(final EntityType<? extends EonsBigFishEntity> type, final World world) {
         super(type, world, null);
     }
     

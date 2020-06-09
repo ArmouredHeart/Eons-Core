@@ -8,13 +8,19 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
 import net.minecraft.item.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.block.BlockState;
 
 // Forge imports
 
 // Eons imports
+import com.github.armouredheart.eons_core.init.EonsSounds;
 import com.github.armouredheart.eons_core.common.entity.EonsBigFishEntity;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes; 
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
+import com.github.armouredheart.eons_core.client.EonsAnimationState;
 
 // misc imports
 
@@ -44,5 +50,10 @@ public class EonsAnomalocarisEntity extends EonsBigFishEntity {
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7D);
         this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return EonsSounds.CRACK;
     }
 }

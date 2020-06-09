@@ -24,6 +24,7 @@ import net.minecraft.nbt.CompoundNBT;
 // Forge imports
 
 // Eons imports
+import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 
 // misc imports
@@ -69,20 +70,7 @@ public abstract class EonsBeastMultiPartEntity extends EonsBeastEntity {
 
     /** */
     @Override
-    public boolean isWounded() {
-        if(this.shellBroken && !(this.getHealthPercentage() > 0.70D)) {
-            return true;
-        } else {
-            return super.isWounded();
-        }
-    }
-
-    /** */
-    @Override
-    public void setRested() {
-        this.restoreShell();
-        super.setRested();
-    }
+    public boolean isWounded() {return IEonsBeast.testForWounds(this, 0.7D, this.shellBroken);}
 
     /** */
     private void restoreShell() {

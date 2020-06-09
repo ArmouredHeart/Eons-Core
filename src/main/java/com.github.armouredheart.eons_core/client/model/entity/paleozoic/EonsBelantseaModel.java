@@ -12,12 +12,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
 import com.github.armouredheart.eons_core.client.model.entity.EonsEntityModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsBelantseaEntity;
 
 // misc imports
 import com.mojang.blaze3d.platform.GlStateManager;
 
 @OnlyIn(Dist.CLIENT)
-public class EonsBelantseaModel<T extends Entity> extends EonsEntityModel<T> {
+public class EonsBelantseaModel<T extends EonsBelantseaEntity> extends EonsEntityModel<T> {
     public RendererModel body;
     public RendererModel tail1;
     public RendererModel head;
@@ -91,7 +92,7 @@ public class EonsBelantseaModel<T extends Entity> extends EonsEntityModel<T> {
     // *** Methods ***
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         GlStateManager.pushMatrix();
         GlStateManager.translatef(this.body.offsetX, this.body.offsetY, this.body.offsetZ);
         GlStateManager.translatef(this.body.rotationPointX * f5, this.body.rotationPointY * f5, this.body.rotationPointZ * f5);

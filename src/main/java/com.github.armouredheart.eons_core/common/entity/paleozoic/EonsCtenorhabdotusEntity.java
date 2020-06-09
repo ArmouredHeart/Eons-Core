@@ -20,7 +20,7 @@ public class EonsCtenorhabdotusEntity extends EonsJellyfishEntity {
     // *** Constructors ***
     
     /** */
-    public EonsCtenorhabdotusEntity(final EntityType<? extends EonsCtenorhabdotusEntity> type, final World world) {
+    public EonsCtenorhabdotusEntity(final EntityType<? extends EonsJellyfishEntity> type, final World world) {
         super(type, world, null, -1, 1);
 
     }

@@ -31,7 +31,8 @@ public final class EonsSounds {
 
     // misc
     public static final SoundEvent ZAP = createSoundEvent("misc.zap");
-    
+    public static final SoundEvent CRACK= createSoundEvent("misc.crack");
+
     // arthropod
     public static final SoundEvent MARINE_ARTHROPOD_CRAWLING = createSoundEvent("arthropod.marine_arthropod_crawling");
 

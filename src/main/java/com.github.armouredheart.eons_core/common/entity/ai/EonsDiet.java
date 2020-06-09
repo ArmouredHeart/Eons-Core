@@ -32,6 +32,8 @@ public class EonsDiet extends Inventory {
     private final List<Item> favouriteFoodsInOrder;
     private final List<LivingEntity> prey;
     private final EonsPreyType preyType;
+    private int metabolismTimer;
+    private static final int dayLengthTicks = 24000; // fixed value, make this a calculated value in the future if variable day length
 
     // *** Constructors ***
 
@@ -42,13 +44,14 @@ public class EonsDiet extends Inventory {
     * @param prey
     * @param favouriteFoodsInOrder
     */
-    private EonsDiet(int stomachSize, boolean isPredator, boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<LivingEntity> prey, @Nullable List<Item> favouriteFoodsInOrder) {
+    public EonsDiet(int stomachSize, boolean isPredator, boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<LivingEntity> prey, @Nullable List<Item> favouriteFoodsInOrder) {
         super(stomachSize);
         this.prey = prey;
         this.favouriteFoodsInOrder = favouriteFoodsInOrder;
         this.isPredator = isPredator;
         this.isOmnivore = isOmnivore;
         this.preyType = preyType;
+        this.metabolismTimer = 0;
     }
 
     /** Construct generalist hunting diet */
@@ -67,6 +70,35 @@ public class EonsDiet extends Inventory {
     }
 
     // *** Methods ***
+
+    /** */
+    public void tick() {
+        ++this.metabolismTimer;
+        if(this.metabolismTimer > dayLengthTicks) {
+            if(this.digestFood()) {
+                this.metabolismTimer = 0;
+            }
+        }
+    }
+
+    /** Return false if there is no food to digest. */
+    public boolean digestFood() {
+        // don't bother if starving
+        if(!this.isStarving) {
+
+            // search for food in stomach
+            for (int i = 0; i < this.getSizeInventory(); i++) {
+                // try to digest
+                ItemStack foodStack = decrStackSize(i, 1); 
+                if(!foodStack.isEmpty()) {
+                    // digestion successful!
+                    this.updateStomach();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /** This method should be called when the stomach inventory is changed. */
     public void updateStomach() {
@@ -99,12 +131,17 @@ public class EonsDiet extends Inventory {
     public ItemStack addItem(ItemStack stack) {
         if(isEdible(stack.getItem())) {
             // eat item
-            return super.addItem(stack);
+            ItemStack foodIn = super.addItem(stack);
+            this.updateStomach();
+            return foodIn;
         } else {
             // item is not edible
             return stack;
         }
     }
+
+    /** */
+    public boolean hasFavouredPrey() {return this.prey != null;}
 
     /** */
     public boolean isHungry() {return this.isHungry;}
@@ -126,17 +163,24 @@ public class EonsDiet extends Inventory {
 
     /** */
     public boolean isPredator() {return this.isPredator;}
-    
+
     /** */
     public boolean isPrey(LivingEntity creature) {
-        if(this.isPredator) {
-            if(this.prey == null && this.preyType != null) {
-                return this.preyType.isPrey(creature);
-            } else if(this.prey != null && this.preyType == null) {
-                return this.prey.contains(creature);
-            }
-        }
-        return false;
+        if(this.isPredator) {return isFavouredPrey(creature) || isAcceptablePrey(creature);} else {return false;}
+    }
+
+    /** */
+    public boolean isAcceptablePrey(LivingEntity creature) {
+        if(this.preyType != null) {
+            return this.preyType.isPrey(creature);
+        } else {return false;}
+    }
+
+    /** */
+    public boolean isFavouredPrey(LivingEntity creature) {
+        if(this.prey != null) {
+            return this.prey.contains(creature);
+        } else {return false;}
     }
 
     /** @return item wanted most */

@@ -30,7 +30,7 @@ public class EonsSpathicephalusEntity extends EonsAmphibianEntity {
     // *** Constructors ***
     
     /** */
-    public EonsSpathicephalusEntity(final EntityType<? extends EonsSpathicephalusEntity> type, final World world) {
+    public EonsSpathicephalusEntity(final EntityType<? extends EonsAmphibianEntity> type, final World world) {
         super(type, world, FIELDNOTES, DIET, 50, false);
     }
     
@@ -40,7 +40,7 @@ public class EonsSpathicephalusEntity extends EonsAmphibianEntity {
     @Override
     protected void registerAttributes() {
         super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
+        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2.0D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
     }
 

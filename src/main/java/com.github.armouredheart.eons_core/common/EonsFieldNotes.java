@@ -21,12 +21,8 @@ public class EonsFieldNotes implements IEonsFieldNotes {
 
     /** domain, kingdom, phylum, taxaClass, order, family, genus, species*/
     public EonsFieldNotes(String domain, String kingdom, String phylum, String taxaClass, String order, String family,
-        String genus, String species, String biography, EonsPeriod period){
-        //
-
-        //
-        this.taxanomy = new String[]{domain, kingdom, phylum, taxaClass, order, family, genus, species};
-        this.biography = biography;
+        String genus, String species, String clade, String biography, EonsPeriod period){
+        this(new String[]{domain, kingdom, phylum, taxaClass, order, family, genus, species}, clade, biography, period);
     }
 
     /** */

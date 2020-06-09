@@ -20,7 +20,7 @@ public class EonsAraxocerasEntity extends EonsCephalopodEntity {
     // *** Constructors ***
     
     /** */
-    public EonsAraxocerasEntity(final EntityType<? extends EonsAraxocerasEntity> type, final World world) {
+    public EonsAraxocerasEntity(final EntityType<? extends EonsCephalopodEntity> type, final World world) {
         super(type, world, null);
 
     }

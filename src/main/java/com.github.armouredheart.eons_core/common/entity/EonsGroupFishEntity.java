@@ -14,6 +14,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.nbt.CompoundNBT;
 
@@ -21,8 +22,12 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
+import com.github.armouredheart.eons_core.client.EonsAnimationState;
+import com.github.armouredheart.eons_core.api.IEonsAnimationState;
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
@@ -31,10 +36,11 @@ import com.github.armouredheart.eons_core.common.entity.ai.EonsSex;
 // misc imports
 import javax.annotation.Nullable;
 
-public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implements IEonsLifeForm, IEonsSexuallyDimorphic {
+public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implements IEonsLifeForm, IEonsSexuallyDimorphic, IEonsAnimationState {
 
 	// *** Attributes ***
 	private final EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
+	private EonsAnimationState state;
 	private EonsSex sex;
 
 	// *** Constructors ***
@@ -49,6 +55,7 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 		super(type, world);
 		this.fieldNotes = fieldNotes;
         this.sex = new EonsSex(this, sexRatio);
+		this.state = null;
 	}
 
 	/** */
@@ -57,6 +64,12 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	}
 
     // *** Methods ***
+
+    /** */
+    public EonsAnimationState getState() {return this.state;}
+
+    /** */
+    public void setState(EonsAnimationState state) {this.state = state;}
 	
 	/** */
 	@Override
@@ -96,6 +109,6 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return null;}
 
     @Override
-    protected SoundEvent getFlopSound() {return null;}
+    protected SoundEvent getFlopSound() {return SoundEvents.ENTITY_SALMON_FLOP;}
 
 }

@@ -12,15 +12,16 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
 import com.github.armouredheart.eons_core.client.model.entity.EonsEntityModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsParadoxidesEntity;
 
 // misc imports
 import com.mojang.blaze3d.platform.GlStateManager;
 
 /**
- * Paradoxides - Accentaur
+ * Paradoxides - Accentaur, ArmouredHeart
  * Created using Tabula 7.0.0
  */
-public class EonsParadoxidesModel<T extends Entity> extends EonsEntityModel<T> {
+public class EonsParadoxidesModel<T extends EonsParadoxidesEntity> extends EonsEntityModel<T> {
     // *** Attributes ***
     public RendererModel body;
     public RendererModel head;
@@ -323,8 +324,9 @@ public class EonsParadoxidesModel<T extends Entity> extends EonsEntityModel<T> {
         this.torso.addChild(this.rlegs2);
     }
 	// *** Methods ***
+    
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         GlStateManager.pushMatrix();
         GlStateManager.translatef(this.body.offsetX, this.body.offsetY, this.body.offsetZ);
         GlStateManager.translatef(this.body.rotationPointX * f5, this.body.rotationPointY * f5, this.body.rotationPointZ * f5);
@@ -335,7 +337,8 @@ public class EonsParadoxidesModel<T extends Entity> extends EonsEntityModel<T> {
         GlStateManager.popMatrix();
     }
 
-    protected void animationWalk(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    @Override
+    protected void animationWalk(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.torso.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
         this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
         this.head.rotateAngleX = f4 / (180F / (float) Math.PI);

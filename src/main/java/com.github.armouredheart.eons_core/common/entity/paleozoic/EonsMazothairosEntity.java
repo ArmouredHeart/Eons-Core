@@ -2,10 +2,12 @@
 package com.github.armouredheart.eons_core.common.entity.paleozoic;
 
 // Minecraft imports
+import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
 import net.minecraft.item.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 
 // Forge imports
 
@@ -27,9 +29,13 @@ public class EonsMazothairosEntity extends EonsArthropodEntity {
     // *** Constructors ***
     
     /** */
-    public EonsMazothairosEntity(final EntityType<? extends EonsMazothairosEntity> type, final World world) {
+    public EonsMazothairosEntity(final EntityType<? extends EonsArthropodEntity> type, final World world) {
         super(type, world, FIELDNOTES, DIET, 50, false);
     }
     
     // *** Methods ***
+
+    /** */
+    @Override
+    public CreatureAttribute getCreatureAttribute() {return CreatureAttribute.ARTHROPOD;}
 }
