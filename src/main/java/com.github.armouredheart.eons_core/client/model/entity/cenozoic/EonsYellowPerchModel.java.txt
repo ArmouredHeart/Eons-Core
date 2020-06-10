@@ -12,6 +12,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
 import com.github.armouredheart.eons_core.client.model.entity.EonsEntityModel;
+import com.github.armouredheart.eons_core.common.entity.cenozoic.EonsYellowPerchEntity;
 
 // misc imports
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -20,7 +21,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
  * Created using Tabula 7.1.0
  */
 @OnlyIn(Dist.CLIENT)
-public class EonsYellowPerchModel<T extends Entity> extends EonsEntityModel<T> {
+public class EonsYellowPerchModel<T extends EonsYellowPerchEntity> extends EonsEntityModel<T> {
 // *** Attributes ***
     public RendererModel shape1;
     public RendererModel shape2;

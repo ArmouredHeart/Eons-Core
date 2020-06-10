@@ -32,7 +32,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.IEonsAnimationState;
-import com.github.armouredheart.eons_core.client.EonsAnimationState;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsSex;
@@ -47,7 +46,6 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 
    // *** Attributes ***
    private static final Logger LOGGER = LogManager.getLogger(EonsCore.MOD_ID + " EonsBeastEntity");
-   private EonsAnimationState state;
    private final EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
    private final EonsDiet diet;
    private final boolean isNocturnal;
@@ -73,7 +71,6 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       this.sex = new EonsSex(this, sexRatio);
       this.isNocturnal = isNocturnal;
       this.setCanPickUpLoot(true);
-      this.state = null;
    }
 
    /** Default Settings EonsBeast constructor*/
@@ -96,12 +93,6 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       super.registerAttributes();
       this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
    }
-
-   /** */
-   public EonsAnimationState getState() {return this.state;}
-
-   /** */
-   public void setState(EonsAnimationState state) {this.state = state;}
 
    /** */
    @Nullable
@@ -192,5 +183,13 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 
    /** */
    public boolean isFemale() {return this.sex.isFemale();}
+
+   /** */
+	@Override
+   public boolean isSwimming() {return this.handleWaterMovement();}
+
+   /** */
+	@Override
+   public boolean isWalking() {return this.onGround;}
 
 }

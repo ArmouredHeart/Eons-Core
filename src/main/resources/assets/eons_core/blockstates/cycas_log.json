@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "block/core/cycas_log" }
+        "": { "model": "eons_core:block/core/cycas_tree/cycas_log" }
     }
 }

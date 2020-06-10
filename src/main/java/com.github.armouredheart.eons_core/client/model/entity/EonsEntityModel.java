@@ -18,7 +18,7 @@ import com.github.armouredheart.eons_core.client.EonsAnimationState;
 // misc imports
 
 @OnlyIn(Dist.CLIENT)
-public abstract class EonsEntityModel<T extends Entity> extends EntityModel<T> {
+public abstract class EonsEntityModel<T extends Entity & IEonsAnimationState> extends EntityModel<T> {
     
     // *** Attributes ***
     private float partialTicks;
@@ -26,21 +26,19 @@ public abstract class EonsEntityModel<T extends Entity> extends EntityModel<T> {
 
     // *** Methods ***  
 
-    /** 
-    @Override
-    public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
-        super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
-        this.partialTicks = partialTick;
-    }*/
-
     /** */
     @Override
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
         super.setRotationAngles(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
-        if(entityIn instanceof IEonsAnimationState) {
-            EonsAnimationState state = ((IEonsAnimationState) entityIn).getState();
-            if(state != null) {this.doAnimations(state, entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
-        }
+        // movement render
+        if(entityIn.isSprinting()){this.animationRun(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
+        else if(entityIn.isSneaking()){this.animationSneak(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
+        else if(entityIn.isSwimming()){this.animationSwim(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
+        else if(entityIn.isWalking()) {this.animationWalk(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
+
+        // do animations
+        //this.doMovementAnimations(movingState, entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+        //this.doActionAnimations(actionState, entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
     }
 
     /**
@@ -53,21 +51,27 @@ public abstract class EonsEntityModel<T extends Entity> extends EntityModel<T> {
     }
 
     /** This is called in the living animations tick, and performs the animation matching the defined state in the enitity. */
-    public void doAnimations(EonsAnimationState state, T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void doMovementAnimations(EonsAnimationState state, T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         switch(state) {
             case FLYING: {this.animationFly(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
             case SWIMMING: {this.animationSwim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
             case IDLE: {this.animationIdle(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
             case WALKING: {this.animationWalk(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
-            case RUNNING: {this.animationRun(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case RUNNING: { break;}
             case SNEAKING: {this.animationSneak(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
             case CLIMBING: {this.animationClimb(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
             case POUNCING: {this.animationPounce(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
-            case EATING: {this.animationEat(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
             case SLEEPING: {this.animationSleep(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+            case ON_SHOULDER: {this.animationOnShoulder(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
+        }
+    }
+
+    /** This is called in the living animations tick, and performs the animation matching the defined state in the enitity. */
+    public void doActionAnimations(EonsAnimationState state, T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        switch(state) {
+            case EATING: {this.animationEat(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
             case ATTACKING: {this.animationAttack(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
             case THREATENING: {this.animationThreat(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
-            case ON_SHOULDER: {this.animationOnShoulder(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale); break;}
         }
     }
     

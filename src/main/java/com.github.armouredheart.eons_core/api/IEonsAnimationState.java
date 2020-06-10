@@ -17,10 +17,10 @@ public interface IEonsAnimationState {
 
     // *** Methods ***
 
-    /** */
-    @OnlyIn(Dist.CLIENT)
-    public EonsAnimationState getState();
-
-    /** */
-    public void setState(EonsAnimationState state);
+    //
+    public boolean isSprinting();
+    public boolean isSneaking();
+    public boolean isSwimming();
+    default boolean isWalking() {return false;}
+        
 }   

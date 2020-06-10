@@ -32,10 +32,13 @@ public interface IEonsBeast extends IEonsLifeForm {
     // *** Methods ***
 
     /** @return true if beast1 should run away from entity2, and false if it should not. */
-    public static <T extends IEonsBeast> boolean shouldRunAwayFrom(T beast1, LivingEntity entity2) {
-        int threatRatio = getThreatRatio(beast1, entity2);
-        return !resolveCheck(beast1, threatRatio);
+    default boolean shouldRunAwayFrom(LivingEntity entity2) {
+        int threatRatio = getThreatRatio(this, entity2);
+        return !resolveCheck(this, threatRatio);
     }
+
+    /** */
+    default @Nullable LivingEntity getLeastThreatening(List<LivingEntity> entityList) {return getLeastThreatening(this, entityList);}
 
     /** */
     public static <T extends IEonsBeast> @Nullable LivingEntity getLeastThreatening(T beast1, List<LivingEntity> entityList) {
@@ -51,6 +54,9 @@ public interface IEonsBeast extends IEonsLifeForm {
             return wimp;
         } else {return null;}
     }
+
+    /** */
+    default int getThreatRatio(LivingEntity entity) {return getThreatRatio(this, entity);}
 
     /** */
     public static int getThreatRatio(IEonsBeast beast1, LivingEntity entity2) {

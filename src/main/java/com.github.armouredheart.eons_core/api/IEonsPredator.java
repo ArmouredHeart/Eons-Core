@@ -3,6 +3,9 @@ package com.github.armouredheart.eons_core.api;
 
 // Minecraft imports
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.EntityPredicates;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Entity;
 
 // Forge imports
 
@@ -14,13 +17,31 @@ import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import java.util.List;
 import java.util.ArrayList;
 import javax.annotation.Nullable;
+import java.util.function.Predicate;
 
-public interface IEonsPredator {
+public interface IEonsPredator extends IEonsBeast {
 
     // *** Methods ***
 
+    /** 
+    * @return true if prey target is found
+    * TODO Not elegant, can be improved in the future
+    */
+    default <P extends MobEntity & IEonsPredator> boolean scanForPreyTarget(P predator, double boundingBoxX, double boundingBoxY) {
+        List<Entity> entities = predator.world.getEntitiesInAABBexcluding(predator, predator.getBoundingBox().grow(boundingBoxX, boundingBoxY, boundingBoxX), null);
+        List<LivingEntity> living = new ArrayList<>();
+        for(Entity entity : entities) {
+            if(entity instanceof LivingEntity) {
+                LivingEntity alive = (LivingEntity)entity;
+                living.add(alive);
+            }
+        }
+        predator.setAttackTarget(choosePreyTarget(predator, living));
+        return predator.getAttackTarget() != null;
+    }
+
     /** */
-    public static <P extends IEonsPredator, B extends IEonsPredator & IEonsBeast> @Nullable LivingEntity choosePreyTarget(P predator, List<LivingEntity> creatures) {
+    default <P extends MobEntity & IEonsPredator> @Nullable LivingEntity choosePreyTarget(P predator, List<LivingEntity> creatures) {
         List<LivingEntity> preyList = new ArrayList<>();
         LivingEntity target = null;
         EonsDiet diet = predator.getDiet();
@@ -45,21 +66,11 @@ public interface IEonsPredator {
             }
 
             if(!preyList.isEmpty()) {
-                // predator extends IEonsBeast?
-                if(predator instanceof IEonsBeast) {
-                    B beast = (B) predator;
-                    target = IEonsBeast.getLeastThreatening(beast, preyList);
-                } else {
-                    // otherwise just pick the first entity in the array
-                    target = preyList.get(0);
-                }
+                target = predator.getLeastThreatening(preyList);
             } else {
                 target = null;
             }
         }
         return target;
     }
-
-    /** */
-    public EonsDiet getDiet();
 }

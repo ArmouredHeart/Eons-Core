@@ -1,9 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"texture_size": [100, 100],
-	"textures": {
-		"1": "eons_core:block/core/cycas_tree/cycas_leaves"
-	},
+	"textures": {"1": "eons_core:block/core/cycas_tree/cycas_leaves_no_seeds"},
 	"elements": [
 		{
 			"from": [7.5, -1.1, -10.9],

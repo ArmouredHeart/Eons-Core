@@ -10,22 +10,44 @@ import net.minecraftforge.common.extensions.IForgeEntity;
 // Eons imports
 
 // misc imports
+import javax.annotation.Nullable;
 
-public interface IEonsFlocking<T extends CreatureEntity & IEonsFlocking>{
-
-    // *** Attributes ***
-
+public interface IEonsFlocking<T extends CreatureEntity & IEonsFlocking> {
     // *** Methods ***
-    public T getGroupLeader();
+    
+    /** */
+    default boolean canGroupGrow() {return this.getGroupSize() < this.getMaxGroupSize();}
+
+    /** */
+    default void leaveGroup() {this.setGroupSize(0); this.setGroupLeader(null);}
+
+    /** Use this instead of `setGroupSize`. */
+    default void increaseGroupSize() {
+        int size = this.getGroupSize();
+        int maxSize = this.getMaxGroupSize();
+        if(size < maxSize) {
+            this.setGroupSize(size + 1);
+        } else {
+            this.setGroupSize(maxSize);
+        }
+    }
+
+    /** Use this instead of `setGroupSize`. */
+    default void decreaseGroupSize() {
+        int size = this.getGroupSize();
+        if(size > 0) {
+            this.setGroupSize(size - 1);
+        } else {
+            this.setGroupSize(0);
+        }
+    }
+
+    public @Nullable T getGroupLeader();
     public boolean hasGroupLeader();
     public boolean isGroupLeader();
-    public boolean canGroupGrow();
     public boolean inRangeOfGroupLeader();
-    public void leaveGroup();
     public int getGroupSize();
+    public int setGroupSize(int size);
     public int getMaxGroupSize();
-
-    public void increaseGroupSize();
-    public void decreaseGroupSize();
-    public void setGroupLeader(T newLeader);
+    public void setGroupLeader(@Nullable T newLeader);
 }

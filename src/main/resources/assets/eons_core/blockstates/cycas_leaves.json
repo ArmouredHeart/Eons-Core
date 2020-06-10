@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "age=0": { "model": "eons_core:block/core/cycas_tree/cycas_leaves_no_seeds" },
+        "age=1": { "model": "eons_core:block/core/cycas_tree/cycas_leaves_no_seeds" },
+        "age=2": { "model": "eons_core:block/core/cycas_tree/cycas_leaves_with_seeds" },
+        "age=3": { "model": "eons_core:block/core/cycas_tree/cycas_leaves_with_seeds" }
+    }
+}

@@ -41,7 +41,6 @@ import javax.annotation.Nullable;
 public abstract class EonsBigFishEntity extends AbstractFishEntity implements IEonsBeast, IEonsSexuallyDimorphic, IEonsAnimationState {
     // *** Attributes ***
     private EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
-    private EonsAnimationState state;
     private EonsSex sex;
     private final EonsDiet diet;
     private final boolean isNocturnal;
@@ -64,7 +63,6 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
         this.sex = new EonsSex(this, sexRatio);
         this.isNocturnal = isNocturnal;
         this.setCanPickUpLoot(true);
-        this.state = null;
     }
 
     /** */
@@ -73,12 +71,6 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     }
 
     // *** Methods ***
-
-    /** */
-    public EonsAnimationState getState() {return this.state;}
-
-    /** */
-    public void setState(EonsAnimationState state) {this.state = state;}
 
     @Override
     protected void registerAttributes() {
@@ -143,5 +135,9 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
 
     /** */
     public boolean isWounded() {return IEonsBeast.testForWounds(this, 0.4D, false);}
+
+    /** */
+	@Override
+    public boolean isSwimming() {return this.inWater;}
 
 }

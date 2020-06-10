@@ -26,7 +26,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
-import com.github.armouredheart.eons_core.client.EonsAnimationState;
 import com.github.armouredheart.eons_core.api.IEonsAnimationState;
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
@@ -40,7 +39,6 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 
 	// *** Attributes ***
 	private final EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
-	private EonsAnimationState state;
 	private EonsSex sex;
 
 	// *** Constructors ***
@@ -55,7 +53,6 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 		super(type, world);
 		this.fieldNotes = fieldNotes;
         this.sex = new EonsSex(this, sexRatio);
-		this.state = null;
 	}
 
 	/** */
@@ -64,12 +61,6 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	}
 
     // *** Methods ***
-
-    /** */
-    public EonsAnimationState getState() {return this.state;}
-
-    /** */
-    public void setState(EonsAnimationState state) {this.state = state;}
 	
 	/** */
 	@Override
@@ -110,5 +101,9 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 
     @Override
     protected SoundEvent getFlopSound() {return SoundEvents.ENTITY_SALMON_FLOP;}
+
+	//
+	@Override
+    public boolean isSwimming() {return this.inWater;}
 
 }

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [36, 32],
 	"textures": {
-		"0": "Downloads/Chancelloriidae ",
-		"particle": "Downloads/Chancelloriidae "
+		"0": "eons_core:block/paleozoic/chancelloriidae/chancelloriidae",
+		"particle": "eons_core:block/paleozoic/chancelloriidae/chancelloriidae"
 	},
 	"elements": [
 		{

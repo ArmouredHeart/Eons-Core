@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "block textures/siphusauctum",
-		"particle": "block textures/siphusauctum"
+		"0": "eons_core:block/paleozoic/siphusauctum/siphusauctum",
+		"particle": "eons_core:block/paleozoic/siphusauctum/siphusauctum"
 	},
 	"elements": [
 		{

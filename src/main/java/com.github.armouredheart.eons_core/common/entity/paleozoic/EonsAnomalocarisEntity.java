@@ -4,6 +4,7 @@ package com.github.armouredheart.eons_core.common.entity.paleozoic;
 // Minecraft imports
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
 import net.minecraft.item.Items;
@@ -16,18 +17,25 @@ import net.minecraft.block.BlockState;
 // Forge imports
 
 // Eons imports
+import com.github.armouredheart.eons_core.common.entity.ai.EonsFightPreyGoal;
 import com.github.armouredheart.eons_core.init.EonsSounds;
+import com.github.armouredheart.eons_core.init.EonsEntityTypes;
 import com.github.armouredheart.eons_core.common.entity.EonsBigFishEntity;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes; 
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import com.github.armouredheart.eons_core.client.EonsAnimationState;
+import com.github.armouredheart.eons_core.api.IEonsPredator;
 
 // misc imports
+import java.util.ArrayList;
+import java.util.List;
 
-public class EonsAnomalocarisEntity extends EonsBigFishEntity {
+public class EonsAnomalocarisEntity extends EonsBigFishEntity implements IEonsPredator {
     // *** Attributes ***
     private static final EonsFieldNotes FIELDNOTES = null;
-    private static final EonsDiet DIET = new EonsDiet(4, false, null);
+    private static final ArrayList<LivingEntity> preyList = new ArrayList<>();
+
+    private static final EonsDiet DIET = new EonsDiet(5, false, EonsDiet.EonsPreyType.WATER, null);
 
     // *** Constructors ***
     
@@ -37,6 +45,13 @@ public class EonsAnomalocarisEntity extends EonsBigFishEntity {
     }
 
     // *** Methods ***
+
+    /** */
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(1, new EonsFightPreyGoal(this, 5, 1.25F, false, 5));
+    }
 
     /** */
     @Override

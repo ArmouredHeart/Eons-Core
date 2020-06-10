@@ -17,6 +17,7 @@ import net.minecraft.block.Block;
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
 import net.minecraft.block.LogBlock;
+import com.github.armouredheart.eons_core.common.block.*;
 
 // misc imports
 import java.util.function.Supplier;
@@ -35,8 +36,11 @@ public final class EonsBlocks {
     public static final RegistryObject<Block> STRIPPED_CYCAS_LOG = registerBlock("stripped_cycas_log", () -> new LogBlock(MaterialColor.WOOD, Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> CYCAS_WOOD = registerBlock("cycas_wood", () -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> CYCAS_PLANKS = registerBlock("cycas_planks", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> CYCAS_LEAVES = registerBlock("cycas_leaves", () -> new EonsFruitingLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
 
     // Paleozoic
+    public static final RegistryObject<Block> DIRAPHORA_NISUIA = registerBlock("diraphora_nisusia", () -> new EonsSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), null));
+    public static final RegistryObject<Block> MARGARETIA = registerBlock("margaretia", () -> new EonsSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), null));
 
     // *** Methods ***
 

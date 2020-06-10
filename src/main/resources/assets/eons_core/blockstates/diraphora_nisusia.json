@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "waterlogged=false": { "model": "eons_core:block/paleozoic/diraphora_nisusia/diraphora_nisusia" },
+        "waterlogged=true": { "model": "eons_core:block/paleozoic/diraphora_nisusia/diraphora_nisusia" }
+    }
+}
