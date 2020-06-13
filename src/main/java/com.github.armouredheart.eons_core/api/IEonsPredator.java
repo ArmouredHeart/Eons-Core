@@ -19,16 +19,20 @@ import java.util.ArrayList;
 import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
-public interface IEonsPredator extends IEonsBeast {
-
+public interface IEonsPredator<P extends MobEntity & IEonsPredator> extends IEonsBeast {
     // *** Methods ***
+
+    /** Call this every tick in a predator. */
+    default void predatorTick(P predator, double scanRangeX, double scanRangeY) {
+        if(predator.getDiet().isHungry()){scanForPreyTarget(predator, scanRangeX, scanRangeY);}
+    }
 
     /** 
     * @return true if prey target is found
     * TODO Not elegant, can be improved in the future
     */
-    default <P extends MobEntity & IEonsPredator> boolean scanForPreyTarget(P predator, double boundingBoxX, double boundingBoxY) {
-        List<Entity> entities = predator.world.getEntitiesInAABBexcluding(predator, predator.getBoundingBox().grow(boundingBoxX, boundingBoxY, boundingBoxX), null);
+    default boolean scanForPreyTarget(P predator, double scanRangeX, double scanRangeY) {
+        List<Entity> entities = predator.world.getEntitiesInAABBexcluding(predator, predator.getBoundingBox().grow(scanRangeX, scanRangeY, scanRangeX), null);
         List<LivingEntity> living = new ArrayList<>();
         for(Entity entity : entities) {
             if(entity instanceof LivingEntity) {
@@ -36,12 +40,13 @@ public interface IEonsPredator extends IEonsBeast {
                 living.add(alive);
             }
         }
-        predator.setAttackTarget(choosePreyTarget(predator, living));
+        LivingEntity prey = choosePreyTarget(predator, living);
+        predator.setAttackTarget(prey);
         return predator.getAttackTarget() != null;
     }
 
     /** */
-    default <P extends MobEntity & IEonsPredator> @Nullable LivingEntity choosePreyTarget(P predator, List<LivingEntity> creatures) {
+    default @Nullable LivingEntity choosePreyTarget(P predator, List<LivingEntity> creatures) {
         List<LivingEntity> preyList = new ArrayList<>();
         LivingEntity target = null;
         EonsDiet diet = predator.getDiet();

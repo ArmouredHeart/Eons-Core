@@ -26,6 +26,12 @@ public abstract class EonsEntityModel<T extends Entity & IEonsAnimationState> ex
 
     // *** Methods ***  
 
+    @Override
+    public void render(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) { 
+        super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+        this.animationBreathing(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+    }
+
     /** */
     @Override
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
@@ -34,7 +40,7 @@ public abstract class EonsEntityModel<T extends Entity & IEonsAnimationState> ex
         if(entityIn.isSprinting()){this.animationRun(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
         else if(entityIn.isSneaking()){this.animationSneak(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
         else if(entityIn.isSwimming()){this.animationSwim(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
-        else if(entityIn.isWalking()) {this.animationWalk(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
+        else {this.animationWalk(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);}
 
         // do animations
         //this.doMovementAnimations(movingState, entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
@@ -89,5 +95,5 @@ public abstract class EonsEntityModel<T extends Entity & IEonsAnimationState> ex
     protected void animationClimb(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
     protected void animationOnShoulder(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
     protected void animationSleep(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
-
+    protected void animationBreathing(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {}
 }

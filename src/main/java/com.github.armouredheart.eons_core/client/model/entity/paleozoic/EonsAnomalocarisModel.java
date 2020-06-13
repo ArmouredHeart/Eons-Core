@@ -272,14 +272,13 @@ public class EonsAnomalocarisModel<T extends EonsAnomalocarisEntity> extends Eon
 	// *** Methods ***
 
     @Override
-    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        super.render(entity, f, f1, f2, f3, f4, f5);
         this.body.render(f5);
     }
 
     @Override
-    protected void animationSwim(T entity, float f, float f1, float f2, float f3, float f4, float f5){
-        this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
-        this.head.rotateAngleX = f4 / (180F / (float) Math.PI);
+    protected void animationBreathing(T entity, float f, float f1, float f2, float f3, float f4, float f5){
         this.wingR2.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
         this.wingR1.rotateAngleZ = MathHelper.cos(f * 1.0F) * 1.0F * f1;
         this.wingR6.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
@@ -294,6 +293,18 @@ public class EonsAnomalocarisModel<T extends EonsAnomalocarisEntity> extends Eon
         this.wingL7.rotateAngleZ = MathHelper.cos(f * 0.6662F) * f1;
         this.wingL6.rotateAngleZ = MathHelper.cos(f * 1.0F) * -1.0F * f1;
         this.wingL5.rotateAngleZ = MathHelper.cos(f * 0.6662F) * f1;
+    }
+
+
+    @Override
+    protected void animationSwim(T entity, float f, float f1, float f2, float f3, float f4, float f5){
+        this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
+        this.head.rotateAngleX = f4 / (180F / (float) Math.PI);
+        this.body.rotateAngleX = MathHelper.cos(f * .5F) * .50F * f1;
+        this.body3.rotateAngleX = MathHelper.cos(f * 0.3331F) * f1;
+        this.tailthingL1.rotateAngleX = MathHelper.cos(f * .5F) * .50F * f1;
+        this.tailthingR1.rotateAngleX = MathHelper.cos(f * .5F) * .50F * f1;
+        
     }
 
     @Override

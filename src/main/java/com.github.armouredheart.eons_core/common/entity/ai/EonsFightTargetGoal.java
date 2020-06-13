@@ -5,22 +5,31 @@ package com.github.armouredheart.eons_core.common.entity.ai;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 
 // Forge imports
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsPredator;
-import com.github.armouredheart.eons_core.common.entity.ai.EonsMeleeAttackGoal;
-// misc imports
+import com.github.armouredheart.eons_core.EonsCore;
 
-public class EonsFightPreyGoal<B extends CreatureEntity> extends EonsMeleeAttackGoal {
+// misc imports
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class EonsFightTargetGoal<B extends CreatureEntity> extends MeleeAttackGoal {
     // *** Attributes ***
+    private static final Logger LOGGER = LogManager.getLogger(EonsCore.MOD_ID + " EonsBeastEntity");
+    private final B beast;
     private final double baseCircleRadius;
-    private boolean strafingClockwise;
-    private boolean strafingBackwards;
+    private final int basePatience;
     private final float facingYaw;
     private final float facingPitch;
+    private boolean strafingClockwise;
+    private boolean strafingBackwards;
+    private boolean isAttacking;
+    private int patience;
 
     // *** Constructors ***
 
@@ -33,15 +42,17 @@ public class EonsFightPreyGoal<B extends CreatureEntity> extends EonsMeleeAttack
     * @param facingYaw
     * @param facingPitch
     */
-    public EonsFightPreyGoal(B beast, double circleRadius, double speedFactor, boolean useLongMemory, int patience, float facingYaw, float facingPitch) {
-        super(beast, speedFactor, useLongMemory, patience);
+    public EonsFightTargetGoal(B beast, double circleRadius, double speedFactor, boolean useLongMemory, int patience, float facingYaw, float facingPitch) {
+        super(beast, speedFactor, useLongMemory);
         this.baseCircleRadius = circleRadius;
         this.strafingClockwise = true;
         this.facingYaw = facingYaw;
         this.facingPitch = facingPitch;
+        this.basePatience = patience;
+        this.beast = beast;
     }
 
-    public EonsFightPreyGoal(B beast, double circleRadius, double speedFactor, boolean useLongMemory, int patience) {
+    public EonsFightTargetGoal(B beast, double circleRadius, double speedFactor, boolean useLongMemory, int patience) {
         this(beast, circleRadius, speedFactor, useLongMemory, patience, 30.0F, 30.0F);
     }
 
@@ -55,13 +66,9 @@ public class EonsFightPreyGoal<B extends CreatureEntity> extends EonsMeleeAttack
     */
     @Override
     public boolean shouldExecute() {
-        LivingEntity target = this.beast.getAttackTarget();
-        if(target != null) {
-            if(target.isAlive()) {
-                return true;
-            }
-        }
-        return false;
+        boolean execute = super.shouldExecute();
+        //LOGGER.debug("Should execute? " + execute);
+        return execute;
     }
 
     /**
@@ -69,8 +76,9 @@ public class EonsFightPreyGoal<B extends CreatureEntity> extends EonsMeleeAttack
     */
     @Override
     public void startExecuting() {
-        this.resetPatienceTicks();
-        this.beast.setAggroed(true);
+        super.startExecuting();
+        this.isAttacking = true;
+        //LOGGER.debug("Starting Execution...");
     }
 
     /**
@@ -78,7 +86,9 @@ public class EonsFightPreyGoal<B extends CreatureEntity> extends EonsMeleeAttack
     */
     @Override
     public boolean shouldContinueExecuting() {
-        return super.shouldContinueExecuting();
+        boolean con = super.shouldContinueExecuting();
+        //LOGGER.debug("Continue Execution? " + con);
+        return con;
     }
 
     /**
@@ -87,7 +97,6 @@ public class EonsFightPreyGoal<B extends CreatureEntity> extends EonsMeleeAttack
     @Override
     public void resetTask() {
         super.resetTask();
-        this.beast.setAggroed(false);
     }
 
     /**
@@ -97,25 +106,24 @@ public class EonsFightPreyGoal<B extends CreatureEntity> extends EonsMeleeAttack
     public void tick() {
         //
         LivingEntity target = this.beast.getAttackTarget();
-        this.reducePatienceTicks();
         boolean beastCanSeePrey = this.beast.getEntitySenses().canSee(target);
         boolean targetLookingAway = false; // TODO implement this later
-
         this.beast.getNavigator().tryMoveToEntityLiving(target, 1);
-        
 
         // Wait for opening
-        if(beastCanSeePrey && (targetLookingAway || this.outOfPatience()) && super.shouldExecute()) {
+        if(isAttacking) {
             // Execute Melee attack
-            this.resetPatienceTicks();
-            super.startExecuting();
+            LOGGER.debug("Doing melee!");
+            super.tick();
+
         } else if(beastCanSeePrey) {
+            LOGGER.debug("Circling target!");
             // Circle target like skeleton
             // get distance to target
-            double distance = this.beast.getDistanceSq(target.posX, target.getBoundingBox().minY, target.posZ);
+            double distance = this.getAttackReachSqr(target);
 
             // set to move backward if too close, set to move forward if too far
-            this.strafingBackwards = distance > this.baseCircleRadius;
+            this.strafingBackwards = distance < this.baseCircleRadius;
 
             // toggle strafe direction
             this.toggleStrafeDirection();
@@ -125,6 +133,7 @@ public class EonsFightPreyGoal<B extends CreatureEntity> extends EonsMeleeAttack
             this.beast.faceEntity(target, this.facingYaw, this.facingPitch);
 
         } else {
+            LOGGER.debug("Looking at target!");
             // look at target
             this.beast.getLookController().setLookPositionWithEntity(target, this.facingYaw, this.facingPitch);
         }   

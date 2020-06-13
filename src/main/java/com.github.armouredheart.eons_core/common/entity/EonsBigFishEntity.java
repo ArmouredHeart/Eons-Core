@@ -72,10 +72,18 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
 
     // *** Methods ***
 
+    /** */
+    @Override
+    public void tick() {
+        super.tick();
+        this.diet.dietTick();
+    }
+
     @Override
     protected void registerAttributes() {
         super.registerAttributes();
         this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
     }
 
     /** */
@@ -119,7 +127,7 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     public boolean isNocturnal() {return this.isNocturnal;}
 
     /** Calculated using remaining HP, Personality and Attack damage plus threatBoost.*/
-    public int getThreat() {return (int) (this.getHealth() * this.threatFactor * this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue() / this.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).getValue());}
+    public int getThreat() {return (int) (this.getHealth() * this.threatFactor);}
 
     /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
     public int getResolve() {return (int) (this.getHealth()*this.resolveFactor);}

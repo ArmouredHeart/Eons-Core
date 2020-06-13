@@ -57,7 +57,9 @@ public final class EonsEventSubscriber {
 					// Register the BlockItem
 					registry.register(blockItem);
 				});
-		LOGGER.debug("Registered BlockItems");
+		LOGGER.debug("Registered BlockItems!");
+
+		// Register Spawn eggs
     }
 
     /** */

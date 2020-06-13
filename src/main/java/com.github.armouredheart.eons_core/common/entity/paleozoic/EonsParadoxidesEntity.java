@@ -2,6 +2,7 @@
 package com.github.armouredheart.eons_core.common.entity.paleozoic;
 
 // Minecraft imports
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -42,14 +43,21 @@ public class EonsParadoxidesEntity extends EonsAmphibianEntity {
 
     /** */
     @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(5, new RandomWalkingGoal(this, this.getSpeed()));
+    }
+
+    /** */
+    @Override
     public CreatureAttribute getCreatureAttribute() {return CreatureAttribute.ARTHROPOD;}
 
     /** */
     @Override
     protected void registerAttributes() {
         super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
+        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
         this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
     }
 
@@ -60,6 +68,6 @@ public class EonsParadoxidesEntity extends EonsAmphibianEntity {
     
     /** */
     @Override
-    protected void playStepSound(BlockPos pos, BlockState blockIn) {this.playSound(EonsSounds.MARINE_ARTHROPOD_CRAWLING, 0.15F, 1.0F);}
+    protected void playStepSound(BlockPos pos, BlockState blockIn) {this.playSound(EonsSounds.MARINE_ARTHROPOD_CRAWLING, 1.0F, 1.0F);}
 
 }

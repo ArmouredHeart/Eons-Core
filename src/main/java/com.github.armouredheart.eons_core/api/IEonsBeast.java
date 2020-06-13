@@ -93,7 +93,7 @@ public interface IEonsBeast extends IEonsLifeForm {
 
     /** */
     public static int computeVanillaMobThreat(LivingEntity entity) {
-        double threat = entity.getHealth() * entity.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue() / entity.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).getValue();
+        double threat = entity.getHealth();
         return (int) threat; 
     }
 

@@ -17,7 +17,8 @@ import net.minecraft.block.BlockState;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.common.entity.ai.EonsFightPreyGoal;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsParadoxidesEntity;
+import com.github.armouredheart.eons_core.common.entity.ai.EonsFightTargetGoal;
 import com.github.armouredheart.eons_core.init.EonsSounds;
 import com.github.armouredheart.eons_core.init.EonsEntityTypes;
 import com.github.armouredheart.eons_core.common.entity.EonsBigFishEntity;
@@ -27,22 +28,21 @@ import com.github.armouredheart.eons_core.client.EonsAnimationState;
 import com.github.armouredheart.eons_core.api.IEonsPredator;
 
 // misc imports
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EonsAnomalocarisEntity extends EonsBigFishEntity implements IEonsPredator {
     // *** Attributes ***
     private static final EonsFieldNotes FIELDNOTES = null;
-    private static final ArrayList<LivingEntity> preyList = new ArrayList<>();
-
-    private static final EonsDiet DIET = new EonsDiet(5, false, EonsDiet.EonsPreyType.WATER, null);
+    private static final List<Class<? extends LivingEntity>> favouritePrey = Arrays.asList(EonsParadoxidesEntity.class);
+    private static final EonsDiet DIET = new EonsDiet(5, false, EonsDiet.EonsPreyType.WATER, favouritePrey, null);
 
     // *** Constructors ***
     
     /** */
     public EonsAnomalocarisEntity(final EntityType<? extends EonsBigFishEntity> type, final World world) {
         super(type, world, FIELDNOTES, DIET, 50, false);
-    }
+    }   
 
     // *** Methods ***
 
@@ -50,7 +50,14 @@ public class EonsAnomalocarisEntity extends EonsBigFishEntity implements IEonsPr
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(1, new EonsFightPreyGoal(this, 5, 1.25F, false, 5));
+        this.goalSelector.addGoal(2, new EonsFightTargetGoal(this, 5, 1.25F, false, 5));
+    }
+
+    @Override
+    /** */
+    public void tick() {
+        super.tick();
+        predatorTick(this, 20, 20);
     }
 
     /** */
@@ -62,7 +69,6 @@ public class EonsAnomalocarisEntity extends EonsBigFishEntity implements IEonsPr
     protected void registerAttributes() {
         super.registerAttributes();
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7D);
         this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
     }

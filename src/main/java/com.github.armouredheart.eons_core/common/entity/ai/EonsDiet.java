@@ -27,52 +27,46 @@ public class EonsDiet extends Inventory {
     // *** Attributes ***
     private boolean isStarving; // cached this value because it is called often.
     private boolean isHungry; // cached this value because it is called often.
+    private int metabolismTimer;
+    //private final boolean allowCanibalismIfStarving;
     private final boolean isPredator;
     private final boolean isOmnivore;
     private final List<Item> favouriteFoodsInOrder;
-    private final List<LivingEntity> prey;
+    private final List<Class<? extends LivingEntity>> favouritePrey;
     private final EonsPreyType preyType;
-    private int metabolismTimer;
     private static final int dayLengthTicks = 24000; // fixed value, make this a calculated value in the future if variable day length
 
     // *** Constructors ***
 
     /** 
-    * @param isPredator 
     * @param isOmnivore
     * @param preyType
-    * @param prey
+    * @param favouritePrey
     * @param favouriteFoodsInOrder
     */
-    public EonsDiet(int stomachSize, boolean isPredator, boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<LivingEntity> prey, @Nullable List<Item> favouriteFoodsInOrder) {
+    public EonsDiet(int stomachSize, boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<Class<? extends LivingEntity>> favouritePrey, @Nullable List<Item> favouriteFoodsInOrder) {
         super(stomachSize);
-        this.prey = prey;
+        this.favouritePrey = favouritePrey;
         this.favouriteFoodsInOrder = favouriteFoodsInOrder;
-        this.isPredator = isPredator;
+        this.isPredator = preyType != null || favouritePrey != null;
         this.isOmnivore = isOmnivore;
         this.preyType = preyType;
+
+        // initialize dynamic attributes
         this.metabolismTimer = 0;
-    }
-
-    /** Construct generalist hunting diet */
-    public EonsDiet(int stomachSize, boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<Item> favouriteFoodsInOrder) {
-        this(stomachSize, true, isOmnivore, preyType, null, favouriteFoodsInOrder);
-    }
-
-    /** Construct specialist hunting diet */
-    public EonsDiet(int stomachSize, boolean isOmnivore, @Nullable List<LivingEntity> prey, @Nullable List<Item> favouriteFoodsInOrder) {
-        this(stomachSize, true, isOmnivore, null, prey, favouriteFoodsInOrder);
+        this.isStarving = true;
+        this.isHungry = true;
     }
 
     /** Construct non-hunting diet */
     public EonsDiet(int stomachSize, boolean isOmnivore, @Nullable List<Item> favouriteFoodsInOrder) {
-        this(stomachSize, false, isOmnivore, null, null, favouriteFoodsInOrder);
+        this(stomachSize, isOmnivore, null, null, favouriteFoodsInOrder);
     }
 
     // *** Methods ***
 
     /** */
-    public void tick() {
+    public void dietTick() {
         ++this.metabolismTimer;
         if(this.metabolismTimer > dayLengthTicks) {
             if(this.digestFood()) {
@@ -141,7 +135,7 @@ public class EonsDiet extends Inventory {
     }
 
     /** */
-    public boolean hasFavouredPrey() {return this.prey != null;}
+    public boolean hasFavouredPrey() {return this.favouritePrey != null;}
 
     /** */
     public boolean isHungry() {return this.isHungry;}
@@ -178,8 +172,8 @@ public class EonsDiet extends Inventory {
 
     /** */
     public boolean isFavouredPrey(LivingEntity creature) {
-        if(this.prey != null) {
-            return this.prey.contains(creature);
+        if(this.hasFavouredPrey()) {
+            return this.favouritePrey.contains(creature.getClass());
         } else {return false;}
     }
 
@@ -249,40 +243,38 @@ public class EonsDiet extends Inventory {
     
     /** */
     public static enum EonsPreyType {
-        ALL("all"),
+        ALL("all", null),
         // Vanilla Generic Types
-        ANIMAL("animal"),
-        FISH("fish"),
-        WATER("water"),
-        ARTHROPOD("arthropod"),
-        FLYING("flying");
+        ANIMAL("animal", null),
+        FISH("fish", null),
+        WATER("water", null),
+        ARTHROPOD("arthropod", null),
+        FLYING("flying", null);
         // Eons Generic Types
         
         // Eons Specialized Types
 
         // *** Attributes ***
-        private final List<LivingEntity> prey;
+        private final List<Class<? extends LivingEntity>> prey;
         private final String id;
-
+        private final boolean hasType;
+        private final boolean hasPrey;
         // *** Constructors ***
         
         /** */
-        private EonsPreyType(List<LivingEntity> prey) {
+        private EonsPreyType(@Nullable String id, @Nullable List<Class<? extends LivingEntity>> prey) {
             this.prey = prey;
-            this.id = null;
-        }
-
-        /** */
-        private EonsPreyType(String id) {
-            this.prey = null;
             this.id = id;
+            this.hasType = this.id != null;
+            this.hasPrey = this.id != null;
         }
 
         // *** Methods ***
 
         /** */
         public boolean isPrey(LivingEntity entity) {
-            if(prey == null && id != null) {
+            // check for type match
+            if(this.hasType) {
                 switch(this.id){
                     // Vanilla Generic Types
                     case "all": {return true;}
@@ -291,11 +283,14 @@ public class EonsDiet extends Inventory {
                     case "water": {return entity.getCreatureAttribute() == CreatureAttribute.WATER;}
                     case "arthropod": {return entity.getCreatureAttribute() == CreatureAttribute.ARTHROPOD;}
                     case "flying": {return entity instanceof IFlyingAnimal;}
-                    default: {return false;}
+                    default: {break;}
                 }
-            } else {
-                return prey.contains(entity);
             }
+            // check for class match
+            if(this.hasPrey) {return this.prey.contains(entity.getClass());}
+            
+            // this straight up isn't food my dude
+            return false;
         }
     }
 }

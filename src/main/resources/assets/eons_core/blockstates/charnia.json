@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "age=0": { "model": "eons_core:block/paleozoic/charnia/charnia_small" },
+        "age=1": { "model": "eons_core:block/paleozoic/charnia/charnia_small" },
+        "age=2": { "model": "eons_core:block/paleozoic/charnia/charnia_medium" },
+        "age=3": { "model": "eons_core:block/paleozoic/charnia/charnia_big" }
+    }
+}

@@ -64,6 +64,7 @@ public abstract class EonsBeastMultiPartEntity extends EonsBeastEntity {
     /**
     * Called when the entity is attacked.
     */
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         return super.attackEntityFrom(source, amount);
     }

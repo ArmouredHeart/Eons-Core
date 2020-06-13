@@ -20,6 +20,7 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.Item;
 
 // Forge imports
 import net.minecraftforge.common.PlantType;
@@ -45,6 +46,7 @@ public class EonsSeaAnimalBlock extends BushBlock implements IEonsLifeForm, IWat
         this.fieldNotes = fieldNotes;
         this.thermophile = thermophile;
         this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, Boolean.valueOf(true)));
+
     }
 
     /** */

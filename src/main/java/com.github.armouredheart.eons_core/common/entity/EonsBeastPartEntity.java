@@ -26,7 +26,7 @@ import com.github.armouredheart.eons_core.common.entity.EonsBeastMultiPartEntity
 // misc imports
 import javax.annotation.Nullable;
 
-public class EonsBeastPartEntity extends Entity{
+public class EonsBeastPartEntity extends Entity {
     // *** Attributes ***
     private static final DataParameter<Integer> SHELL = EntityDataManager.createKey(EonsBeastPartEntity.class, DataSerializers.VARINT);
     private final EonsBeastMultiPartEntity beast;
@@ -39,15 +39,14 @@ public class EonsBeastPartEntity extends Entity{
     // *** Constructors ***
 
     /** */
-    /*public EonsBeastPartEntity(EonsBeastMultiPartEntity beast, String partName, float width, float height) {
-        EonsBeastPartEntity(beast, partName, width, height, 0, 1, false);
-    }*/
+    public EonsBeastPartEntity(EonsBeastMultiPartEntity beast, String partName, float width, float height) {
+        this(beast, partName, width, height, 0, 1, false);
+    }
 
     /** */
-    /*
     public EonsBeastPartEntity(EonsBeastMultiPartEntity beast, String partName, float width, float height, int baseShell) {
-        EonsBeastPartEntity(beast, partName, width, height, baseShell, 1, false);
-    }*/
+        this(beast, partName, width, height, baseShell, 1, false);
+    }
 
     /** */
     public EonsBeastPartEntity(EonsBeastMultiPartEntity beast, String partName, float width, float height, int baseShell, int shellToughness, boolean isBug) {
@@ -100,6 +99,7 @@ public class EonsBeastPartEntity extends Entity{
     /**
     * Called when the entity is attacked.
     */
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         //
         if(!this.isInvulnerableTo(source)){

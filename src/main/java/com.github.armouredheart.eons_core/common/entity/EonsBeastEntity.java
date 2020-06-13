@@ -84,7 +84,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    @Override
    public void tick() {
       super.tick();
-      // do some stuff here maybe?
+      this.diet.dietTick();
    }
 
    /** */
@@ -92,6 +92,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    protected void registerAttributes() {
       super.registerAttributes();
       this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+      this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
    }
 
    /** */
@@ -167,10 +168,10 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 	}
    
    /** Calculated using remaining HP, Personality and Attack damage plus threatBoost.*/
-   public int getThreat() {return (int) (this.getHealth() * this.threatFactor * this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue() / this.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).getValue());}
+   public int getThreat() {return 0 + (int) (this.getHealth() * this.threatFactor);}
 
    /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
-   public int getResolve() {return (int) (this.getHealth()*this.resolveFactor);}
+   public int getResolve() {return 0 + (int) (this.getHealth()*this.resolveFactor);}
 
    /** */
    protected void setThreatFactorResolveFactor(double threatFactor, double resolveFactor) {

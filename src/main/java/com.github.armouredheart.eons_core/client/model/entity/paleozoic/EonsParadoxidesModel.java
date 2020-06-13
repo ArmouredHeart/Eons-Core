@@ -327,6 +327,7 @@ public class EonsParadoxidesModel<T extends EonsParadoxidesEntity> extends EonsE
     
     @Override
     public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        super.render(entity, f, f1, f2, f3, f4, f5);
         GlStateManager.pushMatrix();
         GlStateManager.translatef(this.body.offsetX, this.body.offsetY, this.body.offsetZ);
         GlStateManager.translatef(this.body.rotationPointX * f5, this.body.rotationPointY * f5, this.body.rotationPointZ * f5);
@@ -335,6 +336,11 @@ public class EonsParadoxidesModel<T extends EonsParadoxidesEntity> extends EonsE
         GlStateManager.translatef(-this.body.rotationPointX * f5, -this.body.rotationPointY * f5, -this.body.rotationPointZ * f5);
         this.body.render(f5);
         GlStateManager.popMatrix();
+    }
+
+    @Override
+    public void setRotationAngles(T entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        this.animationWalk(entity, f, f1, f2, f3, f4, f5);
     }
 
     @Override

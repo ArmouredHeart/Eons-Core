@@ -6,8 +6,10 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.Item;
 
 // Forge imports
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -43,8 +45,11 @@ public final class EonsEntityTypes {
     public static final RegistryObject<EntityType<EonsCtenorhabdotusEntity>> CTENORHABDOTUS = makeEonsEntity("ctenorhabdotus", EonsCtenorhabdotusEntity::new, EntityClassification.WATER_CREATURE, 0.50F, 0.30F);
     public static final RegistryObject<EntityType<EonsAnomalocarisEntity>> ANOMALOCARIS = makeEonsEntity("anomalocaris", EonsAnomalocarisEntity::new, EntityClassification.WATER_CREATURE, 0.40F, 0.80F);
     public static final RegistryObject<EntityType<EonsParadoxidesEntity>> PARADOXIDES = makeEonsEntity("paradoxides",  EonsParadoxidesEntity::new, EntityClassification.WATER_CREATURE, 0.30F, 0.30F);
-    
+    public static final RegistryObject<EntityType<EonsDimetrodonEntity>> DIMETRODON = makeEonsEntity("dimetrodon",  EonsDimetrodonEntity::new, EntityClassification.CREATURE, 1.8F, 2.0F);
     // *** Methods ***
+
+    /** */
+    public static <E extends Entity>
 
     /** */
     public static <E extends Entity> RegistryObject<EntityType<E>> makeEonsEntity(String id, EntityType.IFactory<E> factory, EntityClassification classification){
@@ -72,5 +77,11 @@ public final class EonsEntityTypes {
         RenderingRegistry.registerEntityRenderingHandler(EonsCtenorhabdotusEntity.class, manager -> new EonsCtenorhabdotusRenderer(manager));
         RenderingRegistry.registerEntityRenderingHandler(EonsAnomalocarisEntity.class, manager -> new EonsAnomalocarisRenderer(manager));
         RenderingRegistry.registerEntityRenderingHandler(EonsParadoxidesEntity.class, manager -> new EonsParadoxidesRenderer(manager));
+        RenderingRegistry.registerEntityRenderingHandler(EonsDimetrodonEntity.class, manager -> new EonsDimetrodonRenderer(manager));
+    }
+
+    /** Register spawn eggs, called in EonsEventSubscriber*/
+    public static void registerEonsSpawnEggs(RegistryEvent.Register<Item> event) {
+        // paleozoic
     }
 }
