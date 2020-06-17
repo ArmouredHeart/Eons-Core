@@ -25,12 +25,13 @@ import net.minecraft.nbt.CompoundNBT;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsBeast;
+import com.github.armouredheart.eons_core.api.IEonsMultiPart;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 
 // misc imports
 import javax.annotation.Nullable;
 
-public abstract class EonsBeastMultiPartEntity extends EonsBeastEntity {
+public abstract class EonsBigBeastEntity extends EonsBeastEntity implements IEonsMultiPart {
 
     // *** Attributes ***
     private final EonsBeastPartEntity[] parts;
@@ -40,8 +41,8 @@ public abstract class EonsBeastMultiPartEntity extends EonsBeastEntity {
     // *** Constructors ***
 
     /** */
-    public EonsBeastMultiPartEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsBeastPartEntity[] parts) {
-        super(type, world, fieldNotes);
+    public EonsBigBeastEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsBeastPartEntity[] parts, final EonsDiet diet, int sexRatio, boolean isNocturnal) {
+        super(type, world, fieldNotes, diet, sexRatio, isNocturnal);
         this.parts = parts;
         this.shellBroken = false;
         this.partCount = parts.length;
@@ -57,6 +58,7 @@ public abstract class EonsBeastMultiPartEntity extends EonsBeastEntity {
     }
 
     /** */
+    @Override
     public void setShellBroken(){
         this.shellBroken = true;
     }
@@ -72,34 +74,6 @@ public abstract class EonsBeastMultiPartEntity extends EonsBeastEntity {
     /** */
     @Override
     public boolean isWounded() {return IEonsBeast.testForWounds(this, 0.7D, this.shellBroken);}
-
-    /** */
-    private void restoreShell() {
-        for(int i = 0; i < this.partCount; i++){
-            this.getPart(i).restoreShell();
-        }
-    }
-
-    /** @return returns null if part does not exist */
-    protected EonsBeastPartEntity getPart(String partName) {
-        for(int i = 0; i < this.partCount; i++){
-            if(this.getPart(i).getPartName() == partName){
-                return this.getPart(i);
-            }
-        }
-        return null;
-    }
-
-    /** @return returns null if part does not exist */
-    protected EonsBeastPartEntity getPart(int index) {
-        if(index > -1 && index < partCount){
-            // the index exists
-            return parts[index];
-        } else {
-            // the index does not exist
-            return null;
-        }
-    }
 
     /**
     * Returns true if other Entities should be prevented from moving through this Entity.

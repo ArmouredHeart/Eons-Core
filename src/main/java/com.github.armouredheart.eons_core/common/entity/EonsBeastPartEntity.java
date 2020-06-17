@@ -7,6 +7,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,15 +22,15 @@ import net.minecraft.nbt.CompoundNBT;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.common.entity.EonsBeastMultiPartEntity;
+import com.github.armouredheart.eons_core.api.IEonsMultiPart;
 
 // misc imports
 import javax.annotation.Nullable;
 
-public class EonsBeastPartEntity extends Entity {
+public class EonsBeastPartEntity<B extends CreatureEntity & IEonsMultiPart> extends Entity {
     // *** Attributes ***
     private static final DataParameter<Integer> SHELL = EntityDataManager.createKey(EonsBeastPartEntity.class, DataSerializers.VARINT);
-    private final EonsBeastMultiPartEntity beast;
+    private final B beast;
     private final String partName;
     private final EntitySize size;
     private final int baseShell;
@@ -39,17 +40,17 @@ public class EonsBeastPartEntity extends Entity {
     // *** Constructors ***
 
     /** */
-    public EonsBeastPartEntity(EonsBeastMultiPartEntity beast, String partName, float width, float height) {
+    public EonsBeastPartEntity(B beast, String partName, float width, float height) {
         this(beast, partName, width, height, 0, 1, false);
     }
 
     /** */
-    public EonsBeastPartEntity(EonsBeastMultiPartEntity beast, String partName, float width, float height, int baseShell) {
+    public EonsBeastPartEntity(B beast, String partName, float width, float height, int baseShell) {
         this(beast, partName, width, height, baseShell, 1, false);
     }
 
     /** */
-    public EonsBeastPartEntity(EonsBeastMultiPartEntity beast, String partName, float width, float height, int baseShell, int shellToughness, boolean isBug) {
+    public EonsBeastPartEntity(B beast, String partName, float width, float height, int baseShell, int shellToughness, boolean isBug) {
         super(beast.getType(), beast.world);
         this.size = EntitySize.flexible(width, height);
         this.recalculateSize();
@@ -72,10 +73,10 @@ public class EonsBeastPartEntity extends Entity {
     public void restoreShell() {this.setShell(this.baseShell);}
 
     /** */
-    public String getPartName() {return partName;}
+    public String getPartName() {return this.partName;}
 
     /** */
-    public EonsBeastMultiPartEntity getBeast() {return this.beast;}
+    public B getBeast() {return this.beast;}
 
     /** */
     protected void registerData() {
@@ -153,20 +154,18 @@ public class EonsBeastPartEntity extends Entity {
     /**
     * Returns true if Entity argument is equal to this Entity
     */
+    @Override
     public boolean isEntityEqual(Entity entityIn) {
         return this == entityIn || this.beast == entityIn;
     }
 
+    /** */
     public IPacket<?> createSpawnPacket() {
         throw new UnsupportedOperationException();
     }
 
+    /** */
     public EntitySize getSize(Pose poseIn) {
         return this.size;
-    }
-
-    /** */
-    public boolean processInteract(PlayerEntity player, Hand hand) {
-      return this.beast.processInteract(player, hand);
     }
 }

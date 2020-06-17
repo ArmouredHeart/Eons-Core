@@ -9,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.item.Item;
 
 // Forge imports
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -49,9 +48,6 @@ public final class EonsEntityTypes {
     // *** Methods ***
 
     /** */
-    public static <E extends Entity>
-
-    /** */
     public static <E extends Entity> RegistryObject<EntityType<E>> makeEonsEntity(String id, EntityType.IFactory<E> factory, EntityClassification classification){
         return makeEonsEntity(id, factory, classification, 0.6F, 1.8F);
     }
@@ -80,8 +76,4 @@ public final class EonsEntityTypes {
         RenderingRegistry.registerEntityRenderingHandler(EonsDimetrodonEntity.class, manager -> new EonsDimetrodonRenderer(manager));
     }
 
-    /** Register spawn eggs, called in EonsEventSubscriber*/
-    public static void registerEonsSpawnEggs(RegistryEvent.Register<Item> event) {
-        // paleozoic
-    }
 }

@@ -1,0 +1,1 @@
+dont give it a collison box  so player cant hit it. make  it  so that they have to break the block beneath and make it deal damage since it has large thorns

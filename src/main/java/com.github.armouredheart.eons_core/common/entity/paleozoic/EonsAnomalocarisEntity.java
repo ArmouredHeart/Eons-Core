@@ -70,7 +70,7 @@ public class EonsAnomalocarisEntity extends EonsBigFishEntity implements IEonsPr
         super.registerAttributes();
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
         this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
-        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
     }
 
     @Override

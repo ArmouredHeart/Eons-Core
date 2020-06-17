@@ -113,11 +113,11 @@ public class EonsFightTargetGoal<B extends CreatureEntity> extends MeleeAttackGo
         // Wait for opening
         if(isAttacking) {
             // Execute Melee attack
-            LOGGER.debug("Doing melee!");
+            //LOGGER.debug("Doing melee!");
             super.tick();
 
         } else if(beastCanSeePrey) {
-            LOGGER.debug("Circling target!");
+            //LOGGER.debug("Circling target!");
             // Circle target like skeleton
             // get distance to target
             double distance = this.getAttackReachSqr(target);
@@ -133,9 +133,9 @@ public class EonsFightTargetGoal<B extends CreatureEntity> extends MeleeAttackGo
             this.beast.faceEntity(target, this.facingYaw, this.facingPitch);
 
         } else {
-            LOGGER.debug("Looking at target!");
+            //LOGGER.debug("Looking at target!");
             // look at target
-            this.beast.getLookController().setLookPositionWithEntity(target, this.facingYaw, this.facingPitch);
+            this.beast.getLookController().setLookPositionWithEntity(target, 30.0F, 30.0F);
         }   
     }
 }

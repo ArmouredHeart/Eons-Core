@@ -1,0 +1,169 @@
+// package
+package com.github.armouredheart.eons_core.client.model.entity.paleozoic;
+
+// Minecraft imports
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.entity.Entity;
+
+// Forge imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+// Eons imports
+import com.github.armouredheart.eons_core.client.model.entity.EonsEntityModel;
+
+// misc imports
+import com.mojang.blaze3d.platform.GlStateManager;
+
+@OnlyIn(Dist.CLIENT)
+
+    // *** Attributes ***
+public class EonsEndocerasModel<T extends Entity> extends EonsEntityModel<T> {
+    public RendererModel shell;
+    public RendererModel head;
+    public RendererModel shell2;
+    public RendererModel shape23;
+    public RendererModel head_1;
+    public RendererModel tenticleL;
+    public RendererModel tenticleR;
+    public RendererModel tenticleXL;
+    public RendererModel tenticleXR;
+    public RendererModel tenticleR_1;
+    public RendererModel tenticleR_2;
+    public RendererModel tenticleL_1;
+    public RendererModel tenticleL_2;
+    public RendererModel shape45;
+    public RendererModel shell3;
+    public RendererModel shell4;
+    public RendererModel shell5;
+    public RendererModel shell6;
+    public RendererModel shell7;
+
+    // *** Constructors ***
+    public Eons_Endoceras_model() {
+        this.textureWidth = 64;
+        this.textureHeight = 100;
+        this.head = new ModelRenderer(this, 30, 0);
+        this.head.setRotationPoint(-2.5F, 3.0F, 6.0F);
+        this.head.addBox(0.0F, 0.0F, 0.0F, 5, 6, 8, 0.0F);
+        this.setRotateAngle(head, 3.141592653589793F, 0.0F, 0.0F);
+        this.tenticleXR = new ModelRenderer(this, 0, 57);
+        this.tenticleXR.setRotationPoint(2.0F, 0.0F, 4.0F);
+        this.tenticleXR.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 12, 0.0F);
+        this.tenticleR_1 = new ModelRenderer(this, 0, 57);
+        this.tenticleR_1.setRotationPoint(3.5F, 3.0F, 4.0F);
+        this.tenticleR_1.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 12, 0.0F);
+        this.setRotateAngle(tenticleR_1, 0.0F, 0.0F, 0.7853981633974483F);
+        this.shell7 = new ModelRenderer(this, 45, 28);
+        this.shell7.setRotationPoint(0.0F, 0.0F, 7.0F);
+        this.shell7.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 8, 0.0F);
+        this.tenticleR = new ModelRenderer(this, 0, 57);
+        this.tenticleR.setRotationPoint(4.0F, 2.0F, 4.0F);
+        this.tenticleR.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 12, 0.0F);
+        this.tenticleL_1 = new ModelRenderer(this, 0, 57);
+        this.tenticleL_1.setRotationPoint(0.5F, 0.5F, 4.0F);
+        this.tenticleL_1.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 12, 0.0F);
+        this.setRotateAngle(tenticleL_1, 0.0F, 0.0F, 0.7853981633974483F);
+        this.shell6 = new ModelRenderer(this, 42, 49);
+        this.shell6.setRotationPoint(0.0F, 0.0F, 7.0F);
+        this.shell6.addBox(-1.0F, -1.0F, 0.0F, 2, 2, 8, 0.0F);
+        this.tenticleL = new ModelRenderer(this, 0, 57);
+        this.tenticleL.setRotationPoint(0.0F, 2.0F, 4.0F);
+        this.tenticleL.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 12, 0.0F);
+        this.tenticleL_2 = new ModelRenderer(this, 0, 57);
+        this.tenticleL_2.setRotationPoint(0.5F, 3.5F, 4.0F);
+        this.tenticleL_2.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 12, 0.0F);
+        this.setRotateAngle(tenticleL_2, 0.0F, 0.0F, -0.7853981633974483F);
+        this.shape23 = new ModelRenderer(this, 0, 0);
+        this.shape23.setRotationPoint(0.5F, 0.3F, 7.5F);
+        this.shape23.addBox(0.0F, 0.0F, 0.0F, 4, 4, 4, 0.0F);
+        this.shell3 = new ModelRenderer(this, 0, 71);
+        this.shell3.setRotationPoint(0.0F, 0.0F, 15.0F);
+        this.shell3.addBox(-2.5F, -2.5F, 0.0F, 5, 5, 8, 0.0F);
+        this.tenticleXL = new ModelRenderer(this, 0, 57);
+        this.tenticleXL.setRotationPoint(2.0F, 3.5F, 4.0F);
+        this.tenticleXL.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 12, 0.0F);
+        this.shape45 = new ModelRenderer(this, 30, 0);
+        this.shape45.setRotationPoint(2.0F, 1.4F, 2.9F);
+        this.shape45.addBox(0.0F, 0.0F, 0.0F, 1, 2, 2, 0.0F);
+        this.setRotateAngle(shape45, 0.4553564018453205F, 0.0F, 0.0F);
+        this.shell4 = new ModelRenderer(this, 26, 75);
+        this.shell4.setRotationPoint(0.0F, 0.0F, 8.0F);
+        this.shell4.addBox(-2.0F, -2.0F, 0.0F, 4, 4, 8, 0.0F);
+        this.shell5 = new ModelRenderer(this, 0, 84);
+        this.shell5.setRotationPoint(0.0F, 0.0F, 8.0F);
+        this.shell5.addBox(-1.5F, -1.5F, 0.0F, 3, 3, 8, 0.0F);
+        this.head_1 = new ModelRenderer(this, 42, 19);
+        this.head_1.setRotationPoint(0.0F, 2.0F, 6.5F);
+        this.head_1.addBox(0.0F, 0.0F, 0.0F, 5, 4, 4, 0.0F);
+        this.setRotateAngle(head_1, 0.40980330836826856F, 0.0F, 0.0F);
+        this.tenticleR_2 = new ModelRenderer(this, 0, 57);
+        this.tenticleR_2.setRotationPoint(3.5F, 0.5F, 4.0F);
+        this.tenticleR_2.addBox(-0.5F, -0.5F, 0.0F, 1, 1, 12, 0.0F);
+        this.setRotateAngle(tenticleR_2, 0.0F, 0.0F, -0.7590436916923339F);
+        this.shell2 = new ModelRenderer(this, 0, 23);
+        this.shell2.setRotationPoint(0.0F, 0.0F, 15.0F);
+        this.shell2.addBox(-3.0F, -3.0F, 0.0F, 6, 6, 15, 0.0F);
+        this.shell = new ModelRenderer(this, 0, 0);
+        this.shell.setRotationPoint(0.0F, 16.1F, 12.0F);
+        this.shell.addBox(-3.5F, -3.5F, 0.0F, 7, 7, 16, 0.0F);
+        this.setRotateAngle(shell, 0.40980330836826856F, 3.141592653589793F, 0.0F);
+        this.shell.addChild(this.head);
+        this.shape23.addChild(this.tenticleXR);
+        this.shape23.addChild(this.tenticleR_1);
+        this.shell6.addChild(this.shell7);
+        this.shape23.addChild(this.tenticleR);
+        this.shape23.addChild(this.tenticleL_1);
+        this.shell5.addChild(this.shell6);
+        this.shape23.addChild(this.tenticleL);
+        this.shape23.addChild(this.tenticleL_2);
+        this.head.addChild(this.shape23);
+        this.shell2.addChild(this.shell3);
+        this.shape23.addChild(this.tenticleXL);
+        this.head_1.addChild(this.shape45);
+        this.shell3.addChild(this.shell4);
+        this.shell4.addChild(this.shell5);
+        this.head.addChild(this.head_1);
+        this.shape23.addChild(this.tenticleR_2);
+        this.shell.addChild(this.shell2);
+    }
+
+    // *** Methods ***
+    @Override
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        GlStateManager.pushMatrix();
+        GlStateManager.translatef(this.shell.offsetX, this.shell.offsetY, this.shell.offsetZ);
+        GlStateManager.translatef(this.shell.rotationPointX * f5, this.shell.rotationPointY * f5, this.shell.rotationPointZ * f5);
+        GlStateManager.scaled(0.7D, 0.7D, 0.7D);
+        GlStateManager.translatef(-this.shell.offsetX, -this.shell.offsetY, -this.shell.offsetZ);
+        GlStateManager.translatef(-this.shell.rotationPointX * f5, -this.shell.rotationPointY * f5, -this.shell.rotationPointZ * f5);
+        this.shell.render(f5);
+        GlStateManager.popMatrix();
+	if(this.isChild) {f5 = f5 * babyScaleNumber} this.shell.render(f0.2); }
+    }
+
+    /**
+     * This is a helper function from Tabula to set the rotation of model parts
+     */
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
+	
+	@Override 
+	protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
+	{ 
+	this.tenticleXL.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+	this.tenticleXR.rotateAngleX = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+	this.tenticleL.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+	this.tenticleR.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+	this.tenticleL_2.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+	this.tenticleR_1.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+	this.tenticleL_1.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+	this.tenticleR_2.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+	 };
+
+
+    }
+}

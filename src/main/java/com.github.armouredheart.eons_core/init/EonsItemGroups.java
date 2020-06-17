@@ -23,6 +23,9 @@ public final class EonsItemGroups {
 
     // Default Creative Tab for Eons
 	public static final ItemGroup EONS_ITEM_GROUP = new EonsItemGroup(EonsCore.MOD_ID, () -> new ItemStack(EonsItems.EONS_MUSIC_DISC_PRIMAL_AGE.get()));
+	public static final ItemGroup PALEOZOIC_GROUP = new EonsItemGroup(EonsCore.MOD_ID, () -> new ItemStack(EonsItems.EONS_MUSIC_DISC_PRIMAL_AGE.get()));
+	public static final ItemGroup CENOZOIC_GROUP = new EonsItemGroup(EonsCore.MOD_ID, () -> new ItemStack(EonsItems.EONS_MUSIC_DISC_PRIMAL_AGE.get()));
+	public static final ItemGroup MESOZOIC_GROUP = new EonsItemGroup(EonsCore.MOD_ID, () -> new ItemStack(EonsItems.EONS_MUSIC_DISC_PRIMAL_AGE.get()));
 
 	// *** Methods ***
 
@@ -43,7 +46,7 @@ public final class EonsItemGroups {
 		public ItemStack createIcon() {
 			return iconSupplier.get();
 		}
-
+		
 	}
 
 }

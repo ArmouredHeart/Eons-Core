@@ -10,6 +10,7 @@ import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.EntityType;
 
 // Forge imports
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -39,8 +40,7 @@ public final class EonsItems {
     public static final RegistryObject<Item> EONS_NOTEBOOK_ITEM = registerItem("eons_notebook_item", () -> new EonsNotebookItem());
     public static final RegistryObject<Item> EONS_BIG_LEAF_ITEM = registerItem("eons_big_leaf_item", () -> new EonsBigLeafItem(new Item.Properties().group(EonsItemGroups.EONS_ITEM_GROUP)));
     // Paleozoic
-    public static final RegistryObject<Item> EONS_ARAXOCERAS_BUCKET = registerFishBucket("eons_araxoceras_bucket", EonsEntityTypes.ARAXOCERAS.get());
-    public static final RegistryObject<Item> EONS_HYNERIA_BUCKET = registerFishBucket("eons_hyneria_bucket", EonsEntityTypes.HYNERIA.get());
+    
 
     // *** Methods ***
     
@@ -48,7 +48,7 @@ public final class EonsItems {
      * @param item_supplier Minecraft Item object or subclass object
      * @param item_name String unlocalised name all lowercase
      */
-    private static RegistryObject<Item> registerItem(String item_name, Supplier<Item> item_supplier){
+    private static RegistryObject<Item> registerItem(String item_name, Supplier<Item> item_supplier) {
         return ITEMS.register(item_name, item_supplier);
     }
 
@@ -58,5 +58,10 @@ public final class EonsItems {
 
     private static RegistryObject<Item> registerSpawnEgg(String item_name, EntityType<?> entityType, int primaryColor, int secondaryColor, Item.Properties builder) {
         return registerItem(item_name, () -> new SpawnEggItem(entityType, primaryColor, secondaryColor, builder));
+    }
+
+    /** Register spawn eggs, called in EonsEventSubscriber*/
+    public static void registerEonsSpawnEggs(RegistryEvent.Register<Item> event) {
+        // paleozoic
     }
 }
