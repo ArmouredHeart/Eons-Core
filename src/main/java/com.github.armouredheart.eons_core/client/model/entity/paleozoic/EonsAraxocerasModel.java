@@ -125,14 +125,14 @@ public class EonsAraxocerasModel<T extends EonsAraxocerasEntity> extends EonsEnt
         this.shell.render(f5);
         GlStateManager.popMatrix();
     }
-    protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-    {this.tentical_2.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
-	this.tentical_4.rotateAngleX = MathHelper.cos (f * 1.0F) * -1.0F * f1;
-    this.tentical_3.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
-	this.tentical_5.rotateAngleX = MathHelper.cos (f * 1.0F) * -1.0F * f1;
-    this.tentical.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
-	this.tentical_1.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
-
-
- };
+    
+    @Override
+    protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)) {
+        this.tentical_2.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+        this.tentical_4.rotateAngleX = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+        this.tentical_3.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+        this.tentical_5.rotateAngleX = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+        this.tentical.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+        this.tentical_1.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+    }
 }
