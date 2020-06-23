@@ -520,10 +520,10 @@ public class EonsDimetrodonModel<T extends EonsDimetrodonEntity> extends EonsEnt
     this.jointR2.rotateAngleY = MathHelper.cos(f * 1.0F) * 1.0F * f1;
     this.headbottomjaw.rotateAngleX = MathHelper.cos(f * 0.2F) * f1;
     this.JointL1.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
-    this.jointR2.rotateAngleX = MathHelper.cos(f * .20F) * 0.20F * f1;
+    this.jointR2.rotateAngleX = MathHelper.cos(f * 0.20F) * 0.20F * f1;
     this.jointT_1.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
     this.jointL2.rotateAngleY = MathHelper.cos(f * 1.0F) * -1.0F * f1;
-    this.jointL2.rotateAngleX = MathHelper.cos(f * 0.20F) * 0.20F * f1;
+    this.jointL2.rotateAngleX = MathHelper.cos(f * 0.20F) * -0.20F * f1;
     this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
     this.neck.rotateAngleX = f4 / (180F / (float) Math.PI);
     this.JointR1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
@@ -536,7 +536,7 @@ public class EonsDimetrodonModel<T extends EonsDimetrodonEntity> extends EonsEnt
     this.JointL1.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
     this.jointT_1.rotateAngleY = MathHelper.cos(f * 0.5F) * 0.5F * f1;
     this.jointL2.rotateAngleY = MathHelper.cos(f * 1.0F) * -1.0F * f1;
-    this.jointL2.rotateAngleX = MathHelper.cos(f * 0.20F) * 0.20F * f1;
+    this.jointL2.rotateAngleX = MathHelper.cos(f * 0.20F) * -0.20F * f1;
     this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
     this.neck.rotateAngleX = f4 / (180F / (float) Math.PI);
     this.jointT.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
