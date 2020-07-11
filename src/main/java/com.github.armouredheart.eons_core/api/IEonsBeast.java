@@ -171,9 +171,6 @@ public interface IEonsBeast extends IEonsLifeForm {
     /** Most cases will be false, override in beasts that protect thier young. */
     default boolean isProtectingYoung() {return false;}
 
-    /** Most cases will be false, override in beasts that can defend themselves. */
-    default boolean isThreatening() {return false;}
-
     /** Most cases will be 0, override in beasts that can have allies. */
     default int getBackup() {return 0;}
 }

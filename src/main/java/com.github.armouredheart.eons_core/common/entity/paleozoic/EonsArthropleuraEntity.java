@@ -1,13 +1,26 @@
 // package
+package com.github.armouredheart.eons_core.common.entity.paleozoic;
 
 // Minecraft imports
+import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.world.World;
+import net.minecraft.item.Items;
+import net.minecraft.item.Item;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.block.BlockState;
 
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.common.entity.EonsAmphibianEntity;
+import com.github.armouredheart.eons_core.common.entity.EonsBigBeastEntity;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes; 
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
+import com.github.armouredheart.eons_core.common.entity.EonsBeastPartEntity;
 
 // misc imports
 
@@ -18,8 +31,10 @@ public class EonsArthropleuraEntity extends EonsBigBeastEntity {
     private static final EonsDiet DIET = new EonsDiet(10, false, null);
 
     // *** Constructors ***
-    public EonsArthropleuraEntity(final EntityType<? extends EonsBeastEntity> type, final World world) {
-        super(type, world, PARTS, FIELDNOTES, DIET, 50, false);
+    public EonsArthropleuraEntity(final EntityType<? extends EonsBigBeastEntity> type, final World world) {
+        super(type, world, FIELDNOTES, DIET, 50, false);
+        this.addPart(new EonsBeastPartEntity(this, "head", 2.0F, 1.0F));
+        this.addPart(new EonsBeastPartEntity(this, "tail", 2.0F, 1.0F));
     }
 
     // *** Methods ***

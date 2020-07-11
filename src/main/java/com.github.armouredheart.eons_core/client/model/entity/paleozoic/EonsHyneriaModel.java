@@ -201,37 +201,39 @@ public class EonsHyneriaModel<T extends EonsHyneriaEntity> extends EonsEntityMod
         this.body.render(f5);
         GlStateManager.popMatrix();
     }
+
     @Override 
-    protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-    {
-      this.tail1.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
-	this.tail2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
-	this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
-    this.Larm.rotateAngleZ = MathHelper.cos(f * 0.6662F) * f1;
-	this.Lleg.rotateAngleZ = MathHelper.cos (f * 1.0F) * -1.0F * f1;
-	this.Lleg_1.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
-	this.Rarm.rotateAngleZ = MathHelper.cos(f * 1.0F) * 1.0F * f1; 
-    };
-     @Override 
-    protected void animationWalk(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-    {
-   this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
-    this.Larm.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
-	this.Lleg.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
-	this.Lleg_1.rotateAngleY= MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
-	this.Rarm.rotateAngleY = MathHelper.cos(f * 1.0F) * 1.0F * f1; 
-    this.Larm.rotateAngleZ = MathHelper.cos(f * 1.0F);
-	this.Lleg.rotateAngleZ = MathHelper.cos (f * 1.0F);
-	this.Lleg_1.rotateAngleZ= MathHelper.cos(f * 1.0F);
-	this.Rarm.rotateAngleZ = MathHelper.cos(f * 1.0F); 
-    };
+    protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
+        this.tail1.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+        this.tail2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+        this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
+        this.Larm.rotateAngleZ = MathHelper.cos(f * 0.6662F) * f1;
+        this.Lleg.rotateAngleZ = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+        this.Lleg_1.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+        this.Rarm.rotateAngleZ = MathHelper.cos(f * 1.0F) * 1.0F * f1; 
+    }
+
     @Override 
-    protected void animationAttack(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-    { this.head.rotateAngleZ = (f * 0.50F)* 0.50F * f1;
-     this.jaw.rotateAngleX = (f * 1.0F)* 1.0F * f1;
-    }; 
-     @Override 
-    protected void animationEat(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-    { 
-     this.jaw.rotateAngleX = (f * 0.50F)* 0.50F * f1;
+    protected void animationWalk(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
+        this.Larm.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+        this.Lleg.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+        this.Lleg_1.rotateAngleY= MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+        this.Rarm.rotateAngleY = MathHelper.cos(f * 1.0F) * 1.0F * f1; 
+        this.Larm.rotateAngleZ = MathHelper.cos(f * 1.0F);
+        this.Lleg.rotateAngleZ = MathHelper.cos (f * 1.0F);
+        this.Lleg_1.rotateAngleZ= MathHelper.cos(f * 1.0F);
+        this.Rarm.rotateAngleZ = MathHelper.cos(f * 1.0F); 
+    }
+
+    @Override 
+    protected void animationAttack(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        this.head.rotateAngleZ = (f * 0.50F)* 0.50F * f1;
+        this.jaw.rotateAngleX = (f * 1.0F)* 1.0F * f1;
+    }
+
+    @Override 
+    protected void animationEat(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        this.jaw.rotateAngleX = (f * 0.50F)* 0.50F * f1;
+    }
 }

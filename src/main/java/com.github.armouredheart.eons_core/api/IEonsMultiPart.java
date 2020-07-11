@@ -8,6 +8,7 @@ import com.github.armouredheart.eons_core.common.entity.EonsBeastPartEntity;
 
 // misc imports
 import javax.annotation.Nullable;
+import java.util.List;
 
 public interface IEonsMultiPart {
     // *** ATTRIBUTES ***
@@ -28,14 +29,17 @@ public interface IEonsMultiPart {
     default @Nullable EonsBeastPartEntity getPart(int index) {
         if(index > -1 && index < this.getPartCount()){
             // the index exists
-            return this.getPartsList()[index];
+            return this.getPartsList().get(index);
         } else {
             // the index does not exist
             return null;
         }
     }
 
-    public EonsBeastPartEntity[] getPartsList();
+    /** */
+    public void addPart(EonsBeastPartEntity part);
+
+    public List<EonsBeastPartEntity> getPartsList();
 
     public int getPartCount();
 

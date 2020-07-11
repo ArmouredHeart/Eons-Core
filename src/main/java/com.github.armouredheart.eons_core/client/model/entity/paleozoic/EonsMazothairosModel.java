@@ -152,18 +152,19 @@ public class EonsMazothairosModel<T extends EonsMazothairosEntity> extends EonsE
     }
 
 	@Override 
-protected void animationFly(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)){ 
-	this.haed.rotateAngleY = f3 / (180f / (float) Math.PI);
-        this.haed.rotateAngleX = f4 / (180f / (float) Math.PI);
+    protected void animationFly(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        this.head.rotateAngleY = f3 / (180f / (float) Math.PI);
+        this.head.rotateAngleX = f4 / (180f / (float) Math.PI);
         this.LWING1.rotateAngleZ = MathHelper. cos(f * 0.6662F) * f1;;
         this.LWING2.rotateAngleZ = MathHelper. cos( f * 1.0F) * -1.0F * f1;
         this.LWING3.rotateAngleZ = MathHelper. cos(f * 0.6662F) * f1;;
         this.RWING1.rotateAngleZ = MathHelper. cos(f * 1.0F) * 1.0F * f1;
         this.RWING2.rotateAngleZ = MathHelper. cos(f * 0.6662F + (float) Math.PI) * f1;
         this.RWING3.rotateAngleZ = MathHelper. cos(f * 1.0F) * 1.0F * f1; 
-}; 
+    }
+
 	@Override 
-protected void animationClimb(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-{ this.body.rotateAngleZ = MathHelper. cos(f * 1.0F);
-};
+    protected void animationClimb(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        this.body.rotateAngleZ = MathHelper. cos(f * 1.0F);
+    }
 }

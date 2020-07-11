@@ -74,8 +74,10 @@ public class EonsCtenorhabdotusModel<T extends EonsCtenorhabdotusEntity> extends
         this.bell.render(f5);
         GlStateManager.disableBlend();
     }
+
     @Override 
-protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-{ this.bell.scaleX = MathHelper.cos(f * 0.2F) * f1; };
+    protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        this.bell.scaleX = MathHelper.cos(f * 0.2F) * f1; 
+    }
 
 }

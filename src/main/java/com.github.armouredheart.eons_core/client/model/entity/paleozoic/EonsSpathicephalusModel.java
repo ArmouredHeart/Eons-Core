@@ -106,45 +106,45 @@ public class EonsSpathicephalusModel<T extends EonsSpathicephalusEntity> extends
         this.shape1.render(f5);
         GlStateManager.popMatrix();
     }
+
     @Override 
-protected void animationWalk(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-{
-this.Larm.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
-this.Lleg.rotateAngleX = MathHelper.cos (f * 1.0F) * -1.0F * f1;
-this.Rleg.rotateAngleX = MathHelper.cos(f * 1.0F) * 1.0F * f1;
-this.Rarm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
-this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
-this.neck.rotateAngleX = f4 / (180F / (float) Math.PI);  
-};
-@Override 
-protected void animationAttack(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-{
-this.jaw.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
-this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
-this.neck.rotateAngleX = f4 / (180F / (float) Math.PI);  
-};
+    protected void animationWalk(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        this.Larm.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+        this.Lleg.rotateAngleX = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+        this.Rleg.rotateAngleX = MathHelper.cos(f * 1.0F) * 1.0F * f1;
+        this.Rarm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+        this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
+        this.neck.rotateAngleX = f4 / (180F / (float) Math.PI);  
+    }
+
     @Override 
-protected void animationEat(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-{
-this.jaw.rotateAngleX = MathHelper.cos(f * 0.3F) * f1;
-};
-      @Override 
-protected void animationThreat(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-{
-this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
-this.neck.rotateAngleX = f4 / (180F / (float) Math.PI);  
-this.jaw.rotateAngleX = MathHelper.cos(f * 0.1F);
-this.shape3.rotateAngleX = MathHelper.cos(f * 0.1F);
-};
+    protected void animationAttack(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        this.jaw.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+        this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
+        this.neck.rotateAngleX = f4 / (180F / (float) Math.PI);  
+    }
+
     @Override 
-protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
-{ 
-this.tail.rotateAngleX = MathHelper.cos(f * 0.001F) * f1;
-this.tail.rotateAngleY = MathHelper.cos(f * 1.0F) * f1;
-this.tail_1.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
-this.tail_2.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
-this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
-this.neck.rotateAngleX = f4 / (180F / (float) Math.PI); 
-};
+    protected void animationEat(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        this.jaw.rotateAngleX = MathHelper.cos(f * 0.3F) * f1;
+    }
+    
+    @Override 
+    protected void animationThreat(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
+        this.neck.rotateAngleX = f4 / (180F / (float) Math.PI);  
+        this.jaw.rotateAngleX = MathHelper.cos(f * 0.1F);
+        this.shape3.rotateAngleX = MathHelper.cos(f * 0.1F);
+    }
+
+    @Override 
+    protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        this.tail.rotateAngleX = MathHelper.cos(f * 0.001F) * f1;
+        this.tail.rotateAngleY = MathHelper.cos(f * 1.0F) * f1;
+        this.tail_1.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+        this.tail_2.rotateAngleY = MathHelper.cos (f * 1.0F) * -1.0F * f1;
+        this.neck.rotateAngleY = f3 / (180F / (float) Math.PI);
+        this.neck.rotateAngleX = f4 / (180F / (float) Math.PI); 
+    }
 
 }

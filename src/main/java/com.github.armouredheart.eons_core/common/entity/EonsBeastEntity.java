@@ -3,6 +3,9 @@ package com.github.armouredheart.eons_core.common.entity;
 
 // Minecraft imports
 import net.minecraft.item.ItemStack;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -19,7 +22,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.DamageSource;
 import net.minecraft.nbt.CompoundNBT;
-
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.datasync.DataParameter;
 
 // Forge imports
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -34,7 +39,6 @@ import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.IEonsAnimationState;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
-import com.github.armouredheart.eons_core.common.entity.ai.EonsSex;
 import com.github.armouredheart.eons_core.EonsCore;
 
 // misc imports
@@ -45,11 +49,22 @@ import org.apache.logging.log4j.Logger;
 public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast, IEonsSexuallyDimorphic, IEonsAnimationState {
 
    // *** Attributes ***
+   // DATA
+   private static final DataParameter<Boolean> SLEEPING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+   private static final DataParameter<Boolean> SWIMMING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+   private static final DataParameter<Boolean> GRABBING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+   private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+   private static final DataParameter<Boolean> THREATENING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+   private static final DataParameter<Boolean> SPRINTING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+   private static final DataParameter<Boolean> SNEAKING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+   private static final DataParameter<Boolean> FLYING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);  
+   private static final DataParameter<Byte> SEX = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BYTE);
+
+   // 
    private static final Logger LOGGER = LogManager.getLogger(EonsCore.MOD_ID + " EonsBeastEntity");
    private final EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
    private final EonsDiet diet;
    private final boolean isNocturnal;
-   private EonsSex sex;
    private double threatFactor = 1.0D;
    private double resolveFactor = 1.0D;
 
@@ -68,9 +83,9 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       this.fieldNotes = fieldNotes;
       this.stepHeight = 1.0F;
       this.diet = diet;
-      this.sex = new EonsSex(this, sexRatio);
       this.isNocturnal = isNocturnal;
       this.setCanPickUpLoot(true);
+      IEonsSexuallyDimorphic.assignSex(this, sexRatio);
    }
 
    /** Default Settings EonsBeast constructor*/
@@ -110,6 +125,20 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       return this.diet.isBreedingItem(stack);
    }
 
+   /**
+    * Returns true if the mob is currently able to mate with the specified mob.
+    */
+   @Override
+   public boolean canMateWith(AnimalEntity otherAnimal) {
+      boolean flag = super.canMateWith(otherAnimal);
+      if(otherAnimal instanceof IEonsSexuallyDimorphic) {
+         IEonsSexuallyDimorphic other = (IEonsSexuallyDimorphic) otherAnimal;
+         return flag && this.isOppositeSex(other);
+      } else {
+         return flag;
+      }
+   }
+
    /** */
    public EonsDiet getDiet() {return this.diet;}
 
@@ -122,7 +151,12 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    public boolean isNocturnal() {return this.isNocturnal;}
 
    /** */
-   protected void registerEonsBeastGoals() {}
+   protected void registerGoals() {
+      super.registerGoals();
+      this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.0D));
+      this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+      this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+   }
 
    /** */
    protected float getLocalTemperature() {  
@@ -171,26 +205,76 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    public int getThreat() {return 0 + (int) (this.getHealth() * this.threatFactor);}
 
    /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
-   public int getResolve() {return 0 + (int) (this.getHealth()*this.resolveFactor);}
+   public int getResolve() {return 0 + (int) (this.getHealth() * this.resolveFactor);}
 
-   /** */
+   /** default values are 1.0 for each. */
    protected void setThreatFactorResolveFactor(double threatFactor, double resolveFactor) {
       this.threatFactor = threatFactor;
       this.resolveFactor = resolveFactor;
    }
 
+   @Override
+   protected void registerData() {
+      super.registerData();
+      this.dataManager.register(SWIMMING, Boolean.valueOf(false));
+      this.dataManager.register(SLEEPING, Boolean.valueOf(false));
+      this.dataManager.register(SPRINTING, Boolean.valueOf(false));
+      this.dataManager.register(FLYING, Boolean.valueOf(false));
+      this.dataManager.register(SNEAKING, Boolean.valueOf(false));
+      this.dataManager.register(THREATENING, Boolean.valueOf(false));
+      this.dataManager.register(ATTACKING, Boolean.valueOf(false));
+      this.dataManager.register(GRABBING, Boolean.valueOf(false));
+      this.dataManager.register(SEX, Byte.valueOf((byte) 0));
+   }  
+      
    /** */
-   public boolean isMale() {return this.sex.isMale();}
+   @Override
+   public byte getSexByteData() {return this.dataManager.get(SEX).byteValue();}
 
    /** */
-   public boolean isFemale() {return this.sex.isFemale();}
+   @Override
+   public void setSexByteData(byte data) {this.dataManager.set(SEX, Byte.valueOf(data));}
 
-   /** */
-	@Override
-   public boolean isSwimming() {return this.handleWaterMovement();}
+   @Override
+   public void writeAdditional(CompoundNBT compound) {
+      super.writeAdditional(compound);
+      // animation state data
+      compound.putBoolean("Sprinting", this.isSprinting());
+      compound.putBoolean("Sneaking", this.isSneaking());
+      compound.putBoolean("Threatening", this.isThreatening());
+      compound.putBoolean("Grabbing", this.isGrabbing());
+      compound.putBoolean("Sleeping", this.isSleeping());   
+      compound.putBoolean("Attacking", this.isAttacking());
+      compound.putBoolean("Pouncing", this.isPouncing());
+      compound.putBoolean("Swimming", this.isSwimming());
+      compound.putBoolean("OnShoulder", this.isOnShoulder());
+      compound.putBoolean("Climbing", this.isClimbing());
+      compound.putBoolean("Flying", this.isFlying());
+      compound.putBoolean("Eating", this.isEating());
 
-   /** */
-	@Override
-   public boolean isWalking() {return this.onGround;}
+      // entity data
+      compound.putByte("Sex", this.getSexByteData());
+   }
+
+   @Override
+   public void readAdditional(CompoundNBT compound) {
+      super.readAdditional(compound);
+      // animation state data
+      this.setSprinting(compound.getBoolean("Sprinting"));
+      this.setSneaking(compound.getBoolean("Sneaking"));
+      this.setThreatening(compound.getBoolean("Threatening"));
+      this.setGrabbing(compound.getBoolean("Grabbing"));
+      this.setSleeping(compound.getBoolean("Sleeping"));
+      this.setAttacking(compound.getBoolean("Attacking"));
+      this.setPouncing(compound.getBoolean("Pouncing"));
+      this.setSwimming(compound.getBoolean("Swimming"));
+      this.setOnShoulder(compound.getBoolean("OnShoulder"));
+      this.setClimbing(compound.getBoolean("Climbing"));
+      this.setFlying(compound.getBoolean("Flying"));
+      this.setEating(compound.getBoolean("Eating"));
+
+      // entity data
+      this.setSexByteData(compound.getByte("Sex"));
+   }
 
 }

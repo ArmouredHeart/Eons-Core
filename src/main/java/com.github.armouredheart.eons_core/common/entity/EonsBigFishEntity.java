@@ -18,6 +18,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.datasync.DataParameter;
 
 // Forge imports
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -33,15 +36,24 @@ import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.IEonsAnimationState;
 import com.github.armouredheart.eons_core.common.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
-import com.github.armouredheart.eons_core.common.entity.ai.EonsSex;
 
 // misc imports
 import javax.annotation.Nullable;
 
 public abstract class EonsBigFishEntity extends AbstractFishEntity implements IEonsBeast, IEonsSexuallyDimorphic, IEonsAnimationState {
     // *** Attributes ***
+    // DATA
+    private static final DataParameter<Boolean> SLEEPING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SWIMMING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> GRABBING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> THREATENING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SPRINTING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SNEAKING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FLYING = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BOOLEAN);  
+    private static final DataParameter<Byte> SEX = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BYTE);
+
     private EonsFieldNotes fieldNotes; // pointer to educational notes about lifeform
-    private EonsSex sex;
     private final EonsDiet diet;
     private final boolean isNocturnal;
     private double threatFactor = 1.0D; // default value is 1.0D
@@ -60,9 +72,9 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     protected EonsBigFishEntity(final EntityType<? extends AbstractFishEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
         super(type, world);
         this.diet = diet;
-        this.sex = new EonsSex(this, sexRatio);
         this.isNocturnal = isNocturnal;
         this.setCanPickUpLoot(true);
+        IEonsSexuallyDimorphic.assignSex(this, sexRatio);
     }
 
     /** */
@@ -106,12 +118,6 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     public EonsFieldNotes getFieldNotes(){return fieldNotes;}
 
     /** */
-    public boolean isMale() {return this.sex.isMale();}
-
-    /** */
-    public boolean isFemale() {return this.sex.isFemale();}
-
-    /** */
     @Override
     protected SoundEvent getFlopSound() {return null;}
 
@@ -145,7 +151,25 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     public boolean isWounded() {return IEonsBeast.testForWounds(this, 0.4D, false);}
 
     /** */
-	@Override
-    public boolean isSwimming() {return this.inWater;}
+    @Override
+    public byte getSexByteData() {return this.dataManager.get(SEX).byteValue();}
+
+    /** */
+    @Override
+    public void setSexByteData(byte data) {this.dataManager.set(SEX, Byte.valueOf(data));}
+
+    @Override
+    protected void registerData() {
+        super.registerData();
+        this.dataManager.register(SWIMMING, Boolean.valueOf(false));
+        this.dataManager.register(SLEEPING, Boolean.valueOf(false));
+        this.dataManager.register(SPRINTING, Boolean.valueOf(false));
+        this.dataManager.register(FLYING, Boolean.valueOf(false));
+        this.dataManager.register(SNEAKING, Boolean.valueOf(false));
+        this.dataManager.register(THREATENING, Boolean.valueOf(false));
+        this.dataManager.register(ATTACKING, Boolean.valueOf(false));
+        this.dataManager.register(GRABBING, Boolean.valueOf(false));
+        this.dataManager.register(SEX, Byte.valueOf((byte) 0));
+    }  
 
 }

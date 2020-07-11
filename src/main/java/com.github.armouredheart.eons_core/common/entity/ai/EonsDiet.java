@@ -13,6 +13,7 @@ import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.IFlyingAnimal;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.IInventoryChangedListener;
 
 // Forge imports
 
@@ -65,6 +66,7 @@ public class EonsDiet extends Inventory {
 
     // *** Methods ***
 
+
     /** */
     public void dietTick() {
         ++this.metabolismTimer;
@@ -86,7 +88,7 @@ public class EonsDiet extends Inventory {
                 ItemStack foodStack = decrStackSize(i, 1); 
                 if(!foodStack.isEmpty()) {
                     // digestion successful!
-                    this.updateStomach();
+                    this.updateStomachState();
                     return true;
                 }
             }
@@ -95,7 +97,7 @@ public class EonsDiet extends Inventory {
     }
 
     /** This method should be called when the stomach inventory is changed. */
-    public void updateStomach() {
+    public void updateStomachState() {
 
         // update if this is starving or not
         this.isStarving = this.isEmpty();
@@ -126,7 +128,7 @@ public class EonsDiet extends Inventory {
         if(isEdible(stack.getItem())) {
             // eat item
             ItemStack foodIn = super.addItem(stack);
-            this.updateStomach();
+            this.updateStomachState();
             return foodIn;
         } else {
             // item is not edible
