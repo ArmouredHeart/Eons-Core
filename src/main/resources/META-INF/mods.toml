@@ -4,16 +4,15 @@ loaderVersion="[28,)"
 issueTrackerURL="https://github.com/ArmouredHeart/Eons-Core/issues"
 
 [[mods]]
-modId="eons_core"
+modId="eons-core"
 version="${file.jarVersion}"
 displayName="Eons-Core"
 #updateJSONURL=""
 #displayURL="https://github.com/ArmouredHeart/Eons-Core"
-logoFile="Eons-Core_Logo.png"
+logoFile="EonsCore_Logo.png"
 credits="sample text"
 authors="ArmouredHeart, Accentaur"
-description='''This is Eons-Core.
-It is needed to use other Eons mods.'''
+description='''This is Eons!'''
 # Forge
 [[dependencies.eons_core]]
     modId="forge"
@@ -26,6 +25,6 @@ It is needed to use other Eons mods.'''
 [[dependencies.eons_core]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.14.4]"
+    versionRange="[1.15.2]"
     ordering="NONE"
     side="BOTH"
