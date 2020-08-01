@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 
 // misc imports
 import javax.annotation.Nullable;

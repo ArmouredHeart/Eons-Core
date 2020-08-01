@@ -14,7 +14,7 @@ import com.github.armouredheart.eons_core.common.entity.EonsAmphibianEntity;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsGoToWaterGoal;
 import com.github.armouredheart.eons_core.api.IEonsMoistness;
 import com.github.armouredheart.eons_core.api.IEonsArthropod;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 
 // misc imports

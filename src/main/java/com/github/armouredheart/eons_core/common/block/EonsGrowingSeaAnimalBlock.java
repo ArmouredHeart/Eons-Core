@@ -31,7 +31,7 @@ import net.minecraftforge.common.IShearable;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.block.EonsSeaAnimalBlock;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 
 // misc imports
 import java.util.Random;

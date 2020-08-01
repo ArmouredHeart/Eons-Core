@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3d;
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.EonsGroupFishEntity;
 
 // misc imports

@@ -60,7 +60,7 @@ public final class EonsEntityTypes {
     //public static final RegistryObject<EntityType<EonsCtenorhabdotusEntity>> CTENORHABDOTUS = makeEonsEntity("ctenorhabdotus", EonsCtenorhabdotusEntity::new, EntityClassification.WATER_CREATURE, 0.50F, 0.30F);
     //public static final RegistryObject<EntityType<EonsAnomalocarisEntity>> ANOMALOCARIS = makeEonsEntity("anomalocaris", EonsAnomalocarisEntity::new, EntityClassification.WATER_CREATURE, 0.40F, 0.80F);
     //public static final RegistryObject<EntityType<EonsParadoxidesEntity>> PARADOXIDES = makeEonsEntity("paradoxides",  EonsParadoxidesEntity::new, EntityClassification.WATER_CREATURE, 0.30F, 0.30F);
-    public static final RegistryObject<EntityType<EonsDimetrodonEntity>> DIMETRODON = makeMobEntity("dimetrodon",  EonsDimetrodonEntity::new, EntityClassification.CREATURE, 1.8F, 2.0F, 0x000000, 0xFFFFFF);
+    public static final RegistryObject<EntityType<EonsDimetrodonEntity>> DIMETRODON = makeMobEntity("dimetrodon",  EonsDimetrodonEntity::new, EntityClassification.CREATURE, 1.8F, 2.0F, TRACKING_RANGE, UPDATE_INTERVAL, 0x000000, 0xFFFFFF);
     
     // *** Methods ***
 
@@ -70,12 +70,14 @@ public final class EonsEntityTypes {
      * @param classification
      * @param width
      * @param height
+     * @param tracking_range
+     * @param update_interval
      * @param eggPrimary
      * @param eggSecondary
     */
-    public static <T extends MobEntity> RegistryObject<EntityType<T>> makeMobEntity(String name, EntityType.IFactory<T> factory, EntityClassification classification, float width, float height, int eggPrimary, int eggSecondary) {
+    public static <T extends MobEntity> RegistryObject<EntityType<T>> makeMobEntity(String name, EntityType.IFactory<T> factory, EntityClassification classification, float width, float height, int tracking_range, int update_interval, int eggPrimary, int eggSecondary) {
         // register entity
-        RegistryObject<EntityType<T>> registry_object = ENTITY_TYPES.register(name, () -> EntityType.Builder.create(factory, classification).size(width, height).setTrackingRange(TRACKING_RANGE).setUpdateInterval(UPDATE_INTERVAL).build(name));
+        RegistryObject<EntityType<T>> registry_object = ENTITY_TYPES.register(name, () -> EntityType.Builder.create(factory, classification).size(width, height).setTrackingRange(tracking_range).setUpdateInterval(update_interval).build(name));
         
         // build egg
         /**Item spawnEgg = new SpawnEggItem(registry_object.get(), eggPrimary, eggSecondary, (new Item.Properties()).group(ItemGroup.MISC));

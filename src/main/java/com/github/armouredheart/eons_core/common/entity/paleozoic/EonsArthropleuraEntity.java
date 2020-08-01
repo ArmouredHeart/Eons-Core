@@ -18,7 +18,7 @@ import net.minecraft.block.BlockState;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.EonsBigBeastEntity;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes; 
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import com.github.armouredheart.eons_core.common.entity.EonsBeastPartEntity;
 

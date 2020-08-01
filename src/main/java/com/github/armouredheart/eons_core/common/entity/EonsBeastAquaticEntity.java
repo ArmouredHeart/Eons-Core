@@ -9,7 +9,7 @@ import net.minecraft.entity.EntityType;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.EonsBeastEntity;
 
 // misc imports

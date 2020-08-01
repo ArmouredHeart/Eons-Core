@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.EonsGroupFishEntity;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes; 
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 
 // misc imports
 

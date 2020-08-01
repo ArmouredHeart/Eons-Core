@@ -22,7 +22,7 @@ import com.github.armouredheart.eons_core.common.entity.ai.EonsFightTargetGoal;
 import com.github.armouredheart.eons_core.init.EonsSounds;
 import com.github.armouredheart.eons_core.init.EonsEntityTypes;
 import com.github.armouredheart.eons_core.common.entity.EonsBigFishEntity;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes; 
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import com.github.armouredheart.eons_core.api.IEonsPredator;
 

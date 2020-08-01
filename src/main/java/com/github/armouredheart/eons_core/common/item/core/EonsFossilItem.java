@@ -12,7 +12,7 @@ import net.minecraft.util.SoundEvent;
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.init.EonsItemGroups;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 
 // misc imports
 

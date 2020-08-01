@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.EonsBeastEntity;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes; 
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import com.github.armouredheart.eons_core.api.IEonsPredator;
 

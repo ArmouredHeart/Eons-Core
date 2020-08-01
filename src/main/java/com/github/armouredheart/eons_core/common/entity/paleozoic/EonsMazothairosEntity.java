@@ -13,7 +13,7 @@ import net.minecraft.util.DamageSource;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.EonsArthropodEntity;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 
 // misc imports

@@ -23,7 +23,7 @@ import net.minecraft.nbt.CompoundNBT;
 
 // Eons imports
 import com.github.armouredheart.eons_core.init.EonsSounds;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.api.IEonsToxic;
 
 // misc imports

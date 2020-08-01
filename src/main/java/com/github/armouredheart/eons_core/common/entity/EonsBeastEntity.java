@@ -38,7 +38,7 @@ import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.IEonsAnimationEntity;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import com.github.armouredheart.eons_core.api.EonsAnimationHandler;
 import com.github.armouredheart.eons_core.EonsCore;

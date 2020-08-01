@@ -23,7 +23,7 @@ import net.minecraft.entity.SpawnReason;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.EonsBeastEntity;
-import com.github.armouredheart.eons_core.common.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsGoToWaterGoal;
 import com.github.armouredheart.eons_core.api.IEonsMoistness;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsEatBerriesGoal;
@@ -57,7 +57,7 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     /** */
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new EonsGoToWaterGoal(this, 1.0F, 48));
+        this.goalSelector.addGoal(0, new EonsGoToWaterGoal<EonsAmphibianEntity>(this, 1.0F, 48));
     }
 
     /** */
