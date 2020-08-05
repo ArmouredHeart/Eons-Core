@@ -87,7 +87,7 @@ public class EonsFruitingLeavesBlock extends LeavesBlock implements IGrowable {
             worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
             return ActionResultType.SUCCESS;
         } else {
-            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit); // depreciated by mojang?
         }
     }
 

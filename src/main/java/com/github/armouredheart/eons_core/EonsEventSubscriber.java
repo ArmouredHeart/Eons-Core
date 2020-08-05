@@ -17,6 +17,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.config.ModConfig.Reloading;
@@ -32,6 +33,7 @@ import com.github.armouredheart.eons_core.init.EonsItemGroups;
 import com.github.armouredheart.eons_core.init.EonsBlocks;
 import com.github.armouredheart.eons_core.init.EonsEntityTypes;
 import com.github.armouredheart.eons_core.EonsCore;
+import com.github.armouredheart.eons_core.client.render.entity.paleozoic.*;
 import com.github.armouredheart.eons_core.init.EonsBiomes;
 import com.github.armouredheart.eons_core.common.world.gen.surfacebuilders.EonsSurfaceBuilders;
 
@@ -124,7 +126,10 @@ public final class EonsEventSubscriber {
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
 	public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
-		
+		LOGGER.debug("Registering Entity renderers...");
+		// Register Entity Renderers
+		RenderingRegistry.registerEntityRenderingHandler(EonsEntityTypes.DIMETRODON.get(), EonsDimetrodonRenderer::new);
+
 	}
 
 	/** Cadiboo method */

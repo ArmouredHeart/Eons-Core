@@ -7,6 +7,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 // Forge imports
 
 // Eons imports
+import com.github.armouredheart.eons_core.EonsCore;
 
 // misc imports
 import java.util.ArrayList;
@@ -113,15 +114,15 @@ public class EonsFieldNotes {
         SIDERIAN ("SIDERIAN", NEOARCHEAN, 2630, 2420),
         OXYGENIAN ("OXYGENIAN", PALEOPROTEROZOIC, 2420, 2250),
         EUKAYIAN ("EUKAYIAN", OXYGENIAN, 2250, 2060),
-        COLUMBIAN ("EUKAYIAN", OXYGENIAN, 2060, 1780),
+        COLUMBIAN ("COLUMBIAN", OXYGENIAN, 2060, 1780),
         RODINIAN ("RODINIAN", MESOPROTEROZOIC, 1780, 850),
         CRYOGENIAN ("CRYOGENIAN", NEOPROTEROZOIC, 850, 630),
         EDIACARAN ("EDIACARAN", NEOPROTEROZOIC, 630, 541),
         CAMBRIAN ("CAMBRIAN", PALEOZOIC, 541, 485.4), // explosion!
         ORDOVICIAN ("ORDOVICIAN", PALEOZOIC, 485.4, 443.8), 
         SILURIAN ("SILURIAN", PALEOZOIC, 443.8, 419.2),
-        DEVONIAN ("DEVONIAN", PALEOZOIC, 419.2, 358.9),
-        CARBONIFEROUS ("CARBONIFEROUS", PALEOZOIC, 358.9, 298.9),
+        DEVONIAN ("DEVONIAN", PALEOZOIC, 419.2, 358.9), // age of fishes!
+        CARBONIFEROUS ("CARBONIFEROUS", PALEOZOIC, 358.9, 298.9), // age of insects!
         PERMIAN ("PERMIAN", PALEOZOIC, 298.9, 251.902),
         TRIASSIC ("TRIASSIC", MESOZOIC, 251.902, 201.3), // age of dinosaurs!
         JURASSIC ("JURASSIC", MESOZOIC, 201.3, 145),
@@ -134,19 +135,19 @@ public class EonsFieldNotes {
         private final String NAME;
         private final double START_TIME;
         private final double END_TIME;
-        private final Geon SUPER_GEON;
+        private final Geon PARENT_GEON;
     
         // *** Constructors ***
     
         /**
          * @param name String name of geon
          * @param start_time double when geon started in millions of years ago.
-         * @param super_geon parent geon, null if has no parent
+         * @param parent_geon parent geon, null if has no parent
          * @param end_time double when geon ended in millions of years ago.
          */
-        private Geon(final String name, final @Nullable Geon super_geon, final double start_time, final double end_time) {
+        private Geon(final String name, final @Nullable Geon parent_geon, final double start_time, final double end_time) {
             this.NAME = name;
-            this.SUPER_GEON = super_geon;
+            this.PARENT_GEON = parent_geon;
             this.START_TIME = start_time;
             this.END_TIME = end_time;
         }
@@ -156,8 +157,11 @@ public class EonsFieldNotes {
         /**@return double[start, end] in millions of years ago.*/
         public double[] getTemporalRange() {return new double[]{this.START_TIME, this.END_TIME};}
     
-        /**@return String name of period.*/
-        public String getName(){return this.NAME;}
+        /**@return TranslationTextComponent name of geon.*/
+        public String getName() {return this.NAME;}
+
+        /**@return TranslationTextComponent description of geon*/
+        public TranslationTextComponent getDescription() {return new TranslationTextComponent("education." + EonsCore.MOD_ID + ".geon." + this.NAME.toLowerCase() + "desc");}
 
         /** @return List parents in order [Period, Era, Eon] */
         public List<Geon> getFullRange() {
@@ -168,7 +172,7 @@ public class EonsFieldNotes {
         /** recursive helper method */
         private List<Geon> getFullRangeRecursive(List<Geon> range) {
             range.add(this);
-            if(this.SUPER_GEON == null) {return range;} else {return this.SUPER_GEON.getFullRangeRecursive(range);}
+            if(this.PARENT_GEON == null) {return range;} else {return this.PARENT_GEON.getFullRangeRecursive(range);}
         }
 
     }

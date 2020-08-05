@@ -64,7 +64,7 @@ public class EonsSeaAnimalBlock extends BushBlock implements IEonsLifeForm, IWat
     */
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
         BlockState blockstate = super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-        if (!blockstate.isAir()) {
+        if (!blockstate.isAir(worldIn, currentPos)) {
             worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
         }
         return blockstate;
