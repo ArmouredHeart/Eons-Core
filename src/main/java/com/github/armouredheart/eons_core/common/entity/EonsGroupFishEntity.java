@@ -72,7 +72,6 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	/** */
 	@Override
 	public boolean processInteract(PlayerEntity player, Hand hand) {
-		ItemStack itemstack = player.getHeldItem(hand);
 		IEonsLifeForm.addNotesToJournal(this, player, hand);
 		return super.processInteract(player, hand);
 	}

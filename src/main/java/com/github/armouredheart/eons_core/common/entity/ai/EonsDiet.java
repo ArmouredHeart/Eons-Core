@@ -36,17 +36,19 @@ public class EonsDiet extends Inventory {
 
     // *** Constructors ***
 
-    /** 
-    * @param isOmnivore
-    * @param preyType
-    * @param favouritePrey
-    * @param favouriteFoodsInOrder
-    */
+    /**
+     * 
+     * @param stomachSize
+     * @param isOmnivore
+     * @param preyType
+     * @param favouritePrey
+     * @param favouriteFoodsInOrder
+     */
     public EonsDiet(int stomachSize, boolean isOmnivore, @Nullable EonsPreyType preyType, @Nullable List<Class<? extends LivingEntity>> favouritePrey, @Nullable List<Item> favouriteFoodsInOrder) {
         super(stomachSize);
         this.favouritePrey = favouritePrey;
         this.favouriteFoodsInOrder = favouriteFoodsInOrder;
-        this.isPredator = preyType != null || favouritePrey != null;
+        this.isPredator = (preyType != null || favouritePrey != null);
         this.isOmnivore = isOmnivore;
         this.preyType = preyType;
 
@@ -59,6 +61,11 @@ public class EonsDiet extends Inventory {
     /** Construct non-hunting diet */
     public EonsDiet(int stomachSize, boolean isOmnivore, @Nullable List<Item> favouriteFoodsInOrder) {
         this(stomachSize, isOmnivore, null, null, favouriteFoodsInOrder);
+    }
+
+    /** Construct non-eating diet */
+    public EonsDiet() {
+        this(0, false, null, null, null);
     }
 
     // *** Methods ***

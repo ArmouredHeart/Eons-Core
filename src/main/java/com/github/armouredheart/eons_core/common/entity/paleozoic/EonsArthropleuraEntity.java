@@ -33,8 +33,8 @@ public class EonsArthropleuraEntity extends EonsBigBeastEntity {
     // *** Constructors ***
     public EonsArthropleuraEntity(final EntityType<? extends EonsBigBeastEntity> type, final World world) {
         super(type, world, FIELDNOTES, DIET, 50, false);
-        this.addPart(new EonsBeastPartEntity(this, "head", 2.0F, 1.0F));
-        this.addPart(new EonsBeastPartEntity(this, "tail", 2.0F, 1.0F));
+        this.addPart(new EonsBeastPartEntity<EonsArthropleuraEntity>(this, "head", 2.0F, 1.0F));
+        this.addPart(new EonsBeastPartEntity<EonsArthropleuraEntity>(this, "tail", 2.0F, 1.0F));
     }
 
     // *** Methods ***

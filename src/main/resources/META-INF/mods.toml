@@ -1,6 +1,6 @@
 # Eons-Core
 modLoader="javafml"
-loaderVersion="[28,)"
+loaderVersion="[31,)"
 issueTrackerURL="https://github.com/ArmouredHeart/Eons-Core/issues"
 
 [[mods]]
@@ -8,16 +8,18 @@ modId="eons-core"
 version="${file.jarVersion}"
 displayName="Eons-Core"
 #updateJSONURL=""
-#displayURL="https://github.com/ArmouredHeart/Eons-Core"
+displayURL="https://github.com/ArmouredHeart/Eons-Core"
 logoFile="EonsCore_Logo.png"
 credits="sample text"
 authors="ArmouredHeart, Accentaur"
-description='''This is Eons!'''
+description='''
+Explore the history of life on Earth throughout the eons!
+'''
 # Forge
 [[dependencies.eons_core]]
     modId="forge"
     mandatory=true
-    versionRange="[28,)"
+    versionRange="[31,)"
     ordering="NONE"
     side="BOTH"
 

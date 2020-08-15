@@ -13,6 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsAnimationEntity;
+import com.github.armouredheart.eons_core.api.EonsAnimationHandler;
 
 // misc imports
 
@@ -30,7 +31,15 @@ public interface IEonsAnimationModel<T extends LivingEntity & IEonsAnimationEnti
         renderer.rotateAngleZ = z;
     }
 
-    //
+    /**
+     * @return void; performs animation tasks as directed by EonsAnimationHandler accessed through IEonsAnimationEntity.
+     * @param entityIn
+     * @param limbSwing
+     * @param limbSwingAmount
+     * @param ageInTicks
+     * @param netHeadYaw
+     * @param headPitch
+     */
     default public void doAnimations(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         EonsAnimationHandler handler = entityIn.getAnimationHandler();
         // do movements
@@ -59,6 +68,16 @@ public interface IEonsAnimationModel<T extends LivingEntity & IEonsAnimationEnti
 
     //animationWalk(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
     // override these in model to use them
+
+    /**
+     * 
+     * @param entityIn
+     * @param limbSwing
+     * @param limbSwingAmount
+     * @param ageInTicks
+     * @param netHeadYaw
+     * @param headPitch
+     */
     default public void animationWalk(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
     default public void animationRun(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
     default public void animationSwim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
@@ -72,5 +91,6 @@ public interface IEonsAnimationModel<T extends LivingEntity & IEonsAnimationEnti
     default public void animationClimb(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
     default public void animationOnShoulder(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
     default public void animationSleep(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
-    default public void animationBreathing(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}   
+    default public void animationBreathing(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {} 
+    default public void animationGrab(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}  
 }

@@ -38,6 +38,8 @@ import java.util.List;
 @EventBusSubscriber(modid = EonsCore.MOD_ID)
 public final class EonsEntityTypes {
 
+    // **** NOTE: ALL ENTITY RENDERERS ARE LOCATED IN [com.github.armouredheart.eons_core.EonsEventSubscriber]! ****
+
     // *** Attributes ***
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, EonsCore.MOD_ID);
     private static final List<Item> SPAWN_EGGS = Lists.newArrayList();
@@ -51,18 +53,36 @@ public final class EonsEntityTypes {
     // projectile 
     //public static final RegistryObject<EntityType<EonsSpearEntity>> EONS_SPEAR_ENTITY = makeEonsEntity("eons_spear_entity", EonsSpearEntity::new, EntityClassification.MISC, 0.5F, 0.5F);
 
-    // paleozoic
+    // === paleozoic ===
     //public static final RegistryObject<EntityType<EonsAraxocerasEntity>> ARAXOCERAS = makeEonsEntity("araxoceras", EonsAraxocerasEntity::new, EntityClassification.WATER_CREATURE, 0.3F, 0.3F);
     //public static final RegistryObject<EntityType<EonsBelantseaEntity>> BELANTSEA = makeEonsEntity("belantsea", EonsBelantseaEntity::new, EntityClassification.WATER_CREATURE, 0.3F, 0.31F);
-    //public static final RegistryObject<EntityType<EonsHyneriaEntity>> HYNERIA = makeEonsEntity("hyneria", EonsHyneriaEntity::new, EntityClassification.WATER_CREATURE, 0.8F, 0.8F);
+    //public static final RegistryObject<EntityType<EonsHyneriaEntity>> HYNERIA = makeMobEntity("hyneria", EonsHyneriaEntity::new, EntityClassification.WATER_CREATURE, 0.8F, 0.8F, DEFAULT_TRACKING_RANGE, DEFAULT_UPDATE_INTERVAL, 0x000000, 0xFFFFFF);
     //public static final RegistryObject<EntityType<EonsSpathicephalusEntity>> SPATHICEPHALUS = makeEonsEntity("spathicephalus", EonsSpathicephalusEntity::new, EntityClassification.CREATURE, 0.3F, 0.3F);
     //public static final RegistryObject<EntityType<EonsMazothairosEntity>> MAZOTHAIROS = makeEonsEntity("mazothairos", EonsMazothairosEntity::new, EntityClassification.CREATURE, 0.3F, 0.3F);
-    //public static final RegistryObject<EntityType<EonsCtenorhabdotusEntity>> CTENORHABDOTUS = makeEonsEntity("ctenorhabdotus", EonsCtenorhabdotusEntity::new, EntityClassification.WATER_CREATURE, 0.50F, 0.30F);
-    //public static final RegistryObject<EntityType<EonsAnomalocarisEntity>> ANOMALOCARIS = makeEonsEntity("anomalocaris", EonsAnomalocarisEntity::new, EntityClassification.WATER_CREATURE, 0.40F, 0.80F);
-    //public static final RegistryObject<EntityType<EonsParadoxidesEntity>> PARADOXIDES = makeEonsEntity("paradoxides",  EonsParadoxidesEntity::new, EntityClassification.WATER_CREATURE, 0.30F, 0.30F);
-    public static final RegistryObject<EntityType<EonsDimetrodonEntity>> DIMETRODON = makeMobEntity("dimetrodon", EonsDimetrodonEntity::new, EntityClassification.CREATURE, 1.8F, 2.0F, DEFAULT_TRACKING_RANGE, DEFAULT_UPDATE_INTERVAL, 0x000000, 0xFFFFFF);
     
+    // cambrian
+    public static final RegistryObject<EntityType<EonsCtenorhabdotusEntity>> CTENORHABDOTUS = makeMobEntity("ctenorhabdotus", EonsCtenorhabdotusEntity::new, EntityClassification.WATER_CREATURE, 0.50F, 0.30F, DEFAULT_TRACKING_RANGE, DEFAULT_UPDATE_INTERVAL, 11656161, 1845871);
+    public static final RegistryObject<EntityType<EonsAnomalocarisEntity>> ANOMALOCARIS = makeMobEntity("anomalocaris", EonsAnomalocarisEntity::new, EntityClassification.WATER_CREATURE, 0.40F, 0.80F, DEFAULT_TRACKING_RANGE, DEFAULT_UPDATE_INTERVAL, 4480091, 4984858);
+    public static final RegistryObject<EntityType<EonsParadoxidesEntity>> PARADOXIDES = makeMobEntity("paradoxides",  EonsParadoxidesEntity::new, EntityClassification.WATER_CREATURE, 0.30F, 0.30F, DEFAULT_TRACKING_RANGE, DEFAULT_UPDATE_INTERVAL, 3416087, 6574906);
+    public static final RegistryObject<EntityType<EonsHurdiaEntity>> HURDIA = makeMobEntity("hurdia", EonsHurdiaEntity::new, EntityClassification.WATER_CREATURE, 1F, 1F, DEFAULT_TRACKING_RANGE, DEFAULT_UPDATE_INTERVAL, 5712393, 6981968);
+    public static final RegistryObject<EntityType<EonsDickinsoniaEntity>> DICKINSONIA = makeMobEntity("dickinsonia", EonsDickinsoniaEntity::new, EntityClassification.WATER_CREATURE, 1F, 1F, DEFAULT_TRACKING_RANGE, DEFAULT_UPDATE_INTERVAL, 4075099, 4075099);
+
+    // permian
+    public static final RegistryObject<EntityType<EonsDimetrodonEntity>> DIMETRODON = makeMobEntity("dimetrodon", EonsDimetrodonEntity::new, EntityClassification.CREATURE, 1.8F, 2.0F, DEFAULT_TRACKING_RANGE, DEFAULT_UPDATE_INTERVAL, 0x000000, 0xFFFFFF);
+    // === mesozoic ===
+
+    // === cenoozoic ===
+
     // *** Methods ***
+
+    /** 
+     * @param baseName
+     * @return string name of entity translated via lang file.
+    */
+    private static String getLocalisedName(String baseName) {
+        //TODO implement this method
+        return baseName;
+    }
 
     /** 
      * @param name
@@ -97,18 +117,18 @@ public final class EonsEntityTypes {
     }
 
     /** */
-    public static <E extends Entity> RegistryObject<EntityType<E>> makeEonsEntity(String id, EntityType.IFactory<E> factory, EntityClassification classification){
+    /*public static <E extends Entity> RegistryObject<EntityType<E>> makeEonsEntity(String id, EntityType.IFactory<E> factory, EntityClassification classification){
         return makeEonsEntity(id, factory, classification, 0.6F, 1.8F);
-    }
+    }*/
 
     /** */
-    public static <E extends Entity> RegistryObject<EntityType<E>> makeEonsEntity(String id, EntityType.IFactory<E> factory, EntityClassification classification, float width, float height) {
+    /*public static <E extends Entity> RegistryObject<EntityType<E>> makeEonsEntity(String id, EntityType.IFactory<E> factory, EntityClassification classification, float width, float height) {
         return ENTITY_TYPES.register(id, 
             () -> EntityType.Builder.create(factory, classification)
             .size(width, height).setTrackingRange(EonsEntityTypes.DEFAULT_TRACKING_RANGE)
             .setUpdateInterval(EonsEntityTypes.DEFAULT_UPDATE_INTERVAL)
             .setShouldReceiveVelocityUpdates(true)
             .build(id));
-    }
+    }*/
 
 }
