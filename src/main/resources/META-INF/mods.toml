@@ -5,15 +5,15 @@ issueTrackerURL="https://github.com/ArmouredHeart/Eons-Core/issues"
 
 [[mods]]
 modId="eons-core"
-version="${file.jarVersion}"
-displayName="Eons-Core"
+version="${version}"
+displayName="Eons"
 #updateJSONURL=""
-displayURL="https://github.com/ArmouredHeart/Eons-Core"
+displayURL="not on curseforge yet lol"
 logoFile="EonsCore_Logo.png"
-credits="sample text"
+#credits="sample text"
 authors="ArmouredHeart, Accentaur"
 description='''
-Explore the history of life on Earth throughout the eons!
+Grab your notebook and learn about the history of life on Earth with 300+ prehistoric mobs!
 '''
 # Forge
 [[dependencies.eons_core]]

@@ -11,6 +11,7 @@ import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.IPacket;
@@ -41,12 +42,9 @@ import com.github.armouredheart.eons_core.api.IEonsAnimationEntity;
 import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import com.github.armouredheart.eons_core.api.EonsAnimationHandler;
-import com.github.armouredheart.eons_core.EonsCore;
 
 // misc imports
 import javax.annotation.Nullable;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast, IEonsLifeForm, IEonsSexuallyDimorphic, IEonsAnimationEntity {
 
@@ -55,13 +53,10 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    private static final DataParameter<Byte> SEX = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BYTE);
 
    // 
-   private final EonsAnimationHandler ANIMATION_HANDLER;
-   private static final Logger LOGGER = LogManager.getLogger(EonsCore.MOD_ID + " EonsBeastEntity");
+   private static final EonsAnimationHandler ANIMATION_HANDLER = new EonsAnimationHandler();
    private final EonsFieldNotes FIELD_NOTES; // pointer to educational notes about lifeform
-   private final EonsDiet diet;
-   private final boolean isNocturnal;
-   private double threatFactor = 1.0D;
-   private double resolveFactor = 1.0D;
+   private final EonsDiet DIET;
+   private final boolean IS_NOCTURNAL;
 
    // *** Constructors ***
 
@@ -76,12 +71,10 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
       super(type, world);
       this.FIELD_NOTES = fieldNotes;
-      this.stepHeight = 1.0F;
-      this.diet = diet;
-      this.isNocturnal = isNocturnal;
+      this.DIET = diet;
+      this.IS_NOCTURNAL = isNocturnal;
       this.setCanPickUpLoot(true);
       IEonsSexuallyDimorphic.assignSex(this, sexRatio);
-      this.ANIMATION_HANDLER = new EonsAnimationHandler();
    }
 
    /** Default Settings EonsBeast constructor*/
@@ -95,7 +88,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    @Override
    public void tick() {
       super.tick();
-      this.diet.dietTick();
+      this.DIET.dietTick();
    }
 
    /** */
@@ -118,7 +111,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    */
    @Override
    public boolean isBreedingItem(ItemStack stack) {
-      return this.diet.isBreedingItem(stack);
+      return this.DIET.isBreedingItem(stack);
    }
 
    /**
@@ -136,15 +129,12 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    }
 
    /** */
-   public EonsDiet getDiet() {return this.diet;}
-
-   /** */
-   public boolean isWounded() {return IEonsBeast.testForWounds(this, 0.4D, false);}
+   public EonsDiet getDiet() {return this.DIET;}
 
    public boolean shouldSleep() {return false;}
 
    /** */
-   public boolean isNocturnal() {return this.isNocturnal;}
+   public boolean isNocturnal() {return this.IS_NOCTURNAL;}
 
    /** */
    protected void registerGoals() {
@@ -169,8 +159,6 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       return this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue();
    }
 
-
-
    /** @return EonsFieldNotes object containing educational notes about lifeform.*/
    public EonsFieldNotes getFieldNotes() {
       return this.FIELD_NOTES;
@@ -179,7 +167,6 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    /** */
    @Override
    public boolean processInteract(PlayerEntity player, Hand hand) {
-      ItemStack itemstack = player.getHeldItem(hand);
       IEonsLifeForm.addNotesToJournal(this, player, hand);
       return super.processInteract(player, hand);
    }
@@ -195,50 +182,35 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    @Override
 	public IPacket<?> createSpawnPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
-	}
-   
-   /** Calculated using remaining HP, Personality and Attack damage plus threatBoost.*/
-   public int getThreat() {return 0 + (int) (this.getHealth() * this.threatFactor);}
-
-   /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
-   public int getResolve() {return 0 + (int) (this.getHealth() * this.resolveFactor);}
-
-   /** default values are 1.0 for each. */
-   protected void setThreatFactorResolveFactor(double threatFactor, double resolveFactor) {
-      this.threatFactor = threatFactor;
-      this.resolveFactor = resolveFactor;
-   }
-
+	} 
+      
    @Override
    protected void registerData() {
       super.registerData();
-      this.dataManager.register(SEX, Byte.valueOf((byte) 0));
-   }  
-      
-   /** */
-   @Override
-   public byte getSexByteData() {return this.dataManager.get(SEX).byteValue();}
-
-   /** */
-   @Override
-   public void setSexByteData(byte data) {this.dataManager.set(SEX, Byte.valueOf(data));}
+      IEonsSexuallyDimorphic.registerSexData(this);
+   }
 
    @Override
    public void writeAdditional(CompoundNBT compound) {
       super.writeAdditional(compound);
       // entity data
-      compound.putByte("Sex", this.getSexByteData());
+      IEonsSexuallyDimorphic.writeSexToNBT(this, compound);
    }
 
    @Override
    public void readAdditional(CompoundNBT compound) {
       super.readAdditional(compound);
       // entity data
-      this.setSexByteData(compound.getByte("Sex"));
+      IEonsSexuallyDimorphic.readSexFromNBT(this, compound);
    }
 
    /** */
 	@Override
-   public EonsAnimationHandler getAnimationHandler() {return this.ANIMATION_HANDLER;}
+   public EonsAnimationHandler getAnimationHandler() {return EonsBeastEntity.ANIMATION_HANDLER;}
 
+   @Override
+   public EntityDataManager getEntityDataManager() {return this.dataManager;}
+
+   @Override
+   public DataParameter<Byte> getSexParameter() {return EonsBeastEntity.SEX;}
 }

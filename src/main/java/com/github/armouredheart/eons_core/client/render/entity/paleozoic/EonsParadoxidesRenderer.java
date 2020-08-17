@@ -10,32 +10,32 @@ import net.minecraft.util.ResourceLocation;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsDimetrodonEntity;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsParadoxidesEntity;
 import com.github.armouredheart.eons_core.EonsCore;
+import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphicRenderer;
-import com.github.armouredheart.eons_core.client.model.entity.paleozoic.EonsDimetrodonModel;
+import com.github.armouredheart.eons_core.client.model.entity.paleozoic.EonsParadoxidesModel;
 
 // misc imports
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class EonsDimetrodonRenderer extends MobRenderer<EonsDimetrodonEntity, EonsDimetrodonModel<EonsDimetrodonEntity>> implements IEonsSexuallyDimorphicRenderer {
+public class EonsParadoxidesRenderer extends MobRenderer<EonsParadoxidesEntity, EntityModel<EonsParadoxidesEntity>> implements IEonsSexuallyDimorphicRenderer {
 
     // *** Attributes ***
 
     // *** Constructors ***
 
     /** */
-    public EonsDimetrodonRenderer(final EntityRendererManager manager) {
-        super(manager, new EonsDimetrodonModel<>(), 0.7F);
+    public EonsParadoxidesRenderer(final EntityRendererManager manager) {
+        super(manager, new EonsParadoxidesModel<>(), 0.2F);
     }
 
     // *** Methods ***
 
-    /** */
     @Override
-    public ResourceLocation getEntityTexture(EonsDimetrodonEntity entity) {
-        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, GeonFile.PALEOZOIC, "dimetrodon");
+    public ResourceLocation getEntityTexture(EonsParadoxidesEntity entity) {
+        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, GeonFile.PALEOZOIC, "paradoxides");
     }
 }

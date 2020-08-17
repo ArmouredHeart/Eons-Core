@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "side": "eons-core:block/core/cycas_tree/cycas_log",
+        "end": "eons-core:block/core/cycas_tree/cycas_log"
+    }
+}

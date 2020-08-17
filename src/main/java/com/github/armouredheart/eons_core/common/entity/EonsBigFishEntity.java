@@ -7,6 +7,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.IPacket;
@@ -46,12 +47,10 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     // DATA
     private static final DataParameter<Byte> SEX = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BYTE);
 
-    private final EonsAnimationHandler ANIMATION_HANDLER;
+    private static final EonsAnimationHandler ANIMATION_HANDLER = new EonsAnimationHandler();
     private final EonsFieldNotes FIELD_NOTES; // pointer to educational notes about lifeform
-    private final EonsDiet diet;
-    private final boolean isNocturnal;
-    private double threatFactor = 1.0D; // default value is 1.0D
-    private double resolveFactor = 1.0D; // default value is 1.0D
+    private final EonsDiet DIET;
+    private final boolean IS_NOCTURNAL;
 
     // *** Constructors ***
 
@@ -65,12 +64,11 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     */
     protected EonsBigFishEntity(final EntityType<? extends AbstractFishEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
         super(type, world);
-        this.diet = diet;
+        this.DIET = diet;
         this.FIELD_NOTES = fieldNotes;
-        this.isNocturnal = isNocturnal;
+        this.IS_NOCTURNAL = isNocturnal;
         this.setCanPickUpLoot(true);
         IEonsSexuallyDimorphic.assignSex(this, sexRatio);
-        this.ANIMATION_HANDLER = new EonsAnimationHandler();
     }
 
     /** */
@@ -84,7 +82,7 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     @Override
     public void tick() {
         super.tick();
-        this.diet.dietTick();
+        this.DIET.dietTick();
     }
 
     @Override
@@ -124,42 +122,35 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
 	protected ItemStack getFishBucket() {return null;}
 
     /** */
-    public boolean isNocturnal() {return this.isNocturnal;}
-
-    /** Calculated using remaining HP, Personality and Attack damage plus threatBoost.*/
-    public int getThreat() {return (int) (this.getHealth() * this.threatFactor);}
-
-    /** Calculated using remaining HP and Personality reduced by threat of opponent(s).*/
-    public int getResolve() {return (int) (this.getHealth()*this.resolveFactor);}
-
-    /** Use when mob needs a boost */
-    protected void setThreatFactorResolveFactor(double threatFactor, double resolveFactor) {
-        this.threatFactor = threatFactor;
-        this.resolveFactor = resolveFactor;
-    }
+    public boolean isNocturnal() {return this.IS_NOCTURNAL;}
 
     /** */
-    public EonsDiet getDiet() {return this.diet;}
-
-    /** */
-    public boolean isWounded() {return IEonsBeast.testForWounds(this, 0.4D, false);}
-
-    /** */
-    @Override
-    public byte getSexByteData() {return this.dataManager.get(SEX).byteValue();}
-
-    /** */
-    @Override
-    public void setSexByteData(byte data) {this.dataManager.set(SEX, Byte.valueOf(data));}
+    public EonsDiet getDiet() {return this.DIET;}
 
     @Override
     protected void registerData() {
         super.registerData();
-        this.dataManager.register(SEX, Byte.valueOf((byte) 0));
+        IEonsSexuallyDimorphic.registerSexData(this);
+    }
+
+    @Override
+    public void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        // entity data
+        IEonsSexuallyDimorphic.writeSexToNBT(this, compound);
+    }
+
+    @Override
+    public void readAdditional(CompoundNBT compound) {
+        super.readAdditional(compound);
+        // entity data
+        IEonsSexuallyDimorphic.readSexFromNBT(this, compound);
     }
 
     /** */
 	@Override
-    public EonsAnimationHandler getAnimationHandler() {return this.ANIMATION_HANDLER;}
+    public EonsAnimationHandler getAnimationHandler() {return EonsBigFishEntity.ANIMATION_HANDLER;}
 
+    public EntityDataManager getEntityDataManager() {return this.dataManager;}
+    public DataParameter<Byte> getSexParameter() {return EonsBigFishEntity.SEX;}
 }

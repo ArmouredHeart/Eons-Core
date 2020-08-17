@@ -11,7 +11,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 // Eons imports
-import com.github.armouredheart.eons_core.api.IEonsAnimationModel;
 import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsDickinsoniaEntity;
 
 // misc imports
@@ -24,7 +23,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
  * Created using Tabula 8.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class EonsDickinsoniaModel<T extends EonsDickinsoniaEntity> extends EntityModel<T> implements IEonsAnimationModel<T> {
+public class EonsDickinsoniaModel<T extends EonsDickinsoniaEntity> extends EntityModel<T> {
     public ModelRenderer body;
     public ModelRenderer foot;
     public ModelRenderer shape3;
@@ -94,6 +93,6 @@ public class EonsDickinsoniaModel<T extends EonsDickinsoniaEntity> extends Entit
 
     @Override
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.doAnimations(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+
     }
 }

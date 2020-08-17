@@ -69,7 +69,7 @@ public interface IEonsPredator<P extends MobEntity & IEonsPredator<P>> extends I
             }
 
             if(!preyList.isEmpty()) {
-                target = predator.getLeastThreatening(preyList);
+                target = IEonsBeast.getLeastThreatening(predator, preyList);
             } else {
                 target = null;
             }

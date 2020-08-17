@@ -70,7 +70,7 @@ public class EonsCtenorhabdotusModel<T extends EonsCtenorhabdotusEntity> extends
 
     @Override 
     public void animationBreathing(T entity, float f, float f1, float f2, float f3, float f4) { 
-        this.slowspin.rotateAngleY = f4 / (180F (float) Math.PI); //TODO this is gibberish
+        this.bell.rotateAngleY = MathHelper.cos(f * 180F) * f1;
     }
 
     @Override 

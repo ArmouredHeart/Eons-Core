@@ -98,7 +98,7 @@ public abstract class EonsBigBeastEntity extends EonsBeastEntity implements IEon
 
     /** */
     @Override
-    public boolean isWounded() {return IEonsBeast.testForWounds(this, 0.7D, this.shellBroken);}
+    public boolean isBadCondition() {return super.isBadCondition() || this.shellBroken;}
 
     /**
     * Returns true if other Entities should be prevented from moving through this Entity.

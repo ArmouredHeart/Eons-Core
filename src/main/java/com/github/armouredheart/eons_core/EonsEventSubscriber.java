@@ -115,6 +115,17 @@ public final class EonsEventSubscriber {
 		EonsConfig.onFileChange(event);
 	}
 
+	/** Cadiboo method */
+	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name) {
+		return setup(entry, new ResourceLocation(EonsCore.MOD_ID, name));
+	}
+	
+	/** Cadiboo method */
+	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final ResourceLocation registryName) {
+		entry.setRegistryName(registryName);
+		return entry;
+	}
+
 	/**
 	 * We need to register our renderers on the client because rendering code does not exist on the server
 	 * and trying to use it on a dedicated server will crash the game.
@@ -129,17 +140,6 @@ public final class EonsEventSubscriber {
 		LOGGER.debug("Registering Entity renderers...");
 		// Register Entity Renderers
 		RenderingRegistry.registerEntityRenderingHandler(EonsEntityTypes.DIMETRODON.get(), EonsDimetrodonRenderer::new);
-
-	}
-
-	/** Cadiboo method */
-	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name) {
-		return setup(entry, new ResourceLocation(EonsCore.MOD_ID, name));
-	}
-	
-	/** Cadiboo method */
-	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final ResourceLocation registryName) {
-		entry.setRegistryName(registryName);
-		return entry;
+		RenderingRegistry.registerEntityRenderingHandler(EonsEntityTypes.ANOMALOCARIS.get(), EonsAnomalocarisRenderer::new);
 	}
 }

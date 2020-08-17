@@ -1,0 +1,7 @@
+{
+    "parent": "block/tinted_cross",
+    "textures": {
+        "particle": "eons-core:block/paleozoic/diraphora_nisusia/diraphora_nisusia",
+        "cross": "eons-core:block/paleozoic/diraphora_nisusia/diraphora_nisusia"
+    }
+}

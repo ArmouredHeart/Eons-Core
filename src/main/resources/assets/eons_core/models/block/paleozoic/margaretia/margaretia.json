@@ -1,7 +1,0 @@
-{
-    "parent": "block/tinted_cross",
-    "textures": {
-        "particle": "eons_core:block/paleozoic/margaretia/margaretia",
-        "cross": "eons_core:block/paleozoic/margaretia/margaretia"
-    }
-}

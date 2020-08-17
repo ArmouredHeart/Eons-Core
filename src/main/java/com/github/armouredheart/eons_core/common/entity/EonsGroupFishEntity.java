@@ -100,22 +100,31 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
     @Override
     protected SoundEvent getFlopSound() {return SoundEvents.ENTITY_SALMON_FLOP;}
 
-	/** */
 	@Override
-	public byte getSexByteData() {return this.dataManager.get(SEX).byteValue();}
+    protected void registerData() {
+        super.registerData();
+        IEonsSexuallyDimorphic.registerSexData(this);
+    }
+
+    @Override
+    public void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        // entity data
+        IEonsSexuallyDimorphic.writeSexToNBT(this, compound);
+    }
+
+    @Override
+    public void readAdditional(CompoundNBT compound) {
+        super.readAdditional(compound);
+        // entity data
+        IEonsSexuallyDimorphic.readSexFromNBT(this, compound);
+    }
 
 	/** */
 	@Override
-	public void setSexByteData(byte data) {this.dataManager.set(SEX, Byte.valueOf(data));}
-
-	@Override
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(SEX, Byte.valueOf((byte) 0));
-	}
-
-	/** */
-	@Override
-    public EonsAnimationHandler getAnimationHandler() {return this.ANIMATION_HANDLER;}
+	public EonsAnimationHandler getAnimationHandler() {return this.ANIMATION_HANDLER;}
+	
+	public EntityDataManager getEntityDataManager() {return this.dataManager;}
+	public DataParameter<Byte> getSexParameter() {return EonsGroupFishEntity.SEX;}
 
 }

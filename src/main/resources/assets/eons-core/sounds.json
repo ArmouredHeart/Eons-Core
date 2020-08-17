@@ -1,0 +1,40 @@
+{
+    "music.eons_primal_age": {
+        "sounds": [
+            {
+                "name": "eons-core:music/eons_primal_age",
+                "stream": true
+            }
+        ]
+    },
+
+    "misc.zap": {
+        "sounds": [
+            {
+                "name": "eons-core:misc/zap",
+                "stream": false
+            }
+        ]
+
+    },
+
+    "misc.crack": {
+        "sounds": [
+            {
+                "name": "eons-core:misc/crack",
+                "stream": false
+            }
+        ]
+
+    },
+
+    "arthropod.marine_arthropod_crawling": {
+        "sounds": [
+            {
+                "name": "eons-core:arthropod/marine_arthropod_crawling",
+                "stream": true
+            }
+        ]
+
+    }
+}
