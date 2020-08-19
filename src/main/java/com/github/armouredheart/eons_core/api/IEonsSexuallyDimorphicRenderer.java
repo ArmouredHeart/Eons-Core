@@ -24,7 +24,8 @@ public interface IEonsSexuallyDimorphicRenderer {
      * @param name
      * @return non null resource location of mob texture to use
      */
-    public static <E extends MobEntity & IEonsSexuallyDimorphic> @Nonnull ResourceLocation getEonsMobTexture(E entity, GeonFile geonFolder, String name) {
+    public static <E extends MobEntity & IEonsSexuallyDimorphic> @Nonnull ResourceLocation getEonsMobTexture(E entity, GeonFile geonFolder) {
+        String name = entity.getEntityString().toLowerCase();
         return new ResourceLocation(EonsCore.MOD_ID, "textures/entity/" + geonFolder.toString() + "/" + name + "/" + name + "_" + entity.getSex().toString().toLowerCase() + ".png");
     }
 

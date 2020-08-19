@@ -36,6 +36,6 @@ public class EonsDimetrodonRenderer extends MobRenderer<EonsDimetrodonEntity, Eo
     /** */
     @Override
     public ResourceLocation getEntityTexture(EonsDimetrodonEntity entity) {
-        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, GeonFile.PALEOZOIC, "dimetrodon");
+        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, GeonFile.PALEOZOIC);
     }
 }

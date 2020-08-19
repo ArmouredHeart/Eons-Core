@@ -2,7 +2,6 @@
 package com.github.armouredheart.eons_core.common.entity;
 
 // Minecraft imports
-import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;

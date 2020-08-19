@@ -35,6 +35,6 @@ public class EonsAnomalocarisRenderer extends MobRenderer<EonsAnomalocarisEntity
 
     @Override
     public ResourceLocation getEntityTexture(EonsAnomalocarisEntity entity) {
-        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, GeonFile.PALEOZOIC, "anomalocaris");
+        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, GeonFile.PALEOZOIC);
     }
 }

@@ -36,6 +36,6 @@ public class EonsParadoxidesRenderer extends MobRenderer<EonsParadoxidesEntity, 
 
     @Override
     public ResourceLocation getEntityTexture(EonsParadoxidesEntity entity) {
-        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, GeonFile.PALEOZOIC, "paradoxides");
+        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, GeonFile.PALEOZOIC);
     }
 }
