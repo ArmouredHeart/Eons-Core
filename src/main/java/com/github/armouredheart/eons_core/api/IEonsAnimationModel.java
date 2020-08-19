@@ -67,7 +67,7 @@ public interface IEonsAnimationModel<T extends LivingEntity & IEonsAnimationEnti
     }
 
     //animationWalk(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
-    // override these in model to use them
+    // override these in model to use them 
 
     /**
      * 
