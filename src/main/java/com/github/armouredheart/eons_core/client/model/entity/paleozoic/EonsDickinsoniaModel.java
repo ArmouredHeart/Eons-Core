@@ -4,7 +4,6 @@ package com.github.armouredheart.eons_core.client.model.entity.paleozoic;
 // Minecraft imports
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.util.math.MathHelper;
 
 // Forge imports
 import net.minecraftforge.api.distmarker.Dist;

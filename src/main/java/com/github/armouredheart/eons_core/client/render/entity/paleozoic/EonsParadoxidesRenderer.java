@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsParadoxidesEntity;
 import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
+import com.github.armouredheart.eons_core.api.EonsGeonFile;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphicRenderer;
 import com.github.armouredheart.eons_core.client.model.entity.paleozoic.EonsParadoxidesModel;
 
@@ -36,6 +37,6 @@ public class EonsParadoxidesRenderer extends MobRenderer<EonsParadoxidesEntity, 
 
     @Override
     public ResourceLocation getEntityTexture(EonsParadoxidesEntity entity) {
-        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, GeonFile.PALEOZOIC);
+        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, EonsGeonFile.PALEOZOIC);
     }
 }

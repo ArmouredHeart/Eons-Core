@@ -19,18 +19,18 @@ import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 public class EonsFossilItem extends Item {
 
     // *** Attributes ***
-    private final EonsFieldNotes fieldNotes;
+    private final EonsFieldNotes FIELD_NOTES;
 
     // *** Constructors ***
 
     /** */
     public EonsFossilItem(Item.Properties builder, EonsFieldNotes fieldNotes) {
         super(builder);
-        this.fieldNotes = fieldNotes;
+        this.FIELD_NOTES = fieldNotes;
     }
 
     // *** Methods ***
 
     /** */
-    public EonsFieldNotes getFieldNotes() {return this.fieldNotes;}
+    public EonsFieldNotes getFieldNotes() {return this.FIELD_NOTES;}
 }

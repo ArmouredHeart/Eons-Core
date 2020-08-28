@@ -42,6 +42,7 @@ public final class EonsBlocks {
     public static final RegistryObject<Block> DIRAPHORA_NISUIA = registerBlock("diraphora_nisusia", () -> new EonsSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), null));
     public static final RegistryObject<Block> MARGARETIA = registerBlock("margaretia", () -> new EonsSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), null));
     public static final RegistryObject<Block> CHARNIA = registerBlock("charnia", () -> new EonsGrowingSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), null, false, null, null));
+    public static final RegistryObject<Block> CAMBRIAN_FOSSIL_BLOCK = registerBlock("cambrian_fossil_block", () -> new EonsFossilBlock(Block.Properties.create(Material.ROCK)));
     
     // *** Methods ***
 

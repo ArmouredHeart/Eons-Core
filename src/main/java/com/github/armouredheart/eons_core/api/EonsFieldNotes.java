@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
 
-
-
 public class EonsFieldNotes {
     // *** Attributes ***
     // taxanomy in format: [domain, kingdom, phylum, taxaClass, order, family, genus, species]
@@ -84,7 +82,9 @@ public class EonsFieldNotes {
         // *** Methods ***
     }
 
-    /** */
+    /**
+     * A geon is a span of time
+     */
     public enum Geon {
         // EONS
         HADEAN ("HADEAN", null, 4600, 4031),
@@ -154,16 +154,16 @@ public class EonsFieldNotes {
     
         // *** Methods ***
     
-        /**@return double[start, end] in millions of years ago.*/
+        /**@return double[start, end] in millions of years ago. (inclusive)*/
         public double[] getTemporalRange() {return new double[]{this.START_TIME, this.END_TIME};}
     
-        /**@return TranslationTextComponent name of geon.*/
+        /**@return string name of geon.*/
         public String getName() {return this.NAME;}
 
         /**@return TranslationTextComponent description of geon*/
         public TranslationTextComponent getDescription() {return new TranslationTextComponent("education." + EonsCore.MOD_ID + ".geon." + this.NAME.toLowerCase() + "desc");}
 
-        /** @return List parents in order [Period, Era, Eon] */
+        /**@return List parents in order [Period, Era, Eon] */
         public List<Geon> getFullRange() {
             List<Geon> range = new ArrayList<>();
             return getFullRangeRecursive(range);
