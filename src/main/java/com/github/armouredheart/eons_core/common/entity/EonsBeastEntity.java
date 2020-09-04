@@ -74,7 +74,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       this.DIET = diet;
       this.IS_NOCTURNAL = isNocturnal;
       this.setCanPickUpLoot(true);
-      IEonsSexuallyDimorphic.assignSex(this, sexRatio);
+      IEonsSexuallyDimorphic.assignSexByRatio(this, sexRatio);
    }
 
    /** Default Settings EonsBeast constructor*/

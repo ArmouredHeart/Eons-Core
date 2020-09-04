@@ -24,7 +24,7 @@ public class EonsFossilItem extends Item {
     // *** Constructors ***
 
     /** */
-    public EonsFossilItem(Item.Properties builder, EonsFieldNotes fieldNotes) {
+    public EonsFossilItem(Item.Properties builder, final EonsFieldNotes fieldNotes) {
         super(builder);
         this.FIELD_NOTES = fieldNotes;
     }

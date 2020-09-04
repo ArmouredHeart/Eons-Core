@@ -46,7 +46,7 @@ public abstract class EonsTamableBeastEntity extends TameableEntity implements I
         this.DIET = diet;
         this.IS_NOCTURNAL = isNocturnal;
         this.setCanPickUpLoot(true);
-        IEonsSexuallyDimorphic.assignSex(this, sexRatio);
+        IEonsSexuallyDimorphic.assignSexByRatio(this, sexRatio);
     }
 
     // *** Methods ***

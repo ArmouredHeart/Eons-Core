@@ -20,7 +20,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 public abstract class EonsAdvancedAgeableModel<T extends AgeableEntity> extends EntityModel<T> {
 
     // *** Attributes ***
-    private final float[][] CHILD_STAGES;
+    private final float[][] CHILD_STAGES; // first array is younger stage
     private final boolean IS_CHILD_HEAD_SCALED;
     private int age;
     private final int MAX_AGE;
@@ -31,7 +31,7 @@ public abstract class EonsAdvancedAgeableModel<T extends AgeableEntity> extends 
      * @param isChildHeadScaled
      * @param childStages
      */
-    EonsAdvancedAgeableModel(final boolean isChildHeadScaled, final float[][] childStages) {
+    public EonsAdvancedAgeableModel(final boolean isChildHeadScaled, final float[][] childStages) {
         this(RenderType::getEntityCutoutNoCull, isChildHeadScaled, childStages);
     }    
 
@@ -40,7 +40,7 @@ public abstract class EonsAdvancedAgeableModel<T extends AgeableEntity> extends 
      * @param isChildHeadScaled
      * @param childStages
      */
-    EonsAdvancedAgeableModel(Function<ResourceLocation, RenderType> renderTypeIn, final boolean isChildHeadScaled, final float[][] childStages) {
+    public EonsAdvancedAgeableModel(Function<ResourceLocation, RenderType> renderTypeIn, final boolean isChildHeadScaled, final float[][] childStages) {
         super(renderTypeIn);
         this.IS_CHILD_HEAD_SCALED = isChildHeadScaled;
         this.CHILD_STAGES = childStages;
@@ -58,7 +58,7 @@ public abstract class EonsAdvancedAgeableModel<T extends AgeableEntity> extends 
      * @param childBodyScale
      * @param childBodyOffsetY
      */
-    EonsAdvancedAgeableModel(Function<ResourceLocation, RenderType> renderTypeIn, boolean isChildHeadScaled, float childHeadOffsetY, float childHeadOffsetZ, float childHeadScale, float childBodyScale, float childBodyOffsetY) {
+    public EonsAdvancedAgeableModel(Function<ResourceLocation, RenderType> renderTypeIn, boolean isChildHeadScaled, float childHeadOffsetY, float childHeadOffsetZ, float childHeadScale, float childBodyScale, float childBodyOffsetY) {
         this(renderTypeIn, isChildHeadScaled, new float[][] {{childHeadOffsetY, childHeadOffsetZ, childHeadScale, childBodyScale, childBodyOffsetY}});
     }
 
@@ -73,6 +73,10 @@ public abstract class EonsAdvancedAgeableModel<T extends AgeableEntity> extends 
         if (this.isChild) {
             float[] stage = this.getChildStage();
             matrixStackIn.push();
+            
+            // do tabula compatibility
+            doTabulaScaling(matrixStackIn);
+
             if (this.IS_CHILD_HEAD_SCALED) {
                 float f = 1.5F / stage[0];
                 matrixStackIn.scale(f, f, f);
@@ -92,12 +96,17 @@ public abstract class EonsAdvancedAgeableModel<T extends AgeableEntity> extends 
             });
             matrixStackIn.pop();
         } else {
+            matrixStackIn.push();
+            // do tabula compatibility
+            doTabulaScaling(matrixStackIn);
+
             this.getHeadParts().forEach((head_part) -> {
                 head_part.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
             });
             this.getBodyParts().forEach((body_part) -> {
                 body_part.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
             });
+            matrixStackIn.pop();
         }
     }
 
@@ -125,4 +134,23 @@ public abstract class EonsAdvancedAgeableModel<T extends AgeableEntity> extends 
     protected abstract Iterable<ModelRenderer> getHeadParts();
 
     protected abstract Iterable<ModelRenderer> getBodyParts();
+
+    /** 
+     * @return modelScale variable as seen in tabula. Returns unit vector by default
+    */
+    protected float[] getModelScale() {return new float[]{1.0F, 1.0F, 1.0F};}
+
+    /**
+     * @param matrixStackIn
+     * @return false if getModelScale is wrong length
+     */
+    protected boolean doTabulaScaling(MatrixStack matrixStackIn) {
+        float[] modelScale = this.getModelScale();
+        if(modelScale.length == 3) {
+            matrixStackIn.scale(modelScale[0], modelScale[1], modelScale[2]);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

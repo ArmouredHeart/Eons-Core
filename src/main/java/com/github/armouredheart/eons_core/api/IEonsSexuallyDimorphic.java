@@ -44,7 +44,7 @@ public interface IEonsSexuallyDimorphic {
      * @param entity extends LivingEntity & IEonsSexuallyDimorphic
      * @param sexRatio
      */
-    public static <E extends LivingEntity & IEonsSexuallyDimorphic> void assignSex(E entity, int sexRatio) {
+    public static <E extends LivingEntity & IEonsSexuallyDimorphic> void assignSexByRatio(E entity, int sexRatio) {
         if(sexRatio < 0) {
             // sexless, set to unisex
             assignSex(entity, EonsSex.UNISEX);

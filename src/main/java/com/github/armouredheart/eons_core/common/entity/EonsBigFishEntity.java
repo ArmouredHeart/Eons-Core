@@ -68,7 +68,7 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
         this.FIELD_NOTES = fieldNotes;
         this.IS_NOCTURNAL = isNocturnal;
         this.setCanPickUpLoot(true);
-        IEonsSexuallyDimorphic.assignSex(this, sexRatio);
+        IEonsSexuallyDimorphic.assignSexByRatio(this, sexRatio);
     }
 
     /** */
