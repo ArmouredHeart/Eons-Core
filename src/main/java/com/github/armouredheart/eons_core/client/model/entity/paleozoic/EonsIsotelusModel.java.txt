@@ -1,0 +1,183 @@
+  
+// package
+package com.github.armouredheart.eons_core.client.model.entity.paleozoic;
+
+// Minecraft imports
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.math.MathHelper;
+
+// Forge imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+// Eons imports
+import com.github.armouredheart.eons_core.api.IEonsAnimationModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsAnomalocarisEntity;
+
+// misc imports
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+/**
+ * Isotelus - Accentaur
+ * Created using Tabula 8.0.0
+ */
+@OnlyIn(Dist.CLIENT)
+public class EonsIsotelusModel<Textends EonsIsotelusEntity> extends EntityModel<T> implements IEonsAnimationModel<T> {
+    public float[] modelScale = new float[] { 0.6F, 0.6F, 0.6F };
+    public ModelRenderer body;
+    public ModelRenderer HEAD;
+    public ModelRenderer dome;
+    public ModelRenderer legsL;
+    public ModelRenderer legsR;
+    public ModelRenderer dome_1;
+    public ModelRenderer spike;
+    public ModelRenderer eye;
+    public ModelRenderer eye_1;
+    public ModelRenderer spike_1;
+    public ModelRenderer dome_2;
+    public ModelRenderer dome_3;
+    public ModelRenderer dome_4;
+    public ModelRenderer dome_5;
+    public ModelRenderer antenna;
+    public ModelRenderer antenna_1;
+    public ModelRenderer dome_6;
+    public ModelRenderer dome_7;
+    public ModelRenderer legsL2;
+    public ModelRenderer legsR2;
+    public ModelRenderer dome_8;
+    public ModelRenderer dome_9;
+
+    public EonsIsotelusModel() {
+        this.textureWidth = 64;
+        this.textureHeight = 64;
+        this.dome_1 = new ModelRenderer(this, 0, 19);
+        this.dome_1.setRotationPoint(0.0F, 0.0F, -4.9F);
+        this.dome_1.addBox(-6.0F, -1.5F, 0.0F, 12.0F, 3.0F, 3.0F, 0.0F, 0.0F, 0.0F);
+        this.body = new ModelRenderer(this, 0, 0);
+        this.body.setRotationPoint(0.0F, 20.8F, 1.0F);
+        this.body.addBox(-6.5F, -1.5F, -4.5F, 13.0F, 4.0F, 9.0F, 0.0F, 0.0F, 0.0F);
+        this.dome_4 = new ModelRenderer(this, 41, 0);
+        this.dome_4.setRotationPoint(0.0F, 0.5F, -1.0F);
+        this.dome_4.addBox(-4.0F, -0.5F, 0.0F, 8.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F);
+        this.antenna_1 = new ModelRenderer(this, 5, 4);
+        this.antenna_1.setRotationPoint(2.0F, 0.5F, 0.2F);
+        this.antenna_1.addBox(0.0F, 0.0F, 0.0F, 0.3F, 1.0F, 5.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(antenna_1, 3.141592653589793F, -0.46792276313861597F, 0.0F);
+        this.dome_7 = new ModelRenderer(this, 24, 25);
+        this.dome_7.setRotationPoint(0.0F, 0.4F, 6.3F);
+        this.dome_7.addBox(-5.0F, -1.0F, 0.0F, 10.0F, 1.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(dome_7, 0.46792276313861597F, 3.141592653589793F, 0.0F);
+        this.eye_1 = new ModelRenderer(this, 0, 0);
+        this.eye_1.setRotationPoint(-4.0F, -1.5F, -1.0F);
+        this.eye_1.addBox(-0.5F, -0.5F, -0.5F, 1.0F, 1.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(eye_1, 0.0F, 0.0F, 0.7853981633974483F);
+        this.dome_9 = new ModelRenderer(this, 22, 28);
+        this.dome_9.setRotationPoint(0.0F, 0.4F, -1.7F);
+        this.dome_9.addBox(-4.0F, -0.5F, 0.0F, 8.0F, 1.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(dome_9, 0.45378560551852565F, 0.0F, 0.0F);
+        this.antenna = new ModelRenderer(this, 5, 5);
+        this.antenna.setRotationPoint(-2.0F, 0.2F, 0.2F);
+        this.antenna.addBox(0.0F, 0.0F, 0.0F, 0.3F, 1.0F, 5.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(antenna, 3.141592653589793F, 0.46792276313861597F, 0.0F);
+        this.HEAD = new ModelRenderer(this, 0, 13);
+        this.HEAD.setRotationPoint(0.0F, 0.6F, -5.5F);
+        this.HEAD.addBox(-7.0F, -1.5F, -2.0F, 14.0F, 3.0F, 3.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(HEAD, 0.0911061832922575F, 0.0F, 0.0F);
+        this.dome_6 = new ModelRenderer(this, 0, 25);
+        this.dome_6.setRotationPoint(0.0F, 0.5F, 7.0F);
+        this.dome_6.addBox(-5.0F, -1.0F, 0.0F, 10.0F, 2.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(dome_6, 0.0F, 3.141592653589793F, 0.0F);
+        this.legsR2 = new ModelRenderer(this, 6, 28);
+        this.legsR2.setRotationPoint(4.0F, 1.5F, 2.0F);
+        this.legsR2.addBox(0.0F, 0.0F, -4.0F, 0.0F, 1.0F, 8.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(legsR2, 0.0F, -0.18203784630933073F, 0.0F);
+        this.dome_8 = new ModelRenderer(this, 22, 28);
+        this.dome_8.setRotationPoint(0.0F, 0.5F, -2.0F);
+        this.dome_8.addBox(-4.0F, -0.5F, 0.0F, 8.0F, 1.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.legsR = new ModelRenderer(this, 6, 28);
+        this.legsR.setRotationPoint(-5.0F, 2.5F, -4.0F);
+        this.legsR.addBox(0.0F, -0.1F, 0.0F, 0.0F, 1.0F, 8.0F, 0.0F, 0.0F, 0.0F);
+        this.spike_1 = new ModelRenderer(this, 35, 0);
+        this.spike_1.setRotationPoint(-6.0F, 0.4F, -1.0F);
+        this.spike_1.addBox(-1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(spike_1, 0.0F, -0.28972466248896145F, 0.0F);
+        this.dome_5 = new ModelRenderer(this, 41, 2);
+        this.dome_5.setRotationPoint(0.0F, 0.4F, -0.7F);
+        this.dome_5.addBox(-4.0F, -0.5F, 0.0F, 8.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(dome_5, 0.5569345616482294F, 0.0F, 0.0F);
+        this.eye = new ModelRenderer(this, 0, 0);
+        this.eye.setRotationPoint(4.0F, -1.5F, -1.0F);
+        this.eye.addBox(-0.5F, -0.5F, -0.5F, 1.0F, 1.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(eye, 0.0F, 0.0F, -0.7853981633974483F);
+        this.dome_2 = new ModelRenderer(this, 35, 5);
+        this.dome_2.setRotationPoint(0.0F, 0.5F, -2.0F);
+        this.dome_2.addBox(-5.0F, -1.0F, 0.0F, 10.0F, 2.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.dome_3 = new ModelRenderer(this, 30, 22);
+        this.dome_3.setRotationPoint(0.0F, 0.4F, -1.3F);
+        this.dome_3.addBox(-5.0F, -1.0F, 0.0F, 10.0F, 1.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(dome_3, 0.46792276313861597F, 0.0F, 0.0F);
+        this.legsL = new ModelRenderer(this, 6, 28);
+        this.legsL.setRotationPoint(5.0F, 2.5F, -4.0F);
+        this.legsL.addBox(0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 8.0F, 0.0F, 0.0F, 0.0F);
+        this.legsL2 = new ModelRenderer(this, 6, 28);
+        this.legsL2.setRotationPoint(-4.0F, 1.5F, 2.0F);
+        this.legsL2.addBox(0.0F, 0.0F, -4.0F, 0.0F, 1.0F, 8.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(legsL2, 0.0F, 0.18203784630933073F, 0.0F);
+        this.spike = new ModelRenderer(this, 35, 0);
+        this.spike.setRotationPoint(6.0F, 0.4F, -2.0F);
+        this.spike.addBox(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(spike, 0.0F, 0.28972466248896145F, 0.0F);
+        this.dome = new ModelRenderer(this, 29, 14);
+        this.dome.setRotationPoint(0.0F, 0.7F, 4.1F);
+        this.dome.addBox(-6.0F, -1.5F, 0.0F, 12.0F, 3.0F, 5.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(dome, -0.0911061832922575F, 0.0F, 0.0F);
+        this.HEAD.addChild(this.dome_1);
+        this.dome_2.addChild(this.dome_4);
+        this.dome_4.addChild(this.antenna_1);
+        this.dome.addChild(this.dome_7);
+        this.HEAD.addChild(this.eye_1);
+        this.dome_6.addChild(this.dome_9);
+        this.dome_4.addChild(this.antenna);
+        this.body.addChild(this.HEAD);
+        this.dome.addChild(this.dome_6);
+        this.dome.addChild(this.legsR2);
+        this.dome_6.addChild(this.dome_8);
+        this.body.addChild(this.legsR);
+        this.HEAD.addChild(this.spike_1);
+        this.dome_2.addChild(this.dome_5);
+        this.HEAD.addChild(this.eye);
+        this.dome_1.addChild(this.dome_2);
+        this.dome_1.addChild(this.dome_3);
+        this.body.addChild(this.legsL);
+        this.dome.addChild(this.legsL2);
+        this.HEAD.addChild(this.spike);
+        this.body.addChild(this.dome);
+    }
+
+    @Override
+    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) { 
+        matrixStackIn.push();
+        matrixStackIn.scale(modelScale[0], modelScale[1], modelScale[2]);
+        ImmutableList.of(this.body).forEach((modelRenderer) -> { 
+            modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        });
+        matrixStackIn.pop();
+    }
+
+    @Override
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
+
+    /**
+     * This is a helper function from Tabula to set the rotation of model parts
+     */
+    @Override 
+protected void animationWalk(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
+{ 
+this.HEAD.rotateAngleY = f3 / (45F / (float) Math.PI);
+this.HEAD.rotateAngleX = f4 / (45F / (float) Math.PI);
+};
+
+    }
+}

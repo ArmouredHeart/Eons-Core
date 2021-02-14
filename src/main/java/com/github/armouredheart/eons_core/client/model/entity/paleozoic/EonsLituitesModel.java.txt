@@ -1,0 +1,159 @@
+  
+// package
+package com.github.armouredheart.eons_core.client.model.entity.paleozoic;
+
+// Minecraft imports
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.math.MathHelper;
+
+// Forge imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+// Eons imports
+import com.github.armouredheart.eons_core.api.IEonsAnimationModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsAnomalocarisEntity;
+
+// misc imports
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+
+/**
+ * Lituites  - Accentaur
+ * Created using Tabula 8.0.0
+ */
+@OnlyIn(Dist.CLIENT)
+public class EonsLituitesModel<Textends EonsLituitesEntity> extends EntityModel<T> implements IEonsAnimationModel<T> {
+    public ModelRenderer shell1;
+    public ModelRenderer shell2;
+    public ModelRenderer head;
+    public ModelRenderer shell3;
+    public ModelRenderer shell2_1;
+    public ModelRenderer shell2_2;
+    public ModelRenderer shell2_3;
+    public ModelRenderer shell2_4;
+    public ModelRenderer eyeL;
+    public ModelRenderer part3;
+    public ModelRenderer tenticalTL;
+    public ModelRenderer tenticalBL;
+    public ModelRenderer tenticalTR;
+    public ModelRenderer tenticalBR;
+    public ModelRenderer tenticalT;
+    public ModelRenderer tenticalB;
+    public ModelRenderer eyeR;
+
+    public EonsLituitesModel() {
+        this.textureWidth = 64;
+        this.textureHeight = 32;
+        this.shell3 = new ModelRenderer(this, 24, 0);
+        this.shell3.setRotationPoint(0.0F, -0.1F, 3.6F);
+        this.shell3.addBox(-0.5F, -0.5F, 0.0F, 1.0F, 1.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(shell3, -0.1464331302344367F, 0.0F, 0.0F);
+        this.eyeL = new ModelRenderer(this, 12, 0);
+        this.eyeL.setRotationPoint(0.0F, 0.0F, -1.2F);
+        this.eyeL.addBox(0.0F, -0.5F, -0.5F, 1.0F, 1.0F, 1.0F, 0.0F, -0.1F, -0.1F);
+        this.tenticalT = new ModelRenderer(this, 44, 0);
+        this.tenticalT.mirror = true;
+        this.tenticalT.setRotationPoint(0.0F, -0.5F, -2.0F);
+        this.tenticalT.addBox(-0.5F, -0.5F, -3.0F, 1.0F, 1.0F, 3.0F, -0.3F, -0.3F, 0.0F);
+        this.setRotateAngle(tenticalT, 8.72664639000881E-4F, 0.0F, 0.0F);
+        this.eyeR = new ModelRenderer(this, 12, 0);
+        this.eyeR.setRotationPoint(0.0F, 0.0F, -1.2F);
+        this.eyeR.addBox(-1.0F, -0.5F, -0.5F, 1.0F, 1.0F, 1.0F, 0.0F, -0.1F, -0.1F);
+        this.tenticalTR = new ModelRenderer(this, 44, 0);
+        this.tenticalTR.setRotationPoint(-0.4F, -0.3F, -2.0F);
+        this.tenticalTR.addBox(-0.5F, -0.5F, -3.0F, 1.0F, 1.0F, 3.0F, -0.3F, -0.3F, 0.0F);
+        this.setRotateAngle(tenticalTR, -5.235987638949542E-4F, 0.0F, 0.5262167628183876F);
+        this.shell2_4 = new ModelRenderer(this, 0, 0);
+        this.shell2_4.setRotationPoint(0.0F, -0.2F, 1.6F);
+        this.shell2_4.addBox(-0.5F, -0.5F, 0.0F, 1.0F, 1.0F, 1.0F, -0.4F, 0.0F, 0.0F);
+        this.setRotateAngle(shell2_4, 1.992642375043993F, 0.0F, 0.0F);
+        this.tenticalB = new ModelRenderer(this, 44, 0);
+        this.tenticalB.setRotationPoint(0.0F, 0.5F, -2.0F);
+        this.tenticalB.addBox(-0.5F, -0.5F, -3.0F, 1.0F, 1.0F, 3.0F, -0.3F, -0.3F, 0.0F);
+        this.setRotateAngle(tenticalB, 3.4906584259663615E-4F, 0.0F, 0.0F);
+        this.part3 = new ModelRenderer(this, 24, 0);
+        this.part3.setRotationPoint(0.0F, 0.0F, -2.0F);
+        this.part3.addBox(-0.5F, -0.5F, -0.5F, 1.0F, 1.0F, 1.0F, -0.3F, -0.3F, -0.3F);
+        this.setRotateAngle(part3, -0.7321656345274267F, 0.0F, 0.0F);
+        this.shell1 = new ModelRenderer(this, 0, 0);
+        this.shell1.setRotationPoint(0.0F, 21.0F, -2.3F);
+        this.shell1.addBox(-1.0F, -1.0F, -2.0F, 2.0F, 2.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(shell1, 0.23457224414434488F, 0.0F, 0.0F);
+        this.shell2_2 = new ModelRenderer(this, 30, 0);
+        this.shell2_2.mirror = true;
+        this.shell2_2.setRotationPoint(0.0F, 0.0F, 1.5F);
+        this.shell2_2.addBox(-0.5F, -0.5F, 0.0F, 1.0F, 1.0F, 2.0F, -0.2F, 0.0F, 0.0F);
+        this.setRotateAngle(shell2_2, 1.5531684640654986F, 0.0F, 0.0F);
+        this.tenticalBL = new ModelRenderer(this, 44, 0);
+        this.tenticalBL.setRotationPoint(0.4F, 0.2F, -2.0F);
+        this.tenticalBL.addBox(-0.5F, -0.5F, -3.0F, 1.0F, 1.0F, 3.0F, -0.3F, -0.3F, 0.0F);
+        this.setRotateAngle(tenticalBL, 0.0F, 0.0013962633703865446F, 0.4982914881285756F);
+        this.tenticalTL = new ModelRenderer(this, 44, 0);
+        this.tenticalTL.setRotationPoint(0.4F, -0.3F, -2.0F);
+        this.tenticalTL.addBox(-0.5F, -0.5F, -3.0F, 1.0F, 1.0F, 3.0F, -0.3F, -0.3F, 0.0F);
+        this.setRotateAngle(tenticalTL, 0.0F, 0.0013962633703865446F, -0.4103269111386085F);
+        this.shell2 = new ModelRenderer(this, 12, 0);
+        this.shell2.setRotationPoint(0.0F, 0.0F, 1.7F);
+        this.shell2.addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 4.0F, -0.2F, -0.2F, 0.0F);
+        this.setRotateAngle(shell2, -0.08796459363472393F, 0.0F, 0.0F);
+        this.head = new ModelRenderer(this, 36, 0);
+        this.head.setRotationPoint(0.0F, 0.1F, -1.6F);
+        this.head.addBox(-1.0F, -1.0F, -2.0F, 2.0F, 2.0F, 2.0F, -0.2F, -0.2F, 0.0F);
+        this.setRotateAngle(head, -0.08796459363472393F, 0.0F, 0.0F);
+        this.shell2_3 = new ModelRenderer(this, 20, 0);
+        this.shell2_3.setRotationPoint(0.0F, 0.4F, 1.5F);
+        this.shell2_3.addBox(-0.5F, -0.5F, 0.0F, 1.0F, 1.0F, 2.0F, -0.3F, 0.0F, 0.0F);
+        this.setRotateAngle(shell2_3, 1.5707963267948966F, 0.0F, 0.0F);
+        this.tenticalBR = new ModelRenderer(this, 44, 0);
+        this.tenticalBR.setRotationPoint(-0.4F, 0.2F, -2.0F);
+        this.tenticalBR.addBox(-0.5F, -0.5F, -3.0F, 1.0F, 1.0F, 3.0F, -0.3F, -0.3F, 0.0F);
+        this.setRotateAngle(tenticalBR, 0.0F, 3.4906584259663615E-4F, -0.38100537437878157F);
+        this.shell2_1 = new ModelRenderer(this, 8, 0);
+        this.shell2_1.mirror = true;
+        this.shell2_1.setRotationPoint(0.0F, 0.0F, 3.6F);
+        this.shell2_1.addBox(-0.5F, -0.5F, 0.0F, 1.0F, 1.0F, 2.0F, -0.1F, 0.0F, 0.0F);
+        this.setRotateAngle(shell2_1, 0.879645969636753F, 0.0F, 0.0F);
+        this.shell2.addChild(this.shell3);
+        this.head.addChild(this.eyeL);
+        this.head.addChild(this.tenticalT);
+        this.head.addChild(this.eyeR);
+        this.head.addChild(this.tenticalTR);
+        this.shell2_3.addChild(this.shell2_4);
+        this.head.addChild(this.tenticalB);
+        this.head.addChild(this.part3);
+        this.shell2_1.addChild(this.shell2_2);
+        this.head.addChild(this.tenticalBL);
+        this.head.addChild(this.tenticalTL);
+        this.shell1.addChild(this.shell2);
+        this.shell1.addChild(this.head);
+        this.shell2_2.addChild(this.shell2_3);
+        this.head.addChild(this.tenticalBR);
+        this.shell3.addChild(this.shell2_1);
+    }
+
+    @Override
+    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) { 
+        ImmutableList.of(this.shell1).forEach((modelRenderer) -> { 
+            modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        });
+    }
+
+    @Override
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
+
+  @Override 
+protected void animationSwim(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
+{
+this.tenticalT.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticalTR.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticalTL.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticalBR.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticalBL.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticalB.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+ };
+
+    }
+}

@@ -136,11 +136,12 @@ public abstract class EonsAdvancedAgeableModel<T extends AgeableEntity> extends 
     protected abstract Iterable<ModelRenderer> getBodyParts();
 
     /** 
-     * @return modelScale variable as seen in tabula. Returns unit vector by default
+     * @return modelScale variable as seen in tabula. Returns unit vector `{1.0F, 1.0F, 1.0F}` by default.
     */
     protected float[] getModelScale() {return new float[]{1.0F, 1.0F, 1.0F};}
 
     /**
+     * Tabula compatibility method
      * @param matrixStackIn
      * @return false if getModelScale is wrong length
      */

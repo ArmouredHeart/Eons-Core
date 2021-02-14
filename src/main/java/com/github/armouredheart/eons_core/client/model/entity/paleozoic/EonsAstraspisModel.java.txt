@@ -1,0 +1,139 @@
+  
+// package
+package com.github.armouredheart.eons_core.client.model.entity.paleozoic;
+
+// Minecraft imports
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.math.MathHelper;
+
+// Forge imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+// Eons imports
+import com.github.armouredheart.eons_core.api.IEonsAnimationModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsAnomalocarisEntity;
+
+// misc imports
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+/**
+ * astraspis - Accentaur
+ * Created using Tabula 8.0.0
+ */
+@OnlyIn(Dist.CLIENT)
+public class EonsAstraspisModel<Textends EonsAstraspisEntity> extends EntityModel<T> implements IEonsAnimationModel<T> {
+    public float[] modelScale = new float[] { 0.25F, 0.25F, 0.25F };
+    public ModelRenderer head;
+    public ModelRenderer tail1;
+    public ModelRenderer chin;
+    public ModelRenderer head2;
+    public ModelRenderer stomach;
+    public ModelRenderer joint1;
+    public ModelRenderer tail2;
+    public ModelRenderer fin;
+    public ModelRenderer fin_1;
+    public ModelRenderer fin_2;
+    public ModelRenderer fin_3;
+    public ModelRenderer fin_4;
+    public ModelRenderer Leye;
+    public ModelRenderer Reye;
+
+    public EonsAstraspisModel() {
+        this.textureWidth = 64;
+        this.textureHeight = 32;
+        this.head = new ModelRenderer(this, 0, 0);
+        this.head.setRotationPoint(0.7F, 22.1F, -6.0F);
+        this.head.addBox(-2.5F, -1.5F, 0.0F, 5.0F, 3.0F, 3.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(head, 0.18203784630933073F, 0.0F, 0.0F);
+        this.joint1 = new ModelRenderer(this, 13, 0);
+        this.joint1.setRotationPoint(0.0F, 0.0F, 5.0F);
+        this.joint1.addBox(-0.5F, -0.5F, -0.5F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F);
+        this.stomach = new ModelRenderer(this, 26, 0);
+        this.stomach.setRotationPoint(0.0F, 1.0F, -0.5F);
+        this.stomach.addBox(-1.5F, -1.0F, -1.0F, 3.0F, 2.0F, 6.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(stomach, 0.18203784630933073F, 0.0F, 0.0F);
+        this.Reye = new ModelRenderer(this, 28, 0);
+        this.Reye.setRotationPoint(-1.9F, -0.9F, -2.6F);
+        this.Reye.addBox(-0.5F, -0.5F, -0.5F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(Reye, 0.0F, -0.5864306020384839F, 0.0F);
+        this.fin_1 = new ModelRenderer(this, 56, 3);
+        this.fin_1.setRotationPoint(0.0F, 0.8F, 5.0F);
+        this.fin_1.addBox(-0.5F, -1.0F, -1.0F, 1.0F, 2.0F, 2.0F, -0.1F, 0.0F, 0.0F);
+        this.setRotateAngle(fin_1, -0.3186971254089062F, 0.0F, 0.0F);
+        this.fin_3 = new ModelRenderer(this, 48, 4);
+        this.fin_3.setRotationPoint(0.0F, -0.4F, 1.6F);
+        this.fin_3.addBox(-0.5F, -1.0F, -1.0F, 1.0F, 2.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(fin_3, 2.023185636953894F, 0.0F, 0.0F);
+        this.chin = new ModelRenderer(this, 6, 6);
+        this.chin.setRotationPoint(0.0F, 1.1F, 0.0F);
+        this.chin.addBox(-2.0F, -0.5F, -3.0F, 4.0F, 1.0F, 3.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(chin, -0.36529741776873537F, 0.0F, 0.0F);
+        this.fin_2 = new ModelRenderer(this, 52, 0);
+        this.fin_2.setRotationPoint(0.0F, 0.5F, 0.1F);
+        this.fin_2.addBox(-0.5F, 0.0F, -1.0F, 1.0F, 3.0F, 2.0F, 0.1F, 0.0F, 0.0F);
+        this.setRotateAngle(fin_2, -0.6017895180981616F, 0.0F, 0.0F);
+        this.tail2 = new ModelRenderer(this, 38, 0);
+        this.tail2.setRotationPoint(0.0F, 0.0F, -1.5F);
+        this.tail2.addBox(-1.0F, -1.0F, 1.0F, 2.0F, 2.0F, 4.0F, 0.3F, 0.0F, 0.0F);
+        this.setRotateAngle(tail2, 0.0911061832922575F, 0.0F, 0.0F);
+        this.fin = new ModelRenderer(this, 46, 0);
+        this.fin.setRotationPoint(0.0F, -0.7F, 4.7F);
+        this.fin.addBox(-0.5F, -1.0F, -1.0F, 1.0F, 2.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(fin, 2.0399407817940727F, 0.0F, 0.0F);
+        this.Leye = new ModelRenderer(this, 28, 0);
+        this.Leye.setRotationPoint(1.9F, -0.9F, -2.6F);
+        this.Leye.addBox(-0.5F, -0.5F, -0.5F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(Leye, 0.0F, 0.5864306020384839F, 0.0F);
+        this.tail1 = new ModelRenderer(this, 16, 0);
+        this.tail1.setRotationPoint(0.0F, -0.1F, 1.6F);
+        this.tail1.addBox(-2.0F, -1.5F, 1.0F, 4.0F, 2.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(tail1, -0.27314402127920984F, 0.0F, 0.0F);
+        this.head2 = new ModelRenderer(this, 17, 8);
+        this.head2.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.head2.addBox(-2.0F, -1.5F, -3.0F, 4.0F, 2.0F, 3.0F, 0.2F, 0.0F, 0.0F);
+        this.fin_4 = new ModelRenderer(this, 0, 6);
+        this.fin_4.setRotationPoint(0.0F, 1.4F, 0.6F);
+        this.fin_4.addBox(-0.5F, -1.0F, -1.0F, 1.0F, 2.0F, 2.0F, -0.2F, 0.3F, 0.3F);
+        this.setRotateAngle(fin_4, 2.1404717839932013F, 0.0F, 0.0F);
+        this.tail1.addChild(this.joint1);
+        this.tail1.addChild(this.stomach);
+        this.head2.addChild(this.Reye);
+        this.tail2.addChild(this.fin_1);
+        this.fin_1.addChild(this.fin_3);
+        this.head.addChild(this.chin);
+        this.fin.addChild(this.fin_2);
+        this.joint1.addChild(this.tail2);
+        this.tail2.addChild(this.fin);
+        this.head2.addChild(this.Leye);
+        this.head.addChild(this.tail1);
+        this.head.addChild(this.head2);
+        this.fin_3.addChild(this.fin_4);
+    }
+
+    @Override
+    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) { 
+        matrixStackIn.push();
+        matrixStackIn.scale(modelScale[0], modelScale[1], modelScale[2]);
+        ImmutableList.of(this.head).forEach((modelRenderer) -> { 
+            modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        });
+        matrixStackIn.pop();
+    }
+
+    @Override
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
+
+    /**
+     * This is a helper function from Tabula to set the rotation of model parts
+     */
+     @Override 
+    public void animationSwim(T entity, float f, float f1, float f2, float f3, float f4) { 
+      
+        this.tail2.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+       
+    }
+    }
+}

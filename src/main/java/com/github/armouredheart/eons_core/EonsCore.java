@@ -2,7 +2,6 @@
  * Project: Eons-Core
  * Started: 10/02/2020
  * @author: ArmouredHeart
- * Discord: ArmouredHeart#1208
  * Email: ArmouredHeart@proton.com
  * GitHub: https://github.com/ArmouredHeart/Eons-Core
  * CurseForge: 

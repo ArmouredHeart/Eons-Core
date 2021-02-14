@@ -1,0 +1,394 @@
+  
+// package
+package com.github.armouredheart.eons_core.client.model.entity.paleozoic;
+
+// Minecraft imports
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.math.MathHelper;
+
+// Forge imports
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+// Eons imports
+import com.github.armouredheart.eons_core.api.IEonsAnimationModel;
+import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsAnomalocarisEntity;
+
+// misc imports
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+/**
+ * cameroceras - Undefined
+ * Created using Tabula 8.0.0
+ */
+@OnlyIn(Dist.CLIENT)
+public class EonsCamerocerasModel<Textends EonsCamerocerasEntity> extends EntityModel<T> implements IEonsAnimationModel<T> {
+    public ModelRenderer shell;
+    public ModelRenderer shell_1;
+    public ModelRenderer head;
+    public ModelRenderer cap;
+    public ModelRenderer shell_2;
+    public ModelRenderer shell_3;
+    public ModelRenderer shell_4;
+    public ModelRenderer shell_5;
+    public ModelRenderer shell_6;
+    public ModelRenderer LBtenticel;
+    public ModelRenderer shape14;
+    public ModelRenderer TLtenticel;
+    public ModelRenderer BRtenticel;
+    public ModelRenderer LTtenticel;
+    public ModelRenderer Ttenticel;
+    public ModelRenderer Btenticel;
+    public ModelRenderer BLtenticel;
+    public ModelRenderer TRtenticel;
+    public ModelRenderer RTtenticel;
+    public ModelRenderer RBtenticel;
+    public ModelRenderer shape14_1;
+    public ModelRenderer shape14_2;
+    public ModelRenderer Leye;
+    public ModelRenderer Reye;
+    public ModelRenderer tenticel;
+    public ModelRenderer shape14_3;
+    public ModelRenderer shape14_4;
+    public ModelRenderer tenticel_1;
+    public ModelRenderer tenticel_2;
+    public ModelRenderer tenticel_3;
+    public ModelRenderer tenticel_4;
+    public ModelRenderer tenticel_5;
+    public ModelRenderer tenticel_6;
+    public ModelRenderer tenticel_7;
+    public ModelRenderer tenticel_8;
+    public ModelRenderer tenticel_9;
+    public ModelRenderer shape14_5;
+
+    public EonsCamerocerasModel() {
+        this.textureWidth = 164;
+        this.textureHeight = 100;
+        this.shell_2 = new ModelRenderer(this, 48, 30);
+        this.shell_2.setRotationPoint(0.0F, 0.0F, -16.0F);
+        this.shell_2.addBox(-6.0F, -6.0F, -16.0F, 12.0F, 12.0F, 16.0F, 0.0F, 0.0F, 0.0F);
+        this.LTtenticel = new ModelRenderer(this, 40, 60);
+        this.LTtenticel.mirror = true;
+        this.LTtenticel.setRotationPoint(5.0F, -2.9F, 9.0F);
+        this.LTtenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(LTtenticel, 1.7453292129831807E-4F, -1.7453292129831807E-4F, -0.39269908169872414F);
+        this.tenticel_5 = new ModelRenderer(this, 40, 84);
+        this.tenticel_5.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel_5.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.2F, -0.1F, 0.0F);
+        this.setRotateAngle(tenticel_5, -0.4084070383087704F, 0.0F, 1.7453292129831807E-4F);
+        this.TLtenticel = new ModelRenderer(this, 40, 72);
+        this.TLtenticel.setRotationPoint(3.0F, -4.5F, 9.0F);
+        this.TLtenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(TLtenticel, 8.72664639000881E-4F, 0.0F, 0.7853981633974483F);
+        this.shell_5 = new ModelRenderer(this, 0, 54);
+        this.shell_5.setRotationPoint(0.0F, 0.0F, -12.0F);
+        this.shell_5.addBox(-3.0F, -3.0F, -14.0F, 6.0F, 6.0F, 14.0F, 0.0F, 0.0F, 0.0F);
+        this.shape14_5 = new ModelRenderer(this, 52, 40);
+        this.shape14_5.setRotationPoint(0.0F, 0.9F, 1.5F);
+        this.shape14_5.addBox(-0.5F, -3.0F, -1.0F, 1.0F, 3.0F, 2.0F, -0.1F, 0.0F, -0.3F);
+        this.setRotateAngle(shape14_5, -0.6202900321377512F, 0.0F, 0.0F);
+        this.tenticel_3 = new ModelRenderer(this, 40, 60);
+        this.tenticel_3.mirror = true;
+        this.tenticel_3.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel_3.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.1F, -0.2F, 0.0F);
+        this.setRotateAngle(tenticel_3, -0.4098033003787853F, -0.2631956498691643F, 0.0F);
+        this.shape14_1 = new ModelRenderer(this, 41, 39);
+        this.shape14_1.setRotationPoint(0.0F, -0.3F, 8.4F);
+        this.shape14_1.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 3.0F, -0.3F, 0.0F, 0.0F);
+        this.setRotateAngle(shape14_1, -6.981316851932723E-4F, 0.0F, 0.0F);
+        this.RTtenticel = new ModelRenderer(this, 40, 60);
+        this.RTtenticel.setRotationPoint(-5.0F, -2.7F, 9.0F);
+        this.RTtenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(RTtenticel, 0.0F, 1.7453292129831807E-4F, 0.39269908169872414F);
+        this.BLtenticel = new ModelRenderer(this, 40, 84);
+        this.BLtenticel.setRotationPoint(3.0F, 2.0F, 9.0F);
+        this.BLtenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(BLtenticel, 0.0010471975277899085F, 0.0F, -0.7853981633974483F);
+        this.Ttenticel = new ModelRenderer(this, 40, 72);
+        this.Ttenticel.setRotationPoint(0.0F, -4.5F, 9.0F);
+        this.Ttenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(Ttenticel, 1.7453292129831807E-4F, 0.0F, 0.0F);
+        this.TRtenticel = new ModelRenderer(this, 40, 72);
+        this.TRtenticel.setRotationPoint(-3.0F, -4.5F, 9.0F);
+        this.TRtenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(TRtenticel, -0.14660765050962096F, 0.0F, -0.7853981633974483F);
+        this.shell_1 = new ModelRenderer(this, 64, 0);
+        this.shell_1.setRotationPoint(0.0F, 0.0F, -8.0F);
+        this.shell_1.addBox(-7.0F, -7.0F, -16.0F, 14.0F, 14.0F, 16.0F, 0.0F, 0.0F, 0.0F);
+        this.tenticel_1 = new ModelRenderer(this, 40, 72);
+        this.tenticel_1.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel_1.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.2F, 0.0F, 0.0F);
+        this.setRotateAngle(tenticel_1, -0.02862339948303565F, 0.2631956498691643F, 0.0F);
+        this.shape14_4 = new ModelRenderer(this, 50, 33);
+        this.shape14_4.setRotationPoint(0.0F, 1.0F, -0.1F);
+        this.shape14_4.addBox(-0.5F, -1.0F, -0.5F, 1.0F, 2.0F, 1.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(shape14_4, -1.0011208695965919F, 0.0F, 0.0F);
+        this.tenticel_7 = new ModelRenderer(this, 40, 72);
+        this.tenticel_7.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel_7.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.2F, -0.1F, 0.0F);
+        this.setRotateAngle(tenticel_7, 0.02932153051804311F, -0.32253683777906883F, 0.0F);
+        this.Reye = new ModelRenderer(this, 0, 80);
+        this.Reye.setRotationPoint(5.4F, -1.3F, 5.0F);
+        this.Reye.addBox(0.0F, -1.5F, -2.0F, 1.0F, 3.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.tenticel_4 = new ModelRenderer(this, 40, 72);
+        this.tenticel_4.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel_4.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.2F, -0.1F, 0.0F);
+        this.setRotateAngle(tenticel_4, -0.3799581861486488F, 0.0F, 0.0F);
+        this.head = new ModelRenderer(this, 121, 21);
+        this.head.setRotationPoint(0.0F, 1.6F, 6.0F);
+        this.head.addBox(-6.0F, -5.5F, 0.0F, 12.0F, 9.0F, 9.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(head, -0.27314402127920984F, 0.0F, 0.0F);
+        this.shape14_3 = new ModelRenderer(this, 42, 33);
+        this.shape14_3.setRotationPoint(0.0F, 2.8F, -0.3F);
+        this.shape14_3.addBox(-0.5F, -1.0F, -1.0F, 1.0F, 2.0F, 2.0F, 0.3F, 0.0F, 0.0F);
+        this.setRotateAngle(shape14_3, -0.5030038850984435F, 0.0F, 0.0F);
+        this.shell = new ModelRenderer(this, 0, 0);
+        this.shell.setRotationPoint(0.0F, 3.0F, -1.0F);
+        this.shell.addBox(-8.0F, -8.0F, -8.0F, 16.0F, 16.0F, 16.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(shell, -8.72664639000881E-4F, 3.141592653589793F, 0.0F);
+        this.Btenticel = new ModelRenderer(this, 40, 84);
+        this.Btenticel.setRotationPoint(0.0F, 2.0F, 9.0F);
+        this.Btenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(Btenticel, 0.0012217304815975172F, 0.0F, 0.0F);
+        this.tenticel = new ModelRenderer(this, 40, 60);
+        this.tenticel.mirror = true;
+        this.tenticel.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.1F, -0.2F, 0.0F);
+        this.setRotateAngle(tenticel, -0.2932153010192419F, -8.72664639000881E-4F, 0.0F);
+        this.tenticel_8 = new ModelRenderer(this, 40, 60);
+        this.tenticel_8.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel_8.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.1F, -0.2F, 0.0F);
+        this.setRotateAngle(tenticel_8, -0.38083083745884055F, 0.293389837939183F, 0.0F);
+        this.shell_4 = new ModelRenderer(this, 104, 39);
+        this.shell_4.setRotationPoint(0.0F, 0.0F, -12.0F);
+        this.shell_4.addBox(-4.0F, -4.0F, -12.0F, 8.0F, 8.0F, 12.0F, 0.0F, 0.0F, 0.0F);
+        this.LBtenticel = new ModelRenderer(this, 40, 60);
+        this.LBtenticel.mirror = true;
+        this.LBtenticel.setRotationPoint(5.0F, 0.3F, 9.0F);
+        this.LBtenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(LBtenticel, 0.0F, 1.7453292129831807E-4F, 0.39269908169872414F);
+        this.BRtenticel = new ModelRenderer(this, 40, 84);
+        this.BRtenticel.setRotationPoint(-3.0F, 2.0F, 9.0F);
+        this.BRtenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(BRtenticel, 0.030892327427404498F, 0.0F, 0.7853981633974483F);
+        this.RBtenticel = new ModelRenderer(this, 40, 60);
+        this.RBtenticel.setRotationPoint(-5.0F, 0.3F, 9.0F);
+        this.RBtenticel.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(RBtenticel, 0.0F, 0.0013962633703865446F, -0.39269908169872414F);
+        this.shell_3 = new ModelRenderer(this, 0, 32);
+        this.shell_3.setRotationPoint(0.0F, 0.0F, -16.0F);
+        this.shell_3.addBox(-5.0F, -5.0F, -12.0F, 10.0F, 10.0F, 12.0F, 0.0F, 0.0F, 0.0F);
+        this.shell_6 = new ModelRenderer(this, 48, 0);
+        this.shell_6.setRotationPoint(0.0F, 0.0F, -14.0F);
+        this.shell_6.addBox(-2.0F, -2.0F, -12.0F, 4.0F, 4.0F, 12.0F, 0.0F, 0.0F, 0.0F);
+        this.Leye = new ModelRenderer(this, 0, 80);
+        this.Leye.setRotationPoint(-6.4F, -1.3F, 5.0F);
+        this.Leye.addBox(0.0F, -1.5F, -2.0F, 1.0F, 3.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.tenticel_2 = new ModelRenderer(this, 40, 84);
+        this.tenticel_2.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel_2.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.2F, -0.1F, 0.0F);
+        this.setRotateAngle(tenticel_2, -0.3797836492287078F, 0.46914448828868976F, 0.0F);
+        this.tenticel_9 = new ModelRenderer(this, 40, 60);
+        this.tenticel_9.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel_9.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.1F, -0.2F, 0.0F);
+        this.setRotateAngle(tenticel_9, -0.38117991129872264F, 0.02967059811614144F, 1.7453292129831807E-4F);
+        this.shape14 = new ModelRenderer(this, 33, 34);
+        this.shape14.setRotationPoint(0.0F, -2.0F, 8.5F);
+        this.shape14.addBox(-1.0F, -1.0F, -1.0F, 2.0F, 4.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(shape14, 1.5465362608448199F, 0.0F, 0.0F);
+        this.cap = new ModelRenderer(this, 122, 0);
+        this.cap.setRotationPoint(0.0F, -7.0F, 8.0F);
+        this.cap.addBox(-6.0F, 0.0F, -0.01F, 12.0F, 3.0F, 8.0F, 0.0F, 0.0F, 0.0F);
+        this.setRotateAngle(cap, -0.27314402127920984F, 0.0F, 0.0F);
+        this.shape14_2 = new ModelRenderer(this, 0, 6);
+        this.shape14_2.setRotationPoint(0.0F, 3.0F, 3.2F);
+        this.shape14_2.addBox(-2.0F, 0.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.0F, 0.0F, -0.3F);
+        this.setRotateAngle(shape14_2, 0.7552039753274297F, 0.0F, 0.0F);
+        this.tenticel_6 = new ModelRenderer(this, 40, 84);
+        this.tenticel_6.setRotationPoint(0.0F, 0.0F, 9.5F);
+        this.tenticel_6.addBox(-1.0F, -1.0F, -0.5F, 2.0F, 2.0F, 10.0F, -0.2F, -0.1F, 0.0F);
+        this.setRotateAngle(tenticel_6, -0.23684117416930833F, -0.2638937809041718F, 0.0F);
+        this.shell_1.addChild(this.shell_2);
+        this.head.addChild(this.LTtenticel);
+        this.Btenticel.addChild(this.tenticel_5);
+        this.head.addChild(this.TLtenticel);
+        this.shell_4.addChild(this.shell_5);
+        this.shape14_1.addChild(this.shape14_5);
+        this.LTtenticel.addChild(this.tenticel_3);
+        this.head.addChild(this.shape14_1);
+        this.head.addChild(this.RTtenticel);
+        this.head.addChild(this.BLtenticel);
+        this.head.addChild(this.Ttenticel);
+        this.head.addChild(this.TRtenticel);
+        this.shell.addChild(this.shell_1);
+        this.TLtenticel.addChild(this.tenticel_1);
+        this.shape14_3.addChild(this.shape14_4);
+        this.TRtenticel.addChild(this.tenticel_7);
+        this.head.addChild(this.Reye);
+        this.Ttenticel.addChild(this.tenticel_4);
+        this.shell.addChild(this.head);
+        this.shape14.addChild(this.shape14_3);
+        this.head.addChild(this.Btenticel);
+        this.LBtenticel.addChild(this.tenticel);
+        this.RTtenticel.addChild(this.tenticel_8);
+        this.shell_3.addChild(this.shell_4);
+        this.head.addChild(this.LBtenticel);
+        this.head.addChild(this.BRtenticel);
+        this.head.addChild(this.RBtenticel);
+        this.shell_2.addChild(this.shell_3);
+        this.shell_5.addChild(this.shell_6);
+        this.head.addChild(this.Leye);
+        this.BRtenticel.addChild(this.tenticel_2);
+        this.RBtenticel.addChild(this.tenticel_9);
+        this.head.addChild(this.shape14);
+        this.shell.addChild(this.cap);
+        this.head.addChild(this.shape14_2);
+        this.BLtenticel.addChild(this.tenticel_6);
+    }
+
+    @Override
+    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) { 
+        ImmutableList.of(this.shell).forEach((modelRenderer) -> { 
+            modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        });
+    }
+
+    @Override
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
+
+  @Override 
+    public void animationSwim(T entity, float f, float f1, float f2, float f3, float f4) 
+{ 
+this.Ttenticel.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_4.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+
+this.TLtenticel.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_1.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+
+this.TRtenticel.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_7.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+
+this.LTtenticel.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_3.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+
+this.LBtenticel.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+
+this.Btenticel.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_5.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+
+this.BLtenticel.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_6.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+
+this.BRtenticel.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_2.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+
+this.RTtenticel.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_8.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+
+this.RBtenticel.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_9.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+}
+
+@Override 
+protected void animationAttack(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
+{
+this.Ttenticel.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_4.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+
+this.TLtenticel.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_1.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+
+this.TRtenticel.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_7.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+
+this.LTtenticel.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_3.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+
+this.LBtenticel.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+
+this.Btenticel.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_5.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+
+this.BLtenticel.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_6.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+
+this.BRtenticel.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_2.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+
+this.RTtenticel.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_8.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+
+this.RBtenticel.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_9.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+ }; 
+
+@Override 
+protected void animationEat(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
+{ 
+this.Ttenticel.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_4.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+
+this.TLtenticel.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_1.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+
+this.TRtenticel.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_7.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+
+this.LTtenticel.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+this.tenticel_3.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+
+this.RTtenticel.rotateAngleY = MathHelper.cos(f * -0.6662F) * f1;
+this.tenticel_8.rotateAngleY = MathHelper.cos(f * 0.6662F) * f1;
+
+
+
+/***beak***
+this.shape14.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+this.shape14_#.rotateAngleX = MathHelper.cos(f * -0.6662F) * f1;
+ }; 
+
+ protected void animationIdle(Entity entity, float f, float f1, float f2, float f3, float f4, float f5))
+{ 
+this.setRotateAngle(shell, -49F, 180F, 0.0F);
+
+this.setRotateAngle(Ttenticel, 35F, 0F, 0.0F);
+this.setRotateAngle(tenticel_4, 31F, 0F, 0.0F);
+
+this.setRotateAngle(TLtenticel, 44F, -2.24F, 45.0F);
+this.setRotateAngle(tenticel_1, -49F, 0F, 0.0F);
+
+this.setRotateAngle(TRtenticel, 43F, 0F, -45.0F);
+this.setRotateAngle(tenticel_7, 33F, -18F, 0.0F);
+
+this.setRotateAngle(RTtenticel, 0F, -53F, 22.0F);
+this.setRotateAngle(tenticel_8, -21F, -36F, 0.0F);
+
+this.setRotateAngle(LTtenticel, 0F, 60F, -22.0F);
+this.setRotateAngle(tenticel_3, -19F, 19F, 0.0F);
+
+this.setRotateAngle(Btenticel, 105F, 0F, 0.0F);
+this.setRotateAngle(tenticel_5, -5F, 0F, 0.0F);
+
+this.setRotateAngle(BRtenticel, -92F, 0F, 45.0F);
+this.setRotateAngle(tenticel_2, -21F, 26F, 0.0F);
+
+
+this.setRotateAngle(BLtenticel, -92F, 0F, 45.0F);
+this.setRotateAngle(tenticel_6, -21F, -26F, 0.0F);
+
+this.setRotateAngle(LBtenticel, 0F, 85F, -22.0F);
+this.setRotateAngle(tenticel_4, 22F, -5F, 0.0F);
+
+this.setRotateAngle(RBtenticel, 0F, -85F, -22.0F);
+this.setRotateAngle(tenticel_4, 22F, -5F, 0.0F);
+
+
+
+};
+ 
+    }
+}
