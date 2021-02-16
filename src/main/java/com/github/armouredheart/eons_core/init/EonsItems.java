@@ -5,6 +5,7 @@ package com.github.armouredheart.eons_core.init;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.item.FishBucketItem;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
@@ -21,12 +22,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.api.EonsGeonFile;
+import com.github.armouredheart.eons_core.common.item.EonsFoodItem;
 import com.github.armouredheart.eons_core.common.item.core.*;
 import com.github.armouredheart.eons_core.init.EonsSounds;
 import com.github.armouredheart.eons_core.init.EonsEntityTypes;
 
 // misc imports
 import java.util.function.Supplier;
+
+import javax.annotation.Nullable;
 
 /** */
 public final class EonsItems {
@@ -43,7 +47,8 @@ public final class EonsItems {
     public static final RegistryObject<Item> EONS_MUSIC_DISC_PRIMAL_AGE = registerItem("eons_music_disc_primal_age", () -> new MusicDiscItem(0, () -> EonsSounds.MUSIC_EONS_PRIMAL_AGE, eonsDiscProperties()));
     public static final RegistryObject<Item> EONS_NOTEBOOK_ITEM = registerItem("eons_notebook_item", () -> new EonsNotebookItem(EonsItemGroups.EONS_ITEM_GROUP));
     public static final RegistryObject<Item> EONS_BIG_LEAF_ITEM = registerItem("eons_big_leaf_item", () -> new EonsBigLeafItem(new Item.Properties().group(EonsItemGroups.EONS_ITEM_GROUP)));
-    // Paleozoic
+    
+    // Paleozoic - Fossils
     public static final RegistryObject<Item> CAMBRIAN_FOSSIL_ITEM = registerFossilItem("CAMBRIAN", EonsItemGroups.PALEOZOIC_GROUP);
     public static final RegistryObject<Item> AEGIROCASSIS_FOSSIL_ITEM = registerFossilItem("AEGIROCASSIS", EonsItemGroups.PALEOZOIC_GROUP);
     public static final RegistryObject<Item> ANOMALOCARIS_FOSSIL_ITEM = registerFossilItem("ANOMALOCARIS", EonsItemGroups.PALEOZOIC_GROUP);
@@ -65,11 +70,17 @@ public final class EonsItems {
     public static final RegistryObject<Item> PISOCRINUS_FOSSIL_ITEM = registerFossilItem("PISOCRINUS", EonsItemGroups.PALEOZOIC_GROUP);
     public static final RegistryObject<Item> SIPHUSAUCTUM_FOSSIL_ITEM = registerFossilItem("SIPHUSAUCTUM", EonsItemGroups.PALEOZOIC_GROUP);
     public static final RegistryObject<Item> ORDOVICIAN_FOSSIL_ITEM = registerFossilItem("ORDOVICIAN", EonsItemGroups.PALEOZOIC_GROUP);
+    // Paleozoic - DNA
+    // Paleozoic - Food
 
     // *** Methods ***
 
-    private static RegistryObject<Item> registerFossilItem(String name, ItemGroup item_group) {
-        return registerItem(name.toLowerCase() + "_fossil_item", () -> new EonsFossilItem(new Item.Properties().group(item_group), null));
+    private static RegistryObject<Item> registerFossilItem(String species_name, ItemGroup item_group) {
+        return registerItem(species_name.toLowerCase() + "_fossil_item", () -> new EonsFossilItem(new Item.Properties().group(item_group), null));
+    }
+
+    private static RegistryObject<Item> registerFoodItem(String species_name, FoodState food_state, int feed_amount, float saturation, boolean isMeat, boolean eatFast, boolean alwaysEdible, @Nullable EffectInstance potion, ItemGroup item_group) {
+        return registerItem("food_" + food_state + "_" + species_name.toLowerCase(), () -> new EonsFoodItem(feed_amount, saturation, isMeat, eatFast, alwaysEdible, potion, item_group));
     }
 
     /** Helper method for registering music discs */
@@ -83,4 +94,8 @@ public final class EonsItems {
         return ITEMS.register(item_name, item_supplier);
     }
 
-}
+    private enum FoodState {
+        cooked,
+        raw;
+    }
+}   

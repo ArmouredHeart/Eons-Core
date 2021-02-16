@@ -1,9 +1,16 @@
 {
     "itemGroup.EONS_ITEM_GROUP": "Eons",
+    "itemGroup.PALEOZOIC_GROUP": "Paleozoic",
+    "itemGroup.CENOZOIC_GROUP": "Cenozoic",
+    "itemGroup.MESOZOIC_GROUP": "Mesozoic",
 
     "item.eons-core.eons_music_disc_primal_age": "Music Disc",
     "item.eons-core.eons_music_disc_primal_age.desc": "Eons - Primal Age",
     "item.eons-core.eons_notebook_item": "Notebook",
+    "item.eons-core.eons_notebook_item.desc": "An old book stuffed with your field notes...",
 
+    "item.eons-core.cambrian_fossil_item": "Cambrian Fossil",
+    "item.eons-core.cambrian_fossil_item.desc": "An unknown fossil from the Cambrian period.",
+    
     "education.eons-core.geon.hadean.desc": "The Hadean is an Eon. Description WIP"
 }
