@@ -23,7 +23,7 @@ import net.minecraft.nbt.CompoundNBT;
 
 // Eons imports
 import com.github.armouredheart.eons_core.init.EonsSounds;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 import com.github.armouredheart.eons_core.api.IEonsToxic;
 
 // misc imports
@@ -36,8 +36,8 @@ public abstract class EonsJellyfishEntity extends EonsGroupFishEntity implements
     // *** Constructors ***
 
     /** @param toxicity value of 0 is non-toxic, and 1 is equal to a puffer fish. Bigger number, longer poison effect */
-    protected EonsJellyfishEntity(EntityType<? extends  EonsGroupFishEntity> type, World world, EonsFieldNotes fieldNotes, final int sexRatio, final int toxicity) {
-        super(type, world, fieldNotes, sexRatio);
+    protected EonsJellyfishEntity(EntityType<? extends  EonsGroupFishEntity> type, World world, Species species, final int sexRatio, final int toxicity) {
+        super(type, world, species, sexRatio);
         this.toxicity = toxicity;
     }
 

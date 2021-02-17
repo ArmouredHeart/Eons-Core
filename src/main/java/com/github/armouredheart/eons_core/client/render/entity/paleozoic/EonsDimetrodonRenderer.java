@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.api.EonsGeonFile;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.EonsGeonFile;
 import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsDimetrodonEntity;
 import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphicRenderer;

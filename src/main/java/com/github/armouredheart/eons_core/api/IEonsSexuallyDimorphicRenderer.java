@@ -9,7 +9,7 @@ import net.minecraft.entity.MobEntity;
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
-import com.github.armouredheart.eons_core.api.EonsGeonFile;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.EonsGeonFile;
 // misc imports
 import javax.annotation.Nonnull;
 

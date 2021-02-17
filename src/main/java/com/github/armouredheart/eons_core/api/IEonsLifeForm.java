@@ -8,20 +8,12 @@ import net.minecraft.util.Hand;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 
 // misc imports
 
 public interface IEonsLifeForm {
 
-    // *** Methods ***
-
-    /** @return EonsFieldNotes object containing educational notes about lifeform.*/
-    public EonsFieldNotes getFieldNotes();
-
-    /** @return returns true if notes can be added to journal.*/
-    public static boolean addNotesToJournal(IEonsLifeForm lifeForm, PlayerEntity player, Hand hand) {
-        /**TODO implement this interaction*/
-        return false;
-    }
+    /** @return Species enumerator containing educational notes about lifeform.*/
+    public Species getSpecies();
 }

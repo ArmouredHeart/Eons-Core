@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3d;
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 import com.github.armouredheart.eons_core.common.entity.EonsGroupFishEntity;
 
 // misc imports
@@ -26,8 +26,8 @@ public class EonsCephalopodEntity extends EonsGroupFishEntity {
     // *** Attributes ***
 
     // *** Constructors ***
-    public EonsCephalopodEntity(final EntityType<? extends EonsCephalopodEntity> type, final World world, final EonsFieldNotes fieldNotes) {
-        super(type, world, fieldNotes);
+    public EonsCephalopodEntity(final EntityType<? extends EonsCephalopodEntity> type, final World world, final Species species) {
+        super(type, world, species);
     }
 
     // *** Methods ***

@@ -36,7 +36,7 @@ import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.IEonsAnimationEntity;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 
 // misc imports
@@ -48,7 +48,7 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     private static final DataParameter<Byte> SEX = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BYTE);
 
     private static final EonsAnimationHandler ANIMATION_HANDLER = new EonsAnimationHandler();
-    private final EonsFieldNotes FIELD_NOTES; // pointer to educational notes about lifeform
+    private final Species SPECIES; // pointer to educational notes about lifeform
     private final EonsDiet DIET;
     private final boolean IS_NOCTURNAL;
 
@@ -57,22 +57,22 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     /**
     * @param type
     * @param world
-    * @param fieldNotes
+    * @param species
     * @param diet
     * @param sexRatio
     * @param isNocturnal
     */
-    protected EonsBigFishEntity(final EntityType<? extends AbstractFishEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
+    protected EonsBigFishEntity(final EntityType<? extends AbstractFishEntity> type, final World world, final Species species, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
         super(type, world);
         this.DIET = diet;
-        this.FIELD_NOTES = fieldNotes;
+        this.SPECIES = species;
         this.IS_NOCTURNAL = isNocturnal;
         this.setCanPickUpLoot(true);
         IEonsSexuallyDimorphic.assignSexByRatio(this, sexRatio);
     }
 
     /** */
-    protected EonsBigFishEntity(final EntityType<? extends AbstractFishEntity> type, final World world, final EonsFieldNotes fieldNotes) {
+    protected EonsBigFishEntity(final EntityType<? extends AbstractFishEntity> type, final World world, final Species fieldNotes) {
         this(type, world, fieldNotes, new EonsDiet(8, false, null), 50, false);
     }
 
@@ -96,7 +96,6 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
 	@Override
 	public boolean processInteract(PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
-		IEonsLifeForm.addNotesToJournal(this, player, hand);
 		return super.processInteract(player, hand);
 	}
 
@@ -107,7 +106,7 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     }
 
     /** */
-    public EonsFieldNotes getFieldNotes(){return this.FIELD_NOTES;}
+    public Species getSpecies(){return this.SPECIES;}
 
     /** */
     @Override

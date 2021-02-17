@@ -3,7 +3,7 @@ package com.github.armouredheart.eons_core.common.item.core;
 
 // Minecraft imports
 import net.minecraft.item.Item;
-
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.SoundEvent;
 
@@ -12,25 +12,26 @@ import net.minecraft.util.SoundEvent;
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.init.EonsItemGroups;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.IEonsLifeForm;
+import com.github.armouredheart.eons_core.api.Species;
 
 // misc imports
 
-public class EonsFossilItem extends Item {
+public class EonsFossilItem extends Item implements IEonsLifeForm {
 
     // *** Attributes ***
-    private final EonsFieldNotes FIELD_NOTES;
+    private final Species SPECIES;
 
     // *** Constructors ***
 
     /** */
-    public EonsFossilItem(Item.Properties builder, final EonsFieldNotes fieldNotes) {
-        super(builder);
-        this.FIELD_NOTES = fieldNotes;
+    public EonsFossilItem(ItemGroup item_group, final Species species) {
+        super(new Item.Properties().group(item_group));
+        this.SPECIES = species;
     }
 
     // *** Methods ***
 
     /** */
-    public EonsFieldNotes getFieldNotes() {return this.FIELD_NOTES;}
+    public Species getSpecies() {return this.SPECIES;}
 }

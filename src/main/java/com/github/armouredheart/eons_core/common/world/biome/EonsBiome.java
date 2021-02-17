@@ -7,7 +7,7 @@ import net.minecraft.world.biome.Biome;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.api.EonsFieldNotes.Geon;
+import com.github.armouredheart.eons_core.api.Geon;
 
 // misc imports
 

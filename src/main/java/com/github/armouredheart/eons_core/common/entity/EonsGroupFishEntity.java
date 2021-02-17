@@ -33,7 +33,7 @@ import com.github.armouredheart.eons_core.api.EonsAnimationHandler;
 import com.github.armouredheart.eons_core.api.IEonsAnimationEntity;
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 
 // misc imports
 import javax.annotation.Nullable;
@@ -45,25 +45,25 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	private static final DataParameter<Byte> SEX = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BYTE);
 
 	private final EonsAnimationHandler ANIMATION_HANDLER;
-	private final EonsFieldNotes FIELD_NOTES; // pointer to educational notes about lifeform
+	private final Species SPECIES; // pointer to educational notes about lifeform
 
 	// *** Constructors ***
 
 	/**
     * @param type
     * @param world
-    * @param fieldNotes
+    * @param species
     * @param sexRatio
     */
-	protected EonsGroupFishEntity(final EntityType<? extends AbstractGroupFishEntity> type, final World world, final EonsFieldNotes fieldNotes, final int sexRatio) {
+	protected EonsGroupFishEntity(final EntityType<? extends AbstractGroupFishEntity> type, final World world, final Species species, final int sexRatio) {
 		super(type, world);
-		this.FIELD_NOTES = fieldNotes;
+		this.SPECIES = species;
 		IEonsSexuallyDimorphic.assignSexByRatio(this, sexRatio);
 		this.ANIMATION_HANDLER = new EonsAnimationHandler();
 	}
 
 	/** */
-	protected EonsGroupFishEntity(final EntityType<? extends AbstractGroupFishEntity> type, final World world, final EonsFieldNotes fieldNotes) {
+	protected EonsGroupFishEntity(final EntityType<? extends AbstractGroupFishEntity> type, final World world, final Species fieldNotes) {
 		this(type, world, fieldNotes, 50);
 	}
 
@@ -72,7 +72,6 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	/** */
 	@Override
 	public boolean processInteract(PlayerEntity player, Hand hand) {
-		IEonsLifeForm.addNotesToJournal(this, player, hand);
 		return super.processInteract(player, hand);
 	}
 
@@ -86,7 +85,7 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	protected ItemStack getFishBucket(){return null;}
 
 	/** */
-    public EonsFieldNotes getFieldNotes(){return this.FIELD_NOTES;}
+    public Species getSpecies(){return this.SPECIES;}
 
 	@Override
     protected SoundEvent getAmbientSound() {return null;}

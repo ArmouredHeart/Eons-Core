@@ -13,7 +13,7 @@ import net.minecraft.world.biome.Biome;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.world.biome.EonsBiome;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes.Geon;
+import com.github.armouredheart.eons_core.api.Geon;
 import com.github.armouredheart.eons_core.common.world.gen.surfacebuilders.EonsSurfaceBuilders;
 
 // misc imports

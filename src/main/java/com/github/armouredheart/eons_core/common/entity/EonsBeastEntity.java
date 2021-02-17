@@ -39,7 +39,7 @@ import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.IEonsAnimationEntity;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 import com.github.armouredheart.eons_core.api.EonsAnimationHandler;
 
@@ -54,7 +54,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
 
    // 
    private static final EonsAnimationHandler ANIMATION_HANDLER = new EonsAnimationHandler();
-   private final EonsFieldNotes FIELD_NOTES; // pointer to educational notes about lifeform
+   private final Species SPECIES; // pointer to educational notes about lifeform
    private final EonsDiet DIET;
    private final boolean IS_NOCTURNAL;
 
@@ -63,14 +63,14 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    /**
    * @param type
    * @param world
-   * @param fieldNotes
+   * @param species
    * @param diet
    * @param sexRatio
    * @param isNocturnal
    */
-   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
+   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final Species species, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
       super(type, world);
-      this.FIELD_NOTES = fieldNotes;
+      this.SPECIES = species;
       this.DIET = diet;
       this.IS_NOCTURNAL = isNocturnal;
       this.setCanPickUpLoot(true);
@@ -78,8 +78,8 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    }
 
    /** Default Settings EonsBeast constructor*/
-   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final EonsFieldNotes fieldNotes) {
-      this(type, world, fieldNotes, new EonsDiet(8, false, null), 50, false);
+   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final Species species) {
+      this(type, world, species, new EonsDiet(8, false, null), 50, false);
    }
 
    // *** Methods ***
@@ -159,15 +159,14 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       return this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue();
    }
 
-   /** @return EonsFieldNotes object containing educational notes about lifeform.*/
-   public EonsFieldNotes getFieldNotes() {
-      return this.FIELD_NOTES;
+   /** @return Species object containing educational notes about lifeform.*/
+   public Species getSpecies() {
+      return this.SPECIES;
    }
 
    /** */
    @Override
    public boolean processInteract(PlayerEntity player, Hand hand) {
-      IEonsLifeForm.addNotesToJournal(this, player, hand);
       return super.processInteract(player, hand);
    }
 

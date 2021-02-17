@@ -25,6 +25,8 @@ public interface IEonsPredator<P extends MobEntity & IEonsPredator<P>> extends I
         if(predator.getDiet().isHungry()){scanForPreyTarget(predator, scanRangeX, scanRangeY);}
     }
 
+    // below this is old code - TODO - improve hunting target selection to be more robust
+
     /** 
     * @return true if prey target is found
     * TODO Not elegant, can be improved in the future
@@ -43,7 +45,7 @@ public interface IEonsPredator<P extends MobEntity & IEonsPredator<P>> extends I
         return predator.getAttackTarget() != null;
     }
 
-    /** */
+    /** TODO - rebuild this */
     default @Nullable LivingEntity choosePreyTarget(P predator, List<LivingEntity> creatures) {
         List<LivingEntity> preyList = new ArrayList<>();
         LivingEntity target = null;
@@ -69,9 +71,7 @@ public interface IEonsPredator<P extends MobEntity & IEonsPredator<P>> extends I
             }
 
             if(!preyList.isEmpty()) {
-                target = IEonsBeast.getLeastThreatening(predator, preyList);
-            } else {
-                target = null;
+                //target = IEonsBeast.getLeastThreatening(predator, preyList);
             }
         }
         return target;

@@ -21,7 +21,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
-import com.github.armouredheart.eons_core.api.EonsGeonFile;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper;
+import com.github.armouredheart.eons_core.api.Geon;
+import com.github.armouredheart.eons_core.api.Species;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.EonsResourcePrefix;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.FoodState;
 import com.github.armouredheart.eons_core.common.item.EonsFoodItem;
 import com.github.armouredheart.eons_core.common.item.core.*;
 import com.github.armouredheart.eons_core.init.EonsSounds;
@@ -48,39 +52,45 @@ public final class EonsItems {
     public static final RegistryObject<Item> EONS_NOTEBOOK_ITEM = registerItem("eons_notebook_item", () -> new EonsNotebookItem(EonsItemGroups.EONS_ITEM_GROUP));
     public static final RegistryObject<Item> EONS_BIG_LEAF_ITEM = registerItem("eons_big_leaf_item", () -> new EonsBigLeafItem(new Item.Properties().group(EonsItemGroups.EONS_ITEM_GROUP)));
     
+    // Paleozoic - GeonFossils
+    public static final RegistryObject<Item> CAMBRIAN_FOSSIL_ITEM = registerGeonFossilItem(Geon.CAMBRIAN, EonsItemGroups.PALEOZOIC_GROUP);
+    public static final RegistryObject<Item> ORDOVICIAN_FOSSIL_ITEM = registerGeonFossilItem(Geon.ORDOVICIAN, EonsItemGroups.PALEOZOIC_GROUP);
+    
     // Paleozoic - Fossils
-    public static final RegistryObject<Item> CAMBRIAN_FOSSIL_ITEM = registerFossilItem("CAMBRIAN", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> AEGIROCASSIS_FOSSIL_ITEM = registerFossilItem("AEGIROCASSIS", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> ANOMALOCARIS_FOSSIL_ITEM = registerFossilItem("ANOMALOCARIS", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> ARANDASPIS_FOSSIL_ITEM = registerFossilItem("ARANDASPIS", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> ASTRASPIS_FOSSIL_ITEM = registerFossilItem("ASTRASPIS", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> CAMEROCERAS_FOSSIL_ITEM = registerFossilItem("CAMEROCERAS", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> CHANCELLORIIDAE_FOSSIL_ITEM = registerFossilItem("CHANCELLORIIDAE", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> CHARNIA_FOSSIL_ITEM = registerFossilItem("CHARNIA", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> CHOIA_FOSSIL_ITEM = registerFossilItem("CHOIA", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> CTENORHABDOTUS_FOSSIL_ITEM = registerFossilItem("CTENORHABDOTUS", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> DICKSONIA_FOSSIL_ITEM = registerFossilItem("DICKSONIA", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> DIRAPHORA_FOSSIL_ITEM = registerFossilItem("DIRAPHORA", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> ENDOCERAS_FOSSIL_ITEM = registerFossilItem("ENDOCERAS", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> HURDIA_FOSSIL_ITEM = registerFossilItem("HURDIA", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> ISOTELUS_FOSSIL_ITEM = registerFossilItem("ISOTELUS", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> LITUITES_FOSSIL_ITEM = registerFossilItem("LITUITES", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> MARGARETIA_FOSSIL_ITEM = registerFossilItem("MARGARETIA", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> PARADOXIDES_FOSSIL_ITEM = registerFossilItem("PARADOXIDES", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> PISOCRINUS_FOSSIL_ITEM = registerFossilItem("PISOCRINUS", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> SIPHUSAUCTUM_FOSSIL_ITEM = registerFossilItem("SIPHUSAUCTUM", EonsItemGroups.PALEOZOIC_GROUP);
-    public static final RegistryObject<Item> ORDOVICIAN_FOSSIL_ITEM = registerFossilItem("ORDOVICIAN", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> AEGIROCASSIS_FOSSIL_ITEM = registerFossilItem("AEGIROCASSIS", EonsItemGroups.PALEOZOIC_GROUP);
+    public static final RegistryObject<Item> ANOMALOCARIS_FOSSIL_ITEM = registerFossilItem(Species.ANOMALOCARIS, EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> ARANDASPIS_FOSSIL_ITEM = registerFossilItem("ARANDASPIS", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> ASTRASPIS_FOSSIL_ITEM = registerFossilItem("ASTRASPIS", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> CAMEROCERAS_FOSSIL_ITEM = registerFossilItem("CAMEROCERAS", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> CHANCELLORIIDAE_FOSSIL_ITEM = registerFossilItem("CHANCELLORIIDAE", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> CHARNIA_FOSSIL_ITEM = registerFossilItem("CHARNIA", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> CHOIA_FOSSIL_ITEM = registerFossilItem("CHOIA", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> CTENORHABDOTUS_FOSSIL_ITEM = registerFossilItem("CTENORHABDOTUS", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> DICKSONIA_FOSSIL_ITEM = registerFossilItem("DICKSONIA", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> DIRAPHORA_FOSSIL_ITEM = registerFossilItem("DIRAPHORA", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> ENDOCERAS_FOSSIL_ITEM = registerFossilItem("ENDOCERAS", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> HURDIA_FOSSIL_ITEM = registerFossilItem("HURDIA", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> ISOTELUS_FOSSIL_ITEM = registerFossilItem("ISOTELUS", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> LITUITES_FOSSIL_ITEM = registerFossilItem("LITUITES", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> MARGARETIA_FOSSIL_ITEM = registerFossilItem("MARGARETIA", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> PARADOXIDES_FOSSIL_ITEM = registerFossilItem("PARADOXIDES", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> PISOCRINUS_FOSSIL_ITEM = registerFossilItem("PISOCRINUS", EonsItemGroups.PALEOZOIC_GROUP);
+    //public static final RegistryObject<Item> SIPHUSAUCTUM_FOSSIL_ITEM = registerFossilItem("SIPHUSAUCTUM", EonsItemGroups.PALEOZOIC_GROUP);
     // Paleozoic - DNA
     // Paleozoic - Food
 
     // *** Methods ***
 
-    private static RegistryObject<Item> registerFossilItem(String species_name, ItemGroup item_group) {
-        return registerItem(species_name.toLowerCase() + "_fossil_item", () -> new EonsFossilItem(new Item.Properties().group(item_group), null));
+    private static RegistryObject<Item> registerGeonFossilItem(Geon geon, ItemGroup item_group) {
+        return registerItem(EonsResourceHelper.getGeonFossilItemKey(geon), () -> new EonsGeonFossilItem(item_group, geon));
     }
 
-    private static RegistryObject<Item> registerFoodItem(String species_name, FoodState food_state, int feed_amount, float saturation, boolean isMeat, boolean eatFast, boolean alwaysEdible, @Nullable EffectInstance potion, ItemGroup item_group) {
-        return registerItem("food_" + food_state + "_" + species_name.toLowerCase(), () -> new EonsFoodItem(feed_amount, saturation, isMeat, eatFast, alwaysEdible, potion, item_group));
+    private static RegistryObject<Item> registerFossilItem(Species species, ItemGroup item_group) {
+        return registerItem(EonsResourceHelper.getFossilItemKey(species), () -> new EonsFossilItem(item_group, species));
+    }
+
+    private static RegistryObject<Item> registerFoodItem(Species species, EonsResourcePrefix food_state, int feed_amount, float saturation, boolean isMeat, boolean eatFast, boolean alwaysEdible, @Nullable EffectInstance potion, ItemGroup item_group) {
+        return registerItem(EonsResourceHelper.getFoodItemKey(species, food_state), () -> new EonsFoodItem(feed_amount, saturation, isMeat, eatFast, alwaysEdible, potion, item_group));
     }
 
     /** Helper method for registering music discs */
@@ -92,10 +102,5 @@ public final class EonsItems {
      */
     private static RegistryObject<Item> registerItem(String item_name, Supplier<Item> item_supplier) {
         return ITEMS.register(item_name, item_supplier);
-    }
-
-    private enum FoodState {
-        cooked,
-        raw;
     }
 }   

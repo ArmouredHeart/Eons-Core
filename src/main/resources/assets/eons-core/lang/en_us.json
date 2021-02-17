@@ -11,6 +11,7 @@
 
     "item.eons-core.cambrian_fossil_item": "Cambrian Fossil",
     "item.eons-core.cambrian_fossil_item.desc": "An unknown fossil from the Cambrian period.",
-    
+
+    "education.eons-core.geon.hadean": "Hadean",
     "education.eons-core.geon.hadean.desc": "The Hadean is an Eon. Description WIP"
 }
