@@ -25,7 +25,9 @@ import com.github.armouredheart.eons_core.api.EonsResourceHelper;
 import com.github.armouredheart.eons_core.api.Geon;
 import com.github.armouredheart.eons_core.api.Species;
 import com.github.armouredheart.eons_core.api.EonsResourceHelper.EonsResourcePrefix;
-import com.github.armouredheart.eons_core.api.EonsResourceHelper.FoodState;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.EonsResourceType;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.EonsSetType;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.EonsResourcePrefix;
 import com.github.armouredheart.eons_core.common.item.EonsFoodItem;
 import com.github.armouredheart.eons_core.common.item.core.*;
 import com.github.armouredheart.eons_core.init.EonsSounds;
@@ -77,9 +79,16 @@ public final class EonsItems {
     //public static final RegistryObject<Item> PISOCRINUS_FOSSIL_ITEM = registerFossilItem("PISOCRINUS", EonsItemGroups.PALEOZOIC_GROUP);
     //public static final RegistryObject<Item> SIPHUSAUCTUM_FOSSIL_ITEM = registerFossilItem("SIPHUSAUCTUM", EonsItemGroups.PALEOZOIC_GROUP);
     // Paleozoic - DNA
+    public static final RegistryObject<Item> ANOMALOCARIS_DNA_ITEM = registerDnaItem(Species.ANOMALOCARIS, EonsItemGroups.PALEOZOIC_GROUP);
+    
     // Paleozoic - Food
-
+    public static final RegistryObject<Item> ANOMALOCARIS_RAW_FOOD_ITEM = registerFoodItem(Species.ANOMALOCARIS, EonsResourcePrefix.RAW, 2, 0.4f, true, false, false, null, EonsItemGroups.PALEOZOIC_GROUP);
+    public static final RegistryObject<Item> ANOMALOCARIS_COOKED_FOOD_ITEM = registerFoodItem(Species.ANOMALOCARIS, EonsResourcePrefix.COOKED, 5, 6.0f, true, false, false, null, EonsItemGroups.PALEOZOIC_GROUP);
     // *** Methods ***
+
+    private static RegistryObject<Item> registerDnaItem(Species species, ItemGroup item_group) {
+        return registerItem(EonsResourceHelper.getItemKey(species.toString(), EonsResourcePrefix.NO_PREFIX, EonsSetType.DNA, EonsResourceType.ITEM), () -> new EonsDnaItem(species, item_group));
+    }
 
     private static RegistryObject<Item> registerGeonFossilItem(Geon geon, ItemGroup item_group) {
         return registerItem(EonsResourceHelper.getGeonFossilItemKey(geon), () -> new EonsGeonFossilItem(item_group, geon));

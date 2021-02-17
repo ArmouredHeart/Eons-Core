@@ -74,7 +74,8 @@ public interface EonsResourceHelper {
 
     public enum EonsSetType {
         FOOD,
-        FOSSIL;
+        FOSSIL,
+        DNA;
     }
 
     public enum EonsResourceType {

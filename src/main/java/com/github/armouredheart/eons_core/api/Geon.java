@@ -8,6 +8,9 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.ResourceTextMainCatagory;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.ResourceTextModifier;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper.ResourceTextSubCatagory;
 
 // misc imports
 import java.util.ArrayList;
@@ -88,7 +91,9 @@ public enum Geon {
     public String getName() {return super.toString();}
 
     /**@return TranslationTextComponent description of geon*/
-    public TranslationTextComponent getLocalisedDescription() {return new TranslationTextComponent("education." + EonsCore.MOD_ID + ".geon." + this.getName().toLowerCase() + ".desc");}
+    public TranslationTextComponent getLocalisedDescription() {
+        return EonsResourceHelper.getLocalisedText(ResourceTextMainCatagory.EDUCATION, ResourceTextSubCatagory.GEON, this.getName().toLowerCase(), ResourceTextModifier.DESC);
+    }
 
     /**@return List parents in order [Period, Era, Eon] */
     public List<Geon> getFullRange() {

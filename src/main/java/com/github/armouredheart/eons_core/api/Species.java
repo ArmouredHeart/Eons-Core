@@ -20,23 +20,27 @@ import com.github.armouredheart.eons_core.api.EonsResourceHelper;
  * information in this mod, including the automatic assignment of ai to mobs 
  * and texture resource lookup.*/
 public enum Species {
+    // Paleozoic
     TIKTAALIK(
-        buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA, EonsPhylum.CHORDATA, "", "", ""),
-        new String[] {EonsClade.STEGOCEPHALIA.toString()},
+        buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA, EonsPhylum.CHORDATA, "SARCOPTERYGII", "ELPISTOSTEGALIA", "STEGOCEPHALIA"),
+        new String[] {EonsClade.TETRAPODOMORPHA.toString()},
         new Geon[] {Geon.DEVONIAN},
-        new Habitat[] {},
-        new Behaviour[] {},
-        new int[] {}
+        new Habitat[] {Habitat.RIVER},
+        new Behaviour[] {Behaviour.PREDATOR},
+        0xaa7553,
+        0x26150c
     ),
     ANOMALOCARIS(
         buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA, EonsPhylum.ARTHROPODA, EonsClass.DINOCARIDIDA.toString(), "RADIODONTA", "ANOMALOCARIDIDAE"),
         new String[] {EonsClade.NOT_DEFINED.toString()},
         new Geon[] {Geon.CAMBRIAN}, 
-        new Habitat[] {}, 
+        new Habitat[] {Habitat.OCEAN}, 
         new Behaviour[] {Behaviour.PREDATOR, Behaviour.AGGRESSIVE},
-        new int[] {}
+        0x445C5B,
+        0x4C101A
     );
 
+    // *** Constructors ***
     //
     private final String[] TAXANOMY;
     private final Geon[] PERIODS;
@@ -45,8 +49,6 @@ public enum Species {
     private final Behaviour[] BEHAVIOURS;
     private final int[] EGG_COLOURS;
 
-    //
-
     /**
      * @param taxanomy
      * @param clades
@@ -54,14 +56,16 @@ public enum Species {
      * @param habitats
      * @param behaviours
      */
-    private Species(String[] taxanomy, String[] clades, Geon[] periods, Habitat[] habitats, Behaviour[] behaviours, int[] egg_colours) {
+    private Species(String[] taxanomy, String[] clades, Geon[] periods, Habitat[] habitats, Behaviour[] behaviours, int egg_colours_A, int egg_colours_B) {
         this.TAXANOMY = taxanomy;
         this.CLADES = clades;
         this.PERIODS = periods;
         this.HABITATS = habitats;
         this.BEHAVIOURS = behaviours;
-        this.EGG_COLOURS = egg_colours;
+        this.EGG_COLOURS = new int[]{egg_colours_A, egg_colours_B};
     }
+
+    // *** Methods ***
 
     /**
      * @param domain
@@ -74,8 +78,6 @@ public enum Species {
     private static String[] buildTaxanomy(EonsDomain domain, EonsKingdom kingdom, EonsPhylum phylum, String taxaClass, String order, String family) {
         return new String[] {domain.toString(), kingdom.toString(), phylum.toString(), taxaClass, order, family};
     }
-
-    // *** Methods ***
 
     public String[] getTaxanomy() {return this.TAXANOMY;}
 
@@ -116,7 +118,7 @@ public enum Species {
         DINOSAURIA,
         THEROPODA,
         SAURISCHIA,
-        STEGOCEPHALIA,
+        TETRAPODOMORPHA,
         NOT_DEFINED;
     }
 }
