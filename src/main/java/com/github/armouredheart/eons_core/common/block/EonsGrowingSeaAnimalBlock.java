@@ -29,9 +29,10 @@ import net.minecraft.world.IWorld;
 // Forge imports
 import net.minecraftforge.common.IShearable;
 
+
 // Eons imports
 import com.github.armouredheart.eons_core.common.block.EonsSeaAnimalBlock;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 
 // misc imports
 import java.util.Random;
@@ -49,9 +50,9 @@ public class EonsGrowingSeaAnimalBlock extends EonsSeaAnimalBlock implements IGr
     // *** Constructors ***
 
     /** */
-    public EonsGrowingSeaAnimalBlock(Block.Properties properties, EonsFieldNotes fieldNotes, boolean thermophile,
+    public EonsGrowingSeaAnimalBlock(Block.Properties properties, Species species, boolean thermophile,
             @Nullable Item dropItem, @Nullable SoundEvent pickSound) {
-        super(properties, fieldNotes, thermophile);
+        super(properties, species, thermophile);
         this.pickSound = pickSound;
         this.dropItem = dropItem;
         this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(1)));

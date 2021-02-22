@@ -12,9 +12,9 @@ import net.minecraft.util.ResourceLocation;
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.paleozoic.EonsParadoxidesEntity;
 import com.github.armouredheart.eons_core.EonsCore;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.EonsResourceHelper.EonsGeonFile;
-import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphicRenderer;
 import com.github.armouredheart.eons_core.client.model.entity.paleozoic.EonsParadoxidesModel;
 
 // misc imports
@@ -22,7 +22,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class EonsParadoxidesRenderer extends MobRenderer<EonsParadoxidesEntity, EntityModel<EonsParadoxidesEntity>> implements IEonsSexuallyDimorphicRenderer {
+public class EonsParadoxidesRenderer extends MobRenderer<EonsParadoxidesEntity, EntityModel<EonsParadoxidesEntity>> {
 
     // *** Attributes ***
 
@@ -37,6 +37,6 @@ public class EonsParadoxidesRenderer extends MobRenderer<EonsParadoxidesEntity, 
 
     @Override
     public ResourceLocation getEntityTexture(EonsParadoxidesEntity entity) {
-        return IEonsSexuallyDimorphicRenderer.getEonsMobTexture(entity, EonsGeonFile.PALEOZOIC);
+        return EonsResourceHelper.getEonsMobTexture(entity, EonsGeonFile.PALEOZOIC);
     }
 }

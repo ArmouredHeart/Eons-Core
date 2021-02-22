@@ -20,7 +20,7 @@ public interface IEonsSwimming {
      * @param <E> extends LivingEntity & IEonsSwimming
      * @param entity <E>
      */
-    public static <E extends LivingEntity & IEonsSwimming> void SwimTick(E entity) {
+    public static <E extends LivingEntity & IEonsSwimming> void swimTick(E entity) {
         updateAir(entity);
         
     }

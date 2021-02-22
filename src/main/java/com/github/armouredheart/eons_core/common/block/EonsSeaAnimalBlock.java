@@ -26,7 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.PlantType;
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 
 // misc imports
 import javax.annotation.Nullable;
@@ -35,23 +35,22 @@ public class EonsSeaAnimalBlock extends BushBlock implements IEonsLifeForm, IWat
 
     // *** Attributes ***
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private final EonsFieldNotes fieldNotes;
-    private final boolean thermophile;
-
+    private final boolean THERMOPHILE;
+    private final Species SPECIES;
     // *** Constructors ***
 
     /** */
-    public EonsSeaAnimalBlock(Block.Properties properties, EonsFieldNotes fieldNotes, boolean thermophile) {
+    public EonsSeaAnimalBlock(Block.Properties properties, Species species, boolean thermophile) {
         super(properties);
-        this.fieldNotes = fieldNotes;
-        this.thermophile = thermophile;
+        this.SPECIES = species;
+        this.THERMOPHILE = thermophile;
         this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, Boolean.valueOf(true)));
 
     }
 
     /** */
-    public EonsSeaAnimalBlock(Block.Properties properties, EonsFieldNotes fieldNotes) {
-        this(properties, fieldNotes, false);
+    public EonsSeaAnimalBlock(Block.Properties properties, Species species) {
+        this(properties, species, false);
     }
 
     // *** Methods ***
@@ -76,15 +75,12 @@ public class EonsSeaAnimalBlock extends BushBlock implements IEonsLifeForm, IWat
         IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
         return ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8 ? super.getStateForPlacement(context) : null;
     }
-
-    /** @return EonsFieldNotes object containing educational notes about lifeform.*/
-    public EonsFieldNotes getFieldNotes() {return this.fieldNotes;}
     
     /** */
     @Override
     protected boolean isValidGround(BlockState blockState, IBlockReader worldIn, BlockPos pos) {
         Block block = blockState.getBlock();
-        boolean isThermal = (block == Blocks.MAGMA_BLOCK && this.thermophile) || !this.thermophile;
+        boolean isThermal = (block == Blocks.MAGMA_BLOCK && this.THERMOPHILE) || !this.THERMOPHILE;
         return !blockState.getCollisionShape(worldIn, pos).project(Direction.UP).isEmpty() && isThermal;
     }
 
@@ -115,4 +111,9 @@ public class EonsSeaAnimalBlock extends BushBlock implements IEonsLifeForm, IWat
     }
 
     public PlantType getPlantType(IBlockReader world, BlockPos pos) {return PlantType.Water;}
+
+    @Override
+    public Species getSpecies() {
+        return this.SPECIES;
+    }
 }

@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 
 // misc imports
 import javax.annotation.Nullable;
@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 public class EonsTreeSaplingBlock extends SaplingBlock implements IEonsLifeForm{
 
     // *** Attributes ***
-    private final EonsFieldNotes fieldNotes;
+    private final Species SPECIES;
     private final Block[] validGroundBlocks;
 
     // *** Constructors ***
@@ -30,9 +30,9 @@ public class EonsTreeSaplingBlock extends SaplingBlock implements IEonsLifeForm{
     * @param tree Tree that the sapling grows into
     * @param properties
     */
-    protected EonsTreeSaplingBlock(Tree tree, Block.Properties properties, EonsFieldNotes fieldNotes, @Nullable Block[] validGroundBlocks) {
+    protected EonsTreeSaplingBlock(Tree tree, Block.Properties properties, Species species, @Nullable Block[] validGroundBlocks) {
         super(tree, properties);
-        this.fieldNotes = fieldNotes;
+        this.SPECIES = species;
         this.validGroundBlocks = validGroundBlocks;
     }
 
@@ -50,7 +50,8 @@ public class EonsTreeSaplingBlock extends SaplingBlock implements IEonsLifeForm{
         return super.isValidGround(state, worldIn, pos);
     }
 
-    /** @return EonsFieldNotes object containing educational notes about lifeform.*/
-    public EonsFieldNotes getFieldNotes() {return this.fieldNotes;}
-        
+    @Override
+    public Species getSpecies() {
+        return this.SPECIES;
+    }
 }

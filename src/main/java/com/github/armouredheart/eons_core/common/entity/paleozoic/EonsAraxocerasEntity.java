@@ -5,11 +5,12 @@ package com.github.armouredheart.eons_core.common.entity.paleozoic;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
 
+import com.github.armouredheart.eons_core.api.Species;
+
 // Forge imports
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.EonsCephalopodEntity;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 
 // misc imports
 
@@ -19,9 +20,8 @@ public class EonsAraxocerasEntity extends EonsCephalopodEntity {
 
     // *** Constructors ***
     
-    /** */
     public EonsAraxocerasEntity(final EntityType<? extends EonsCephalopodEntity> type, final World world) {
-        super(type, world, null);
+        super(type, world, Species.ARAXOCERAS);
 
     }
     

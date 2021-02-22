@@ -86,7 +86,7 @@ public class EonsEatBerriesGoal<T extends CreatureEntity & IEonsBeast> extends M
     */
     public boolean shouldExecute() {
         //
-        if(this.creature.getDiet().isHungry()) {
+        if(this.creature.getStomach().isHungry()) {
             return super.shouldExecute();
         } else {
             return false;

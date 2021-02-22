@@ -31,21 +31,21 @@ import com.github.armouredheart.eons_core.api.IEonsToxic;
 public abstract class EonsJellyfishEntity extends EonsGroupFishEntity implements IEonsToxic{
 
     // *** Attributes ***
-    private final int toxicity;
+    private final int TOXICITY;
 
     // *** Constructors ***
 
     /** @param toxicity value of 0 is non-toxic, and 1 is equal to a puffer fish. Bigger number, longer poison effect */
-    protected EonsJellyfishEntity(EntityType<? extends  EonsGroupFishEntity> type, World world, Species species, final int sexRatio, final int toxicity) {
-        super(type, world, species, sexRatio);
-        this.toxicity = toxicity;
+    protected EonsJellyfishEntity(EntityType<? extends  EonsGroupFishEntity> type, World world, Species species, final int toxicity) {
+        super(type, world, species);
+        this.TOXICITY = toxicity;
     }
 
     // *** Methods ***
 
     /** */
     private void attack(MobEntity mobEntity) {
-        if(IEonsToxic.tryPoisonEntity(this, mobEntity, this.toxicity)) {
+        if(IEonsToxic.tryPoisonEntity(this, mobEntity, this.TOXICITY)) {
             this.playStingEffect(); 
         }
     }
@@ -54,7 +54,7 @@ public abstract class EonsJellyfishEntity extends EonsGroupFishEntity implements
     * Called by a player entity when they collide with an entity
     */
     public void onCollideWithPlayer(PlayerEntity entityIn) {
-        if (entityIn instanceof ServerPlayerEntity && IEonsToxic.tryPoisonEntity(this, entityIn, this.toxicity)){
+        if (entityIn instanceof ServerPlayerEntity && IEonsToxic.tryPoisonEntity(this, entityIn, this.TOXICITY)){
             this.playStingEffect();
             ((ServerPlayerEntity)entityIn).connection.sendPacket(new SChangeGameStatePacket(9, 0.0F));
         }

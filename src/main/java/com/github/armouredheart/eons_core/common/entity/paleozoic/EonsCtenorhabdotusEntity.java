@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.EonsJellyfishEntity;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 
 // misc imports
 
@@ -21,7 +21,7 @@ public class EonsCtenorhabdotusEntity extends EonsJellyfishEntity {
     
     /** */
     public EonsCtenorhabdotusEntity(final EntityType<? extends EonsJellyfishEntity> type, final World world) {
-        super(type, world, null, -1, 1);
+        super(type, world, Species.CTENORHABDOTUS, 1);
 
     }
     

@@ -23,11 +23,10 @@ import net.minecraft.entity.SpawnReason;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.EonsBeastEntity;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsGoToWaterGoal;
 import com.github.armouredheart.eons_core.api.IEonsMoistness;
+import com.github.armouredheart.eons_core.api.Species;
 import com.github.armouredheart.eons_core.common.entity.ai.EonsEatBerriesGoal;
-import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 
 // misc imports
 import javax.annotation.Nullable;
@@ -35,12 +34,30 @@ import javax.annotation.Nullable;
 public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEonsMoistness {
     // *** Attributes ***
     private static final DataParameter<Integer> MOISTNESS = EntityDataManager.createKey(EonsAmphibianEntity.class, DataSerializers.VARINT);
-    protected int baseMoistness;
+    protected final int BASE_MOISTNESS;
 
     // *** Constructors ***
-    protected EonsAmphibianEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, int sexRatio, boolean isNocturnal) {
-        super(type, world, fieldNotes, diet, sexRatio, isNocturnal);
-        this.baseMoistness = 2400;
+
+    /**
+     * custom moistness
+     * @param type
+     * @param world
+     * @param species
+     * @param base_moistness
+     */
+    protected EonsAmphibianEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final Species species, final int base_moistness) {
+        super(type, world, species);
+        this.BASE_MOISTNESS = base_moistness;
+    }
+
+    /**
+     * default
+     * @param type
+     * @param world
+     * @param species
+     */
+    protected EonsAmphibianEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final Species species) {
+        this(type, world, species, IEonsMoistness.DEFAULT_BASE_MOISTNESS);
     }
     
     // *** Methods ***
@@ -63,31 +80,14 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     /** */
     @Nullable
     public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        this.setMoistness(this.baseMoistness);
+        this.setMoistness(this.BASE_MOISTNESS);
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
     /** */
     public void tick() {
         super.tick();
-        if (!this.isAIDisabled()) {
-            //check how much moistness to remove
-            //normally moistness is only lost while in direct sunlight, but high temperature will dry out faster even in shade!
-            if (this.isInWaterRainOrBubbleColumn()) {this.setMoistness(this.baseMoistness);} 
-            else  
-            if (this.isInDaylight()) {
-                this.dryOut(1);
-                if (this.getLocalTemperature() > 0.95F) {this.dryOut(2);}
-            }
-
-            // dryout damage
-            if (this.getMoistness() <= 0) {this.attackEntityFrom(DamageSource.DRYOUT, 1.0F);}
-        }
-    }
-
-    /** */
-    protected void dryOut(int points){
-        this.setMoistness(this.getMoistness() - points);
+        IEonsMoistness.moistureTick(this, this.isInDaylight(), this.BASE_MOISTNESS);
     }
 
     /** */
@@ -107,7 +107,7 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
     /** */
     protected void registerData() {
         super.registerData();
-        this.dataManager.register(MOISTNESS, this.baseMoistness);
+        this.dataManager.register(MOISTNESS, this.BASE_MOISTNESS);
     }
 
     /** */
@@ -116,6 +116,8 @@ public abstract class EonsAmphibianEntity extends EonsBeastEntity implements IEo
         compound.putInt("Moistness", this.getMoistness());
     }
 
-    /** */
-    public boolean isDryingOut() {int moist = this.getMoistness(); return moist < 600;}
+    @Override
+    public boolean isDryingOut() {
+        return IEonsMoistness.isDryingOut(this, this.BASE_MOISTNESS);
+    }
 }

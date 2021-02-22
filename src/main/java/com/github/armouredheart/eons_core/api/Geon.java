@@ -7,7 +7,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.EonsCore;
 import com.github.armouredheart.eons_core.api.EonsResourceHelper.ResourceTextMainCatagory;
 import com.github.armouredheart.eons_core.api.EonsResourceHelper.ResourceTextModifier;
 import com.github.armouredheart.eons_core.api.EonsResourceHelper.ResourceTextSubCatagory;

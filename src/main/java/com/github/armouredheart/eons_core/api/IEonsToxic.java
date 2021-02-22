@@ -18,7 +18,14 @@ public interface IEonsToxic {
 
     // *** Methods ***
 
-    /** */
+    /**
+     * 
+     * @param <T>
+     * @param toxicEntity
+     * @param target
+     * @param toxicity
+     * @return
+     */
     public static <T extends LivingEntity & IEonsToxic> boolean tryPoisonEntity(T toxicEntity, LivingEntity target, int toxicity) {
         if(toxicity < 1) {return false;} else {
             if (target.attackEntityFrom(DamageSource.causeMobDamage(toxicEntity), (float)(2))) {

@@ -55,16 +55,11 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
     * @param species
     * @param sexRatio
     */
-	protected EonsGroupFishEntity(final EntityType<? extends AbstractGroupFishEntity> type, final World world, final Species species, final int sexRatio) {
+	protected EonsGroupFishEntity(final EntityType<? extends AbstractGroupFishEntity> type, final World world, final Species species) {
 		super(type, world);
 		this.SPECIES = species;
-		IEonsSexuallyDimorphic.assignSexByRatio(this, sexRatio);
+		IEonsSexuallyDimorphic.assignSexByRatio(this, this.SPECIES);
 		this.ANIMATION_HANDLER = new EonsAnimationHandler();
-	}
-
-	/** */
-	protected EonsGroupFishEntity(final EntityType<? extends AbstractGroupFishEntity> type, final World world, final Species fieldNotes) {
-		this(type, world, fieldNotes, 50);
 	}
 
     // *** Methods ***

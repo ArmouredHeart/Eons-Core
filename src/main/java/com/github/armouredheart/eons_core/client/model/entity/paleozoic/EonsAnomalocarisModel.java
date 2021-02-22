@@ -1,4 +1,3 @@
-  
 // package
 package com.github.armouredheart.eons_core.client.model.entity.paleozoic;
 

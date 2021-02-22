@@ -10,18 +10,18 @@ import net.minecraft.potion.Effects;
 
 // Forge imports
 
+
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsBeast;
-import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
+import com.github.armouredheart.eons_core.api.IEonsMob;
 
 // misc imports
 import java.util.List;
 import javax.annotation.Nullable;
 
-public interface IEonsBeast {
+public interface IEonsBeast extends IEonsMob {
 
     // *** Attributes ***
-    // modifiers
     public static final int MAX_RESOLVE = 100;
     public static final int MIN_RESOLVE = 1;
     public static final int DEFAULT_RESOLVE = 60;
@@ -30,11 +30,19 @@ public interface IEonsBeast {
     // *** Methods ***
 
     /**
+     * 
+     * @param beast_entity
+     */
+    public static <T extends LivingEntity & IEonsBeast> void doBeastTick(T beast_entity) {
+        beast_entity.getStomach().stomachTick();
+    }
+
+    /**
      * @param entity
      * @return [currentHP, maxHP]
      */
     public static double[] getHealthStatus(LivingEntity entity) {
-        return new double[]{entity.getHealth(), entity.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getValue()};
+        return new double[] {entity.getHealth(), entity.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getValue()};
     }
 
     /**
@@ -71,7 +79,7 @@ public interface IEonsBeast {
      * @return Returns false if too hungry to heal.
      */
     public static <T extends LivingEntity & IEonsBeast> boolean setRested(T beast, int seconds) {
-        if(!beast.getDiet().isHungry()) {
+        if(!beast.getStomach().isHungry()) {
             // give regeneration effect
             beast.addPotionEffect(new EffectInstance(Effects.REGENERATION, 20 * seconds, 0, false, false));
             return true;
@@ -95,10 +103,7 @@ public interface IEonsBeast {
     default public boolean isBadCondition() {return false;}
 
     /** */
-    public boolean isNocturnal();
-
-    /** */
-    public EonsDiet getDiet();
+    public Stomach getStomach();
 
 }
     

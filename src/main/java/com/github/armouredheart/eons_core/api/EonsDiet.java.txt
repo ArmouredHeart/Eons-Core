@@ -1,5 +1,5 @@
 // package
-package com.github.armouredheart.eons_core.common.entity.ai;
+package com.github.armouredheart.eons_core.api;
 
 // Minecraft imports
 import net.minecraft.item.Item;

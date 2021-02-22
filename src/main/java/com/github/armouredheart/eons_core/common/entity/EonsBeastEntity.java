@@ -40,13 +40,13 @@ import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.IEonsAnimationEntity;
 import com.github.armouredheart.eons_core.api.Species;
-import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
+import com.github.armouredheart.eons_core.api.Stomach;
 import com.github.armouredheart.eons_core.api.EonsAnimationHandler;
 
 // misc imports
 import javax.annotation.Nullable;
 
-public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast, IEonsLifeForm, IEonsSexuallyDimorphic, IEonsAnimationEntity {
+public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast, IEonsSexuallyDimorphic, IEonsAnimationEntity {
 
    // *** Attributes ***
    // data
@@ -55,8 +55,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    // 
    private static final EonsAnimationHandler ANIMATION_HANDLER = new EonsAnimationHandler();
    private final Species SPECIES; // pointer to educational notes about lifeform
-   private final EonsDiet DIET;
-   private final boolean IS_NOCTURNAL;
+   private final Stomach STOMACH;
 
    // *** Constructors ***
 
@@ -64,22 +63,15 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    * @param type
    * @param world
    * @param species
-   * @param diet
    * @param sexRatio
    * @param isNocturnal
    */
-   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final Species species, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
+   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final Species species) {
       super(type, world);
       this.SPECIES = species;
-      this.DIET = diet;
-      this.IS_NOCTURNAL = isNocturnal;
+      this.STOMACH = new Stomach(this.SPECIES);
       this.setCanPickUpLoot(true);
-      IEonsSexuallyDimorphic.assignSexByRatio(this, sexRatio);
-   }
-
-   /** Default Settings EonsBeast constructor*/
-   protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final Species species) {
-      this(type, world, species, new EonsDiet(8, false, null), 50, false);
+      IEonsSexuallyDimorphic.assignSexByRatio(this, this.SPECIES);
    }
 
    // *** Methods ***
@@ -88,15 +80,13 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    @Override
    public void tick() {
       super.tick();
-      this.DIET.dietTick();
+      IEonsBeast.doBeastTick(this);
    }
 
    /** */
    @Override
    protected void registerAttributes() {
       super.registerAttributes();
-      this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-      this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
    }
 
    /** */
@@ -111,7 +101,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    */
    @Override
    public boolean isBreedingItem(ItemStack stack) {
-      return this.DIET.isBreedingItem(stack);
+      return this.SPECIES.getDiet().isBreedingItem(stack);
    }
 
    /**
@@ -128,13 +118,8 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       }
    }
 
-   /** */
-   public EonsDiet getDiet() {return this.DIET;}
-
+   public Stomach getStomach() {return this.STOMACH;}
    public boolean shouldSleep() {return false;}
-
-   /** */
-   public boolean isNocturnal() {return this.IS_NOCTURNAL;}
 
    /** */
    protected void registerGoals() {
@@ -142,16 +127,6 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
       this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.0D));
       this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
       this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
-   }
-
-   /** */
-   protected float getLocalTemperature() {  
-      /*int i = MathHelper.floor(this.posX);
-      int j = MathHelper.floor(this.posY);
-      int k = MathHelper.floor(this.posZ);
-      return this.world.getBiome(new BlockPos(i, 0, k)).func_225486_c(new BlockPos(i, j, k));// obfuscated method, replace when possible
-      */
-      return 0.5F;
    }
 
    /** */

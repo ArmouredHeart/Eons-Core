@@ -26,9 +26,8 @@ import net.minecraft.nbt.CompoundNBT;
 // Eons imports
 import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsMultiPart;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
 import com.github.armouredheart.eons_core.common.entity.EonsBeastPartEntity;
-import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
 
 // misc imports
 import javax.annotation.Nullable;
@@ -45,8 +44,8 @@ public abstract class EonsBigBeastEntity extends EonsBeastEntity implements IEon
     // *** Constructors ***
 
     /** */
-    public EonsBigBeastEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final EonsFieldNotes fieldNotes, final EonsDiet diet, int sexRatio, boolean isNocturnal) {
-        super(type, world, fieldNotes, diet, sexRatio, isNocturnal);
+    public EonsBigBeastEntity(final EntityType<? extends EonsBeastEntity> type, final World world, final Species species) {
+        super(type, world, species);
         this.shellBroken = false;
         this.parts = new ArrayList<EonsBeastPartEntity>();
         this.partCount = 0;

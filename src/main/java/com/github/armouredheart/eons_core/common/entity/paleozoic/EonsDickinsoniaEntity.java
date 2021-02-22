@@ -2,22 +2,19 @@
 package com.github.armouredheart.eons_core.common.entity.paleozoic;
 
 // Minecraft imports
-import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
 
 // Forge imports
 
 // Eons imports
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
+import com.github.armouredheart.eons_core.api.Species;
 
 public class EonsDickinsoniaEntity extends MobEntity implements IEonsLifeForm {
 
     // *** Attributes ***
-    private static final EonsFieldNotes FIELDNOTES = null;
 
     // *** Constructors ***
 
@@ -27,9 +24,12 @@ public class EonsDickinsoniaEntity extends MobEntity implements IEonsLifeForm {
     }
 
     // *** Methods ***
-
     @Override
-    public EonsFieldNotes getFieldNotes() {return EonsDickinsoniaEntity.FIELDNOTES;}
+    public Species getSpecies() {
+        return Species.DICKINSONIA;
+    }
+
+
     
 }
 

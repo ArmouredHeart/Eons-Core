@@ -17,13 +17,12 @@ import net.minecraft.world.World;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.EonsAnimationHandler;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
+import com.github.armouredheart.eons_core.api.Species;
+import com.github.armouredheart.eons_core.api.Stomach;
 import com.github.armouredheart.eons_core.api.IEonsAnimationEntity;
 import com.github.armouredheart.eons_core.api.IEonsBeast;
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
-import com.github.armouredheart.eons_core.common.entity.ai.EonsDiet;
-
 // misc imports
 
 public abstract class EonsTamableBeastEntity extends TameableEntity implements IEonsBeast, IEonsLifeForm, IEonsSexuallyDimorphic, IEonsAnimationEntity {
@@ -32,21 +31,19 @@ public abstract class EonsTamableBeastEntity extends TameableEntity implements I
     // data
     private static final DataParameter<Byte> SEX = EntityDataManager.createKey(EonsBeastEntity.class, DataSerializers.BYTE);
     private static final EonsAnimationHandler ANIMATION_HANDLER = new EonsAnimationHandler();
-    private final EonsDiet DIET;
-    private final boolean IS_NOCTURNAL;
-    private final EonsFieldNotes FIELD_NOTES;
+    private final Species SPECIES;
+    private final Stomach STOMACH;
 
 
     // *** Constructors ***
 
 
-    protected EonsTamableBeastEntity(EntityType<? extends TameableEntity> type, World worldIn, final EonsFieldNotes fieldNotes, final EonsDiet diet, final int sexRatio, final boolean isNocturnal) {
+    protected EonsTamableBeastEntity(EntityType<? extends TameableEntity> type, World worldIn, final Species species) {
         super(type, worldIn);
-        this.FIELD_NOTES = fieldNotes;
-        this.DIET = diet;
-        this.IS_NOCTURNAL = isNocturnal;
+        this.SPECIES = species;
+        this.STOMACH = new Stomach(this.SPECIES);
         this.setCanPickUpLoot(true);
-        IEonsSexuallyDimorphic.assignSexByRatio(this, sexRatio);
+        IEonsSexuallyDimorphic.assignSexByRatio(this, this.SPECIES);
     }
 
     // *** Methods ***
@@ -55,13 +52,11 @@ public abstract class EonsTamableBeastEntity extends TameableEntity implements I
     @Override
     public void tick() {
         super.tick();
-        this.DIET.dietTick();
     } 
 
     /** */
     @Override
     public boolean processInteract(PlayerEntity player, Hand hand) {
-        IEonsLifeForm.addNotesToJournal(this, player, hand);
         return super.processInteract(player, hand);
     }
 
@@ -71,7 +66,7 @@ public abstract class EonsTamableBeastEntity extends TameableEntity implements I
      */
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return this.DIET.isBreedingItem(stack);
+        return this.SPECIES.getDiet().isBreedingItem(stack);
     }
 
     /** */

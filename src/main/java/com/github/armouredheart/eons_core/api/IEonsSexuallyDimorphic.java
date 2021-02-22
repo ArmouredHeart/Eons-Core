@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.EntityDataManager;
+import com.github.armouredheart.eons_core.api.Species;
 
 // Forge imports
 
@@ -15,8 +16,8 @@ import net.minecraft.network.datasync.EntityDataManager;
 import javax.annotation.Nullable;
 
 public interface IEonsSexuallyDimorphic {
-    
-    public static final String key = "Sex"; // this key should be used to store sex in NBT data
+    public static final int UNISEX = -1;
+    public static final String KEY = "Sex"; // this key should be used to store sex in NBT data
 
     // *** Methods ***
 
@@ -44,7 +45,8 @@ public interface IEonsSexuallyDimorphic {
      * @param entity extends LivingEntity & IEonsSexuallyDimorphic
      * @param sexRatio
      */
-    public static <E extends LivingEntity & IEonsSexuallyDimorphic> void assignSexByRatio(E entity, int sexRatio) {
+    public static <E extends LivingEntity & IEonsSexuallyDimorphic> void assignSexByRatio(E entity, Species species) {
+        int sexRatio = species.getSexRatio();
         if(sexRatio < 0) {
             // sexless, set to unisex
             assignSex(entity, EonsSex.UNISEX);
@@ -83,7 +85,7 @@ public interface IEonsSexuallyDimorphic {
      * @param compound
      */
     public static <E extends LivingEntity & IEonsSexuallyDimorphic> void writeSexToNBT(E entity, CompoundNBT compound) {
-        compound.putByte(key, getSexByte(entity.getEntityDataManager(), entity.getSexParameter()));
+        compound.putByte(KEY, getSexByte(entity.getEntityDataManager(), entity.getSexParameter()));
     }
 
     /**
@@ -91,7 +93,7 @@ public interface IEonsSexuallyDimorphic {
      * @param compound
      */
     public static <E extends LivingEntity & IEonsSexuallyDimorphic> void readSexFromNBT(E entity, CompoundNBT compound) {
-        compound.getByte(key);
+        compound.getByte(KEY);
     }
 
     /**

@@ -1,22 +1,36 @@
 // package
 package com.github.armouredheart.eons_core.api;
 
+
 // Minecraft imports
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.util.ResourceLocation;
 
 // Forge imports
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
 
-
 // misc imports
-
+import javax.annotation.Nonnull;
 /**
  * @apiNote This exists purely to help organise resource lookup and enforce file structure 
  * by generating resource keys instead of hardcoding them in different locations.
  */
-public interface EonsResourceHelper {
+public class EonsResourceHelper {
+
+    /**
+     * @param <E> extends {@link net.minecraft.entity.MobEntity} & {@link com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic}
+     * @param entity
+     * @param geon_file
+     * @param name
+     * @return non null resource location of mob texture to use
+     */
+    public static <E extends MobEntity & IEonsSexuallyDimorphic> @Nonnull ResourceLocation getEonsMobTexture(E entity, EonsGeonFile geon_file) {
+        String name = entity.getEntityString().toLowerCase();
+        return new ResourceLocation(EonsCore.MOD_ID, "textures/entity/" + geon_file.toString() + "/" + name + "/" + name + "_" + entity.getSex().toString().toLowerCase() + ".png");
+    }
 
     public static String getGeonFossilItemKey(Geon geon) {
         return getItemKey(geon.toString(), EonsResourcePrefix.NO_PREFIX, EonsSetType.FOSSIL, EonsResourceType.ITEM);

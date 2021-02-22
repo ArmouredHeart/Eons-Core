@@ -9,8 +9,7 @@ import net.minecraft.world.World;
 
 // Eons imports
 import com.github.armouredheart.eons_core.common.entity.EonsBigFishEntity;
-import com.github.armouredheart.eons_core.api.EonsFieldNotes;
-
+import com.github.armouredheart.eons_core.api.Species;
 // misc imports
 
 public class EonsHyneriaEntity extends EonsBigFishEntity {
@@ -21,7 +20,7 @@ public class EonsHyneriaEntity extends EonsBigFishEntity {
     
     /** */
     public EonsHyneriaEntity(final EntityType<? extends EonsBigFishEntity> type, final World world) {
-        super(type, world, null);
+        super(type, world, Species.HYNERIA);
     }
     
     // *** Methods ***

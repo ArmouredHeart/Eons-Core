@@ -16,6 +16,10 @@ import net.minecraft.block.Block;
 
 // Eons imports
 import com.github.armouredheart.eons_core.EonsCore;
+import com.github.armouredheart.eons_core.api.EonsResourceHelper;
+import com.github.armouredheart.eons_core.api.Geon;
+import com.github.armouredheart.eons_core.api.Species;
+
 import net.minecraft.block.LogBlock;
 import com.github.armouredheart.eons_core.common.block.*;
 
@@ -39,10 +43,12 @@ public final class EonsBlocks {
     public static final RegistryObject<Block> CYCAS_LEAVES = registerBlock("cycas_leaves", () -> new EonsFruitingLeavesBlock(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)));
 
     // Paleozoic
-    public static final RegistryObject<Block> DIRAPHORA_NISUIA = registerBlock("diraphora_nisusia", () -> new EonsSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), null));
-    public static final RegistryObject<Block> MARGARETIA = registerBlock("margaretia", () -> new EonsSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), null));
-    public static final RegistryObject<Block> CHARNIA = registerBlock("charnia", () -> new EonsGrowingSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), null, false, null, null));
-    public static final RegistryObject<Block> CAMBRIAN_FOSSIL_BLOCK = registerBlock("cambrian_fossil_block", () -> new EonsFossilBlock(Block.Properties.create(Material.ROCK)));
+    // animal blocks
+    public static final RegistryObject<Block> DIRAPHORA_NISUSIA = registerBlock(Species.DIRAPHORA_NISUSIA, () -> new EonsSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), Species.DIRAPHORA_NISUSIA));
+    public static final RegistryObject<Block> MARGARETIA = registerBlock(Species.MARGARETIA, () -> new EonsSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), Species.MARGARETIA));
+    public static final RegistryObject<Block> CHARNIA = registerBlock(Species.CHARNIA, () -> new EonsGrowingSeaAnimalBlock(Block.Properties.create(Material.SEA_GRASS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS), Species.CHARNIA, false, null, null));
+    // fossil blocks
+    public static final RegistryObject<Block> CAMBRIAN_FOSSIL_BLOCK = registerFossilBlock(Geon.CAMBRIAN);
     
     // *** Methods ***
 
@@ -53,4 +59,30 @@ public final class EonsBlocks {
     public static RegistryObject<Block> registerBlock(String block_name, Supplier<Block> block_supplier){
         return BLOCKS.register(block_name, block_supplier);
     }
+
+    /**
+     * 
+     * @param species
+     * @param block_supplier
+     */
+    public static RegistryObject<Block> registerBlock(Species species, Supplier<Block> block_supplier){
+        return EonsBlocks.registerBlock(species.toString().toLowerCase(), block_supplier);
+    }
+
+    /**
+     * 
+     * @param geon
+     */
+    public static RegistryObject<Block> registerFossilBlock(Geon geon) {
+        return EonsBlocks.registerBlock(geon.toString().toLowerCase() + "_fossil_block", () -> new EonsFossilBlock(Block.Properties.create(Material.ROCK)));
+    }
+
+    /**
+     * 
+     * @param species
+     */
+    public static RegistryObject<Block> registerFossilBlock(Species species) {
+        return EonsBlocks.registerBlock(species.toString().toLowerCase() + "_fossil_block", () -> new EonsFossilBlock(Block.Properties.create(Material.ROCK)));
+    }
+
 }
