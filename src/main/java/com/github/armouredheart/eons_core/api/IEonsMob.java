@@ -3,13 +3,8 @@ package com.github.armouredheart.eons_core.api;
 
 // Minecraft imports
 import net.minecraft.entity.MobEntity;
-import net.minecraft.network.datasync.EntityDataManager;
-
 // Forge imports
 import net.minecraftforge.common.extensions.IForgeEntity;
-
-// Eons imports
-import com.github.armouredheart.eons_core.api.IEonsLifeForm;
 
 // misc imports
 

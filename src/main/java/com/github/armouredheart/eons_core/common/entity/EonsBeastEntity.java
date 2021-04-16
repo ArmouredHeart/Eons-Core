@@ -69,9 +69,9 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    protected EonsBeastEntity(final EntityType<? extends AnimalEntity> type, final World world, final Species species) {
       super(type, world);
       this.SPECIES = species;
-      this.STOMACH = new Stomach(this.SPECIES);
+      this.STOMACH = new Stomach(Species.getMobData(this));
       this.setCanPickUpLoot(true);
-      IEonsSexuallyDimorphic.assignSexByRatio(this, this.SPECIES);
+      IEonsSexuallyDimorphic.assignSexByRatio(this, Species.getMobData(this));
    }
 
    // *** Methods ***
@@ -101,7 +101,7 @@ public abstract class EonsBeastEntity extends AnimalEntity implements IEonsBeast
    */
    @Override
    public boolean isBreedingItem(ItemStack stack) {
-      return this.SPECIES.getDiet().isBreedingItem(stack);
+      return Species.getMobData(this).getDiet().isBreedingItem(stack);
    }
 
    /**

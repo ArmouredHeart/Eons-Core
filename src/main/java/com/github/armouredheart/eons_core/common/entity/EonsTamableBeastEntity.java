@@ -41,9 +41,9 @@ public abstract class EonsTamableBeastEntity extends TameableEntity implements I
     protected EonsTamableBeastEntity(EntityType<? extends TameableEntity> type, World worldIn, final Species species) {
         super(type, worldIn);
         this.SPECIES = species;
-        this.STOMACH = new Stomach(this.SPECIES);
+        this.STOMACH = new Stomach(Species.getMobData(this));
         this.setCanPickUpLoot(true);
-        IEonsSexuallyDimorphic.assignSexByRatio(this, this.SPECIES);
+        IEonsSexuallyDimorphic.assignSexByRatio(this, Species.getMobData(this));
     }
 
     // *** Methods ***
@@ -66,7 +66,7 @@ public abstract class EonsTamableBeastEntity extends TameableEntity implements I
      */
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return this.SPECIES.getDiet().isBreedingItem(stack);
+        return Species.getMobData(this).getDiet().isBreedingItem(stack);
     }
 
     /** */

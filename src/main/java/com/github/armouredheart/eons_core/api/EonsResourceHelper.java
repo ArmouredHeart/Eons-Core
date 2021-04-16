@@ -23,8 +23,7 @@ public class EonsResourceHelper {
     /**
      * @param <E> extends {@link net.minecraft.entity.MobEntity} & {@link com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic}
      * @param entity
-     * @param geon_file
-     * @param name
+     * @param geon_file {@link com.github.armouredheart.eons_core.api.Geon}
      * @return non null resource location of mob texture to use
      */
     public static <E extends MobEntity & IEonsSexuallyDimorphic> @Nonnull ResourceLocation getEonsMobTexture(E entity, EonsGeonFile geon_file) {

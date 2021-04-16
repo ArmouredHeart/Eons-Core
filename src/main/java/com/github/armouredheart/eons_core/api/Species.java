@@ -4,6 +4,7 @@ package com.github.armouredheart.eons_core.api;
 // Minecraft imports
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttribute;
 
@@ -20,10 +21,11 @@ import com.github.armouredheart.eons_core.api.EonsAIBuilder.Behaviour;
 import com.github.armouredheart.eons_core.common.entity.EonsCreatureAttribute;
 
 // misc imports
+import javax.annotation.Nonnull;
 
 /** @apiNote this enumerator is used as a lookup table for all species related 
  * information in this mod, including the automatic assignment of ai and attributes to mobs 
- * and texture resource lookup. This is going to be a gigantic file... */
+ * and texture resource lookup. (This is going to be a gigantic file...) */
 public enum Species {
     // *** Paleozoic ***
     // Cambrian
@@ -35,7 +37,7 @@ public enum Species {
         new Behaviour[] {Behaviour.PREDATOR, Behaviour.AGGRESSIVE},
         0x445C5B,
         0x4C101A,
-        Species.buildAttributes(8.0D, -1.0D, 3.0D, 4.0D),
+        EonsMobData.buildAttributes(8.0D, -1.0D, 3.0D, 4.0D),
         CreatureAttribute.ARTHROPOD,
         50,
         new Diet()
@@ -51,7 +53,7 @@ public enum Species {
         new Behaviour[] {Behaviour.PREDATOR},
         0xaa7553,
         0x26150c,
-        Species.buildAttributes(8.0D),
+        EonsMobData.buildAttributes(8.0D),
         EonsCreatureAttribute.AMPHIBIAN,
         50,
         new Diet()
@@ -65,7 +67,7 @@ public enum Species {
         new Behaviour[] {},
         0xFFFFFF,
         0xFFFFFF,
-        Species.buildAttributes(10.D),
+        EonsMobData.buildAttributes(10.D),
         CreatureAttribute.ARTHROPOD,
         50,
         new Diet()
@@ -79,89 +81,223 @@ public enum Species {
         new Behaviour[] {Behaviour.PREDATOR},
         0x000000, 
         0xFFFFFF,
-        Species.buildAttributes(10.0D),
+        EonsMobData.buildAttributes(10.0D),
         CreatureAttribute.UNDEFINED,
         50,
         new Diet()
-    ), AEGIROCASSIS, ARAXOCERAS,  BELANTSEA, HYNERIA, PARADOXIDES, CTENORHABDOTUS, HURDIA, DICKINSONIA, DIRAPHORA_NISUSIA, MARGARETIA, CHARNIA, MAZOTHAIROS, SPATHICEPHALUS;
+    ), 
+    AEGIROCASSIS(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ), 
+    ARAXOCERAS(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ),
+    BELANTSEA(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ), 
+    HYNERIA(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ),
+    PARADOXIDES(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ),
+    CTENORHABDOTUS(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ),
+    HURDIA(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ),
+    DICKINSONIA(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ), 
+    DIRAPHORA_NISUSIA(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ),
+    MARGARETIA(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ),
+    CHARNIA(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    ),
+    MAZOTHAIROS(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA, EonsPhylum.ARTHROPODA, "", "", ""),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.ARTHROPOD,
+        50,
+        new Diet()
+    ), 
+    SPATHICEPHALUS(
+        Species.buildTaxanomy(EonsDomain.EUKARYOTA, EonsKingdom.ANIMALIA, EonsPhylum.CHORDATA, "", "", ""),
+        new String[] {},
+        new Geon[] {},
+        new Habitat[] {},
+        new Behaviour[] {},
+        0x000000, 
+        0xFFFFFF,
+        EonsMobData.buildAttributes(10.0D),
+        CreatureAttribute.UNDEFINED,
+        50,
+        new Diet()
+    );
     // *** Mezozoic ***
 
     // *** Cenozoic ***
     
-    
     // *** Attributes ***
-    private static final double SKIP_ATTRIBUTE = -1.0D;
-    public static final IAttribute[] SPECIES_ATTRIBUTE_MAP = {
-        SharedMonsterAttributes.MAX_HEALTH, 
-        SharedMonsterAttributes.FOLLOW_RANGE, 
-        SharedMonsterAttributes.KNOCKBACK_RESISTANCE,
-        SharedMonsterAttributes.MOVEMENT_SPEED,
-        SharedMonsterAttributes.FLYING_SPEED,
-        SharedMonsterAttributes.ATTACK_DAMAGE,
-        SharedMonsterAttributes.ATTACK_KNOCKBACK,
-        SharedMonsterAttributes.ATTACK_SPEED,
-        SharedMonsterAttributes.ARMOR,
-        SharedMonsterAttributes.ARMOR_TOUGHNESS,
-        SharedMonsterAttributes.LUCK
-    }; 
     private final String[] TAXANOMY;
     private final Geon[] PERIODS;
     private final String[] CLADES;
-    private final Habitat[] HABITATS;
-    private final Behaviour[] BEHAVIOURS;
-    private final int[] EGG_COLOURS;
-    private final double[] ATTRIBUTES;
-    private final CreatureAttribute CREATURE_ATTRIBUTE;
-    private final int SEX_RATIO;
-    private final Diet DIET;
+    private final EonsMobData MOB_DATA;
 
     // *** Constructors ***
 
     /**
      * for mob species
-     * @param taxanomy
-     * @param clades
-     * @param periods
-     * @param habitats
-     * @param behaviours
-     * @param egg_colours_A
-     * @param egg_colours_B
-     * @param attributes
-     * @param creature_attribute
-     * @param sex_ratio
+     * @param taxanomy {@link String} array
+     * @param clades {@link String} array
+     * @param periods {@link com.github.armouredheart.eons_core.api.Geon} array in format [start, end] or [geon] if species only existed for one geon
+     * @param habitats {@link com.github.armouredheart.eons_core.api.Habitat} array
+     * @param behaviours {@link com.github.armouredheart.eons_core.api.EonsAIBuilder.Behaviour} array
+     * @param egg_colours_A {@link int} hexadecimal colour
+     * @param egg_colours_B {@link int} hexadecimal colour
+     * @param attributes {@link double} array
+     * @param creature_attribute {@link net.minecraft.entity.CreatureAttribute}
+     * @param sex_ratio {@link int} between 0 and 100. Set to -1 for monosexual
      */
     private Species(final String[] taxanomy, final String[] clades, final Geon[] periods, final Habitat[] habitats, final Behaviour[] behaviours, final int egg_colours_A, final int egg_colours_B, final double[] attributes, final CreatureAttribute creature_attribute, final int sex_ratio, final Diet diet) {
         this.TAXANOMY = taxanomy;
         this.CLADES = clades;
         this.PERIODS = periods;
-        this.HABITATS = habitats;
-        this.BEHAVIOURS = behaviours;
-        this.EGG_COLOURS = new int[]{egg_colours_A, egg_colours_B};
-        this.ATTRIBUTES = attributes;
-        this.CREATURE_ATTRIBUTE = creature_attribute;
-        this.SEX_RATIO = sex_ratio;
-        this.DIET = diet;
+        this.MOB_DATA = new EonsMobData(habitats, behaviours, egg_colours_A, egg_colours_B, attributes, creature_attribute, sex_ratio, diet);
     }
 
     /**
      * for non-mob species
-     * @param taxanomy
-     * @param clades
-     * @param periods
+     * @param taxanomy {@link String} array
+     * @param clades {@link String} array
+     * @param periods {@link com.github.armouredheart.eons_core.api.Geon} array in format [start, end] or [geon] if species only existed for one geon
      */
     private Species(final String[] taxanomy, final String[] clades, final Geon[] periods) {
         this.TAXANOMY = taxanomy;
         this.CLADES = clades;
         this.PERIODS = periods;
-
-        // all this is mob-only
-        this.HABITATS = null;
-        this.BEHAVIOURS = null;
-        this.EGG_COLOURS = null;
-        this.ATTRIBUTES = null;
-        this.CREATURE_ATTRIBUTE = null;
-        this.SEX_RATIO = IEonsSexuallyDimorphic.UNISEX;
-        this.DIET = null;
+        this.MOB_DATA = null;
     }
 
     // *** Methods ***
@@ -179,52 +315,19 @@ public enum Species {
     }
 
     /**
-     * negative values will skip modifying the attribute
-     * @param max_health
-     * @param follow_range
-     * @param knockback_resistance
-     * @param movement_speed
-     * @param flying_speed
-     * @param attack_damage
-     * @param attack_speed
-     * @param armour
-     * @param armour_toughness
-     * @param luck
+     * This accessor was implemented to prevent null pointers being called if mob data is called for a non-mob species
+     * @param <T> extends {@link net.minecraft.entity.MobEntity} & {@link com.github.armouredheart.eons_core.api.IEonsMob}
+     * @param mob_entity {@link #T}
+     * @return {@link com.github.armouredheart.eons_core.api.EonsMobData} that contains all species specific info for mob entity construction
      */
-    private static double[] buildAttributes(double max_health, double follow_range, double knockback_resistance, double movement_speed, double flying_speed, double attack_damage, double attack_knockback, double attack_speed, double armour, double armour_toughness, double luck) {
-        return new double[] {max_health, follow_range, knockback_resistance, movement_speed, flying_speed, attack_damage, attack_knockback, attack_speed, armour, armour_toughness, luck};
-    }
-
-    /**
-     * negative values will skip modifying the attribute
-     * @param max_health
-     * @param movement_speed
-     * @param attack_damage
-     * @param armour
-     */
-    private static double[] buildAttributes(double max_health, double movement_speed, double attack_damage, double armour) {
-        return buildAttributes(max_health, Species.SKIP_ATTRIBUTE, Species.SKIP_ATTRIBUTE, movement_speed, Species.SKIP_ATTRIBUTE, attack_damage, Species.SKIP_ATTRIBUTE, Species.SKIP_ATTRIBUTE, armour, Species.SKIP_ATTRIBUTE, Species.SKIP_ATTRIBUTE);
-    }
-
-    /**
-     * negative values will skip modifying the attribute
-     * @param max_health
-     */
-    private static double[] buildAttributes(double max_health) {
-        return buildAttributes(max_health, Species.SKIP_ATTRIBUTE, Species.SKIP_ATTRIBUTE, Species.SKIP_ATTRIBUTE);
+    public static <T extends MobEntity & IEonsMob> @Nonnull EonsMobData getMobData(T mob_entity) {
+        return mob_entity.getSpecies().MOB_DATA;
     }
     
     // getters
     public String[] getTaxanomy() {return this.TAXANOMY;}
     public Geon[] getPeriods() {return this.PERIODS;}
-    public Habitat[] getHabitats() {return this.HABITATS;}
-    public Behaviour[] getBehaviours() {return this.BEHAVIOURS;}
-    public int[] getSpawnEggColours() {return this.EGG_COLOURS;}
-    public double[] getAttributes() {return this.ATTRIBUTES;}
-    public CreatureAttribute getCreatureAttribute() {return this.CREATURE_ATTRIBUTE;}
-    public int getSexRatio() {return this.SEX_RATIO;}
-    public Diet getDiet() {return this.DIET;}
-    public int getStomachSize() {return this.DIET.getStomachSize();}
+    
 
     public TranslationTextComponent getLocalisedName() {
         return EonsResourceHelper.getLocalisedText(ResourceTextMainCatagory.EDUCATION, ResourceTextSubCatagory.SPECIES, super.toString());

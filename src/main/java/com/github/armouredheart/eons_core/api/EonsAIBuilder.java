@@ -22,10 +22,10 @@ import javax.annotation.Nonnull;
 public interface EonsAIBuilder {
 
     public static <T extends MobEntity & IEonsBeast> void registerAttributes(T entity) {
-        double[] species_attributes = entity.getSpecies().getAttributes();
+        double[] species_attributes = Species.getMobData(entity).getAttributes();
         for(int i = 0; i < species_attributes.length; i++) {
             if(species_attributes[i] > 0) {
-                entity.getAttribute(Species.SPECIES_ATTRIBUTE_MAP[i]).setBaseValue(species_attributes[i]);
+                entity.getAttribute(EonsMobData.ATTRIBUTE_MAP[i]).setBaseValue(species_attributes[i]);
             }
         }
     }
@@ -47,7 +47,7 @@ public interface EonsAIBuilder {
         }
         return goal_selector;
     }
-    
+
     // *** Enumerators ***
 
     public enum Behaviour {

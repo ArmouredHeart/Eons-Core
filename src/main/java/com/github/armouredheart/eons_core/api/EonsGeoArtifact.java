@@ -7,7 +7,6 @@ package com.github.armouredheart.eons_core.api;
 
 // Eons imports
 import com.github.armouredheart.eons_core.api.Geon;
-
 // misc imports
 public interface EonsGeoArtifact {
     public Geon getGeon();

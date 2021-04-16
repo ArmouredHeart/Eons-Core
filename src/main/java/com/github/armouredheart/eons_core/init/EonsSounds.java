@@ -42,7 +42,7 @@ public final class EonsSounds {
     // *** Methods ***
 
     /** 
-     * @param sound_event_name String unlocalised name all lowercase matching sound event entry in @Link{sounds.json} file
+     * @param sound_event_name String unlocalised name all lowercase matching sound event entry in sounds.json file
      * @return SoundEvent the sound event that was registered
     */
     private static SoundEvent createSoundEvent(final String sound_event_name){

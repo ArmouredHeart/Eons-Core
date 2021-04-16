@@ -4,6 +4,7 @@ package com.github.armouredheart.eons_core.api;
 // Minecraft imports
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
 // Forge imports
@@ -43,10 +44,10 @@ public class Stomach extends Inventory {
 
     /**
      * 
-     * @param species
+     * @param mob_data
      */
-    public Stomach(Species species) {
-        this(species.getStomachSize(), species.getDiet(), Stomach.DEFAULT_DIGESTION_RATE);
+    public Stomach(EonsMobData mob_data) {
+        this(mob_data.getStomachSize(), mob_data.getDiet(), Stomach.DEFAULT_DIGESTION_RATE);
     }
 
     // *** Methods ***
@@ -109,7 +110,7 @@ public class Stomach extends Inventory {
     /** */
     @Override
     public ItemStack addItem(ItemStack stack) {
-        if(this.DIET.isEdible(stack.getItem())) {
+        if(this.DIET.isEdible(stack)) {
             // eat item
             ItemStack foodIn = super.addItem(stack);
             this.updateStomachState();

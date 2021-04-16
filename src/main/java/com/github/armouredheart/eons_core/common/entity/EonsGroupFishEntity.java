@@ -32,13 +32,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import com.github.armouredheart.eons_core.api.EonsAnimationHandler;
 import com.github.armouredheart.eons_core.api.IEonsAnimationEntity;
 import com.github.armouredheart.eons_core.api.IEonsLifeForm;
+import com.github.armouredheart.eons_core.api.IEonsMob;
 import com.github.armouredheart.eons_core.api.IEonsSexuallyDimorphic;
 import com.github.armouredheart.eons_core.api.Species;
 
 // misc imports
 import javax.annotation.Nullable;
 
-public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implements IEonsLifeForm, IEonsSexuallyDimorphic, IEonsAnimationEntity {
+public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implements IEonsMob, IEonsSexuallyDimorphic, IEonsAnimationEntity {
 
 	// *** Attributes ***
 	// DATA 
@@ -58,7 +59,7 @@ public abstract class EonsGroupFishEntity extends AbstractGroupFishEntity implem
 	protected EonsGroupFishEntity(final EntityType<? extends AbstractGroupFishEntity> type, final World world, final Species species) {
 		super(type, world);
 		this.SPECIES = species;
-		IEonsSexuallyDimorphic.assignSexByRatio(this, this.SPECIES);
+		IEonsSexuallyDimorphic.assignSexByRatio(this, Species.getMobData(this));
 		this.ANIMATION_HANDLER = new EonsAnimationHandler();
 	}
 

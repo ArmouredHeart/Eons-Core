@@ -65,9 +65,9 @@ public abstract class EonsBigFishEntity extends AbstractFishEntity implements IE
     protected EonsBigFishEntity(final EntityType<? extends AbstractFishEntity> type, final World world, final Species species) {
         super(type, world);
         this.SPECIES = species;
-        this.STOMACH = new Stomach(this.SPECIES);
+        this.STOMACH = new Stomach(Species.getMobData(this));
         this.setCanPickUpLoot(true);
-        IEonsSexuallyDimorphic.assignSexByRatio(this, this.SPECIES);
+        IEonsSexuallyDimorphic.assignSexByRatio(this, Species.getMobData(this));
     }
 
     // *** Methods ***
